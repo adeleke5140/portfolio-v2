@@ -7,9 +7,8 @@ import { getAllPostsIds, getPostData } from "@/lib/posts";
 import { ParsedUrlQuery } from "querystring";
 import type { Post } from "./index";
 import Head from "next/head";
-import { format, parseISO } from "date-fns";
 import { PostWrapper } from "@/components/postWrapper";
-
+import { formatDate } from "@/helpers/formatDate";
 interface PostData extends Post {
   contentHtml: string;
 }
@@ -30,9 +29,7 @@ const Post = ({
         <section className="pb-8 mt-8">
           <div className="font-erode">
             <h1 className="font-extrabold mb-4 text-5xl">{postData.title}.</h1>
-            <p className="text-link-color">
-              {format(parseISO(postData.date!), "LLLL d, yyyy")}
-            </p>
+            <p className="text-link-color">{formatDate(postData.date!)}</p>
           </div>
           <section
             className="mt-12 font-satoshi prose"
