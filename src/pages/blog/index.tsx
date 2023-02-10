@@ -1,6 +1,7 @@
 import { PageWrapper } from "@/components/pageWrapper";
 import { getSortedPostsData } from "@/lib/posts";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
+import Link from "next/link";
 
 export type Post = {
   id: string;
@@ -11,16 +12,14 @@ const Index = ({
   allPostsData,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <PageWrapper heading="Posts." path="/">
-      <section className="mt-4 font-erode h-screen">
+    <PageWrapper heading="Blog." path="/">
+      <section className="mt-8 font-erode h-screen">
         <ul>
           {allPostsData.map(({ id, date, title }) => (
             <li key={id}>
-              {title}
+              <Link href={`/blog/${id}`}>{title}</Link>
               <br />
-              {id}
-              <br />
-              {date}
+              <span className="text-gray-500">{date}</span>
             </li>
           ))}
         </ul>
