@@ -1,9 +1,14 @@
 import Link from "next/link";
 
-const BackButton = () => {
+interface BackButtonProps {
+  path: string;
+  text: string;
+}
+
+const BackButton = ({ path, text }: BackButtonProps) => {
   return (
     <div>
-      <Link href="/" className="back">
+      <Link href={path} className="back">
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +23,7 @@ const BackButton = () => {
             <path d="M19 12H5M12 19l-7-7 7-7"></path>
           </svg>
         </div>
-        Back
+        {text}
       </Link>
     </div>
   );
