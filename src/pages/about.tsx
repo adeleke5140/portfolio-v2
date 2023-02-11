@@ -1,5 +1,7 @@
+import { BackButton } from "@/components/backButton";
 import { PageWrapper } from "@/components/pageWrapper";
 import Head from "next/head";
+import Link from "next/link";
 
 const languages = ["HTML", "CSS", "Javascript", "Typescript", "Ruby", "Go"];
 
@@ -27,10 +29,11 @@ const About = () => {
         <section className="prose pb-3">
           <p>
             Hello, I am Kehinde. I am a Junior Frontend Engineer from Lagos,
-            Nigeria. I really like the web and how exciting it is to build on.
-            It&apos;s why I am rebuilding my portfolio because it is fun.
-            Genuinely.
+            Nigeria, who is interested in digital accessibility. I like the web
+            and how exciting it is to build on. It&apos;s why I am rebuilding my
+            portfolio because it is fun. Genuinely.
           </p>
+
           <p>
             I have been digging into NextJS, Gatsby and Typescript recently.
             Regarding Typescript, I am currently working through
@@ -41,7 +44,7 @@ const About = () => {
             by Dan Vanderkam. It&apos;s packed with insight.
           </p>
           <p>
-            For my React (which I always want to get better at) , I am taking
+            For my React (which I always want to get better at), I am taking
             Josh Comeau&apos; course:{" "}
             <a href="https://www.joyofreact.com/">The Joy of React.</a>{" "}
             Josh&apos;s blog posts have helped me in the past with my react so I
@@ -72,6 +75,10 @@ const About = () => {
               ))}
             </ul>
           </section>
+          <p>
+            You can check out my projects here:{" "}
+            <Link href="/projects">Projects</Link>
+          </p>
           <p>
             I am mostly active on Twitter and sometimes Linkeldn, so you can
             connect with me there. I am always open to meeting new people.
