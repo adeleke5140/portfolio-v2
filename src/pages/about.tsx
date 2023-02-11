@@ -53,7 +53,7 @@ const About = () => {
           <section>
             Onto the meatier part: A couple of programming languages I have used
             in the past include:
-            <ul className="flex list-none gap-1 pl-0 prose-ul:pl-0">
+            <ul className="flex flex-wrap list-none gap-1 pl-0 prose-ul:pl-0">
               {languages.map((language, id) => (
                 <li
                   key={id}
