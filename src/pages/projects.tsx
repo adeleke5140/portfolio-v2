@@ -4,7 +4,7 @@ import Link from "next/link";
 const Projects = () => {
   return (
     <PageWrapper heading="Projects." path="/">
-      <section>
+      <section className="font-satoshi">
         <p className="mb-4">
           A couple of interesting things I have built include:
         </p>
@@ -70,6 +70,7 @@ const Projects = () => {
             LocalStorage
           </span>
         </section>
+        ...
         <p className="mt-4">
           I write about things I&apos;m learning on my{" "}
           <Link href="/blog" className="underline font-bold">
