@@ -7,7 +7,7 @@ interface BackButtonProps {
 
 const BackButton = ({ path, text }: BackButtonProps) => {
   return (
-    <div>
+    <div className="md:absolute -left-40 top-80">
       <Link href={path} className="back">
         <div>
           <svg
