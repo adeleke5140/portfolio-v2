@@ -26,7 +26,7 @@ const Post = ({
         <title>{postData.title}</title>
       </Head>
       <PostWrapper path="/blog">
-        <section className="pb-8 mt-8">
+        <section className="pb-8 mt-4">
           <div className="font-erode">
             <h1 className="font-extrabold mb-4 text-5xl">{postData.title}.</h1>
             <p className="text-link-color">{formatDate(postData.date!)}</p>
