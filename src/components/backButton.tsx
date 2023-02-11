@@ -7,7 +7,7 @@ interface BackButtonProps {
 
 const BackButton = ({ path, text }: BackButtonProps) => {
   return (
-    <div className="md:absolute -left-40 top-80">
+    <div className="md:absolute -left-40 top-80 font-satoshi">
       <Link
         href={path}
         className="flex gap-2 w-fit p-1 px-2 items-center font-extrabold text-button-text transition-transform ease-out duration-200 hover:bg-button-bg -translate-x-1 hover:translate-x-0 rounded"
