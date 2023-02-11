@@ -24,7 +24,7 @@ const About = () => {
         <link rel="icon" href="/kehinde.ico" />
       </Head>
       <PageWrapper heading="About me." path="/">
-        <section className="prose px-2">
+        <section className="prose pb-3">
           <p>
             Hello, I am Kehinde. I am a Junior Frontend Engineer from Lagos,
             Nigeria. I really like the web and how exciting it is to build on.
@@ -39,14 +39,6 @@ const About = () => {
               Effective typescript
             </a>{" "}
             by Dan Vanderkam. It&apos;s packed with insight.
-          </p>
-          <p className="prose-code:text-button-text">
-            One Insight:{" "}
-            <i>
-              Minimize the use of{" "}
-              <code className="prose-code:text-button-text">any</code> as much
-              as you can.
-            </i>
           </p>
           <p>
             For my React (which I always want to get better at) , I am taking
