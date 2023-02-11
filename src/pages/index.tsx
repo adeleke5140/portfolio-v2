@@ -33,7 +33,7 @@ export default function Home() {
           <p>
             <Link
               href="/blog"
-              className="inline-block text-link-color text-3xl opacity-60 font-extrabold hover:opacity-100 origin-left transition-transform-opacity ease-out duration-200 hover:scale-110 hover:translate-x-1 hover:-translate-y-0.5"
+              className="inline-block font-satoshi text-link-color text-3xl opacity-60 font-extrabold hover:opacity-100 origin-left transition-transform-opacity ease-out duration-200 hover:scale-110 hover:translate-x-1 hover:-translate-y-0.5"
             >
               /blog.
             </Link>
@@ -41,7 +41,7 @@ export default function Home() {
           <p className="mt-4">
             <Link
               href="/about"
-              className="inline-block text-link-color text-3xl opacity-60 font-extrabold hover:opacity-100 origin-left transition-transform-opacity ease-out duration-200 hover:scale-110 hover:translate-x-1 hover:-translate-y-0.5"
+              className="inline-block font-satoshi text-link-color text-3xl opacity-60 font-extrabold hover:opacity-100 origin-left transition-transform-opacity ease-out duration-200 hover:scale-110 hover:translate-x-1 hover:-translate-y-0.5"
             >
               /about.
             </Link>
@@ -49,7 +49,7 @@ export default function Home() {
           <p className="mt-4">
             <Link
               href="/projects"
-              className="inline-block text-link-color text-3xl opacity-60 font-extrabold hover:opacity-100 origin-left transition-transform-opacity ease-out duration-200 hover:scale-110 hover:translate-x-1 hover:-translate-y-0.5"
+              className="inline-block font-satoshi text-link-color text-3xl opacity-60 font-extrabold hover:opacity-100 origin-left transition-transform-opacity ease-out duration-200 hover:scale-110 hover:translate-x-1 hover:-translate-y-0.5"
             >
               /projects.
             </Link>
