@@ -56,7 +56,18 @@ export default function Home() {
           </p>
         </nav>
         <div className="font-erode text-sm sm:text-base absolute bottom-0 pb-2">
-          <DynamicHoverComponent />
+          <div className="hidden md:block ">
+            <DynamicHoverComponent />
+          </div>
+          <p className="block font-erode">
+            Built with 愛 by{" "}
+            <a
+              href="https://github.com/adeleke5140"
+              className="font-medium underline text-link-color"
+            >
+              adeleke5140
+            </a>{" "}
+          </p>
         </div>
       </section>
     </>
