@@ -30,7 +30,7 @@ const Index = ({
             {allPostsData.map(({ id, date, title }) => (
               <li key={id} className="mb-4 font-satoshi">
                 <Link
-                  className="text-base inline-block transition-transform ease-out duration-200 hover:bg-button-bg hover:px-2 hover:translate-x-1 rounded"
+                  className="text-base inline-block transition-transform ease-out duration-200 hover:font-medium hover:bg-button-bg hover:px-2 hover:translate-x-1 rounded"
                   href={`/blog/${id}`}
                 >
                   {title}
