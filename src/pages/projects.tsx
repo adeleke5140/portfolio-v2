@@ -1,4 +1,5 @@
 import { PageWrapper } from "@/components/pageWrapper";
+import Link from "next/link";
 
 const Projects = () => {
   return (
@@ -7,7 +8,7 @@ const Projects = () => {
         <p className="mb-4">
           A couple of interesting things I have built include:
         </p>
-        <section className="rounded border border-link-color px-4 py-4 mb-4 hover:bg-button-bg hover:bg-opacity-60 transition-transform ease-out duration-200 translate-x-1 hover:translate-x-0">
+        <section className="rounded border border-link-color px-4 py-4 mb-4 hover:bg-button-bg hover:bg-opacity-50 transition-transform ease-out duration-200 translate-x-1 hover:translate-x-0">
           <div className="flex justify-between ">
             <div className="mb-2">
               <p className="font-bold">LiveChat</p>
@@ -37,7 +38,7 @@ const Projects = () => {
             Firebase Firestore, CSS
           </span>
         </section>
-        <section className="rounded border border-link-color px-4 py-4 hover:bg-button-bg hover:bg-opacity-60 transition-transform ease-out duration-200 translate-x-1 hover:translate-x-0">
+        <section className="rounded border border-link-color px-4 py-4 hover:bg-button-bg hover:bg-opacity-50 transition-transform ease-out duration-200 translate-x-1 hover:translate-x-0">
           <div className="flex justify-between">
             <div className="mb-2">
               <p className="font-bold">CountryFact App</p>
@@ -69,6 +70,12 @@ const Projects = () => {
             LocalStorage
           </span>
         </section>
+        <p className="mt-4">
+          I write about things I&apos;m learning on my{" "}
+          <Link href="/blog" className="underline font-bold">
+            Blog
+          </Link>
+        </p>
       </section>
     </PageWrapper>
   );
