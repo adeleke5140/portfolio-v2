@@ -22,18 +22,23 @@ const Index = ({
         <meta name="og:title" content="Blog" />
       </Head>
       <PageWrapper heading="Blog." path="/">
-        <p className="text-lg font-erode font-bold mb-4">
+        <p className=" text-2xl font-erode font-bold mb-4">
           A couple of my writings:{" "}
         </p>
         <section className="font-erode">
           <ul>
             {allPostsData.map(({ id, date, title }) => (
-              <li key={id} className="mb-2 font-satoshi">
-                <Link className="text-sm" href={`/blog/${id}`}>
+              <li key={id} className="mb-4 font-satoshi">
+                <Link
+                  className="text-base inline-block transition-transform ease-out duration-200 hover:bg-button-bg hover:px-2 hover:translate-x-1 rounded"
+                  href={`/blog/${id}`}
+                >
                   {title}
                 </Link>
                 <br />
-                <span className="text-gray-500">{formatDate(date!)}</span>
+                <span className="text-gray-500 text-xs">
+                  {formatDate(date!)}
+                </span>
               </li>
             ))}
           </ul>
