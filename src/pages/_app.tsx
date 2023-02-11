@@ -5,12 +5,13 @@ import { Layout } from "@/components/layout";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
-      <div
-        className={`${satoshiFont.variable} ${erodeFont.variable} home font-satoshi`}
-      >
+    <div
+      className={`${satoshiFont.variable} ${erodeFont.variable} home font-satoshi`}
+      id="container"
+    >
+      <Layout>
         <Component {...pageProps} />
-      </div>
-    </Layout>
+      </Layout>
+    </div>
   );
 }
