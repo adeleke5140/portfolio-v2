@@ -6,7 +6,7 @@ import { Layout } from "@/components/layout";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <div
-      className={`${satoshiFont.variable} ${erodeFont.variable} home font-satoshi`}
+      className={`${satoshiFont.variable} ${erodeFont.variable} home font-sans`}
       id="container"
     >
       <Layout>
