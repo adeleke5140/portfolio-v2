@@ -7,7 +7,7 @@ interface PostWrapperProps {
 
 const PostWrapper = ({ children, path }: PostWrapperProps) => {
   return (
-    <section className="h-full relative">
+    <section className="h-full relative pr-8 md:pr-0">
       <div className="flex flex-col gap-5">{children}</div>
       <BackButton text="Blog" path={path} />
     </section>
