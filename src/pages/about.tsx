@@ -26,7 +26,7 @@ const About = () => {
         <link rel="icon" href="/kehinde.ico" />
       </Head>
       <PageWrapper heading="About me." path="/">
-        <section className="prose pb-3">
+        <section className="prose pb-3 font-satoshi">
           <p>
             Hello, I am Kehinde. I am a Junior Frontend Engineer from Lagos,
             Nigeria, who is interested in digital accessibility. I like the web
