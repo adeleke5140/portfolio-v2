@@ -28,9 +28,9 @@ const About = () => {
       <PageWrapper heading="About me." path="/">
         <section className="prose pb-3 font-satoshi">
           <p>
-            Hello, I am Kehinde. I am a Junior Frontend Engineer from Lagos,
-            Nigeria, who is interested in digital accessibility. I like the web
-            and how exciting it is to build on. It&apos;s why I am rebuilding my
+            Hello, I am Kehinde. I am a Frontend Engineer from Lagos, Nigeria,
+            who is interested in digital accessibility. I like the web and how
+            exciting it is to build on. It&apos;s why I am rebuilding my
             portfolio because it is fun. Genuinely.
           </p>
 
