@@ -64,7 +64,7 @@ const About = () => {
               ))}
             </ul>
             A number of technologies I have experience in also include:
-            <ul className="flex list-none gap-1 pl-0 prose-ul:pl-0">
+            <ul className="flex flex-wrap list-none gap-1 pl-0 prose-ul:pl-0">
               {technologies.map((technology, id) => (
                 <li
                   key={id}
