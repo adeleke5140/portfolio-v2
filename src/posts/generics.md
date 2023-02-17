@@ -9,7 +9,7 @@ Learning Typescript has been a major boost to my career. The basics were not too
 and after going through a Vscode Livestream and a couple of exercises from Matt Pocock, I believed I was
 ready. Until I met generics. 
 
-Generics were a strange feature I couldn't wrap my head around. They weren't simple `type annotations` I was used to
+Generics were a strange feature I couldn't wrap my head around. They weren't simple `type` annotations I was used to
 and when combined, confused me further. I gave up on it...for some time.
 
 One thing about me though is that I always get back up. This was a subject I didn't understand yet I was going to 
@@ -47,7 +47,7 @@ Here is a sample generic function:
     }
 ```
 
-_I am currently struggling with syntax higlighting in remark so if you could help, I'd appreciate it._
+_I am currently struggling with syntax higlighting in remark so if you could help, I'd appreciate it. Please reach out to me on [Twitter](https://twitter.com/adeleke5140)_
 
 On to the generics stuff. \
 The function `MakeState` is a generic function. In the body of the function, we have two functions. One called
