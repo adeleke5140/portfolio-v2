@@ -4,6 +4,37 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            code: {
+              backgroundColor: "#E7DFCF",
+              color: "#413a30",
+              borderRadius: "0.25rem",
+              padding: "0.25rem",
+              fontWeight: "500",
+            },
+            "code::before": {
+              content: "",
+            },
+            "code::after": {
+              content: "",
+            },
+            pre: {
+              backgroundColor: "#E7DFCF",
+              color: "#413a30",
+              paddingRight: 0,
+              paddingLeft: 0,
+            },
+            "pre code:before": {
+              paddingLeft: "unset",
+            },
+            "pre code:after": {
+              paddingRight: "unset",
+            },
+          },
+        },
+      },
       colors: {
         "app-bg": "#f7f3ee",
         "link-color": "#415030",
