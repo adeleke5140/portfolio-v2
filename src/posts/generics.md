@@ -95,3 +95,32 @@ or with literal types:
 ```typescript
     let newState = MakeState<"kehinde","kehinde">()
 ```
+
+Like I have earlier mentioned, the types we pass to the generic function, constrain the type of argument we can
+pass in. 
+
+Let's experiment with this in the `TS` playground.
+You can check it out by clicking on this [link](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAWQIYGsCmBlKqqYA8AUImeWQGKKYAeBYAJgM6JggC2ARpgE6IAfRMyi8YYAOYAaUhXLYa9TE1YixkwYkqy5iAHwAKAJQBvHXIA2mKIgAOqGLwBciE4mCORLylOGYICIwu2AC+xOYUoJCwCIgS1gAKDrzGZrq6vNYgvEj2jhHkYQVkUdDwSMyJyQa03r4AnsGmxXJ5-AC8ri3p7p5QLrQyPT2VAUwu9d2FLWE9mVDZSG7xUEmOvpWryWFFxFY2YJgA7rj4mIidaFinBIRq4tLCog+GRsSHJ3gEAHSbaykAciwAAtxIxMADfADUOCrFgAW9iGNmHArN8LHAJAYPjdMN8Vv9jEYgA)
+
+If we call the generic `fn` and assign it the `string` types.
+We can't pass any other types of arguments to the `fn`:
+
+![Typescript playground](https://github.com/adeleke5140/portfolio-v2/blob/main/public/images/error.png?raw=true)
+
+The typescript compiler returns the error:
+
+![Typescript compiler error](https://github.com/adeleke5140/portfolio-v2/blob/main/public/images/ts-error.png?raw=true)
+
+This helps us handle catch that error before runtime.
+
+## Conclusion
+
+That sums up my short dive into the world of generics. This might just be a simple example but I recently learned this and wanted to break it down into a manner I understood. It is mostly for myself to know it better but for any other person who 
+might come across this.
+
+I think TS adds a layer of safety to code that I really appreciate. I will be using it in all my projects moving forward.
+
+Thank you for reading and see you next time.
+
+#### Glossary
+ 1. `fn` means `function`
