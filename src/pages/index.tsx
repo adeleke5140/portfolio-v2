@@ -20,7 +20,7 @@ export default function Home() {
         <link rel="icon" href="/kehinde.ico" />
       </Head>
 
-      <section className="flex flex-col h-screen justify-center" id="parent">
+      <section className="flex flex-col mt-[43%] justify-center" id="parent">
         <header className="mb-8">
           <h1 className="font-erode text-heading-color text-7xl sm:text-8xl font-extrabold">
             Kehinde.
