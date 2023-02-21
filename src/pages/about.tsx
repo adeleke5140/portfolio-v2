@@ -80,8 +80,11 @@ const About = () => {
             <Link href="/projects">Projects</Link>
           </p>
           <p>
-            I am mostly active on Twitter and sometimes Linkeldn, so you can
-            connect with me there. I am always open to meeting new people.
+            I am mostly active on{" "}
+            <a href="https://twitter.com/adeleke5140">Twitter</a> and sometimes{" "}
+            <a href="https://www.linkedin.com/in/adeleke5140/">Linkedin</a>, so
+            you can connect with me there. I am always open to meeting new
+            people.
           </p>
         </section>
       </PageWrapper>
