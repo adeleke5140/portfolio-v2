@@ -1,5 +1,4 @@
 import localFont from '@next/font/local'
-import { normalize } from 'path'
 
 export const satoshiFont = localFont({
     src: [
@@ -54,7 +53,8 @@ export const satoshiFont = localFont({
             style: 'italic'
         }
     ],
-    variable: "--font-satoshi"
+    variable: "--font-satoshi",
+    display: 'swap'
 })
 
 export const erodeFont = localFont({
@@ -110,5 +110,6 @@ export const erodeFont = localFont({
             style:"italic",
         }
     ],
-    variable: "--font-erode"
+    variable: "--font-erode",
+    display: 'swap'
 })
