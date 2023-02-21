@@ -54,7 +54,7 @@ export const satoshiFont = localFont({
         }
     ],
     variable: "--font-satoshi",
-    display: 'swap'
+    display: 'block'
 })
 
 export const erodeFont = localFont({
@@ -111,5 +111,5 @@ export const erodeFont = localFont({
         }
     ],
     variable: "--font-erode",
-    display: 'swap'
+    display: 'block'
 })
