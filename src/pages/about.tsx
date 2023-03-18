@@ -57,7 +57,7 @@ const About = () => {
               {languages.map((language, id) => (
                 <li
                   key={id}
-                  className="font-extrabold prose-code:text-button-text transition-transform ease-out duration-200 hover:bg-button-bg -translate-x-1 hover:translate-x-0 rounded"
+                  className="font-extrabold prose-code:text-button-text transition-transform ease-out duration-200 -translate-x-1 hover:translate-x-0 rounded"
                 >
                   <code>{language}</code>
                 </li>
@@ -68,7 +68,7 @@ const About = () => {
               {technologies.map((technology, id) => (
                 <li
                   key={id}
-                  className="font-extrabold prose-code:text-button-text transition-transform ease-out duration-200 hover:bg-button-bg -translate-x-1 hover:translate-x-0 rounded"
+                  className="font-extrabold prose-code:text-button-text transition-transform ease-out duration-200 -translate-x-1 hover:translate-x-0 rounded"
                 >
                   <code>{technology}</code>
                 </li>
