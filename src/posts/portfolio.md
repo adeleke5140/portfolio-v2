@@ -1,5 +1,5 @@
 ---
-title: Building a NextJS, Tailwind Portfolio
+title: Experience building NextJS, Tailwind Portfolio
 date: '2023-02-07'
 ---
 

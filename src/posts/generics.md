@@ -1,5 +1,5 @@
 ---
-title: Breaking down generics with an example
+title: Generics, Generics everywhere. Explain generics with an example
 date: '2023-02-17'
 ---
 
