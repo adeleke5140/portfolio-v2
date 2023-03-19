@@ -22,7 +22,7 @@ const Index = ({
         <meta name="og:title" content="Blog" />
       </Head>
       <PageWrapper heading="Blog." path="/">
-        <p className=" text-2xl font-erode font-bold mb-4">
+        <p className="text-2xl font-erode font-bold mb-4">
           A couple of my writings:{" "}
         </p>
         <section className="font-erode">
@@ -41,6 +41,14 @@ const Index = ({
                 </span>
               </li>
             ))}
+          </ul>
+        </section>
+        <section>
+          <p className="font-erode font-bold text-2xl">Todo List</p>
+          <ul className="font-satoshi text-sm">
+            <li>Finish useMemo article</li>
+            <li>Finish conventional commit article</li>
+            <li>Finish Binary search article</li>
           </ul>
         </section>
       </PageWrapper>
