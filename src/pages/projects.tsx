@@ -38,6 +38,38 @@ const Projects = () => {
             Firebase Firestore, CSS
           </span>
         </section>
+        <section className="rounded border border-link-color px-4 py-4 mb-4 hover:bg-button-bg hover:bg-opacity-50 transition-transform ease-out duration-200 translate-x-1 hover:translate-x-0">
+          <div className="flex justify-between ">
+            <div className="mb-2">
+              <p className="font-bold">Send_over</p>
+              <span className="text-sm">
+                Share links between devices in realTime
+              </span>
+            </div>
+            <div className="flex gap-2 text-button-text ">
+              <span>
+                <a
+                  href="#"
+                  className="p-2 font-medium transition-transform ease-out duration-200 hover:bg-app-bg -translate-x-1 hover:translate-x-0 rounded"
+                >
+                  In progress
+                </a>
+              </span>
+              <span>
+                <a
+                  href="https://github.com/adeleke5140/send_over"
+                  className="p-2 font-medium transition-transform ease-out duration-200 hover:bg-app-bg -translate-x-1 hover:translate-x-0 rounded"
+                >
+                  Github
+                </a>
+              </span>
+            </div>
+          </div>
+          <span className="text-sm">
+            <span className="font-bold">Tools:</span> Astro, NextJS, Tailwind,
+            Supabase
+          </span>
+        </section>
         <section className="rounded border border-link-color px-4 py-4 hover:bg-button-bg hover:bg-opacity-50 transition-transform ease-out duration-200 translate-x-1 hover:translate-x-0">
           <div className="flex justify-between">
             <div className="mb-2">
