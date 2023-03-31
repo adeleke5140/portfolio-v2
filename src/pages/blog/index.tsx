@@ -43,14 +43,6 @@ const Index = ({
             ))}
           </ul>
         </section>
-        <section>
-          <p className="font-erode font-bold text-2xl">Todo List</p>
-          <ul className="font-satoshi text-sm">
-            <li>Finish useMemo article</li>
-            <li>Finish conventional commit article</li>
-            <li>Finish Binary search article</li>
-          </ul>
-        </section>
       </PageWrapper>
     </>
   );
