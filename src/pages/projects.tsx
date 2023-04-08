@@ -49,10 +49,10 @@ const Projects = () => {
             <div className="flex gap-2 text-button-text ">
               <span>
                 <a
-                  href="#"
+                  href="https://send-over.vercel.app/"
                   className="p-2 font-medium transition-transform ease-out duration-200 hover:bg-app-bg -translate-x-1 hover:translate-x-0 rounded"
                 >
-                  In progress
+                  Live
                 </a>
               </span>
               <span>
