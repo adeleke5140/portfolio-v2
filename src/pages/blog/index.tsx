@@ -9,7 +9,10 @@ export type Post = {
   id: string;
   date?: string;
   title?: string;
+  status?: string;
 };
+
+const filter = ["All", "Published", "Draft"];
 const Index = ({
   allPostsData,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
@@ -27,13 +30,18 @@ const Index = ({
         </p>
         <section className="font-erode">
           <ul>
-            {allPostsData.map(({ id, date, title }) => (
+            {allPostsData.map(({ id, date, title, status }) => (
               <li key={id} className="mb-4 font-satoshi">
                 <Link
                   className="text-base inline-block md:transition-transform ease-out duration-200 md:hover:text-link-color"
                   href={`/blog/${id}`}
                 >
-                  {title}
+                  {title}{" "}
+                  {status && (
+                    <span className="bg-button-bg rounded-full p-1 px-2">
+                      {status}
+                    </span>
+                  )}
                 </Link>
                 <br />
                 <span className="text-gray-500 text-xs">
