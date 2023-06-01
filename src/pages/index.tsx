@@ -22,7 +22,7 @@ export default function Home() {
 
       <section className="flex flex-col mt-[43%] justify-center" id="parent">
         <header className="mb-8">
-          <h1 className="font-erode text-heading-color text-7xl sm:text-8xl font-extrabold">
+          <h1 className="font-satoshi text-heading-color text-7xl sm:text-8xl font-extrabold">
             Kehinde.
           </h1>
           <h2 className="mt-8 font-normal leading-[1.6] font-erode">
