@@ -31,7 +31,7 @@ const Post = ({
           <Link
             href={"/"}
             aria-label="home"
-            className="block p-2 hover:bg-button-bg transition-colors ease-out duration-200"
+            className="block w-fit rounded p-2 hover:bg-button-bg transition-colors ease-out duration-200"
           >
             <svg
               width="15"
