@@ -10,6 +10,13 @@ import Head from "next/head";
 import { PostWrapper } from "@/components/postWrapper";
 import { formatDate } from "@/helpers/formatDate";
 import Link from "next/link";
+import { useEffect } from "react";
+import Prism from "prismjs";
+
+require("prismjs/components/prism-jsx");
+require("prismjs/components/prism-javascript");
+require("prismjs/components/prism-typescript")
+require("prismjs/components/prism-elixir")
 interface PostData extends Post {
   contentHtml: string;
 }
@@ -21,6 +28,9 @@ interface Params extends ParsedUrlQuery {
 const Post = ({
   postData,
 }: InferGetServerSidePropsType<typeof getStaticProps>) => {
+  useEffect(() => {
+    Prism.highlightAll();
+  }, []);
   return (
     <>
       <Head>
@@ -53,9 +63,10 @@ const Post = ({
           <div className="font-erode">
             <h1 className="font-extrabold mb-4 text-5xl">{postData.title}.</h1>
             <p className="text-link-color">{formatDate(postData.date!)}</p>
+            <p>{postData.language}</p>
           </div>
           <section
-            className="mt-12 font-satoshi prose"
+            className={`mt-12 font-satoshi prose language-${postData.language}`}
             dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
           ></section>
         </section>
