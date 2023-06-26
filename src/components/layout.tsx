@@ -15,9 +15,9 @@ const Layout = ({ children }: LayoutProps) => {
         <meta name="description" content="Kehinde Adeleke's website" />
         <meta name="og:title" content={siteTitle} />
       </Head>
-      <section className="max-w-xl pl-8 sm:ml-[12%] sm:pl-16 ">
+      <div className="max-w-xl pl-8 sm:ml-[12%] sm:pl-16 ">
         <main className="pt-8 md:pt-12">{children}</main>
-      </section>
+      </div>
     </div>
   );
 };
