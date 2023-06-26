@@ -10,6 +10,7 @@ export type Post = {
   date?: string;
   title?: string;
   status?: string;
+  language?: string
 };
 
 const filter = ["All", "Published", "Draft"];
