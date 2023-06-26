@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import "@/styles/themes/laserwave.css";
 import type { AppProps } from "next/app";
 import { satoshiFont, erodeFont } from "@/fonts/setup";
 import { Layout } from "@/components/layout";
