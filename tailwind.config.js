@@ -8,11 +8,7 @@ module.exports = {
         DEFAULT: {
           css: {
             code: {
-              backgroundColor: "#E7DFCF",
-              color: "#413a30",
-              borderRadius: "0.25rem",
-              padding: "0.25rem",
-              fontWeight: "500",
+              fontSize: "0.895rem",
             },
             "code::before": {
               content: "",
