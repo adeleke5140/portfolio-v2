@@ -2,18 +2,23 @@ import { BackButton } from "@/components/backButton";
 import { PageWrapper } from "@/components/pageWrapper";
 import Head from "next/head";
 import Link from "next/link";
+import { MailIcon } from "lucide-react";
 
 const languages = ["HTML", "CSS", "Javascript", "Typescript", "Ruby", "Go"];
 
 const technologies = [
-  "React",
-  "Vue",
+  "ReactJS",
+  "VueJS",
   "Next",
-  "Nuxt",
   "Gatsby",
   "RTK",
+  "TailwindCSS",
+  "Zustand",
+  "Jest",
   "GraphQL",
-  "MDX",
+  "MongoDB",
+  "NodeJS",
+  "ExpressJS",
 ];
 
 const About = () => {
@@ -28,38 +33,25 @@ const About = () => {
       <PageWrapper heading="About me." path="/">
         <section className="prose pb-3 font-satoshi">
           <p>
-            Hello, I am Kehinde. I am a Frontend Engineer from Lagos, Nigeria,
-            who is interested in digital accessibility. I like the web and how
-            exciting it is to build on. It&apos;s why I am rebuilding my
-            portfolio because it is fun. Genuinely.
+            Hello, I am Kehinde, a Frontend Engineer and a11y advocate. I work
+            at the intersection of frontend, design and digital accessibility.
           </p>
 
           <p>
-            I have been digging into NextJS, Gatsby and Typescript recently.
-            Regarding Typescript, I am currently working through
-            <a href="https://effectivetypescript.com/">
-              {" "}
-              Effective typescript
-            </a>{" "}
-            by Dan Vanderkam. It&apos;s packed with insight.
-          </p>
-          <p>
-            For my React (which I always want to get better at), I am taking
-            Josh Comeau&apos; course:{" "}
-            <a href="https://www.joyofreact.com/">The Joy of React.</a>{" "}
-            Josh&apos;s blog posts have helped me in the past with my react so I
-            am positive his course would make me a better developer.
+            I build minimal, responsive, accessible and inclusive web
+            applications to achieve your business goals.
           </p>
           <section>
-            Onto the meatier part: A couple of programming languages I have used
-            in the past include:
+            I have experience in the following languages:
             <ul className="flex flex-wrap list-none gap-1 pl-0 prose-ul:pl-0">
               {languages.map((language, id) => (
                 <li
                   key={id}
                   className="font-extrabold prose-code:text-button-text transition-transform ease-out duration-200 -translate-x-1 hover:translate-x-0 rounded"
                 >
-                  <code>{language}</code>
+                  <code className="after:content-[','] cursor-default">
+                    {language}
+                  </code>
                 </li>
               ))}
             </ul>
@@ -70,21 +62,27 @@ const About = () => {
                   key={id}
                   className="font-extrabold prose-code:text-button-text transition-transform ease-out duration-200 -translate-x-1 hover:translate-x-0 rounded"
                 >
-                  <code>{technology}</code>
+                  <code className="after:content-[','] cursor-default">
+                    {technology}
+                  </code>
                 </li>
               ))}
             </ul>
           </section>
           <p>
-            You can check out my projects here:{" "}
-            <Link href="/projects">Projects</Link>
+            Wanna collaborate? Reach out to me on{" "}
+            <a href="https://twitter.com/adeleke5140">Twitter</a> or{" "}
+            <a href="https://www.linkedin.com/in/adeleke5140/">Linkedin</a>. I
+            always love connecting with new people.
           </p>
           <p>
-            I am mostly active on{" "}
-            <a href="https://twitter.com/adeleke5140">Twitter</a> and sometimes{" "}
-            <a href="https://www.linkedin.com/in/adeleke5140/">Linkedin</a>, so
-            you can connect with me there. I am always open to meeting new
-            people.
+            <a
+              className="max-w-max flex items-center justify-start gap-2"
+              href="mailto:kehindeadeleke927@gmail.com?subject=Hi Kehinde, wanna work with you"
+            >
+              <MailIcon size={16} />
+              <span> Send a message</span>
+            </a>
           </p>
         </section>
       </PageWrapper>
