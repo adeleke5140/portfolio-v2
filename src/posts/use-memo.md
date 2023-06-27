@@ -7,6 +7,8 @@ language: jsx
 
 ## Introductions
 
+I feel like we have all got that moment where we wanna remember something but can't quite figure out what it is. For me, it is on the tip of my tongue but I can't just...recall. A memo would have helped.
+
 The word memo is short for memorandum. The word's etymology is from the Latin word _memorandum_ which means "to be remembered". We essentially use memos to remember things.
 
 The useMemo hook is one of the most useful hooks in React. It is also one of those hooks that took me a while to understand. I finally have a grasp of it, and I want to share what I have learned.
