@@ -1,10 +1,8 @@
-import { BackButton } from "@/components/backButton";
 import { PageWrapper } from "@/components/pageWrapper";
 import Head from "next/head";
-import Link from "next/link";
 import { MailIcon } from "lucide-react";
 
-const languages = ["HTML", "CSS", "Javascript", "Typescript", "Ruby", "Go"];
+const languages = ["HTML", "CSS", "Javascript", "Typescript", "Go"];
 
 const technologies = [
   "ReactJS",
@@ -47,11 +45,9 @@ const About = () => {
               {languages.map((language, id) => (
                 <li
                   key={id}
-                  className="font-extrabold prose-code:text-button-text transition-transform ease-out duration-200 -translate-x-1 hover:translate-x-0 rounded"
+                  className="after:content-[','] cursor-default last:after:content-['.'] font-extrabold prose-code:text-button-text transition-transform ease-out duration-200 -translate-x-1 hover:translate-x-0 rounded"
                 >
-                  <code className="after:content-[','] cursor-default">
-                    {language}
-                  </code>
+                  <code>{language}</code>
                 </li>
               ))}
             </ul>
@@ -60,11 +56,9 @@ const About = () => {
               {technologies.map((technology, id) => (
                 <li
                   key={id}
-                  className="font-extrabold prose-code:text-button-text transition-transform ease-out duration-200 -translate-x-1 hover:translate-x-0 rounded"
+                  className="after:content-[','] cursor-default last:after:content-['.'] font-extrabold prose-code:text-button-text transition-transform ease-out duration-200 -translate-x-1 hover:translate-x-0 rounded"
                 >
-                  <code className="after:content-[','] cursor-default">
-                    {technology}
-                  </code>
+                  <code>{technology}</code>
                 </li>
               ))}
             </ul>
