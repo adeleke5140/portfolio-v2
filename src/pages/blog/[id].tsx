@@ -63,7 +63,6 @@ const Post = ({
           <div className="font-erode">
             <h1 className="font-extrabold mb-4 text-5xl">{postData.title}.</h1>
             <p className="text-link-color">{formatDate(postData.date!)}</p>
-            <p>{postData.language}</p>
           </div>
           <section
             className={`mt-12 font-satoshi prose language-${postData.language}`}
