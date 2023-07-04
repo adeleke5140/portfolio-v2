@@ -12,13 +12,13 @@ const Layout = ({ children }: LayoutProps) => {
     <div className="home min-h-screen">
       <Head>
         <link rel="icon" href="/kehinde.ico" />
-        <meta name="description" content="Kehinde Adeleke's website" />
+        <meta name="description" content={`${name} website`} />
         <meta name="og:title" content={siteTitle} />
       </Head>
-      <div className="max-w-xl pl-8 sm:ml-[12%] sm:pl-16 ">
+      <div>
         <main className="pt-8 md:pt-12">{children}</main>
       </div>
-    </div>
+    </div >
   );
 };
 
