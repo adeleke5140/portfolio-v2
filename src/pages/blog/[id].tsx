@@ -12,6 +12,7 @@ import { formatDate } from "@/helpers/formatDate";
 import Link from "next/link";
 import { useEffect } from "react";
 import Prism from "prismjs";
+import readingTime from 'reading-time/lib/reading-time'
 
 require("prismjs/components/prism-jsx");
 require("prismjs/components/prism-javascript");
@@ -28,6 +29,8 @@ interface Params extends ParsedUrlQuery {
 const Post = ({
   postData,
 }: InferGetServerSidePropsType<typeof getStaticProps>) => {
+  const estimatedReadingTime = readingTime(postData.contentHtml)
+
   useEffect(() => {
     Prism.highlightAll();
   }, []);
@@ -62,7 +65,10 @@ const Post = ({
         <section className="pb-8 mt-4">
           <div className="font-erode">
             <h1 className="font-extrabold mb-4 text-5xl">{postData.title}.</h1>
-            <p className="text-link-color">{formatDate(postData.date!)}</p>
+            <p className="text-link-color flex gap-2">
+              <span>{formatDate(postData.date!)}</span>
+              .<span>{estimatedReadingTime.text}</span>
+            </p>
           </div>
           <section
             className={`mt-12 font-satoshi prose language-${postData.language}`}
