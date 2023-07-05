@@ -119,10 +119,5 @@ export const dm_mono = DM_Mono({
   subsets: ['latin'],
   display: 'swap',
   weight: ['300', '400', '500'],
-})
-
-export const dm_sans = DM_Sans({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['400', '500', '700'],
+  variable: '--font-dm-mono'
 })
