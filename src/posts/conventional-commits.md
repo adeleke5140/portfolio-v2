@@ -1,6 +1,7 @@
 ---
 title: "Conventional Commits: an exploration"
 date: '2023-03-19'
+status: 'completed'
 ---
 
 ## Introduction
@@ -14,8 +15,8 @@ This ensures that users of your API have an understanding of the changes you mak
 A summary of the spec, which can be found on the [https://semver.org/](website) state:
 Given a version number MAJOR.MINOR.PATCH, increment the:
 
-* MAJOR version when you make incompatible API changes 
-* MINOR version when you add functionality in a backwards compatible manner 
+* MAJOR version when you make incompatible API changes
+* MINOR version when you add functionality in a backwards compatible manner
 * PATCH version when you make backwards compatible bug fixes
 
 Conventional commits therefore aligns with this spec which makes it easier to write automated tooling on top of it.
@@ -35,7 +36,7 @@ Commits are structured as follows:
 The required section of the commit is the type and the description. The scope, body and footer are optional.
 
 
-The elements that make up a conventional commit would contain the following: 
+The elements that make up a conventional commit would contain the following:
 
 * **fix**: a commit of this type fixes a bug in your codebase. This corresponds to PATCH in semver
 * **feat**: a commit of this type introduces new features in your codebase. This corresponds to MINOR in semver
@@ -44,10 +45,10 @@ in the footer. This corresponds with MAJOR in semver.
 
 Other types apart from fix and feat include build, chore, ci, docs, style, refactor, perf, test e.t.c
 
-I have recently being using this type of commits in my personal project and it makes explicit what each commit 
+I have recently being using this type of commits in my personal project and it makes explicit what each commit
 does.
 
-An example of a commit message would be: 
+An example of a commit message would be:
 ```
   feat: implement authorization using context API
 ```
@@ -62,4 +63,4 @@ In summary, the conventional commits system helps developers in creating commit 
 that communicate the nature of changes made in a codebase. This would be useful to them later on, teammates,
 and other concerned stakeholders.
 
-The full spec can be read on this [https://www.conventionalcommits.org/en/v1.0.0/](website)
+The full spec can be read on this [website](https://www.conventionalcommits.org/en/v1.0.0/)
