@@ -28,6 +28,9 @@ module.exports = {
             "pre code:after": {
               paddingRight: "unset",
             },
+            "li::marker": {
+              color: 'black'
+            }
           },
         },
       },
@@ -43,6 +46,7 @@ module.exports = {
       fontFamily: {
         satoshi: ["var(--font-satoshi)"],
         erode: ["var(--font-erode)"],
+        mono: ["var(--font-dm-mono)"],
       },
       transitionProperty: {
         "transform-opacity": "transform, opacity",
@@ -71,16 +75,6 @@ module.exports = {
           "75%": { transform: "rotate(-5deg)" },
           "100%": { transform: "rotate(0deg)" },
         },
-      },
-      animation: {
-        slideUpAndFade: "slideUpAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1)",
-        slideDownAndFade:
-          "slideDownAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1)",
-        slideRightAndFade:
-          "slideRightAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1)",
-        slideLeftAndFade:
-          "slideLeftAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1)",
-        wiggle: "wiggle 1000ms infinite ease-in-out",
       },
     },
   },
