@@ -48,9 +48,8 @@ return { getPair, setPair }
 }
 ```
 
-_I am currently struggling with syntax higlighting in remark so if you could help, I'd appreciate it. Please reach out to me on [Twitter](https://twitter.com/adeleke5140)_
+## On to the generics stuff.
 
-On to the generics stuff. \
 The function `MakeState` is a generic function. In the body of the function, we have two functions. One called
 `getPair` and another `setPair` which are used for getting and setting the pair variable with a set of `object` keys. Then we return an object with those two functions.
 

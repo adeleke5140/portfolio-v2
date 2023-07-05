@@ -8,8 +8,8 @@ interface PageWrapperProps {
 
 const PageWrapper = ({ heading, children, path }: PageWrapperProps) => {
   return (
-    <div className="max-w-xl pl-8 sm:ml-[12%] sm:pl-16 ">
-      <section className="h-full relative pr-8">
+    <div className="max-w-xl sm:pl-8 md:ml-[12%] md:pl-16 ">
+      <section className="h-full relative p-4">
         <div className="flex flex-col gap-5 mb-8">
           <h1 className="title font-mono">{heading}</h1>
           <BackButton path={path} text="../" />

@@ -41,7 +41,7 @@ const projects = [
 const Projects = () => {
   return (
     <PageWrapper heading="Projects." path="/">
-      <section className="font-satoshi">
+      <section className="font-mono">
         <p className="mb-4">
           A couple of interesting things I have built include:
         </p>
@@ -53,9 +53,8 @@ const Projects = () => {
             <div className="flex justify-between ">
               <div className="mb-2">
                 <p className="font-bold">{project.name}{" "}{project.status ? <span className="text-sm">({project.status})</span> : null}</p>
-                <span className="text-sm">{project.subtitle}</span>
               </div>
-              <div className="flex gap-2 text-button-text ">
+              <div className="flex gap-2 text-button-text">
                 <span>
                   <a
                     href={project.live}
@@ -78,14 +77,12 @@ const Projects = () => {
                 </span>
               </div>
             </div>
-            <span className="text-sm">
-              <span className="font-bold">Tools:</span> {project.tools}
-            </span>
+            <p className="mb-2">{project.subtitle}</p>
           </section>
         ))}
         ...
         <p className="mt-4">
-          I write about things I&apos;m learning on my{" "}
+          I write about interesting software topics on my{" "}
           <Link href="/blog" className="underline font-bold">
             Blog
           </Link>

@@ -18,6 +18,12 @@ require("prismjs/components/prism-javascript");
 require("prismjs/components/prism-typescript");
 require("prismjs/components/prism-elixir");
 
+import { Sofia_Sans } from "@next/font/google";
+
+const sofiaSans = Sofia_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500']
+})
 
 interface PostData extends Post {
   contentHtml: string;
@@ -58,7 +64,7 @@ const Post = ({
         </div>
         <section className="pb-8 mt-4">
           <div className="font-erode">
-            <h1 className="font-extrabold mb-4 text-5xl font-mono">{postData.title}.</h1>
+            <h1 className="font-extrabold mb-4 text-3xl md:text-5xl font-mono">{postData.title}.</h1>
             <p
               className="text-link-color text-xs flex gap-2 font-mono"
             >

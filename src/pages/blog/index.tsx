@@ -18,6 +18,14 @@ const filter = ["All", "Published", "Draft"];
 const Index = ({
   allPostsData,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const completedPosts = allPostsData.filter(post => {
+    if (post.status !== "draft" && post.status !== "editing") {
+      return post
+    }
+  })
+  console.log({
+    completedPosts
+  })
   return (
     <>
       <Head>
@@ -30,7 +38,7 @@ const Index = ({
         <p className="font-bold font-mono mb-4 ">A couple of my writings: </p>
         <section className="font-mono">
           <ul>
-            {allPostsData.map(({ id, date, title, status }) => (
+            {completedPosts.map(({ id, date, title, status }) => (
               <li key={id} className="mb-4">
                 <Link
                   className="text-sm inline-block md:transition-transform ease-out duration-200 md:hover:text-link-color"

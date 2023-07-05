@@ -7,7 +7,7 @@ language: elixir
 
 ## Introduction
 
-I started elixir a few weeks ago after reading about it on this [blog](https://ramp-engr). I mostly picked it up because I applied for an internship position at the Ramp which...well ended up with me being ghosted.
+I started elixir a few weeks ago after reading about it on this [blog](https://ramp-engr). I mostly picked it up because I applied for an position at the Ramp which...well ended up with me being ghosted.
 
 Nonetheless, it exposed me to a new language and a new way of thinking about programming.
 

@@ -29,7 +29,7 @@ const About = () => {
         <link rel="icon" href="/kehinde.ico" />
       </Head>
       <PageWrapper heading="About me." path="/">
-        <section className="prose pb-3 font-satoshi">
+        <section className="prose pb-3 font-mono">
           <p>
             Hello, I am Kehinde, a Frontend Engineer and a11y advocate. I work
             at the intersection of frontend, design and digital accessibility.
@@ -39,6 +39,7 @@ const About = () => {
             I build minimal, responsive, accessible and inclusive web
             applications to achieve your business goals.
           </p>
+
           <section>
             I have experience in the following languages:
             <ul className="flex flex-wrap list-none gap-1 pl-0 prose-ul:pl-0">
@@ -64,7 +65,7 @@ const About = () => {
             </ul>
           </section>
           <p>
-            Wanna collaborate? Reach out to me on{" "}
+            Would you love to collaborate? Reach out to me on{" "}
             <a href="https://twitter.com/adeleke5140">Twitter</a> or{" "}
             <a href="https://www.linkedin.com/in/adeleke5140/">Linkedin</a>. I
             always love connecting with new people.
