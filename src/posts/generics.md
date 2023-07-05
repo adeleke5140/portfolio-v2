@@ -1,5 +1,5 @@
 ---
-title: Generics, Generics everywhere. Explain generics with an example
+title: Generics in Typescript
 date: '2023-02-17'
 language: typescript
 ---
