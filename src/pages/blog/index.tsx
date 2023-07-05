@@ -35,23 +35,17 @@ const Index = ({
         <meta name="og:title" content="Blog" />
       </Head>
       <PageWrapper heading="Blog." path="/">
-        <p className="font-bold font-mono mb-4 ">A couple of my writings: </p>
+        <p className="font-bold font-mono mb-4 ">I write things.</p>
         <section className="font-mono">
           <ul>
-            {completedPosts.map(({ id, date, title, status }) => (
+            {completedPosts.map(({ id, date, title }) => (
               <li key={id} className="mb-4">
                 <Link
                   className="text-sm inline-block md:transition-transform ease-out duration-200 md:hover:text-link-color"
                   href={`/blog/${id}`}
                 >
                   {title}{" "}
-                  {status && (
-                    <span
-                      className="bg-button-bg text-xs rounded-full p-1 px-2"
-                    >
-                      {status}
-                    </span>
-                  )}
+
                 </Link>
                 <br />
                 <span className="text-gray-500 text-xs">
