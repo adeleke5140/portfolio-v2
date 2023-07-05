@@ -15,7 +15,7 @@ export default function Home() {
       <div className="max-w-xl pl-8 sm:ml-[12%] sm:pl-16 ">
         <section className="flex flex-col mt-[43%] justify-center" id="parent">
           <header className="mb-8">
-            <h1 className="font-mono text-heading-color text-6xl sm:text-8xl font-extrabold">
+            <h1 className="font-satoshi text-heading-color text-6xl sm:text-8xl font-extrabold">
               Kehinde.
             </h1>
             <h2 className="font-mono mt-8 leading-[1.6] font-[300] text-sm">
