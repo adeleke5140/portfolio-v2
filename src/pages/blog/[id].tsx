@@ -13,11 +13,12 @@ import Link from "next/link";
 import { useEffect } from "react";
 import Prism from "prismjs";
 import readingTime from "reading-time/lib/reading-time";
-import { dm_mono } from "@/fonts/setup";
 require("prismjs/components/prism-jsx");
 require("prismjs/components/prism-javascript");
 require("prismjs/components/prism-typescript");
 require("prismjs/components/prism-elixir");
+
+
 interface PostData extends Post {
   contentHtml: string;
 }
@@ -43,8 +44,7 @@ const Post = ({
         <div className="text-button-text flex flex-row-reverse justify-between w-full items-center">
           <Link
             href={"/"}
-            aria-label="home"
-            className={`${dm_mono.className} font-medium block w-fit rounded p-1 hover:bg-button-bg transition-colors ease-out duration-150`}
+            className="font-medium font-mono block w-fit rounded p-1 hover:bg-button-bg transition-colors ease-out duration-150"
           >
             home
           </Link>
@@ -53,21 +53,21 @@ const Post = ({
             aria-label="home"
             className="block w-fit rounded p-1 hover:bg-button-bg transition-colors ease-out duration-150"
           >
-            <p className={`${dm_mono.className} text-sm font-bold`}>../</p>
+            <p className="text-sm font-mono">../</p>
           </Link>
         </div>
         <section className="pb-8 mt-4">
           <div className="font-erode">
-            <h1 className="font-extrabold mb-4 text-5xl">{postData.title}.</h1>
+            <h1 className="font-extrabold mb-4 text-5xl font-mono">{postData.title}.</h1>
             <p
-              className={`text-link-color text-xs flex gap-2 ${dm_mono.className}`}
+              className="text-link-color text-xs flex gap-2 font-mono"
             >
               <span>{formatDate(postData.date!)}</span>.
               <span>{estimatedReadingTime.text}</span>
             </p>
           </div>
           <section
-            className={`mt-12 font-satoshi prose language-${postData.language}`}
+            className={`mt-12 font-mono text-base prose language-${postData.language}`}
             dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
           ></section>
         </section>
