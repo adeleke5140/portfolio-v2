@@ -25,8 +25,9 @@ You can select your prefered font from the toggle button on the top right corner
 
 ## font options
 * default: **DM Mono**
-* Pairing 2: **Inter**
-* Pairing 3: **Satoshi** and **erode**
+* choice 2: **Inter**
+* choice 3: **Satoshi** and **erode**
+* choice 4: **System ui**
 
 ## Conclusion
 

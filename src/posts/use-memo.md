@@ -2,7 +2,7 @@
 title: The useMemo hook
 date: '2023-02-11'
 status: 'editing'
-language: jsx
+language: 'jsx'
 ---
 
 ## Introductions

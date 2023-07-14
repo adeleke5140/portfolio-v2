@@ -6,9 +6,9 @@ status: 'completed'
 
 ## Introduction
 
-According to WebAIM 2023 accessibility report on the top 1 million websites, 96.3% of home pages had detectable WCAG 2 failures. Even though this is a decrease from last's year 96.8%, it is very high and concerning. It means that many websites are not accessible to people with disabilities.
+According to WebAIM 2023 accessibility report on the top 1 million websites, 96.3% of home pages have detectable WCAG 2 failures. Even though this is a decrease from last's year 96.8%, it is very high and concerning. It means that many websites are not accessible to people with disabilities.
 
-One thing that stood out to me in the report was that the significant errors were straightforward. Maybe not "easy" to fix, but they are good starting points for a developer or designer with a proper understanding of the WCAG guidelines.
+One thing that stood out to me in the report was that quite a bunch of significant errors have straightforward fixes. Maybe not "easy" to fix, but they are good starting points for a developer or designer with a proper understanding of the WCAG guidelines.
 
 These include things like:
 
@@ -20,7 +20,9 @@ These include things like:
 
 You can read the [full report](https://webaim.org/projects/million/)
 
-Web Accessibility is broad, and learning never ends, but I can play my part in advocating for more accessible and inclusive practices.
+Web Accessibility is broad, and learning never ends, but by taking small steps, we can ensure the experience we create don't exclude anyone.
+
+I will play my part in advocating for more accessible and inclusive practices.
 
 My goal as an accessibility advocate would involve writing posts about these errors, how to fix them, and broader web accessibility topics. My mindset is going to be one of progress of perfection. I will not be perfect, but I will be better than I was yesterday.
 

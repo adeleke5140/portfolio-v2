@@ -2,7 +2,7 @@
 title: Pattern matching in Elixir
 date: '2023-06-25'
 status: "draft"
-language: elixir
+language: 'elixir'
 ---
 
 ## Introduction

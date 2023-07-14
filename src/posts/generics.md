@@ -2,7 +2,7 @@
 title: Generics in Typescript
 date: '2023-02-17'
 language: typescript
-status: completed
+status: 'completed'
 ---
 
 ## Introduction
