@@ -22,7 +22,7 @@ const A11yFooter = () => {
             <a
               className="text-link-color opacity-70 font-extrabold hover:opacity-100 origin-left transition-transform-opacity ease-out duration-200 hover:scale-110 hover:translate-x-1 hover:-translate-y-0.5 focus:outline-none rounded focus:ring focus:ring-heading-color"
               rel="external"
-              referrerpolicy="strict-origin"
+              referrerPolicy="strict-origin"
               href="https://a11y-webring.club/prev"
             >
               Previous website
@@ -32,7 +32,7 @@ const A11yFooter = () => {
             <a
               className="text-link-color opacity-70 font-extrabold hover:opacity-100 origin-left transition-transform-opacity ease-out duration-200 hover:scale-110 hover:translate-x-1 hover:-translate-y-0.5 focus:outline-none rounded focus:ring focus:ring-heading-color"
               rel="external"
-              referrerpolicy="strict-origin"
+              referrerPolicy="strict-origin"
               href="https://a11y-webring.club/random"
             >
               Random website
@@ -42,7 +42,7 @@ const A11yFooter = () => {
             <a
               className="text-link-color opacity-70 font-extrabold hover:opacity-100 origin-left transition-transform-opacity ease-out duration-200 hover:scale-110 hover:translate-x-1 hover:-translate-y-0.5 focus:outline-none rounded focus:ring focus:ring-heading-color"
               rel="external"
-              referrerpolicy="strict-origin"
+              referrerPolicy="strict-origin"
               href="https://a11y-webring.club/next"
             >
               Next website
