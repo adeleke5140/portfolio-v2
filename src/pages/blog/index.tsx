@@ -4,7 +4,6 @@ import { getSortedPostsData } from "@/lib/posts";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { dm_mono } from "@/fonts/setup";
 
 export type Post = {
   id: string;
@@ -23,9 +22,7 @@ const Index = ({
       return post
     }
   })
-  console.log({
-    completedPosts
-  })
+
   return (
     <>
       <Head>
