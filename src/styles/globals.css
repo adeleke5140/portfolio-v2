@@ -5,10 +5,5 @@
 @layer base{
   @import 'home.css';
   @import 'common.css';
+  @import 'command.css'
 }
-
- /* * {
-  background-color: #f7f3ee;
-} */
-
-
