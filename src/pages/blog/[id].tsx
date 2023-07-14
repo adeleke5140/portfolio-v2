@@ -10,20 +10,15 @@ import Head from "next/head";
 import { PostWrapper } from "@/components/postWrapper";
 import { formatDate } from "@/helpers/formatDate";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Prism from "prismjs";
 import readingTime from "reading-time/lib/reading-time";
+import { CommandButton } from "@/components/commandButton";
+import { CommandMenu } from "@/components/commandMenu";
 require("prismjs/components/prism-jsx");
 require("prismjs/components/prism-javascript");
 require("prismjs/components/prism-typescript");
 require("prismjs/components/prism-elixir");
-
-import { Sofia_Sans } from "@next/font/google";
-
-const sofiaSans = Sofia_Sans({
-  subsets: ['latin'],
-  weight: ['300', '400', '500']
-})
 
 interface PostData extends Post {
   contentHtml: string;
@@ -37,7 +32,7 @@ const Post = ({
   postData,
 }: InferGetServerSidePropsType<typeof getStaticProps>) => {
   const estimatedReadingTime = readingTime(postData.contentHtml);
-
+  const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     Prism.highlightAll();
   }, []);
@@ -47,13 +42,8 @@ const Post = ({
         <title>{postData.title}</title>
       </Head>
       <PostWrapper path="/blog">
-        <div className="text-button-text flex flex-row-reverse justify-between w-full items-center">
-          <Link
-            href={"/"}
-            className="font-medium font-mono block w-fit rounded p-1 hover:bg-button-bg transition-colors ease-out duration-150"
-          >
-            home
-          </Link>
+        <div ref={containerRef} className="relative text-button-text flex flex-row-reverse justify-between w-full items-center">
+          <CommandButton />
           <Link
             href={"/blog"}
             aria-label="home"
@@ -77,6 +67,7 @@ const Post = ({
             dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
           ></section>
         </section>
+        <CommandMenu container={containerRef} />
       </PostWrapper>
     </>
   );
