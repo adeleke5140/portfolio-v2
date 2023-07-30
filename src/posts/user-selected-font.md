@@ -1,7 +1,7 @@
 ---
 title: Choose your font journey
 date: '2023-03-19'
-status: 'completed'
+status: 'archive'
 ---
 
 ## Introduction
