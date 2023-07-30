@@ -13,7 +13,6 @@ export type Post = {
   language?: string;
 };
 
-const filter = ["All", "Published", "Draft"];
 const Index = ({
   allPostsData,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
@@ -42,7 +41,6 @@ const Index = ({
                   href={`/blog/${id}`}
                 >
                   {title}{" "}
-
                 </Link>
                 <br />
                 <span className="text-gray-500 text-xs">
