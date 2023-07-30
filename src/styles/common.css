@@ -1,3 +1,3 @@
 .title {
-    @apply font-satoshi text-5xl sm:text-7xl font-extrabold
+    @apply text-5xl sm:text-7xl font-extrabold
 }
