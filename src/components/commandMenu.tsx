@@ -79,7 +79,7 @@ const CommandMenu = ({ container }: CommandMenuProps) => {
             popPage();
           }
         }}
-        className="font-mono"
+        className=""
         container={parent}
         open={open}
         onOpenChange={toggleCommand}
