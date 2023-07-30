@@ -7,9 +7,9 @@
 
 code[class*="language-"],
 pre[class*="language-"] {
-	background: #27212e;
+	background: #242424;
 	color: #ffffff;
-	font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace; /* this is the default */
+	font-family: Menlo, Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace; /* this is the default */
 	/* The following properties are standard, please leave them as they are */
 	font-size: 0.9em;
 	direction: ltr;
@@ -34,7 +34,7 @@ code[class*="language-"]::-moz-selection,
 code[class*="language-"] ::-moz-selection,
 pre[class*="language-"]::-moz-selection,
 pre[class*="language-"] ::-moz-selection {
-	background: #eb64b927;
+	background: #242424;
 	color: inherit;
 }
 
@@ -42,7 +42,7 @@ code[class*="language-"]::selection,
 code[class*="language-"] ::selection,
 pre[class*="language-"]::selection,
 pre[class*="language-"] ::selection {
-	background: #eb64b927;
+	background: #242424;
 	color: inherit;
 }
 
