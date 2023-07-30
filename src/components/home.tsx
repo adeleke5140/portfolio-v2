@@ -1,62 +1,81 @@
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import { CommandMenu } from "./commandMenu";
-import { CommandButton } from "./commandButton";
+import { useEffect, useRef } from "react";
+import Post from "@/pages/blog/[id]";
+import { formatDate } from "@/helpers/formatDate";
 
-const Home = () => {
-  const [hasMounted, setHasMounted] = useState(false);
+interface HomeProps {
+  posts: Post[];
+}
+
+const Home = ({ posts }: HomeProps) => {
   const containerRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-  return (
-    <section ref={containerRef} className="relative">
-      <header className="absolute right-0">
-        <CommandButton />
-      </header>
 
+  return (
+    <section ref={containerRef} className="px-6 flex flex-col gap-8 relative mt-8 mb-8">
       <section>
-        <header className="mb-8 pt-[45%] md:pt-[35%]">
-          <h1 className="select-none font-satoshi text-heading-color text-6xl sm:text-8xl font-extrabold">
-            Kehinde.
+        <header className="flex flex-col gap-8">
+          <h1 className="font-inter text-lg leading-7">
+            Kehinde Adeleke
           </h1>
-          <p className="select-none font-mono mt-8 leading-[1.6] font-[300] text-sm">
-            web engineer
-          </p>
+          <div className="flex flex-col gap-6">
+            <p className="select-none leading-[1.6] font-normal">
+              <span className="font-serif text-ken-secondary font-[300] italic text-[17px]">Crafting software.{' '}</span>
+              I build web applications for companies to achieve their business goals.
+              Currently working as a contract frontend dev at <a className="opacity-70 underline underline-offset-2 decoration-1  ">Blocverse.</a>
+            </p>
+            <p>I contribute to open source at <a className="opacity-70 underline underline-offset-2 decoration-1">Anki</a>.
+            </p>
+          </div>
         </header>
       </section>
-      <nav>
-        <ul>
-          <li>
-            <Link
-              href="/blog"
-              className="inline-block font-mono text-link-color text-2xl opacity-70 font-extrabold hover:opacity-100 origin-left transition-transform-opacity ease-out duration-200 hover:scale-110 hover:translate-x-1 hover:-translate-y-0.5 focus:outline-none rounded focus:ring focus:ring-heading-color"
-            >
-              /blog.
-            </Link>
-          </li>
-          <li className="mt-4">
-            <Link
-              href="/about"
-              className="inline-block font-mono text-link-color text-2xl opacity-70 font-extrabold hover:opacity-100 origin-left transition-transform-opacity ease-out duration-200 hover:scale-110 hover:translate-x-1 hover:-translate-y-0.5 focus:outline-none rounded focus:ring focus:ring-heading-color"
-            >
-              /about.
-            </Link>
-          </li>
-          <li className="mt-4">
-            <Link
-              href="/projects"
-              className="inline-block font-mono text-link-color text-2xl opacity-70 font-extrabold hover:opacity-100 origin-left transition-transform-opacity ease-out duration-200 hover:scale-110 hover:translate-x-1 hover:-translate-y-0.5 focus:outline-none rounded focus:ring focus:ring-heading-color"
-            >
-              /projects.
-            </Link>
-          </li>
-        </ul>
-      </nav>
-      {hasMounted ? <CommandMenu container={containerRef} /> : null}
+      <section aria-labelledby="projects" className="flex flex-col gap-6">
+        <h2 id="projects" className="text-ken-grey text-sm">
+          Projects
+        </h2>
+        <div className="grid grid-cols-2 gap-6">
+          <div className="flex flex-col gap-1">
+            <h3 className="text-gray-200">
+              <a className="underline underline-offset-2 decoration-1">POD</a>
+            </h3>
+            <p className="text-sm text-ken-grey">Incentivize open source contributors with collectibles</p>
+          </div>
+          <div className="flex flex-col gap-1">
+            <h3 className="text-gray-200">
+              <a className="underline underline-offset-2 decoration-1">LiveChat</a>
+            </h3>
+            <p className="text-sm text-ken-grey">Chat live with friends on things you enjoy</p>
+          </div>
+          <div className="flex flex-col gap-1">
+            <h3 className="text-gray-200">
+              <a className="underline underline-offset-2 decoration-1">Audio-transciber</a>
+            </h3>
+            <p className="text-sm text-ken-grey">Transcribe your voice using the command line</p>
+          </div>
+          <div className="flex flex-col gap-1">
+            <h3 className="text-gray-200">
+              <a className="underline underline-offset-2 decoration-1">Writerr</a>
+            </h3>
+            <p className="text-sm text-ken-grey">Straightforward writing app in a distracted world</p>
+          </div>
+        </div>
+      </section>
+      <section aria-labelledby="writing" className="flex flex-col gap-6">
+        <h2 id="writing" className="text-ken-grey text-sm">Writing</h2>
+        <div className="flex flex-col gap-4">
+          {posts.map(post => (
+            <div key={post.id} className="flex flex-col">
+              <p className="text-gray-200">
+                <Link href={`/blog/${post.id}`} className="underline underline-offset-2 decoration-1">{post.title}</Link>
+              </p>
+              <p className="text-ken-grey place-self-start">{formatDate(post.date!)}</p>
+            </div>
+          ))}
+        </div>
+      </section>
     </section>
   );
 };
+
 
 export { Home };
