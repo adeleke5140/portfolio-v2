@@ -8,7 +8,9 @@ module.exports = {
         DEFAULT: {
           css: {
             code: {
+              color: "#e5e5e5",
               fontSize: "0.895rem",
+              fontWeight: "400",
             },
             "code::before": {
               content: "",
@@ -17,7 +19,7 @@ module.exports = {
               content: "",
             },
             pre: {
-              backgroundColor: "#E7DFCF",
+              backgroundColor: "#242424",
               color: "#413a30",
               paddingRight: 0,
               paddingLeft: 0,
@@ -28,9 +30,31 @@ module.exports = {
             "pre code:after": {
               paddingRight: "unset",
             },
-            "li::marker": {
-              color: "black",
+            "ul": {
+              color: "#e5e5e5",
             },
+            "li": {
+              paddingLeft: 0
+            },
+            "li::marker": {
+              color: "currentColor",
+              paddingLeft: 0
+            },
+            "h1, h2, h3, h4, h5": {
+              fontSize: '1.2rem',
+              color: "#a0a0a0"
+            },
+            "a": {
+              color: "#e5e5e5",
+              textDecoration: "underline",
+            },
+            "blockquote": {
+              color: "#e5e5e5",
+              "border-left-width": '0.12rem'
+            },
+            "strong": {
+              color: "#e5e5e5",
+            }
           },
         },
       },
