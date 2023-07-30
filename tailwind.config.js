@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const { mauve } = require("@radix-ui/colors");
+const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -29,24 +29,23 @@ module.exports = {
               paddingRight: "unset",
             },
             "li::marker": {
-              color: 'black'
-            }
+              color: "black",
+            },
           },
         },
       },
       colors: {
-        "app-bg": "#f7f3ee",
-        "link-color": "#415030",
-        "heading-color": "#252222",
-        "button-text": "#413a30",
-        "link-clicked": "#7755ce",
-        "button-bg": "#e7dccb",
-        ...mauve,
+        "ken-black": "#171717",
+        "ken-grey": "#a0a0a0",
+        "ken-primary": "#e5e5e5",
+        "ken-secondary": "#f2f2f2",
+        "ken-tertiary": "#ededed"
       },
       fontFamily: {
-        satoshi: ["var(--font-satoshi)"],
-        erode: ["var(--font-erode)"],
-        mono: ["var(--font-dm-mono)"],
+        sans: ["var(--font-dm-sans)", ...defaultTheme.fontFamily.sans],
+        serif: ["var(--font-newsreader)", ...defaultTheme.fontFamily.serif],
+        inter: ["var(--font-inter)"],
+        grotesk: ["var(--font-grotesk)"],
       },
       transitionProperty: {
         "transform-opacity": "transform, opacity",
