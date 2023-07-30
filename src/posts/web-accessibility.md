@@ -1,10 +1,12 @@
 ---
-title: "Web Accessibility"
+title: "Web Accessibility statement"
 date: '2023-07-04'
 status: 'completed'
 ---
 
 ## Introduction
+
+The web isn't as accessible as it should be.
 
 According to WebAIM 2023 accessibility report on the top 1 million websites, 96.3% of home pages have detectable WCAG 2 failures. Even though this is a decrease from last's year 96.8%, it is very high and concerning. It means that many websites are not accessible to people with disabilities.
 
