@@ -24,45 +24,36 @@ export default function Home({
   return (
     <>
       <Head>
-        <title>Kehinde | web engineer</title>
+        <title>Kehinde Adeleke</title>
         <meta name="description" content="Kehinde Adeleke's portfolio" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/kehinde.ico" />
       </Head>
 
-      <section className="max-w-[50rem]">
-        <HomePage posts={completedPosts} />
-        <A11ySection />
-        <section aria-labelledby="Connect" className="px-6 mt-8 flex flex-col gap-6">
-          <h2 id="Connect" className="text-ken-grey text-sm">Connect</h2>
-          <div className="flex flex-col gap-4">
-            <p>
-              Would you love to collaborate? Reach out on {" "}
-              <a href="https://www.linkedin.com/in/adeleke5140/" className="underline underline-offset-2">Linkedin</a>. I
-              always love connecting with new people or you could:
-            </p>
-            <p>
-              <a
-                className="underline underline-offset-2 max-w-max flex items-center justify-start gap-2"
-                href="mailto:kehindeadeleke927@gmail.com?subject=Hi Kehinde, wanna work with you"
-              >
-                <MailIcon size={16} />
-                <span> Send a message</span>
-              </a>
-            </p>
-          </div>
-        </section>
-        <footer className="mt-8 border-ken-grey border-t-[1.2px] border-solid">
-          <div className="px-6 py-3 flex justify-between">
-            <p className="text-ken-grey text-sm">
-              grit. passion. curiosity.
-            </p>
-            <p className="text-ken-grey text-sm">
-              &copy;{new Date().getFullYear()} Kehinde Adeleke
-            </p>
-          </div>
-
-        </footer>
+      <section>
+        <div className="max-w-2xl mx-auto">
+          <HomePage posts={completedPosts} />
+          <A11ySection />
+          <section aria-labelledby="Connect" className="px-6 my-8 flex flex-col gap-6 sm:pb-20">
+            <h2 id="Connect" className="text-ken-grey text-sm">Connect</h2>
+            <div className="flex flex-col gap-4">
+              <p>
+                Would you love to collaborate? Reach out on {" "}
+                <a href="https://www.linkedin.com/in/adeleke5140/" className="underline underline-offset-2 decoration-1 decoration-ken-grey">Linkedin</a>. I
+                always love connecting with new people or you could:
+              </p>
+              <p>
+                <a
+                  className="underline underline-offset-2 decoration-1 decoration-ken-grey  max-w-max flex items-center justify-start gap-2"
+                  href="mailto:kehindeadeleke927@gmail.com?subject=Hi Kehinde, wanna work with you"
+                >
+                  <MailIcon size={16} />
+                  <span> Send a message</span>
+                </a>
+              </p>
+            </div>
+          </section>
+        </div>
       </section>
     </>
   );

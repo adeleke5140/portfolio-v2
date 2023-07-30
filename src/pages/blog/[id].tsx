@@ -13,8 +13,8 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import Prism from "prismjs";
 import readingTime from "reading-time/lib/reading-time";
-import { CommandButton } from "@/components/commandButton";
 import { CommandMenu } from "@/components/commandMenu";
+import { Dot, Undo2 } from "lucide-react";
 require("prismjs/components/prism-jsx");
 require("prismjs/components/prism-javascript");
 require("prismjs/components/prism-typescript");
@@ -42,28 +42,29 @@ const Post = ({
         <title>{postData.title}</title>
       </Head>
       <PostWrapper path="/blog">
-        <div ref={containerRef} className="relative text-button-text flex flex-row-reverse justify-between w-full items-center">
-          <CommandButton />
+        <div ref={containerRef} className="relative flex justify-between w-full items-center">
           <Link
             href={"/blog"}
             aria-label="home"
-            className="block w-fit rounded p-1 hover:bg-button-bg transition-colors ease-out duration-150"
+            className="font-serif font-[300] italic text-[17px] block w-fit rounded p-1 flex items-center gap-2 "
           >
-            <p className="text-sm font-mono">../</p>
+            <Undo2 size={12} />
+            Back
           </Link>
         </div>
         <section className="pb-8 mt-4">
-          <div className="font-erode">
-            <h1 className="font-extrabold mb-4 text-3xl md:text-5xl font-mono">{postData.title}.</h1>
+          <div className="">
+            <h1 className="font-bold mb-4 text-xl md:text-4xl">{postData.title}.</h1>
             <p
-              className="text-link-color text-xs flex gap-2 font-mono"
+              className="flex items-center gap-1 text-sm text-ken-grey"
             >
-              <span>{formatDate(postData.date!)}</span>.
+              <span>{formatDate(postData.date!)}</span>
+              <Dot />
               <span>{estimatedReadingTime.text}</span>
             </p>
           </div>
           <section
-            className={`mt-12 font-mono text-base prose language-${postData.language}`}
+            className={`mt-12 text-ken-primary font-normal prose language-${postData.language}`}
             dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
           ></section>
         </section>

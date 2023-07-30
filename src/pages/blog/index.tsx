@@ -25,25 +25,24 @@ const Index = ({
   return (
     <>
       <Head>
-        <title>Kehinde | Blog </title>
+        <title>Writing</title>
         <link rel="icon" href="/kehinde.ico" />
         <meta name="description" content="Kehinde Adeleke's website" />
         <meta name="og:title" content="Blog" />
       </Head>
-      <PageWrapper heading="Blog." path="/">
-        <p className="font-bold font-mono mb-4 ">I write things.</p>
-        <section className="font-mono">
+      <PageWrapper heading="Writing." path="/">
+        <section className="">
           <ul>
             {completedPosts.map(({ id, date, title }) => (
               <li key={id} className="mb-4">
                 <Link
-                  className="text-sm inline-block md:transition-transform ease-out duration-200 md:hover:text-link-color"
+                  className="inline-block transition-all hover:underline decoration-1 underline-offset-1 decoration-text-ken-grey"
                   href={`/blog/${id}`}
                 >
                   {title}{" "}
                 </Link>
                 <br />
-                <span className="text-gray-500 text-xs">
+                <span className="text-ken-grey text-xs">
                   {formatDate(date!)}
                 </span>
               </li>
