@@ -9,7 +9,7 @@ code[class*="language-"],
 pre[class*="language-"] {
 	background: #242424;
 	color: #ffffff;
-	font-family: Menlo, Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace; /* this is the default */
+	font-family: 'Input Mono', Menlo, Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace; /* this is the default */
 	/* The following properties are standard, please leave them as they are */
 	font-size: 0.9em;
 	direction: ltr;
