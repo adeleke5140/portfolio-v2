@@ -1,7 +1,8 @@
 import { format, parseISO } from "date-fns";
 
 const formatDate = (date: string) => {
-    return format(parseISO(date), "LLLL d, yyyy")
+  if (!date) return
+  return format(parseISO(date), "LLLL d, yyyy")
 }
 
-export { formatDate}
+export { formatDate }

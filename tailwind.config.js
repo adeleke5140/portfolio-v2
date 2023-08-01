@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const { mauve } = require("@radix-ui/colors");
+const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -8,7 +8,9 @@ module.exports = {
         DEFAULT: {
           css: {
             code: {
+              color: "#e5e5e5",
               fontSize: "0.895rem",
+              fontWeight: "400",
             },
             "code::before": {
               content: "",
@@ -17,7 +19,7 @@ module.exports = {
               content: "",
             },
             pre: {
-              backgroundColor: "#E7DFCF",
+              backgroundColor: "#242424",
               color: "#413a30",
               paddingRight: 0,
               paddingLeft: 0,
@@ -28,25 +30,46 @@ module.exports = {
             "pre code:after": {
               paddingRight: "unset",
             },
+            "ul": {
+              color: "#e5e5e5",
+            },
+            "li": {
+              paddingLeft: 0
+            },
             "li::marker": {
-              color: 'black'
+              color: "currentColor",
+              paddingLeft: 0
+            },
+            "h1, h2, h3, h4, h5": {
+              fontSize: '1.2rem',
+              color: "#a0a0a0"
+            },
+            "a": {
+              color: "#e5e5e5",
+              textDecoration: "underline",
+            },
+            "blockquote": {
+              color: "#e5e5e5",
+              "border-left-width": '0.12rem'
+            },
+            "strong": {
+              color: "#e5e5e5",
             }
           },
         },
       },
       colors: {
-        "app-bg": "#f7f3ee",
-        "link-color": "#415030",
-        "heading-color": "#252222",
-        "button-text": "#413a30",
-        "link-clicked": "#7755ce",
-        "button-bg": "#e7dccb",
-        ...mauve,
+        "ken-black": "#171717",
+        "ken-grey": "#a0a0a0",
+        "ken-primary": "#e5e5e5",
+        "ken-secondary": "#f2f2f2",
+        "ken-tertiary": "#ededed"
       },
       fontFamily: {
-        satoshi: ["var(--font-satoshi)"],
-        erode: ["var(--font-erode)"],
-        mono: ["var(--font-dm-mono)"],
+        sans: ["var(--font-dm-sans)", ...defaultTheme.fontFamily.sans],
+        serif: ["var(--font-newsreader)", ...defaultTheme.fontFamily.serif],
+        inter: ["var(--font-inter)"],
+        grotesk: ["var(--font-grotesk)"],
       },
       transitionProperty: {
         "transform-opacity": "transform, opacity",

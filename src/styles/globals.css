@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 @layer base{
-  @import 'home.css';
   @import 'common.css';
   @import 'command.css'
 }
