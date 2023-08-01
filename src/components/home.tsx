@@ -79,7 +79,7 @@ const Home = ({ posts }: HomeProps) => {
           <div className="flex flex-col gap-1">
             <h3 className="text-gray-200">
               <a
-                href="#"
+                href="https://github.com/adeleke5140/writerr/tree/main"
                 target="_blank"
                 rel="noopener noreferrer" className="underline underline-offset-2 decoration-1 decoration-ken-grey">Writerr</a>
             </h3>
