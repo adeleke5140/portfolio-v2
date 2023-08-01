@@ -28,9 +28,18 @@ const Home = ({ posts }: HomeProps) => {
             <p className="select-none leading-[1.6] font-normal">
               <span className="font-serif text-ken-secondary font-[300] italic text-[17px]">Crafting software.{' '}</span>
               I build web applications for companies to achieve their business goals.
-              Currently working as a contract frontend dev at <a className="opacity-70 underline underline-offset-2 decoration-1 decoration-ken-grey  ">Blocverse.</a>
+              Currently working as a contract frontend dev at <a
+                href="https://www.blocverse.com/"
+                target="_blank"
+                rel="noopener noreferrer" className="opacity-70 underline underline-offset-2 decoration-1 decoration-ken-grey">Blocverse.</a>
             </p>
-            <p>I contribute to open source at <a className="opacity-70 underline underline-offset-2 decoration-1 decoration-ken-grey">Anki</a>.
+            <p>I contribute to open source at
+              <a
+                href="https://github.com/ankitects/anki"
+                target="_blank"
+                rel="noopener noreferrer" className="opacity-70 underline underline-offset-2 decoration-1 decoration-ken-grey">
+                Anki
+              </a>.
             </p>
           </div>
         </header>
