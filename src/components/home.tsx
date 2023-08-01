@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import Post from "@/pages/blog/[id]";
 import { formatDate } from "@/helpers/formatDate";
 
@@ -21,10 +21,16 @@ const Home = ({ posts }: HomeProps) => {
     <section className="px-6 md:pt-16 flex flex-col gap-8 md:gap-10 relative mt-8 mb-8">
       <section>
         <header className="flex flex-col gap-8">
-          <h1 className="font-inter font-normal text-lg leading-7 md:pb-4">
+          <motion.h1
+            initial={{ opacity: 0, translateY: "10px" }}
+            animate={{ opacity: 1, translateY: 0 }}
+            transition={{ duration: 1 }} className="font-inter font-normal text-lg leading-7 md:pb-4">
             Kehinde Adeleke
-          </h1>
-          <div className="flex flex-col gap-6">
+          </motion.h1>
+          <motion.div
+            initial={{ opacity: 0, translateY: "10px" }}
+            animate={{ opacity: 1, translateY: 0 }}
+            transition={{ delay: 0.5, duration: 1 }} className="flex flex-col gap-6">
             <p className="select-none leading-[1.6] font-normal">
               <span className="font-serif text-ken-secondary font-[300] italic text-[17px]">Crafting software.{' '}</span>
               I build web applications for companies to achieve their business goals.
@@ -41,10 +47,13 @@ const Home = ({ posts }: HomeProps) => {
                 Anki
               </a>.
             </p>
-          </div>
+          </motion.div>
         </header>
       </section>
-      <section aria-labelledby="projects" className="flex flex-col gap-6">
+      <motion.section
+        initial={{ opacity: 0, translateY: "10px" }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{ delay: 1, duration: 1 }} aria-labelledby="projects" className="flex flex-col gap-6">
         <h2 id="projects" className="text-ken-grey text-sm">
           Projects
         </h2>
@@ -86,8 +95,11 @@ const Home = ({ posts }: HomeProps) => {
             <p className="text-sm text-ken-grey">Straightforward writing app in a distracted world</p>
           </div>
         </div>
-      </section>
-      <section aria-labelledby="writing" className="flex flex-col gap-6">
+      </motion.section>
+      <motion.section
+        initial={{ opacity: 0, translateY: "10px" }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{ delay: 1.5, duration: 1 }} aria-labelledby="writing" className="flex flex-col gap-6">
         <h2 id="writing" className="text-ken-grey text-sm">Writing</h2>
         <div className="flex flex-col md:grid md:grid-cols-2 gap-4">
           {updatedPosts.map(post => (
@@ -100,7 +112,7 @@ const Home = ({ posts }: HomeProps) => {
           ))}
         </div>
 
-      </section>
+      </motion.section>
     </section>
   );
 };
