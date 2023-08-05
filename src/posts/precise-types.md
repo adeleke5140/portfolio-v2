@@ -2,7 +2,7 @@
 title: Use Precise types instead of String types
 date: '2023-08-05'
 language: typescript
-status: draft
+status: completed
 tag: typescript
 ---
 
