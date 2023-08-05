@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { Post } from "./blog";
 import { A11ySection } from "@/components/a11ySection";
 import { MailIcon } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Home({
   allPostsData,
@@ -36,7 +37,10 @@ export default function Home({
         <div className="max-w-2xl mx-auto">
           <HomePage posts={completedPosts} />
           <A11ySection />
-          <section
+          <motion.section
+            initial={{ opacity: 0, translateY: "10px" }}
+            animate={{ opacity: 1, translateY: 0 }}
+            transition={{ delay: 2.5, duration: 1 }}
             aria-labelledby="Connect"
             className="px-6 my-8 flex flex-col gap-6 sm:pb-20"
           >
@@ -64,7 +68,7 @@ export default function Home({
                 </a>
               </p>
             </div>
-          </section>
+          </motion.section>
         </div>
       </section>
     </>
