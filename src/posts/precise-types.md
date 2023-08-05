@@ -66,7 +66,9 @@ Remember that this string could also not exists on the object we need to access.
 
 We make the function a generic so that it can infer the specific type of array it is. The type checker complains.
 
-`element implicity has an 'any' type because expression of type 'string' cannot be used to index type 'unknown'`
+![typeError](https://github.com/adeleke5140/portfolio-v2/blob/new-post/public/images/pluckV3error.png?raw=true)
+
+We cannot use a string key on an `unknown` type.
 
 The problem here still persists and this is because string is still broad. It is **stringly typed**. The return type is also still `any[]`
 
@@ -131,9 +133,7 @@ const artistArr = pluck(recordsArr, 'title')
 
 Using the `TS` playground, we see that we get nice autocomplete.
 
-
-
-Check it out [here](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABABwDYggawDwBUA0iA0ogKYAeUpYAJgM6KakCecwiuAfABQBOpEOL3oAuDgG0AuoSbMRRAJRjc4opKkBvALAAoRIn5QQvJP0HC6AOgC2AQ2R8BQmogC8nA0+HjZkhboBfXV0oZmRSRAAlLxoYMABzXDCI10QAIjojWLg0xAAfdNQYADdSNOCdUPComKTq1O09fURbXlhMsUzeOPj8XWbEWChUUk6oboS+pv1+Eds6UgARWyoxZaopgbNnHrrRmvNYhL3+xCCdXUEwTJbeXjFow72pN0RxU8aB1vaoMTTSGhpTbNIYjP7hXjAARQIGnGakOYLdb7MCkADuiGR3AUwPhh12yT+mRA2VhTQCwM+zW+MA66QAXgCyQNQfs0szmrNSPMlisUejMXzsbjPPjjoTCiUysCKR84bcfn96XE4CM6HRMMwOfpWX8wHBENYhBErrFYAhtZ5EbzVohURisTj5dthATwkSsvAObKdJIANwVK43GmZBipNAYTDcVq8QgAchDUDj-h0Qagop24vCYZQ6Cw0bu8ZdR0SyWTQA)
+Check it out in the [Live playgroun.d](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABABwDYggawDwBUA0iA0ogKYAeUpYAJgM6KakCecwiuAfABQBOpEOL3oAuDgG0AuoSbMRRAJRjc4opKkBvALAAoRIn5QQvJP0HC6AOgC2AQ2R8BQmogC8nA0+HjZkhboBfXV0oZmRSRAAlLxoYMABzXDCI10QAIjojWLg0xAAfdNQYADdSNOCdUPComKTq1O09fURbXlhMsUzeOPj8XWbEWChUUk6oboS+pv1+Eds6UgARWyoxZaopgbNnHrrRmvNYhL3+xCCdXUEwTJbeXjFow72pN0RxU8aB1vaoMTTSGhpTbNIYjP7hXjAARQIGnGakOYLdb7MCkADuiGR3AUwPhh12yT+mRA2VhTQCwM+zW+MA66QAXgCyQNQfs0szmrNSPMlisUejMXzsbjPPjjoTCiUysCKR84bcfn96XE4CM6HRMMwOfpWX8wHBENYhBErrFYAhtZ5EbzVohURisTj5dthATwkSsvAObKdJIANwVK43GmZBipNAYTDcVq8QgAchDUDj-h0Qagop24vCYZQ6Cw0bu8ZdR0SyWTQA)
 
 ## Conclusion
 
