@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -11,6 +11,7 @@ module.exports = {
               color: "#e5e5e5",
               fontSize: "0.895rem",
               fontWeight: "400",
+              userSelect: "auto",
             },
             "code::before": {
               content: "",
@@ -23,6 +24,7 @@ module.exports = {
               color: "#413a30",
               paddingRight: 0,
               paddingLeft: 0,
+              userSelect: "auto",
             },
             "pre code:before": {
               paddingLeft: "unset",
@@ -30,31 +32,31 @@ module.exports = {
             "pre code:after": {
               paddingRight: "unset",
             },
-            "ul": {
+            ul: {
               color: "#e5e5e5",
             },
-            "li": {
-              paddingLeft: 0
+            li: {
+              paddingLeft: 0,
             },
             "li::marker": {
               color: "currentColor",
-              paddingLeft: 0
+              paddingLeft: 0,
             },
             "h1, h2, h3, h4, h5": {
-              fontSize: '1.2rem',
-              color: "#a0a0a0"
+              fontSize: "1.2rem",
+              color: "#a0a0a0",
             },
-            "a": {
+            a: {
               color: "#e5e5e5",
               textDecoration: "underline",
             },
-            "blockquote": {
+            blockquote: {
               color: "#e5e5e5",
-              "border-left-width": '0.12rem'
+              "border-left-width": "0.12rem",
             },
-            "strong": {
+            strong: {
               color: "#e5e5e5",
-            }
+            },
           },
         },
       },
@@ -63,7 +65,7 @@ module.exports = {
         "ken-grey": "#a0a0a0",
         "ken-primary": "#e5e5e5",
         "ken-secondary": "#f2f2f2",
-        "ken-tertiary": "#ededed"
+        "ken-tertiary": "#ededed",
       },
       fontFamily: {
         sans: ["var(--font-dm-sans)", ...defaultTheme.fontFamily.sans],

@@ -3,6 +3,7 @@ title: Generics in Typescript
 date: '2023-02-17'
 language: typescript
 status: 'completed'
+tag: typescript
 ---
 
 ## Introduction
@@ -78,7 +79,7 @@ Why does a literal type work?
 Well think of types as a set. Thank you *Lere* for reminding me of this. In the a `string` set, string values
 are a subset of that set. Therefore, for type `string` we can use the `string` type or a literal value.
 
-If thinking of `types` as set is a bit confusing, check out this [resource]()
+If thinking of `types` as set is a bit confusing, check out this [resource](https://ivov.dev/notes/typescript-and-set-theory)
 
 The second type `S extends string | F` means that, our second parameter is constrained to the `type` string,
 and the `type` of `F` we initially typed in.

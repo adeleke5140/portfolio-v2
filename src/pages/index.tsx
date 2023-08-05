@@ -12,11 +12,13 @@ export default function Home({
   allPostsData,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { updatePosts } = usePostContext();
-  const completedPosts = allPostsData.filter((post) => {
-    if (post.status == 'completed') {
-      return post;
-    }
-  });
+  const completedPosts = allPostsData
+    .filter((post) => {
+      if (post.status == "completed") {
+        return post;
+      }
+    })
+    .slice(0, 4);
   useEffect(() => {
     updatePosts(completedPosts);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -34,13 +36,23 @@ export default function Home({
         <div className="max-w-2xl mx-auto">
           <HomePage posts={completedPosts} />
           <A11ySection />
-          <section aria-labelledby="Connect" className="px-6 my-8 flex flex-col gap-6 sm:pb-20">
-            <h2 id="Connect" className="text-ken-grey text-sm">Connect</h2>
+          <section
+            aria-labelledby="Connect"
+            className="px-6 my-8 flex flex-col gap-6 sm:pb-20"
+          >
+            <h2 id="Connect" className="text-ken-grey text-sm">
+              Connect
+            </h2>
             <div className="flex flex-col gap-4">
               <p>
-                Would you love to collaborate? Reach out on {" "}
-                <a href="https://www.linkedin.com/in/adeleke5140/" className="underline underline-offset-2 decoration-1 decoration-ken-grey">Linkedin</a>. I
-                always love connecting with new people or you could:
+                Would you love to collaborate? Reach out on{" "}
+                <a
+                  href="https://www.linkedin.com/in/adeleke5140/"
+                  className="underline underline-offset-2 decoration-1 decoration-ken-grey"
+                >
+                  Linkedin
+                </a>
+                . I always love connecting with new people or you could:
               </p>
               <p>
                 <a
