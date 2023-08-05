@@ -1,11 +1,16 @@
+import { motion } from "framer-motion";
 const A11ySection = () => {
   return (
-    <section className="px-6">
-      <nav
-        className="flex flex-col gap-6"
-        aria-labelledby="a11y-webring-club"
-      >
-        <h2 id="a11y-webring-club" className="text-ken-grey text-sm">a11y-webring.club</h2>
+    <motion.section
+      initial={{ opacity: 0, translateY: "10px" }}
+      animate={{ opacity: 1, translateY: 0 }}
+      transition={{ delay: 2, duration: 1 }}
+      className="px-6"
+    >
+      <nav className="flex flex-col gap-6" aria-labelledby="a11y-webring-club">
+        <h2 id="a11y-webring-club" className="text-ken-grey text-sm">
+          a11y-webring.club
+        </h2>
         <p>
           This site is a member of the{" "}
           <a
@@ -50,7 +55,7 @@ const A11ySection = () => {
           </li>
         </ul>
       </nav>
-    </section>
+    </motion.section>
   );
 };
 
