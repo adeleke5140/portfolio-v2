@@ -15,8 +15,7 @@ The primary key for my `product` table is an `int` type that auto-increments and
 
 After deleting the product with the `id "of 1, the next product didn't inherit that `id`. 
 
-This was a pickle and something I desperately wanted to solve. After googling around a bit, I found the solution.
-
+This was a pickle and something I desperately wanted to solve. After googling around a bit, I found the solution on this [stackoverflow post.](https://stackoverflow.com/questions/15526813/restart-primary-key-numbers-of-existing-rows-after-deleting-most-of-a-big-table)
 
 ```SQL
   alter table product drop constraint product_pkey;
