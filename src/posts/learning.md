@@ -1,5 +1,5 @@
 ---
-title: Reviewing knowledge gaps, admitting shortcoming and making progress
+title: learning in adversity
 date: '2023-03-19'
 ---
 
