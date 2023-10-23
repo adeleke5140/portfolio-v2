@@ -40,12 +40,12 @@ const Home = ({ posts }: HomeProps) => {
                 Crafting software.{" "}
               </span>
               I build web applications for companies to achieve their business
-              goals. Currently working as a contract frontend dev at{" "}
+              goals. Currently building products at{" "}
               <a
                 href="https://www.blocverse.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="opacity-70 underline underline-offset-2 decoration-1 decoration-ken-grey"
+                className="opacity-70 underline underline-offset-2 decoration-1 decoration-ken-grey hover:bg-white/30"
               >
                 Blocverse.
               </a>
@@ -56,7 +56,7 @@ const Home = ({ posts }: HomeProps) => {
                 href="https://github.com/ankitects/anki"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="opacity-70 underline underline-offset-2 decoration-1 decoration-ken-grey"
+                className="opacity-70 underline underline-offset-2 decoration-1 decoration-ken-grey hover:bg-white/30"
               >
                 Anki
               </a>{" "}
@@ -82,7 +82,7 @@ const Home = ({ posts }: HomeProps) => {
                 href="https://pod-hackfs.vercel.app"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline underline-offset-2 decoration-1 decoration-ken-grey decoration-ken-grey"
+                className="underline underline-offset-2 decoration-1 decoration-ken-grey hover:bg-white/30"
               >
                 POD
               </a>
@@ -97,7 +97,7 @@ const Home = ({ posts }: HomeProps) => {
                 href="https://livechat-98e8c.web.app/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline underline-offset-2 decoration-1 decoration-ken-grey"
+                className="underline underline-offset-2 decoration-1 decoration-ken-grey hover:bg-white/30"
               >
                 LiveChat
               </a>
@@ -112,9 +112,9 @@ const Home = ({ posts }: HomeProps) => {
                 href="https://github.com/adeleke5140/audio-transcriber"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline underline-offset-2 decoration-1 decoration-ken-grey"
+                className="underline underline-offset-2 decoration-1 decoration-ken-grey hover:bg-white/30"
               >
-                Audio-transciber
+                Audio-transcriber
               </a>
             </h3>
             <p className="text-sm text-ken-grey">
@@ -127,7 +127,7 @@ const Home = ({ posts }: HomeProps) => {
                 href="https://github.com/adeleke5140/writerr/tree/main"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline underline-offset-2 decoration-1 decoration-ken-grey"
+                className="underline underline-offset-2 decoration-1 decoration-ken-grey hover:bg-white/30"
               >
                 Writerr
               </a>
