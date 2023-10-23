@@ -51,7 +51,7 @@ const Home = ({ posts }: HomeProps) => {
               </a>
             </p>
             <p>
-              I contribute to open source at{" "}
+              I am contributing accessibility improvements to the{" "}
               <a
                 href="https://github.com/ankitects/anki"
                 target="_blank"
@@ -59,8 +59,8 @@ const Home = ({ posts }: HomeProps) => {
                 className="opacity-70 underline underline-offset-2 decoration-1 decoration-ken-grey"
               >
                 Anki
-              </a>
-              .
+              </a>{" "}
+              open source project.
             </p>
           </motion.div>
         </header>
