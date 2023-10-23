@@ -1,0 +1,123 @@
+---
+title: Hydration Error with Tables in NextJS
+date: '2023-09-22'
+language: typescript
+status: 'completed'
+tag: nextJS
+---
+
+## Introduction
+
+NextJS hydration error is like the inevitable death of the universe. It will happen eventually.
+
+I ran into one recently with HTML tables. I am going to be talking about it today.
+
+I will explain what the error was and how I fixed it. There is also a bit of a deep dive into why the error happened in the first place.
+
+## The Problem
+
+After writing the syntax for my HTML table, NextJS threw the error:
+
+```typescript
+Error: Hydration failed because the initial UI does not match what was rendered on the server.
+
+Warning: Expected server HTML to contain a matching <td> in <td>.
+
+[See more info here:](https://nextjs.org/docs/messages/react-hydration-error)
+```
+
+I was lost. I followed the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) for creating the table. MDN is the gold standard for web dev doc so I was sure I had done everything right.
+
+The syntax was correct, the DOM elements was in the right order...but were they?
+
+The DOM nesting was in fact not correct.
+
+The faulty code was a line in the `tbody`:
+
+```html
+<tbody>
+  <td>
+    <td>Kehinde Adeleke</td>
+  </td>
+<tbody>
+```
+
+I had a nested a `td` in another `td` which led to the hydration error. After removing the nested `td`, the error was fixed.
+
+This fix looks easy now but this frustrated me for 3hrs. Because of that, I decided to do some more research.
+
+## Why this happened
+
+I wasn't satisfied with just solving this. I wanted to get to the root of the problem.
+
+The [HTML5](https://html.spec.whatwg.org/multipage/tables.html#the-td-element) spec on `td` element was a good place to start.
+
+The `td` element can only be used in a context where it is the child of a `tr` element. This context is a non-normative description of the `td` element.
+
+> [Non-normative in software context](https://developer.mozilla.org/en-US/docs/Glossary/non-normative)
+
+NextJS renders the HTML statically on the server first and I hypothesize that `SSR` cannot work with improper tag nesting as per the spec above.
+
+Due to this, the runtime throws an error - honestly this should be a server error that properly specifies what the error is. A better error message of `invalid DOM Nesting` would aid developers - certainly would have aided me - debug the problem faster.
+
+> Update: There is some improvements that Tim from the Vercel team described [here](https://github.com/facebook/react/issues/24519#issuecomment-1439915463). The component stack is included which now helps
+
+There is a second part to this. The Browser still constructs a table. I believe the client tries as much as it can to still create a working document even if the tags aren't ordered properly.
+
+If you construct a `HTML` table like this:
+
+```html
+<table>
+    <tr>
+     <th>Company</th>
+     <th>Contact</th>
+     <th>Country</th>
+    </tr>
+    <tr>
+     <td>Alfreds Futterkiste</td>
+     <td>Maria Anders</td>
+     <td>Germany</td>
+    </tr>
+    <tr>
+     <td>Centro comercial Moctezuma</td>
+     <td>Francisco Chang</td>
+     <td>Mexico</td>
+    </tr>
+</table>
+```
+
+Your Client will display it alright but NextJS will throw an error in the format:
+
+```typescript
+Unhandled Runtime Error
+
+Error: Hydration failed because the initial UI does not match what was rendered on the server.
+
+Warning: Expected server HTML to contain a matching <tr> in <table>.
+```
+
+The error is different from the one above but the root cause is the same. The DOM nesting is incorrect.
+
+The solution is to include the `<thead/>` and `<tbody/>` tags. This is the correct way to construct a table:
+
+```html
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">The table header</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>The table body</td>
+      <td>with two columns</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+## Conclusion
+
+Next time you run into an error like this, check your DOM nesting. It might be the cause of the error.
+
+I hope this helps someone out there. If you have any questions, feel free to reach out to me on [Twitter](https://twitter.com/adeleke5140).
