@@ -72,6 +72,7 @@ module.exports = {
         serif: ["var(--font-newsreader)", ...defaultTheme.fontFamily.serif],
         inter: ["var(--font-inter)"],
         grotesk: ["var(--font-grotesk)"],
+        comm: ["var(--font-comm)"],
       },
       transitionProperty: {
         "transform-opacity": "transform, opacity",
