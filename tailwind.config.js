@@ -68,11 +68,9 @@ module.exports = {
         "ken-tertiary": "#ededed",
       },
       fontFamily: {
-        sans: ["var(--font-dm-sans)", ...defaultTheme.fontFamily.sans],
+        sans: ["var(--font-comm)", ...defaultTheme.fontFamily.sans],
         serif: ["var(--font-newsreader)", ...defaultTheme.fontFamily.serif],
         inter: ["var(--font-inter)"],
-        grotesk: ["var(--font-grotesk)"],
-        comm: ["var(--font-comm)"],
       },
       transitionProperty: {
         "transform-opacity": "transform, opacity",
