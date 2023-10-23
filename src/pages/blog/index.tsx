@@ -13,14 +13,19 @@ export type Post = {
   language?: string;
 };
 
+const isProduction = process.env.NODE_ENV === "production";
+
 const Index = ({
   allPostsData,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const completedPosts = allPostsData.filter(post => {
-    if (post.status !== "draft" && post.status !== "editing") {
-      return post
+  const completedPosts = allPostsData.filter((post) => {
+    if (isProduction) {
+      if (post.status !== "draft" && post.status !== "editing") {
+        return post;
+      }
     }
-  })
+    return post;
+  });
 
   return (
     <>
