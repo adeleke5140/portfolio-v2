@@ -15,8 +15,6 @@ export type Post = {
   language?: string;
 };
 
-const isProduction = process.env.NODE_ENV === "production";
-
 const Index = ({
   allPostsData,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
@@ -47,7 +45,7 @@ const Index = ({
                   className="inline-block transition-all hover:underline decoration-1 underline-offset-1 decoration-text-ken-grey"
                   href={`/blog/${id}`}
                 >
-                  {title} {status}
+                  {title}{" "}
                 </Link>
                 <br />
                 <span className="text-ken-grey text-xs">
