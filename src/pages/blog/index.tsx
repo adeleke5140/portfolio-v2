@@ -15,6 +15,8 @@ export type Post = {
   language?: string;
 };
 
+const isProduction = process.env.NODE_ENV === "production";
+
 const Index = ({
   allPostsData,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {

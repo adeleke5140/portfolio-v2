@@ -61,17 +61,16 @@ module.exports = {
         },
       },
       colors: {
-        "ken-black": "#171717",
+        "ken-black": "#000",
         "ken-grey": "#a0a0a0",
-        "ken-primary": "#e5e5e5",
+        "ken-primary": "#ededed",
         "ken-secondary": "#f2f2f2",
         "ken-tertiary": "#ededed",
       },
       fontFamily: {
-        sans: ["var(--font-dm-sans)", ...defaultTheme.fontFamily.sans],
+        sans: ["var(--font-comm)", ...defaultTheme.fontFamily.sans],
         serif: ["var(--font-newsreader)", ...defaultTheme.fontFamily.serif],
         inter: ["var(--font-inter)"],
-        grotesk: ["var(--font-grotesk)"],
       },
       transitionProperty: {
         "transform-opacity": "transform, opacity",
