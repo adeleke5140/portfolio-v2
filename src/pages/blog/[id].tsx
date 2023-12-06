@@ -10,11 +10,11 @@ import Head from 'next/head';
 import { PostWrapper } from '@/components/postWrapper';
 import { formatDate } from '@/helpers/formatDate';
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import Prism from 'prismjs';
 import readingTime from 'reading-time/lib/reading-time';
-import { CommandMenu } from '@/components/commandMenu';
-import { Dot, Undo2 } from 'lucide-react';
+
+import { Dot } from 'lucide-react';
 require('prismjs/components/prism-jsx');
 require('prismjs/components/prism-javascript');
 require('prismjs/components/prism-typescript');
