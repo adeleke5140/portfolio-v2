@@ -1,5 +1,5 @@
 ---
-title: Use Precise types instead of String types
+title: Use Precise types
 date: '2023-08-05'
 language: typescript
 status: completed
@@ -7,6 +7,7 @@ tag: typescript
 ---
 
 ## Introduction
+
 We have all been there. Throwing `any` at function parameters and object keys because we couldn't be bothered to type it precisely. I did that for a recent project and it was a cop out.
 
 The problem is that with `any`, we lose many of the benefits typescript offers us. The compile time error checking that can catch hard to detect bugs and also the wonderful code completion.
@@ -21,9 +22,9 @@ Item 33 argues that string types are too broad and open up code to a lot of erro
 
 We should consider more precise alternatives that specifies the type of data we expect.
 
-## Example 
+## Example
 
-The best way to illustrate this is with an example. 
+The best way to illustrate this is with an example.
 
 Suppose, we have a utility function `pluck`.
 
@@ -31,13 +32,14 @@ The function of `pluck` is to pull out all the values for a single field in an o
 Properly typing the `pluck` function can help in making sure that we only use existing keys
 that exist in the object.
 
-To illustrate this properly, I am going to use 4 variants of the `pluck` utility function. It would range from untyped to typed. 
+To illustrate this properly, I am going to use 4 variants of the `pluck` utility function. It would range from untyped to typed.
 
 Let's go:
 
 The pluck function without any type(no-pun intended) is this:
 
-#### Version 1:
+### Version 1
+
 ```typescript
   function pluck(records, key){
     return records.map(record => record[key])
@@ -47,17 +49,19 @@ The pluck function without any type(no-pun intended) is this:
 Here the function is untyped and while it works at runtime, it opens up a can of errors.
 We aren't sure that the key we use actually exist, which means we might be trying to access a property not present. The return type is also an `any[]`. It is practically still valid `TS` code but without any benefits.
 
-#### Version 2:
+### Version 2
+
 ```typescript
   function pluck(records: any[], key: string): any[]{
     return records.map(record => record[key])
   }
 ```
 
-Here in the second version, it is slightly better but the string type is still too broad. 
+Here in the second version, it is slightly better but the string type is still too broad.
 Remember that this string could also not exists on the object we need to access. The `any` type is also problematic.
 
-#### Version 3:
+### Version 3
+
 ```typescript
   function pluck<T>(records: T[], key: string){
     return records.map(record => record[key])
@@ -66,13 +70,12 @@ Remember that this string could also not exists on the object we need to access.
 
 We make the function a generic so that it can infer the specific type of array it is. The type checker complains.
 
-![typeError](https://github.com/adeleke5140/portfolio-v2/blob/new-post/public/images/pluckV3error.png?raw=true)
-
 We cannot use a string key on an `unknown` type.
 
 The problem here still persists and this is because string is still broad. It is **stringly typed**. The return type is also still `any[]`
 
-### Version 4:
+### Version 4
+
 ```typescript
   function pluck<T>(records: T[], key: keyof T){
     return records.map(record => record[key])
@@ -86,7 +89,8 @@ In this case, if there are four keys with values of type `number` and `string`, 
 
 It can be better.
 
-### Version 5:
+### Version 5
+
 ```typescript
   function pluck<T, K extends keyof T>(record: T[], key: K): T[K][]{
     return records.map(record => record[key])

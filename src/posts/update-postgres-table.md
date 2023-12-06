@@ -1,7 +1,7 @@
 ---
 title: "Updating the primary key in Postgres table"
 date: '2023-08-08'
-status: 'completed'
+status: 'archived'
 language: SQL
 ---
 

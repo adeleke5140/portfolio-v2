@@ -1,13 +1,12 @@
-import { Home as HomePage } from "@/components/home";
-import { usePostContext } from "@/context/postContext";
-import { getSortedPostsData } from "@/lib/posts";
-import { GetStaticProps, InferGetStaticPropsType } from "next";
-import Head from "next/head";
-import { useEffect } from "react";
-import { Post } from "./blog";
-import { A11ySection } from "@/components/a11ySection";
-import { MailIcon } from "lucide-react";
-import { motion } from "framer-motion";
+import { Home as HomePage } from '@/components/home';
+import { usePostContext } from '@/context/postContext';
+import { getSortedPostsData } from '@/lib/posts';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
+import { useEffect } from 'react';
+import { Post } from './blog';
+import { A11ySection } from '@/components/a11ySection';
+import { MailIcon } from 'lucide-react';
 
 export default function Home({
   allPostsData,
@@ -15,7 +14,7 @@ export default function Home({
   const { updatePosts } = usePostContext();
   const completedPosts = allPostsData
     .filter((post) => {
-      if (post.status == "completed") {
+      if (post.status == 'completed') {
         return post;
       }
     })
@@ -37,26 +36,24 @@ export default function Home({
         <div className="max-w-2xl mx-auto">
           <HomePage posts={completedPosts} />
           <A11ySection />
-          <motion.section
-            initial={{ opacity: 0, translateY: "10px" }}
-            animate={{ opacity: 1, translateY: 0 }}
-            transition={{ delay: 2.5, duration: 1 }}
+          <section
             aria-labelledby="Connect"
             className="px-6 my-8 flex flex-col gap-6 sm:pb-20"
           >
-            <h2 id="Connect" className="text-ken-grey text-sm">
+            <h2 id="Connect" className=" text-sm">
               Connect
             </h2>
             <div className="flex flex-col gap-4">
-              <p>
-                Would you love to collaborate? Reach out on{" "}
+              <p className="leading-6">
+                You can find me on{' '}
                 <a
                   href="https://www.linkedin.com/in/adeleke5140/"
                   className="underline underline-offset-2 decoration-1 decoration-ken-grey"
                 >
                   Linkedin
                 </a>
-                . I always love connecting with new people or you could:
+                . I always love connecting with new people so don't hesitate to
+                reach out.
               </p>
               <p>
                 <a
@@ -68,7 +65,7 @@ export default function Home({
                 </a>
               </p>
             </div>
-          </motion.section>
+          </section>
         </div>
       </section>
     </>
