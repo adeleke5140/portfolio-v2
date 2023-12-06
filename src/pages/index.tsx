@@ -52,8 +52,8 @@ export default function Home({
                 >
                   Linkedin
                 </a>
-                . I always love connecting with new people so don't hesitate to
-                reach out.
+                . I always love connecting with new people so don&apos;t
+                hesitate to reach out.
               </p>
               <p>
                 <a
