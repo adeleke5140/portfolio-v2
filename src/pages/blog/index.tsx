@@ -1,9 +1,11 @@
-import { PageWrapper } from "@/components/pageWrapper";
-import { formatDate } from "@/helpers/formatDate";
-import { getSortedPostsData } from "@/lib/posts";
-import { GetStaticProps, InferGetStaticPropsType } from "next";
-import Head from "next/head";
-import Link from "next/link";
+import { PageWrapper } from '@/components/pageWrapper';
+import { formatDate } from '@/helpers/formatDate';
+import { getSortedPostsData } from '@/lib/posts';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
+import Link from 'next/link';
+
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 export type Post = {
   id: string;
@@ -13,18 +15,21 @@ export type Post = {
   language?: string;
 };
 
-const isProduction = process.env.NODE_ENV === "production";
-
 const Index = ({
   allPostsData,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const completedPosts = allPostsData.filter((post) => {
-    if (isProduction) {
-      if (post.status !== "draft" && post.status !== "editing") {
+  const Posts = allPostsData.filter((post) => {
+    if (isDevelopment) {
+      return post;
+    } else {
+      if (
+        post.status !== 'draft' &&
+        post.status !== 'editing' &&
+        post.status !== 'archived'
+      ) {
         return post;
       }
     }
-    return post;
   });
 
   return (
@@ -35,18 +40,21 @@ const Index = ({
         <meta name="description" content="Kehinde Adeleke's website" />
         <meta name="og:title" content="Blog" />
       </Head>
-      <PageWrapper heading="Writing." path="/">
+      <section className="max-w-2xl px-6 flex flex-col gap-6 mx-auto md:pt-8 mt-8 mb-8">
+        <h1 className="text-xl font-medium ">Writing.</h1>
+        <Link href="/" className="text-sm text-right underline">
+          home
+        </Link>
         <section className="">
           <ul>
-            {completedPosts.map(({ id, date, title }) => (
-              <li key={id} className="mb-4">
+            {Posts.map(({ id, date, title, status }) => (
+              <li key={id} className="mb-4 flex items-center justify-between ">
                 <Link
-                  className="inline-block transition-all hover:underline decoration-1 underline-offset-1 decoration-text-ken-grey"
+                  className="inline-block transition-all hover:underline hover:underline-offset-4 decoration-2 decoration-text-ken-grey"
                   href={`/blog/${id}`}
                 >
-                  {title}{" "}
+                  {title}{' '}
                 </Link>
-                <br />
                 <span className="text-ken-grey text-xs">
                   {formatDate(date!)}
                 </span>
@@ -54,7 +62,7 @@ const Index = ({
             ))}
           </ul>
         </section>
-      </PageWrapper>
+      </section>
     </>
   );
 };

@@ -5,88 +5,86 @@
  * Ported for PrismJS by Simon Jespersen [https://github.com/simjes]
  */
 
-code[class*="language-"],
-pre[class*="language-"] {
-	background: #242424;
-	color: #ffffff;
-	font-family: 'Input Mono', Menlo, Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace; /* this is the default */
-	/* The following properties are standard, please leave them as they are */
-	font-size: 0.9em;
-	direction: ltr;
-	text-align: left;
-	white-space: pre;
-	word-spacing: normal;
-	word-break: normal;
-	line-height: 1.5;
-	-moz-tab-size: 2;
-	-o-tab-size: 2;
-	tab-size: 2;
-	/* The following properties are also standard */
-	-webkit-hyphens: none;
-	-moz-hyphens: none;
-	-ms-hyphens: none;
-	hyphens: none;
-	user-select: all;
+code[class*='language-'],
+pre[class*='language-'] {
+  color: #414141;
+  font-family: 'SF Mono', 'Input Mono', Menlo, Consolas, Monaco, 'Andale Mono',
+    'Ubuntu Mono', monospace; /* this is the default */
+  /* The following properties are standard, please leave them as they are */
+  font-size: 0.9em;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+  -moz-tab-size: 2;
+  -o-tab-size: 2;
+  tab-size: 2;
+  /* The following properties are also standard */
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  user-select: all;
 }
 
-
-
-code[class*="language-"]::-moz-selection,
-code[class*="language-"] ::-moz-selection,
-pre[class*="language-"]::-moz-selection,
-pre[class*="language-"] ::-moz-selection {
-	background: #242424;
-	color: inherit;
+code[class*='language-']::-moz-selection,
+code[class*='language-'] ::-moz-selection,
+pre[class*='language-']::-moz-selection,
+pre[class*='language-'] ::-moz-selection {
+  background: #242424;
+  color: inherit;
 }
 
-code[class*="language-"]::selection,
-code[class*="language-"] ::selection,
-pre[class*="language-"]::selection,
-pre[class*="language-"] ::selection {
-	background: #242424;
-	color: inherit;
+code[class*='language-']::selection,
+code[class*='language-'] ::selection,
+pre[class*='language-']::selection,
+pre[class*='language-'] ::selection {
+  background: #242424;
+  color: inherit;
 }
 
 /* Properties specific to code blocks */
-pre[class*="language-"] {
-	padding: 1em; /* this is standard */
-	margin: 0.5em 0; /* this is the default */
-	overflow: auto; /* this is standard */
-	border-radius: 0.5em;
+pre[class*='language-'] {
+  padding-inline: 1em;
+  margin: 0.5em 0; /* this is the default */
+  overflow: auto; /* this is standard */
+  border-radius: 0.5em;
 }
 
 /* Properties specific to inline code */
-:not(pre) > code[class*="language-"] {
-	padding: 0.2em 0.3em;
-	border-radius: 0.5rem;
-	white-space: normal; /* this is standard */
+:not(pre) > code[class*='language-'] {
+  padding: 0.2em 0.3em;
+  border-radius: 0.5rem;
+  white-space: normal; /* this is standard */
 }
 
 .token.comment,
 .token.prolog,
 .token.cdata {
-	color: #91889b;
+  color: #91889b;
 }
 
 .token.punctuation {
-	color: #7b6995;
+  color: #212121;
 }
 
 .token.builtin,
 .token.constant,
 .token.boolean {
-	color: #ffe261;
+  color: #111827;
 }
 
 .token.number {
-	color: #b381c5;
+  color: #b381c5;
 }
 
 .token.important,
 .token.atrule,
 .token.property,
 .token.keyword {
-	color: #40b4c4;
+  color: #d32f2f;
 }
 
 .token.doctype,
@@ -95,42 +93,77 @@ pre[class*="language-"] {
 .token.tag,
 .token.class-name,
 .token.symbol {
-	color: #74dfc4;
+  color: #74dfc4;
 }
 
 .token.attr-name,
 .token.function,
 .token.deleted,
 .token.selector {
-	color: #eb64b9;
+  color: #eb64b9;
+}
+
+.token.function {
+  color: #6f42c1 !important;
 }
 
 .token.attr-value,
 .token.regex,
 .token.char,
 .token.string {
-	color: #b4dce7;
+  color: #b4dce7;
 }
 
 .token.entity,
 .token.url,
 .token.variable {
-	color: #ffffff;
+  color: #ffffff;
 }
 
 /* The following rules are pretty similar across themes, but feel free to adjust them */
 .token.bold {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 .token.italic {
-	font-style: italic;
+  font-style: italic;
 }
 
 .token.entity {
-	cursor: help;
+  cursor: help;
 }
 
 .token.namespace {
-	opacity: 0.7;
+  opacity: 0.7;
+}
+
+/* my own styles copied from Shu's website*/
+
+.token.constant {
+  color: #1976d2;
+}
+
+.token.string {
+  color: #1976d2;
+}
+
+.token.comment {
+  color: #aaa;
+}
+
+.token.keyword,
+.token.operator {
+  color: #d32f2f;
+}
+
+.token.parameter {
+  color: #ff9800;
+}
+
+.token.string-expression {
+  color: #22863a;
+}
+
+.token.punctuation {
+  color: #212121;
 }

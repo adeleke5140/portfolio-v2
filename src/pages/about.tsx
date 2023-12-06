@@ -1,22 +1,21 @@
-import { PageWrapper } from "@/components/pageWrapper";
-import Head from "next/head";
-import { MailIcon } from "lucide-react";
+import { PageWrapper } from '@/components/pageWrapper';
+import Head from 'next/head';
 
-const languages = ["HTML", "CSS", "Javascript", "Typescript", "Go"];
+const languages = ['HTML', 'CSS', 'Javascript', 'Typescript', 'Go'];
 
 const technologies = [
-  "ReactJS",
-  "VueJS",
-  "Next",
-  "Gatsby",
-  "RTK",
-  "TailwindCSS",
-  "Zustand",
-  "Jest",
-  "GraphQL",
-  "MongoDB",
-  "NodeJS",
-  "ExpressJS",
+  'ReactJS',
+  'VueJS',
+  'Next',
+  'Gatsby',
+  'RTK',
+  'TailwindCSS',
+  'Zustand',
+  'Jest',
+  'GraphQL',
+  'MongoDB',
+  'NodeJS',
+  'ExpressJS',
 ];
 
 const About = () => {
@@ -30,7 +29,9 @@ const About = () => {
       </Head>
       <PageWrapper heading="Tech stack." path="/">
         <section className="prose pb-3 text-ken-primary">
-          <p className="font-[300] font-serif italic text-[17px]">I pick the perfect tool from my toolbox to solve problems.</p>
+          <p className="font-[300] font-serif italic text-[17px]">
+            I pick the perfect tool from my toolbox to solve problems.
+          </p>
           <section>
             With languages, some of it include:
             <ul className="flex flex-wrap list-none gap-1 pl-0 prose-ul:pl-0">
@@ -54,10 +55,11 @@ const About = () => {
                 </li>
               ))}
             </ul>
-            <p>
-              I am not restricted to these as I pick up tools as I go.
+            <p>I am not restricted to these as I pick up tools as I go.</p>
+            <p className="font-serif italic font-[300] text-[17px]">
+              My unique ability is picking up new skills when needed. I am a
+              thriving learner.
             </p>
-            <p className="font-serif italic font-[300] text-[17px]">My unique ability is picking up new skills when needed. I am a thriving learner.</p>
           </section>
         </section>
       </PageWrapper>

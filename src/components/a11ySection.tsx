@@ -1,20 +1,14 @@
-import { motion } from "framer-motion";
 const A11ySection = () => {
   return (
-    <motion.section
-      initial={{ opacity: 0, translateY: "10px" }}
-      animate={{ opacity: 1, translateY: 0 }}
-      transition={{ delay: 2, duration: 1 }}
-      className="px-6"
-    >
+    <section className="px-6">
       <nav className="flex flex-col gap-6" aria-labelledby="a11y-webring-club">
-        <h2 id="a11y-webring-club" className="text-ken-grey text-sm">
+        <h2 id="a11y-webring-club" className=" text-sm">
           a11y-webring.club
         </h2>
         <p>
-          This site is a member of the{" "}
+          This site is a member of the{' '}
           <a
-            className="text-ken-grey underline underline-offset-2"
+            className=" underline underline-offset-2"
             rel="external"
             href="https://a11y-webring.club/"
           >
@@ -25,7 +19,7 @@ const A11ySection = () => {
         <ul className="flex list-disc flex-col pl-8">
           <li>
             <a
-              className="text-ken-grey"
+              className="underline"
               rel="external"
               referrerPolicy="strict-origin"
               href="https://a11y-webring.club/prev"
@@ -35,7 +29,7 @@ const A11ySection = () => {
           </li>
           <li>
             <a
-              className="text-ken-grey"
+              className="underline"
               rel="external"
               referrerPolicy="strict-origin"
               href="https://a11y-webring.club/random"
@@ -45,7 +39,7 @@ const A11ySection = () => {
           </li>
           <li>
             <a
-              className="text-ken-grey"
+              className="underline"
               rel="external"
               referrerPolicy="strict-origin"
               href="https://a11y-webring.club/next"
@@ -55,7 +49,7 @@ const A11ySection = () => {
           </li>
         </ul>
       </nav>
-    </motion.section>
+    </section>
   );
 };
 
