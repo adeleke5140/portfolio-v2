@@ -1,9 +1,4 @@
-import {
-  Newsreader,
-  Inter,
-  Commissioner,
-  Inter_Tight,
-} from '@next/font/google';
+import { Newsreader, Commissioner, Inter_Tight } from '@next/font/google';
 
 export const newsreader = Newsreader({
   subsets: ['latin'],
