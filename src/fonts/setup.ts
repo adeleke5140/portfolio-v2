@@ -1,4 +1,4 @@
-import { Newsreader, Commissioner, Inter_Tight } from '@next/font/google';
+import { Newsreader, Commissioner, Inter_Tight, Italiana } from '@next/font/google';
 
 export const newsreader = Newsreader({
   subsets: ['latin'],
@@ -20,3 +20,11 @@ export const comm = Commissioner({
   weight: ['400', '500'],
   variable: '--font-comm',
 });
+
+
+export const italiana = Italiana({
+  subsets: ['latin'],
+  display: 'swap',
+ weight: ['400'],
+ variable: '--font-italiana'
+})
