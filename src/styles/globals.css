@@ -2,7 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
-  @import 'common.css';
-  @import 'command.css'
+body,
+html {
+  height: 100%;
 }
+
+/* main {
+  background-image: url("/bg.svg");
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+} */

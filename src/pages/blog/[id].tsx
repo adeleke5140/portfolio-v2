@@ -45,7 +45,7 @@ const Post = ({
         <div className="relative flex justify-between w-full items-center"></div>
         <section className="pb-8 mt-4">
           <div className="">
-            <h1 className="font-medium mb-4 text-xl md:text-2xl">
+            <h1 className="font-medium font-serif mb-4 text-xl md:text-2xl">
               {postData.title}.
             </h1>
             <div className="flex items-center justify-between">
@@ -54,12 +54,7 @@ const Post = ({
                 <Dot />
                 <span>{estimatedReadingTime.text}</span>
               </p>
-              <Link
-                href="/blog"
-                className="text-sm underline underline-offset-4"
-              >
-                back
-              </Link>
+            
             </div>
           </div>
           <section
