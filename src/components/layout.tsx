@@ -170,28 +170,28 @@ const Layout = ({ children }: LayoutProps) => {
             fill="url(#pattern-75)"
           ></rect>
         </svg>
-        <nav className="mx-auto border rounded-full border-gray-100/90">
+        <nav className="mx-auto border rounded-full border-gray-100/90 dark:border-[#282828]">
           <ul className="flex items-center px-1 gap-1  py-1">
             {links.map((link) => (
               <li key={link.name}>
                 <Link
                   href={link.href}
                   className={cn(
-                    'text-sm relative grid place-items-center px-3 py-1 font-sm'
+                    'text-sm relative dark:text-[#e5e5e5] grid place-items-center px-3 py-1 font-sm'
                     // path == link.href ? 'bg-gray-100' : '',
                     // link.href == '/photos' ? 'rounded-r-2xl' : '',
                     // link.href == '/' ? 'rounded-l-2xl' : ''
                   )}
                 >
-                  <span className="inline-flex items-center gap-1">
+                  <span className="inline-flex dark:text-[#e5e5e5] items-center gap-1">
                     {link.icon}
-                    {link.name}
+                    <span>{link.name}</span>
                   </span>
 
                   {link.href == path ? (
                     <motion.span
                       layoutId="bubble"
-                      className="absolute inset-0 bg-gray-100 mix-blend-darken"
+                      className="absolute inset-0 bg-gray-100 dark:bg-[#282828] dark:mix-blend-lighten mix-blend-darken"
                       style={{
                         ...getBorderRadius(link.href),
                       }}
@@ -211,7 +211,7 @@ const Layout = ({ children }: LayoutProps) => {
           {children}
         </main>
         <footer className="w-full absolute bottom-2 md:px-6 ">
-          <div className="max-w-2xl rounded-lg bg-gray-100/50  md:px-6 mx-auto">
+          <div className="max-w-2xl rounded-lg bg-gray-100/50 dark:bg-transparent  md:px-6 mx-auto">
             <div className="px-6 py-3 md:px-0 md:pb-2 flex justify-between">
               <p className="text-sm">love, truth and beauty.</p>
               <p className="text-sm">

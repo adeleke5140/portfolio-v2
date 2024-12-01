@@ -1,41 +1,40 @@
+import { PostWrapper } from '@/components/postWrapper'
+import { formatDate } from '@/helpers/formatDate'
+import { getAllPostsIds, getPostData } from '@/lib/posts'
 import {
   GetStaticPaths,
   GetStaticProps,
   InferGetServerSidePropsType,
-} from 'next';
-import { getAllPostsIds, getPostData } from '@/lib/posts';
-import { ParsedUrlQuery } from 'querystring';
-import type { Post } from './index';
-import Head from 'next/head';
-import { PostWrapper } from '@/components/postWrapper';
-import { formatDate } from '@/helpers/formatDate';
-import Link from 'next/link';
-import { useEffect } from 'react';
-import Prism from 'prismjs';
-import readingTime from 'reading-time/lib/reading-time';
+} from 'next'
+import Head from 'next/head'
+import Prism from 'prismjs'
+import { ParsedUrlQuery } from 'querystring'
+import { useEffect } from 'react'
+import readingTime from 'reading-time/lib/reading-time'
+import type { Post } from './index'
 
-import { Dot } from 'lucide-react';
-require('prismjs/components/prism-jsx');
-require('prismjs/components/prism-javascript');
-require('prismjs/components/prism-typescript');
-require('prismjs/components/prism-elixir');
+import { Dot } from 'lucide-react'
+require('prismjs/components/prism-jsx')
+require('prismjs/components/prism-javascript')
+require('prismjs/components/prism-typescript')
+require('prismjs/components/prism-elixir')
 
 interface PostData extends Post {
-  contentHtml: string;
+  contentHtml: string
 }
 
 interface Params extends ParsedUrlQuery {
-  id: string;
+  id: string
 }
 
 const Post = ({
   postData,
 }: InferGetServerSidePropsType<typeof getStaticProps>) => {
-  const estimatedReadingTime = readingTime(postData.contentHtml);
+  const estimatedReadingTime = readingTime(postData.contentHtml)
 
   useEffect(() => {
-    Prism.highlightAll();
-  }, []);
+    Prism.highlightAll()
+  }, [])
   return (
     <>
       <Head>
@@ -54,7 +53,6 @@ const Post = ({
                 <Dot />
                 <span>{estimatedReadingTime.text}</span>
               </p>
-            
             </div>
           </div>
           <section
@@ -64,27 +62,27 @@ const Post = ({
         </section>
       </PostWrapper>
     </>
-  );
-};
+  )
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = getAllPostsIds();
+  const paths = getAllPostsIds()
   return {
     paths,
     fallback: false,
-  };
-};
+  }
+}
 
 export const getStaticProps: GetStaticProps<{ postData: PostData }> = async ({
   params,
 }) => {
-  const { id } = params as Params;
-  const postData = await getPostData(id as string);
+  const { id } = params as Params
+  const postData = await getPostData(id as string)
   return {
     props: {
       postData,
     },
-  };
-};
+  }
+}
 
-export default Post;
+export default Post

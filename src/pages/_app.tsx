@@ -9,7 +9,7 @@ import { Toaster } from 'sonner'
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <div
-      className={`${fonts.crim_pro.variable} h-full ${fonts.sm.variable} ${fonts.comm.variable} home font-sans bg-ken-white text-ken-black`}
+      className={`${fonts.crim_pro.variable} dark:bg-[#1a1a1a] dark:text-[#e5e5e5] h-full ${fonts.sm.variable} ${fonts.comm.variable} home font-sans bg-ken-white text-ken-black`}
       id="container"
     >
       <Toaster />

@@ -7,13 +7,15 @@ import { ReactNode } from 'react'
 
 export const CraftText = ({ text }: { text: string }) => {
   return (
-    <p className="text-sm bg-gray-100/70 w-fit  rounded-md px-3 ">{text}</p>
+    <p className="text-sm bg-gray-100/70 w-fit dark:bg-[#282828] dark:text-[#e5e5e5]  rounded-md px-3 ">
+      {text}
+    </p>
   )
 }
 
 export const CraftContainer = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="bg-gray-100/30 border-[0.5px] rounded col-start-1 col-end-4 w-full py-10 p-2">
+    <div className="bg-gray-100/30 dark:bg-[#1c1c1c] dark:border-[#282828] border-[0.5px] rounded col-start-1 col-end-4 w-full py-10 p-2">
       {children}
     </div>
   )
@@ -34,14 +36,6 @@ export default function Index() {
           <CraftText text="Integration Menu" />
           <CraftContainer>
             <IntegrationMenu />
-          </CraftContainer>
-        </div>
-        <div className="grid gap-2 grid-cols-[192px_640px]">
-          <CraftText text="Copy Button" />
-          <CraftContainer>
-            <div className="p-1 border mx-auto w-8 flex items-center justify-center h-8 rounded">
-              <CopyButton />
-            </div>
           </CraftContainer>
         </div>
       </section>
