@@ -1,15 +1,15 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { PageWrapper } from '@/components/pageWrapper'
 
 const container = {
-  hidden: { opacity: 1, scale: 0 },
+  hidden: { opacity: 0, scale: 1 },
   visible: {
     opacity: 1,
     scale: 1,
     transition: {
       delayChildren: 0.3,
-      staggerChildren: 0.2,
+      staggerChildren: 0.4,
     },
   },
 }
@@ -21,8 +21,8 @@ const item = {
     opacity: 1,
     transition: {
       type: 'spring',
-      bounce: 0.2,
-      duration: 0.6,
+      bounce: 0,
+      duration: 1,
     },
   },
 }
@@ -37,54 +37,58 @@ export default function Home() {
         <link rel="icon" href="/kehinde.ico" />
       </Head>
 
-      <motion.section
-        variants={container}
-        initial="hidden"
-        animate="visible"
-        className="grid grid-cols-2 gap-4"
+      <PageWrapper
+        heading={
+          <div>
+            <h1>Kehinde</h1>
+            <p className=" text-gray-500">Design engineer 🦄</p>
+          </div>
+        }
+        path="/"
+        showHeading
       >
-        <motion.div
-          variants={item}
-          className="bg-gray-100/40 p-1 rounded-lg border border-gray-100/90 dark:border-[#282828] dark:bg-[#282828]"
-        >
-          <div className="p-3 rounded-lg bg-[#fefefe] dark:bg-[#1c1c1c] dark:text-[#fefefe]">
-            <p className="font-medium inline-flex gap-1 items-center">
-              Kehinde
-            </p>
-            <p className="text-sm">Rustacean 🦀, Design engineer 🦄</p>
-            <br />
-            <p className="text-sm">
-              Currently at <span className=" font-medium">mastra.ai</span>
-            </p>
-          </div>
-        </motion.div>
+        <motion.section>
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-col gap-2 dark:border-[#282828] dark:bg-[#282828]"
+          >
+            <motion.div
+              variants={item}
+              className="rounded-lg dark:text-[#fefefe]"
+            >
+              <p>
+                I work at{' '}
+                <a href="https://www.mastra.ai" className="underline">
+                  mastra.ai
+                </a>{' '}
+                where I built the website and cloud dashboard prototype. I tend
+                to obsess over typefaces, padding, highlight color, transitions
+                and weird ui jags
+              </p>
+            </motion.div>
 
-        <motion.div
-          variants={item}
-          className=" bg-gray-100/40 border rounded-lg p-1 border-gray-100/90 dark:border-[#282828] dark:bg-[#282828] text-sm row-start-2"
-        >
-          <p className="p-3 bg-[#fefefe] dark:bg-[#1c1c1c] dark:text-[#fefefe] rounded-lg h-full">
-            I am drawn to design because of beauty. <br /> <br /> I also like
-            Rust because of a different kind of beauty or perhaps marvel. Marvel
-            about how computing can yield so much.
-          </p>
-        </motion.div>
+            <motion.div variants={item}>
+              <p className="dark:text-[#fefefe] rounded-lg h-full">
+                I am drawn to design because of beauty. The beauty of how types
+                and animation can be used to tell stories. The infinite is the
+                well I draw from.
+              </p>
+            </motion.div>
 
-        <motion.div
-          variants={item}
-          className="border col-start-2 p-1 bg-gray-100/40 row-span-2 w-full h-full border-gray-100 dark:border-[#282828] dark:bg-[#282828] rounded-lg skew-x-1"
-        >
-          <div className="p-1 bg-white w-full dark:bg-transparent dark:text-[#fefefe] h-full rounded-lg">
-            <Image
-              src={'/infinite.jpeg'}
-              className="rounded-lg h-full w-full"
-              alt="do you see how infinite you are"
-              width={200}
-              height={200}
-            />
-          </div>
-        </motion.div>
-      </motion.section>
+            <motion.div variants={item}>
+              You can reach me at{' '}
+              <a
+                className="underline text-gray-500 underline-offset-2 decoration-1 decoration-ken-grey "
+                href="mailto:kehindeadeleke927@gmail.com?subject=Hi Kehinde, wanna work with you"
+              >
+                k@kehinde.me
+              </a>
+            </motion.div>
+          </motion.div>
+        </motion.section>
+      </PageWrapper>
     </>
   )
 }

@@ -72,15 +72,16 @@ module.exports = {
       },
       fontFamily: {
         sans: ['var(--font-comm)', ...defaultTheme.fontFamily.sans],
-        serif: ['var(--font-crim)', ...defaultTheme.fontFamily.sans],
+        serif: ['var(--font-serif)', ...defaultTheme.fontFamily.serif],
+        reading: ['var(--font-sans)', ...defaultTheme.fontFamily.sans],
         mono: ['var(--font-sm)', ...defaultTheme.fontFamily.mono],
+      },
+      backgroundImage: {
+        'ken-pattern': "url('/images/texture.png')",
       },
       transitionProperty: {
         'transform-opacity': 'transform, opacity',
       },
-      // backgroundImage: {
-      //   'ken-pattern': "url('/images/texture.png')",
-      // },
     },
   },
   plugins: [require('@tailwindcss/typography')],
