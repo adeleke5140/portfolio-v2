@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme');
+const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'selector',
   theme: {
     extend: {
       typography: {
@@ -38,7 +39,12 @@ module.exports = {
             },
             li: {
               paddingLeft: 0,
+              color: '#374151',
             },
+            p: {
+              color: '#374151',
+            },
+
             'li::marker': {
               color: 'currentColor',
               paddingLeft: 0,
@@ -66,16 +72,17 @@ module.exports = {
       },
       fontFamily: {
         sans: ['var(--font-comm)', ...defaultTheme.fontFamily.sans],
-        serif: ['var(--font-newsreader)', ...defaultTheme.fontFamily.serif],
-        inter: ['var(--font-inter)'],
-      },
-      transitionProperty: {
-        'transform-opacity': 'transform, opacity',
+        serif: ['var(--font-serif)', ...defaultTheme.fontFamily.serif],
+        reading: ['var(--font-sans)', ...defaultTheme.fontFamily.sans],
+        mono: ['var(--font-sm)', ...defaultTheme.fontFamily.mono],
       },
       backgroundImage: {
         'ken-pattern': "url('/images/texture.png')",
       },
+      transitionProperty: {
+        'transform-opacity': 'transform, opacity',
+      },
     },
   },
   plugins: [require('@tailwindcss/typography')],
-};
+}

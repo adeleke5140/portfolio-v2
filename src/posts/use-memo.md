@@ -1,7 +1,7 @@
 ---
 title: The useMemo hook
 date: '2023-02-11'
-status: 'editing'
+status: 'draft'
 language: 'jsx'
 ---
 
@@ -14,13 +14,16 @@ The word memo is short for memorandum. The word's etymology is from the Latin wo
 The useMemo hook is one of the most useful hooks in React. It is also one of those hooks that took me a while to understand. I finally have a grasp of it, and I want to share what I have learned.
 
 I am gonna be talking about the following:
+
 - What is useMemo
 - Memoizing expensive calculations
 
 ## What is useMemo
+
 The useMemo hook allows us to **remember** computed values between renders.
 
 From the React docs:
+
 ```jsx
 import { useMemo } from 'react'
 
@@ -37,19 +40,20 @@ A rerender creates a picture of what the DOM should look like based on the state
 Josh has a fantastic article about rerenders, which you can check out [here](https://www.joshwcomeau.com/react/why-react-re-renders/)
 
 ## Memoizing expensive calculations
+
 A simple example of this is with a component:
 
 ```jsx
-import { useState } from "react";
+import { useState } from 'react'
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [num, setNum] = useState(100);
+  const [count, setCount] = useState(0)
+  const [num, setNum] = useState(100)
 
-  const allOdd = [];
+  const allOdd = []
   for (let i = 0; i < num; i++) {
     if (i % 2) {
-      allOdd.push(i);
+      allOdd.push(i)
     }
   }
 
@@ -61,7 +65,7 @@ function App() {
         id="number"
         value={num}
         onChange={(e) => setNum(e.target.value)}
-       />
+      />
       <p>Count: {count}</p>
       <button onClick={() => setCount(count + 1)}>Add Count</button>
       <p>
@@ -83,24 +87,25 @@ This is where the `useMemo` hook becomes useful.
 We can memoize the value, especially if the dependencies have stayed the same.
 
 ```jsx
- import { useMemo } from 'react'
- //rest of code
- const allOdd = useMemo(() => {
-    const result = [];
-    for (let i = 0; i < num; i++) {
-      if (i % 2) {
-        result.push(i);
-      }
+import { useMemo } from 'react'
+//rest of code
+const allOdd = useMemo(() => {
+  const result = []
+  for (let i = 0; i < num; i++) {
+    if (i % 2) {
+      result.push(i)
     }
-    return result;
-  }, [num]);
+  }
+  return result
+}, [num])
 
-  //rest of code
+//rest of code
 ```
 
 The `useMemo` does all we need it to do. One thing to note is, you don't need to optimize prematurely. Only memoize components after you have figured out that it is a performance bottleneck.
 
 The react docs give a good explanation of how to figure out a calculation is expensive.
+
 > React docs: [how to figure out an expensive calculation](https://react.dev/reference/react/useMemo#how-to-tell-if-a-calculation-is-expensive)
 
 ## Conclusion
@@ -110,4 +115,5 @@ The useMemo hook is a crucial react API that helps us memoize expensive computat
 Thanks for reading.
 
 ## Resources
+
 - [React docs](https://react.dev/reference/react/useMemo)

@@ -1,7 +1,7 @@
 ---
-title: "Web Accessibility statement"
+title: 'Web Accessibility statement'
 date: '2023-07-04'
-status: 'completed'
+status: 'draft'
 ---
 
 ## Introduction
@@ -14,11 +14,11 @@ One thing that stood out to me in the report was that quite a bunch of significa
 
 These include things like:
 
-* Low-contrast text
-* Missing alternative text for images
-* Missing Form labels
-* Inappropriately used headings
-* Inappropriately used ARIA attributes e.t.c
+- Low-contrast text
+- Missing alternative text for images
+- Missing Form labels
+- Inappropriately used headings
+- Inappropriately used ARIA attributes e.t.c
 
 You can read the [full report](https://webaim.org/projects/million/)
 
@@ -35,7 +35,6 @@ Echoing the words of [Meryl Evans](https://meryl.net/accessibility-progress-over
 I use the React library a lot as well, and it is pretty easy to fall into [_divitis_](https://en.wiktionary.org/wiki/divitis). We are going to tackle that as well.
 
 I am not an expert by any means, but I do want to play my part in making the web a more accessible place.
-
 
 ## Conclusion
 

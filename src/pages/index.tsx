@@ -1,28 +1,33 @@
-import { Home as HomePage } from '@/components/home';
-import { usePostContext } from '@/context/postContext';
-import { getSortedPostsData } from '@/lib/posts';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import Head from 'next/head';
-import { useEffect } from 'react';
-import { Post } from './blog';
-import { A11ySection } from '@/components/a11ySection';
-import { MailIcon } from 'lucide-react';
+import Head from 'next/head'
+import { motion } from 'framer-motion'
+import { PageWrapper } from '@/components/pageWrapper'
 
-export default function Home({
-  allPostsData,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { updatePosts } = usePostContext();
-  const completedPosts = allPostsData
-    .filter((post) => {
-      if (post.status == 'completed') {
-        return post;
-      }
-    })
-    .slice(0, 4);
-  useEffect(() => {
-    updatePosts(completedPosts);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+const container = {
+  hidden: { opacity: 0, scale: 1 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.4,
+    },
+  },
+}
+
+const item = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      bounce: 0,
+      duration: 1,
+    },
+  },
+}
+
+export default function Home() {
   return (
     <>
       <Head>
@@ -32,51 +37,58 @@ export default function Home({
         <link rel="icon" href="/kehinde.ico" />
       </Head>
 
-      <section>
-        <div className="max-w-2xl mx-auto">
-          <HomePage posts={completedPosts} />
-          <A11ySection />
-          <section
-            aria-labelledby="Connect"
-            className="px-6 my-8 flex flex-col gap-6 sm:pb-20"
+      <PageWrapper
+        heading={
+          <div>
+            <h1>Kehinde</h1>
+            <p className=" text-gray-500">Design engineer 🦄</p>
+          </div>
+        }
+        path="/"
+        showHeading
+      >
+        <motion.section>
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-col gap-2 dark:border-[#282828] dark:bg-[#282828]"
           >
-            <h2 id="Connect" className=" text-sm">
-              Connect
-            </h2>
-            <div className="flex flex-col gap-4">
-              <p className="leading-6">
-                You can find me on{' '}
-                <a
-                  href="https://www.linkedin.com/in/adeleke5140/"
-                  className="underline underline-offset-2 decoration-1 decoration-ken-grey"
-                >
-                  Linkedin
-                </a>
-                . I always love connecting with new people so don&apos;t
-                hesitate to reach out.
-              </p>
+            <motion.div
+              variants={item}
+              className="rounded-lg dark:text-[#fefefe]"
+            >
               <p>
-                <a
-                  className="underline underline-offset-2 decoration-1 decoration-ken-grey  max-w-max flex items-center justify-start gap-2"
-                  href="mailto:kehindeadeleke927@gmail.com?subject=Hi Kehinde, wanna work with you"
-                >
-                  <MailIcon size={16} />
-                  <span> Send a message</span>
-                </a>
+                I work at{' '}
+                <a href="https://www.mastra.ai" className="underline">
+                  mastra.ai
+                </a>{' '}
+                where I built the website and cloud dashboard prototype. I tend
+                to obsess over typefaces, padding, highlight color, transitions
+                and weird ui jags
               </p>
-            </div>
-          </section>
-        </div>
-      </section>
-    </>
-  );
-}
+            </motion.div>
 
-export const getStaticProps: GetStaticProps<{ allPostsData: Post[] }> = () => {
-  const allPostsData = getSortedPostsData();
-  return {
-    props: {
-      allPostsData,
-    },
-  };
-};
+            <motion.div variants={item}>
+              <p className="dark:text-[#fefefe] rounded-lg h-full">
+                I am drawn to design because of beauty. The beauty of how types
+                and animation can be used to tell stories. The infinite is the
+                well I draw from.
+              </p>
+            </motion.div>
+
+            <motion.div variants={item}>
+              You can reach me at{' '}
+              <a
+                className="underline text-gray-500 underline-offset-2 decoration-1 decoration-ken-grey "
+                href="mailto:kehindeadeleke927@gmail.com?subject=Hi Kehinde, wanna work with you"
+              >
+                k@kehinde.me
+              </a>
+            </motion.div>
+          </motion.div>
+        </motion.section>
+      </PageWrapper>
+    </>
+  )
+}

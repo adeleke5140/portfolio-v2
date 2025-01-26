@@ -2,7 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
-  @import 'common.css';
-  @import 'command.css'
+body,
+html {
+  height: 100%;
+}
+
+:root {
+  --gray-1: #1a1a1a;
+  --gray-2: #1c1c1c;
+  --gray-3: #232323;
+  --gray-4: #282828;
+  --gray-6: #343434;
 }
