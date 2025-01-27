@@ -2,7 +2,7 @@
 title: Hydration Error with Tables in NextJS
 date: '2023-09-22'
 language: typescript
-status: 'completed'
+status: 'draft'
 tag: nextJS
 ---
 

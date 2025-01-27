@@ -23,9 +23,7 @@ const Index = ({
       return post
     } else {
       if (
-        post.status !== 'draft' &&
-        post.status !== 'editing' &&
-        post.status !== 'archived'
+        post.status == "published"
       ) {
         return post
       }

@@ -8,7 +8,6 @@ import {
 import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring'
 import type { Post } from './index'
-
 import { PageWrapper } from '@/components/pageWrapper'
 
 interface PostData extends Post {

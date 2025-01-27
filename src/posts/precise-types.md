@@ -2,7 +2,7 @@
 title: Use Precise types
 date: '2023-08-05'
 language: typescript
-status: completed
+status: "draft"
 tag: typescript
 ---
 
