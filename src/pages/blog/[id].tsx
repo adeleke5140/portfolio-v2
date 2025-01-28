@@ -30,13 +30,16 @@ const Post = ({
       <PageWrapper
         heading={
           <div>
-            <h1>{postData.title}.</h1>
-            <p className="text-gray-500 text-sm">
+            <h1 className="font-semibold font-hobx text-4xl">
+              {postData.title}.
+            </h1>
+            <p className="text-gray-700 text-sm">
               {formatDate(postData.date!)}
             </p>
           </div>
         }
         path="/blog"
+        backText="to blog"
         showHeading
         showLink
       >

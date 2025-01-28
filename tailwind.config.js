@@ -8,12 +8,18 @@ module.exports = {
       typography: {
         DEFAULT: {
           css: {
+            h2: {
+              fontSize: 16,
+              fontWeight: 600,
+            },
             code: {
-              color: '#f7f7f7',
-              backgroundColor: '#f7f7f7',
+              color: 'inherit',
+              backgroundColor: 'rgba(247,247,247,0.8)',
               fontSize: '0.895rem',
               fontWeight: '400',
               userSelect: 'auto',
+              borderRadius: 4,
+              padding: '2px 8px',
             },
             'code::before': {
               content: '',
@@ -24,8 +30,8 @@ module.exports = {
             pre: {
               backgroundColor: 'rgba(247,247,247,0.8)',
               color: '#413a30',
-              paddingRight: 0,
-              paddingLeft: 0,
+              paddingRight: 10,
+              paddingLeft: 10,
               userSelect: 'auto',
             },
             'pre code:before': {
@@ -39,10 +45,10 @@ module.exports = {
             },
             li: {
               paddingLeft: 0,
-              color: '#374151',
+              color: '#19260d',
             },
             p: {
-              color: '#374151',
+              color: '#19260d',
             },
 
             'li::marker': {
@@ -57,6 +63,7 @@ module.exports = {
             },
             blockquote: {
               color: '#e5e5e5',
+              'border-left-color': '#7796d4',
               'border-left-width': '0.12rem',
             },
           },
@@ -74,7 +81,8 @@ module.exports = {
         sans: ['var(--font-comm)', ...defaultTheme.fontFamily.sans],
         serif: ['var(--font-serif)', ...defaultTheme.fontFamily.serif],
         reading: ['var(--font-sans)', ...defaultTheme.fontFamily.sans],
-        mono: ['var(--font-sm)', ...defaultTheme.fontFamily.mono],
+        mono: ['var(--font-fira)', ...defaultTheme.fontFamily.mono],
+        hobx: ['var(--font-hobx)', ...defaultTheme.fontFamily.sans],
       },
       backgroundImage: {
         'ken-pattern': "url('/images/texture.png')",

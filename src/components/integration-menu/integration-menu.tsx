@@ -1,7 +1,8 @@
-import { AnimatePresence, Variants, motion } from 'framer-motion'
+import { motion, AnimatePresence, Variants } from 'motion/react'
 import { Check, Copy } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { integrations } from './int'
+import { cn } from '@/lib/utils'
 
 const copyVariants: Variants = {
   hidden: { opacity: 0, scale: 0.5 },
@@ -23,29 +24,54 @@ export const CopyButton = () => {
   return (
     <button aria-label="copy pr link" onClick={() => setCopy(true)}>
       <AnimatePresence mode="wait" initial={false}>
-        {copy ? (
-          <motion.span
-            key="checkmark"
-            variants={copyVariants}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            transition={{ type: 'spring', duration: 0.3, bounce: 0 }}
-          >
-            <Check className="w-3 h-3 text-gray-500" />
-          </motion.span>
-        ) : (
-          <motion.span
+        <div className="grid">
+          <span
+            style={{
+              gridArea: '1/1',
+            }}
             key="clipboard"
-            variants={copyVariants}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            transition={{ type: 'spring', duration: 0.3, bounce: 0 }}
           >
-            <Copy className="w-3 h-3 text-gray-500" />
-          </motion.span>
-        )}
+            <Copy
+              className={cn(
+                'w-3 h-3 text-gray-500 transition-transform duration-300',
+                copy ? 'scale-0' : 'scale-100'
+              )}
+            />
+          </span>
+          <span
+            style={{
+              gridArea: '1/1',
+            }}
+            key="checkmark"
+          >
+            <Check
+              className={cn(
+                'w-3 h-3 text-gray-500 transition-transform duration-300',
+                copy ? 'scale-100' : 'scale-0'
+              )}
+            />
+          </span>
+        </div>
+
+        {/* {copy ? (
+          <span key="checkmark">
+            <Check
+              className={cn(
+                'w-3 h-3 text-gray-500',
+                copy ? 'scale-100' : 'scale-0'
+              )}
+            />
+          </span>
+        ) : (
+          <span key="clipboard">
+            <Copy
+              className={cn(
+                'w-3 h-3 text-gray-500',
+                copy ? 'scale-100' : 'scale-0'
+              )}
+            />
+          </span>
+        )} */}
       </AnimatePresence>
     </button>
   )

@@ -7,6 +7,7 @@ interface PageWrapperProps {
   children: React.ReactNode
   showHeading?: boolean
   showLink?: boolean
+  backText?: string
 }
 
 const PageWrapper = ({
@@ -15,13 +16,18 @@ const PageWrapper = ({
   path,
   showHeading = false,
   showLink = false,
+  backText,
 }: PageWrapperProps) => {
   const slot =
-    typeof heading == 'string' ? <h1 className="">{heading}</h1> : heading
+    typeof heading == 'string' ? (
+      <h1 className="font-hobx">{heading}</h1>
+    ) : (
+      heading
+    )
   return (
     <div className="relative px-6 max-w-xl mx-auto">
       <div className="flex flex-col gap-8 mb-8">
-        {showLink ? <BackButton path={path} text="Go home" /> : null}
+        {showLink ? <BackButton path={path} text={`Go ${backText}`} /> : null}
         {showHeading ? slot : null}
       </div>
       {children}
