@@ -3,6 +3,7 @@ import {
   CopyButton,
   IntegrationMenu,
 } from '@/components/integration-menu/integration-menu'
+import { Navigation } from '@/components/navigation/navigation'
 import { PageWrapper } from '@/components/pageWrapper'
 import { ReactNode } from 'react'
 
@@ -36,6 +37,13 @@ export default function Index() {
           <CraftText text="Integration Menu" />
           <CraftContainer>
             <IntegrationMenu />
+          </CraftContainer>
+        </div>
+
+        <div>
+          <CraftText text="Position aware indicator" />
+          <CraftContainer>
+            <Navigation />
           </CraftContainer>
         </div>
       </section>

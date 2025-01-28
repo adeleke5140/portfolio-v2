@@ -47,7 +47,7 @@ const Index = ({
               key={post.id}
               className="grid items-center grid-cols-[100px,1fr] gap-8"
             >
-              <span className="text-xs text-gray-500">
+              <span className="text-xs text-gray-700">
                 {formatDate(post.date || Date.now().toString())}
               </span>
               <Link href={`/blog/${post.id}`} className="text-sm">

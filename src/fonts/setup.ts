@@ -1,4 +1,6 @@
-import { Andika, Commissioner, Space_Mono, Crimson_Pro } from 'next/font/google'
+import { Andika, Commissioner, Fira_Mono, Crimson_Pro } from 'next/font/google'
+import localFont from 'next/font/local'
+
 export const comm = Commissioner({
   subsets: ['latin'],
   display: 'swap',
@@ -6,11 +8,11 @@ export const comm = Commissioner({
   variable: '--font-comm',
 })
 
-export const sm = Space_Mono({
+export const firaMono = Fira_Mono({
   subsets: ['latin'],
   display: 'swap',
   weight: ['400'],
-  variable: '--font-sm',
+  variable: '--font-fira',
 })
 
 export const sans = Andika({
@@ -26,9 +28,16 @@ export const serif = Crimson_Pro({
   variable: '--font-serif',
 })
 
+const hobx = localFont({
+  src: './Hobeaux-Semibold.woff',
+  variable: '--font-hobx',
+  weight: '600',
+})
+
 export const fonts = {
   comm,
-  sm,
+  firaMono,
   sans,
   serif,
+  hobx,
 }

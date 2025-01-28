@@ -9,7 +9,7 @@ const container = {
     scale: 1,
     transition: {
       delayChildren: 0.3,
-      staggerChildren: 0.4,
+      staggerChildren: 0.2,
     },
   },
 }
@@ -40,8 +40,8 @@ export default function Home() {
       <PageWrapper
         heading={
           <div>
-            <h1>Kehinde</h1>
-            <p className=" text-gray-500">Design engineer 🦄</p>
+            <h1 className="font-hobx">Kehinde</h1>
+            <p className=" text-gray-700 text-sm">Design engineer 🦄</p>
           </div>
         }
         path="/"
@@ -59,13 +59,12 @@ export default function Home() {
               className="rounded-lg dark:text-[#fefefe]"
             >
               <p>
-                I work at{' '}
+                I obsess over typefaces, padding, highlight color, transitions
+                and weird ui jags. I currently work at{' '}
                 <a href="https://www.mastra.ai" className="underline">
                   mastra.ai
                 </a>{' '}
-                where I built the website and cloud dashboard prototype. I tend
-                to obsess over typefaces, padding, highlight color, transitions
-                and weird ui jags
+                where I built the website and cloud dashboard prototype.
               </p>
             </motion.div>
 
@@ -80,8 +79,8 @@ export default function Home() {
             <motion.div variants={item}>
               You can reach me at{' '}
               <a
-                className="underline text-gray-500 underline-offset-2 decoration-1 decoration-ken-grey "
-                href="mailto:kehindeadeleke927@gmail.com?subject=Hi Kehinde, wanna work with you"
+                className="underline text-gray-700 underline-offset-2 decoration-1 decoration-black "
+                href="mailto:k@kehinde.me?subject=Hi Kehinde, how's it going"
               >
                 k@kehinde.me
               </a>
