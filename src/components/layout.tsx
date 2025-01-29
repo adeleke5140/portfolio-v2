@@ -17,7 +17,7 @@ const Layout = ({ children }: LayoutProps) => {
         <meta name="description" content={`${name} website`} />
         <meta name="og:title" content={siteTitle} />
       </Head>
-      <div className="flex relative pt-8 min-h-screen flex-col bg-ken-pattern">
+      <div className="flex relative pt-8 pb-8 min-h-screen flex-col bg-ken-pattern">
         <Nav />
         <main className="pt-10 flex-1 md:pt-12 place-items-center w-full'">
           {children}
