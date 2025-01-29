@@ -80,7 +80,7 @@ export const CopyButton = () => {
 export const IntegrationMenu = () => {
   const [current, setCurrent] = useState('github')
   return (
-    <div className="w-[24.75rem] flex flex-col gap-2  cursor-pointer border-[0.5px] dark:border-[#282828]  border-gray-200 bg-white dark:bg-[#1a1a1a]  mx-auto p-1.5 rounded-2xl ">
+    <div className="lg:w-[24.75rem] flex flex-col gap-2  cursor-pointer border-[0.5px] dark:border-[#282828]  border-gray-200 bg-white dark:bg-[#1a1a1a]  mx-auto p-1.5 rounded-2xl ">
       <div className="bg-[#f7f8fa] dark:bg-[#232323] flex flex-col gap-1 rounded-xl p-3 font-mono">
         <div className="flex group  items-center justify-between border-b border-dashed dark:border-b-[#343434] pb-1">
           <span className="text-sm inline-flex gap-1 items-center">

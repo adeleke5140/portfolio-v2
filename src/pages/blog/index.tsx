@@ -45,7 +45,7 @@ const Index = ({
           {filteredPosts.map((post) => (
             <div
               key={post.id}
-              className="grid items-center grid-cols-[100px,1fr] gap-8"
+              className="md:grid flex flex-col gap-1 md:items-center grid-cols-[100px,1fr] md:gap-8"
             >
               <span className="text-xs text-gray-700">
                 {formatDate(post.date || Date.now().toString())}
