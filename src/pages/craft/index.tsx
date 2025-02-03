@@ -5,6 +5,7 @@ import {
 } from '@/components/integration-menu/integration-menu'
 import { Navigation } from '@/components/navigation/navigation'
 import { PageWrapper } from '@/components/pageWrapper'
+
 import { ReactNode } from 'react'
 
 export const CraftText = ({ text }: { text: string }) => {

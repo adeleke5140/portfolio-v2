@@ -1,7 +1,7 @@
 ---
 title: Choose your font journey
 date: '2023-03-19'
-status: 'archive'
+status: 'draft'
 ---
 
 ## Introduction
@@ -24,10 +24,11 @@ Basically, a choose your adventure.]
 You can select your prefered font from the toggle button on the top right corner of the site.
 
 ## font options
-* default: **DM Mono**
-* choice 2: **Inter**
-* choice 3: **Satoshi** and **erode**
-* choice 4: **System ui**
+
+- default: **DM Mono**
+- choice 2: **Inter**
+- choice 3: **Satoshi** and **erode**
+- choice 4: **System ui**
 
 ## Conclusion
 
