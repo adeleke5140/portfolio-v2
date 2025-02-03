@@ -10,7 +10,7 @@ import { Toaster } from 'sonner'
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <div
-      className={`dark:bg-[#1a1a1a] ${fonts.serif.variable} dark:text-[#e5e5e5] h-full ${fonts.comm.variable} ${fonts.sans.variable}  ${fonts.firaMono.variable} ${fonts.hobx.variable} home font-reading bg-[rgb(145,235,133)] text-ken-black`}
+      className={`dark:bg-[#1a1a1a] h-full ${fonts.serif.variable} dark:text-[#e5e5e5] h-full ${fonts.comm.variable} ${fonts.sans.variable}  ${fonts.firaMono.variable} ${fonts.hobx.variable} home font-reading bg-[rgb(248,249,250)] text-ken-black`}
       id="container"
     >
       <Toaster />

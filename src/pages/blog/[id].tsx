@@ -10,6 +10,11 @@ import { ParsedUrlQuery } from 'querystring'
 import type { Post } from './index'
 
 import { PageWrapper } from '@/components/pageWrapper'
+import { useEffect } from 'react'
+import Prism from 'prismjs'
+
+require('prismjs/components/prism-javascript')
+require('prismjs/components/prism-typescript')
 
 interface PostData extends Post {
   contentHtml: string
@@ -22,6 +27,10 @@ interface Params extends ParsedUrlQuery {
 const Post = ({
   postData,
 }: InferGetServerSidePropsType<typeof getStaticProps>) => {
+  useEffect(() => {
+    Prism.highlightAll()
+  }, [])
+
   return (
     <>
       <Head>
@@ -44,7 +53,7 @@ const Post = ({
         showLink
       >
         <section
-          className={`mt-10 font-reading font-normal prose language-${postData.language}`}
+          className={`mt-10 font-reading selection:bg-[#dfdad9] font-normal prose language-${postData.language}`}
           dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
         ></section>
       </PageWrapper>
