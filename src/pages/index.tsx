@@ -40,8 +40,8 @@ export default function Home() {
       <PageWrapper
         heading={
           <div>
-            <h1 className="font-hobx">Kehinde</h1>
-            <p className=" text-gray-700 text-sm">Design engineer 🦄</p>
+            <h1 className="font-hobx text-2xl">Kehinde</h1>
+            <p className=" text-gray-700">Design engineer 🦄</p>
           </div>
         }
         path="/"
