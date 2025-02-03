@@ -1,7 +1,7 @@
 ---
 title: Experience building NextJS, Tailwind Portfolio
 date: '2023-02-07'
-status: 'completed'
+status: 'draft'
 ---
 
 ## Introduction
@@ -23,7 +23,7 @@ To get a handle of how things worked in Next land, I went through [Fireship's cr
 
 A bit of a segue: I really appreciate folks who take the time to write amazing docs. It is no mean feat to organize and categorize text without making it a hassle.
 
-A quick shoutout to the folks responsible for the docs of  _Ethereum_, _VueJS_, _Prisma_ and _NextJS_. Your docs are a delight to read.
+A quick shoutout to the folks responsible for the docs of _Ethereum_, _VueJS_, _Prisma_ and _NextJS_. Your docs are a delight to read.
 
 My goal is to be able to write documentation as well as that as I continue my career.
 
@@ -41,6 +41,7 @@ Formatting with Tailwind's prose plugin also added a layer of complexity I didn'
 The goal is to become more proficient with MDX in conjuction with the Tailwind prose plugin.
 
 ### Conclusion
+
 NextJS is incredibly pleasing to use. I wish I started earlier.
 
 All in All, I didn't create this blog in Astro as I initially planned but it's all good because I got to experience NextJS.

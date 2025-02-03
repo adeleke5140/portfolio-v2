@@ -8,11 +8,7 @@ tag: nextJS
 
 ## Introduction
 
-NextJS hydration error is like the inevitable death of the universe. It will happen eventually.
-
-I ran into one recently with HTML tables. I am going to be talking about it today.
-
-I will explain what the error was and how I fixed it. There is also a bit of a deep dive into why the error happened in the first place.
+NextJS hydration error is one of those errors that are bound to happen eventually when building a NexJS application.
 
 ## The Problem
 
