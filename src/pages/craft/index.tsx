@@ -5,7 +5,7 @@ import {
 } from '@/components/integration-menu/integration-menu'
 import { Navigation } from '@/components/navigation/navigation'
 import { PageWrapper } from '@/components/pageWrapper'
-import { ProfileOnline } from '@/components/profile-online/profile-online'
+
 import { ReactNode } from 'react'
 
 export const CraftText = ({ text }: { text: string }) => {
@@ -45,13 +45,6 @@ export default function Index() {
           <CraftText text="Position aware indicator" />
           <CraftContainer>
             <Navigation />
-          </CraftContainer>
-        </div>
-
-        <div>
-          <CraftText text="SVG mask for profile photo" />
-          <CraftContainer>
-            <ProfileOnline />
           </CraftContainer>
         </div>
       </section>
