@@ -17,9 +17,9 @@ const Layout = ({ children }: LayoutProps) => {
         <meta name="description" content={`${name} website`} />
         <meta name="og:title" content={siteTitle} />
       </Head>
-      <div className="flex relative pt-8 pb-8 min-h-screen flex-col bg-ken-pattern">
+      <div className="flex relative h-full pt-8 pb-8 min-h-screen flex-col bg-ken-pattern">
         <Nav />
-        <main className="pt-10 flex-1 md:pt-12 place-items-center w-full'">
+        <main className="pt-10 h-full flex-1 md:pt-12 place-items-center w-full'">
           {children}
         </main>
         <footer className="w-full mt-10 mb-2 md:px-6 ">

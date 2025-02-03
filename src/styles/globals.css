@@ -14,3 +14,8 @@ html {
   --gray-4: #282828;
   --gray-6: #343434;
 }
+
+html,
+body *::selection {
+  background: #dfdad9 !important;
+}
