@@ -1,10 +1,10 @@
 import { CardAnimation } from '@/components/card-animation/card-animation'
 import {
-  CopyButton,
-  IntegrationMenu,
+  IntegrationMenu
 } from '@/components/integration-menu/integration-menu'
 import { Navigation } from '@/components/navigation/navigation'
 import { PageWrapper } from '@/components/pageWrapper'
+import { ProfileOnline } from '@/components/profile-online/profile-online'
 
 import { ReactNode } from 'react'
 
@@ -47,6 +47,22 @@ export default function Index() {
             <Navigation />
           </CraftContainer>
         </div>
+
+        <div>
+          <CraftText text="Online status" />
+          <CraftContainer>
+            <ProfileOnline />
+          </CraftContainer>
+         
+        </div>
+
+        {/* <div>
+          <CraftText text="Profile" />
+          <CraftContainer>
+            <ProfileShine />
+          </CraftContainer>
+        
+        </div> */}
       </section>
     </PageWrapper>
   )
