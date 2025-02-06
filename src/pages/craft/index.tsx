@@ -1,10 +1,9 @@
 import { CardAnimation } from '@/components/card-animation/card-animation'
-import {
-  IntegrationMenu
-} from '@/components/integration-menu/integration-menu'
+import { IntegrationMenu } from '@/components/integration-menu/integration-menu'
 import { Navigation } from '@/components/navigation/navigation'
 import { PageWrapper } from '@/components/pageWrapper'
 import { ProfileOnline } from '@/components/profile-online/profile-online'
+import { ProfileShine } from '@/components/profile-shine/profile-shine'
 
 import { ReactNode } from 'react'
 
@@ -49,20 +48,18 @@ export default function Index() {
         </div>
 
         <div>
-          <CraftText text="Online status" />
+          <CraftText text="Online indicator" />
           <CraftContainer>
             <ProfileOnline />
           </CraftContainer>
-         
         </div>
 
-        {/* <div>
-          <CraftText text="Profile" />
+        <div>
+          <CraftText text="Image Shimmer effect" />
           <CraftContainer>
             <ProfileShine />
           </CraftContainer>
-        
-        </div> */}
+        </div>
       </section>
     </PageWrapper>
   )
