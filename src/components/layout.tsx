@@ -25,7 +25,7 @@ const Layout = ({ children }: LayoutProps) => {
         <footer className="w-full mt-10 mb-2 md:px-6 ">
           <div className="max-w-xl rounded-md md:px-6 mx-auto">
             <div className="px-6 py-3 md:px-0 md:pb-2 flex justify-between">
-              <p className="text-sm">love, truth and beauty.</p>
+              <p className="text-sm">ltb.</p>
               <p className="text-sm">
                 &copy;{new Date().getFullYear()}&nbsp;
                 <span className="font-medium">ケーニ</span>

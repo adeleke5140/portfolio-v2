@@ -3,7 +3,7 @@ import { BackButton } from './backButton'
 
 interface PageWrapperProps {
   heading: string | ReactNode
-  path: string
+  path?: string
   children: React.ReactNode
   showHeading?: boolean
   showLink?: boolean
@@ -27,7 +27,9 @@ const PageWrapper = ({
   return (
     <div className="relative px-6 max-w-xl mx-auto">
       <div className="flex flex-col gap-8 mb-8">
-        {showLink ? <BackButton path={path} text={`Go ${backText}`} /> : null}
+        {showLink ? (
+          <BackButton path={path ? path : ''} text={`Go ${backText}`} />
+        ) : null}
         {showHeading ? slot : null}
       </div>
       {children}

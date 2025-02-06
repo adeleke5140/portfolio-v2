@@ -38,14 +38,8 @@ export default function Home() {
       </Head>
 
       <PageWrapper
-        heading={
-          <div>
-            <h1 className="font-hobx text-2xl">Kehinde</h1>
-            <p className=" text-gray-700">Design engineer 🦄</p>
-          </div>
-        }
-        path="/"
         showHeading
+        heading={<h1 className="font-hobx text-9xl">Hi, I&apos;m Kenny</h1>}
       >
         <motion.section>
           <motion.div
@@ -59,12 +53,11 @@ export default function Home() {
               className="rounded-lg dark:text-[#fefefe]"
             >
               <p>
-                I obsess over typefaces, padding, highlight color, transitions
-                and weird ui jags. I currently work at{' '}
+                Design eng that obsesses over typefaces, css transitions and
+                animation and weird ui jags. I currently work at{' '}
                 <a href="https://www.mastra.ai" className="underline">
                   mastra.ai
-                </a>{' '}
-                where I built the website and cloud dashboard prototype.
+                </a>
               </p>
             </motion.div>
 
