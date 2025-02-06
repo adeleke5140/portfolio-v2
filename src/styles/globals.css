@@ -19,3 +19,33 @@ html,
 body *::selection {
   background: #dfdad9 !important;
 }
+
+.shimmer-parent {
+  &:hover {
+    --shimmer-hover-transform: skewX(-45deg) translateX(600%);
+    --shimmer-after-transform: skewX(45deg) translateX(-150%);
+  }
+}
+
+.shimmer {
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.36);
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  transition: 200ms ease-out;
+  transform: var(--shimmer-hover-transform, skewX(-45deg) translateX(-300%));
+  &::after {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 400%;
+    height: 100%;
+    transform: var(--shimmer-after-transform, skewX(25deg) translateX(75%));
+    transition: 200ms ease-out;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.36);
+    border-radius: 50%;
+  }
+}
