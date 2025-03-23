@@ -1,31 +1,9 @@
 import Head from 'next/head'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { PageWrapper } from '@/components/pageWrapper'
-
-const container = {
-  hidden: { opacity: 0, scale: 1 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      delayChildren: 0.3,
-      staggerChildren: 0.5,
-    },
-  },
-}
-
-const item = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: 'spring',
-      bounce: 0,
-      duration: 1,
-    },
-  },
-}
+import { ProfileShine } from '@/components/profile-shine/profile-shine'
+import { ArrowUpRight, ExternalLink } from 'lucide-react'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -39,21 +17,17 @@ export default function Home() {
 
       <PageWrapper
         showHeading
-        heading={<h1 className="font-hobx text-9xl">Hi, I&apos;m Kenny</h1>}
+        heading={<h1 className="text-xl">Design Engineer</h1>}
       >
         <motion.section>
           <motion.div
-            variants={container}
             initial="hidden"
             animate="visible"
-            className="flex flex-col gap-2 dark:border-[#282828] dark:bg-[#282828]"
+            className="flex flex-col text-ken-grey text-[15px] gap-2 dark:border-[#282828] dark:bg-[#282828]"
           >
-            <motion.div
-              variants={item}
-              className="rounded-lg dark:text-[#fefefe]"
-            >
+            <motion.div className="rounded-lg text-[15px] dark:text-[#fefefe]">
               <p>
-                Design eng that obsesses over typefaces, css transitions and
+                Hi, I&apos;m Kenny. I obsess over typefaces, css transitions,
                 animation and weird ui jags. I currently work at{' '}
                 <a href="https://www.mastra.ai" className="underline">
                   mastra.ai
@@ -61,26 +35,84 @@ export default function Home() {
               </p>
             </motion.div>
 
-            <motion.div variants={item}>
-              <p className="dark:text-[#fefefe] rounded-lg h-full">
-                I am drawn to design because of beauty. The beauty of how types
-                and animation can be used to tell stories. The infinite is the
-                well I draw from.
+            <motion.div>
+              <p className="dark:text-[#fefefe] text-[15px] rounded-lg h-full">
+                I am drawn to design because of beauty. The beauty of how
+                typefaces and animation can be used to tell stories. The
+                infinite is the well I draw from.
               </p>
             </motion.div>
 
-            <motion.div variants={item}>
-              You can reach me at{' '}
-              <a
-                className="underline text-gray-700 underline-offset-2 decoration-1 decoration-black "
-                href="mailto:k@kehinde.me?subject=Hi Kehinde, how's it going"
-              >
-                k@kehinde.me
-              </a>
-            </motion.div>
+            <div>
+              Check out my{' '}
+              <Link className="underline" href="/craft">
+                Craft
+              </Link>{' '}
+              and{' '}
+              <Link className="underline" href={'/blog'}>
+                Blog
+              </Link>
+            </div>
+            <div className="w-full bg-ken-tertiary h-[0.8px]"></div>
+
+            <A11ySection />
           </motion.div>
         </motion.section>
       </PageWrapper>
     </>
   )
 }
+
+const A11ySection = () => {
+  return (
+    <div>
+      <nav className="flex flex-col gap-2" aria-labelledby="a11y-webring-club">
+        <p>
+          This site is a member of the{' '}
+          <a
+            className=" underline underline-offset-2"
+            rel="external"
+            href="https://a11y-webring.club/"
+          >
+            a11y-webring.club
+          </a>
+          .
+        </p>
+        <ul className="flex gap-2">
+          <li>
+            <a
+              className=" bg-gray-100 flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-2xl"
+              rel="external"
+              referrerPolicy="strict-origin"
+              href="https://a11y-webring.club/prev"
+            >
+              Previous website <ArrowUpRight size={12} aria-hidden />
+            </a>
+          </li>
+          <li>
+            <a
+              className=" bg-gray-100 px-3 flex gap-1.5 items-center text-[15px] py-1 rounded-2xl"
+              rel="external"
+              referrerPolicy="strict-origin"
+              href="https://a11y-webring.club/random"
+            >
+              Random website <ArrowUpRight size={12} aria-hidden />
+            </a>
+          </li>
+          <li>
+            <a
+              className=" bg-gray-100 flex gap-1.5 items-center px-3 text-[15px] py-1 rounded-2xl"
+              rel="external"
+              referrerPolicy="strict-origin"
+              href="https://a11y-webring.club/next"
+            >
+              Next website <ArrowUpRight size={12} aria-hidden />
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  )
+}
+
+export { A11ySection }

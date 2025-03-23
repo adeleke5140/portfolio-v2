@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { container, item } from './variants'
 
 export const CardStatus = () => {

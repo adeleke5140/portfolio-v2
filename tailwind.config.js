@@ -12,7 +12,6 @@ module.exports = {
               fontSize: 16,
               fontWeight: 600,
             },
-
             'code::before': {
               content: '',
             },
@@ -54,6 +53,7 @@ module.exports = {
             },
             p: {
               color: '#19260d',
+              fontSize: 15,
             },
 
             'li::marker': {
@@ -80,20 +80,15 @@ module.exports = {
       colors: {
         'ken-black': '#000',
         'ken-white': '#FFFCFF',
-        'ken-grey': '#a0a0a0',
+        'ken-grey': 'oklch(.439 0 0)',
         'ken-primary': '#ededed',
         'ken-secondary': '#f2f2f2',
         'ken-tertiary': '#ededed',
       },
       fontFamily: {
         sans: ['var(--font-comm)', ...defaultTheme.fontFamily.sans],
-        serif: ['var(--font-serif)', ...defaultTheme.fontFamily.serif],
         reading: ['var(--font-sans)', ...defaultTheme.fontFamily.sans],
         mono: ['var(--font-fira)', ...defaultTheme.fontFamily.mono],
-        hobx: ['var(--font-hobx)', ...defaultTheme.fontFamily.sans],
-      },
-      backgroundImage: {
-        'ken-pattern': "url('/images/texture.png')",
       },
       transitionProperty: {
         'transform-opacity': 'transform, opacity',

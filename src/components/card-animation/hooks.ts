@@ -1,4 +1,4 @@
-import { animate } from 'framer-motion'
+import { animate } from 'motion/react'
 import { useState, useEffect } from 'react'
 
 export const useAnimatedText = (text: string, duration = 0.5, delay = 0) => {

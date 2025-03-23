@@ -40,7 +40,13 @@ const Index = ({
         <meta name="description" content="Kehinde Adeleke's website" />
         <meta name="og:title" content="Blog" />
       </Head>
-      <PageWrapper heading="Posts" path="/" showHeading>
+      <PageWrapper
+        heading="Posts"
+        path="/"
+        showLink
+        showHeading
+        backText="home"
+      >
         <section className="flex flex-col gap-4">
           {filteredPosts.map((post) => (
             <div

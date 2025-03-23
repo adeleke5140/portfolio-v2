@@ -20,7 +20,7 @@ const PageWrapper = ({
 }: PageWrapperProps) => {
   const slot =
     typeof heading == 'string' ? (
-      <h1 className="font-hobx text-2xl">{heading}</h1>
+      <h1 className="font-sans text-2xl">{heading}</h1>
     ) : (
       heading
     )

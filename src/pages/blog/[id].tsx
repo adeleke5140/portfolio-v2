@@ -39,7 +39,7 @@ const Post = ({
       <PageWrapper
         heading={
           <div>
-            <h1 className="font-semibold font-hobx text-2xl">
+            <h1 className="font-semibold font-sans text-2xl">
               {postData.title}.
             </h1>
             <p className="text-gray-700 text-sm">
