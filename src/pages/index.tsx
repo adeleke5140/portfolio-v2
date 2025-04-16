@@ -1,11 +1,11 @@
-import Head from 'next/head'
-import { motion } from 'motion/react'
 import { PageWrapper } from '@/components/pageWrapper'
-import { ProfileShine } from '@/components/profile-shine/profile-shine'
-import { ArrowUpRight, ExternalLink } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
+import { motion } from 'motion/react'
+import Head from 'next/head'
 import Link from 'next/link'
 
 export default function Home() {
+  const TITLE = 'Design Engineer'
   return (
     <>
       <Head>
@@ -17,13 +17,28 @@ export default function Home() {
 
       <PageWrapper
         showHeading
-        heading={<h1 className="text-xl">Design Engineer</h1>}
+        heading={
+          <h1 className="text-xl">
+            {TITLE.split('').map((letter, index) => (
+              <>
+                <span
+                  className="letter"
+                  style={{ '--index': index }}
+                  key={index}
+                >
+                  {letter}
+                </span>
+                {index === 5 ? ' ' : null}
+              </>
+            ))}
+          </h1>
+        }
       >
         <motion.section>
           <motion.div
             initial="hidden"
             animate="visible"
-            className="flex flex-col text-ken-grey text-[15px] gap-2 dark:border-[#282828] dark:bg-[#282828]"
+            className="flex flex-col text-[var(--gray-1)] text-[15px] gap-2 dark:border-[#282828] dark:bg-[#282828]"
           >
             <motion.div className="rounded-lg text-[15px] dark:text-[#fefefe]">
               <p>
@@ -81,32 +96,47 @@ const A11ySection = () => {
         <ul className="flex gap-2">
           <li>
             <a
-              className=" bg-gray-100 flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-2xl"
+              className=" bg-gray-100 group -ml-3 flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-2xl"
               rel="external"
               referrerPolicy="strict-origin"
               href="https://a11y-webring.club/prev"
             >
-              Previous website <ArrowUpRight size={12} aria-hidden />
+              Previous website{' '}
+              <ArrowUpRight
+                size={12}
+                aria-hidden
+                className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform"
+              />
             </a>
           </li>
           <li>
             <a
-              className=" bg-gray-100 px-3 flex gap-1.5 items-center text-[15px] py-1 rounded-2xl"
+              className=" bg-gray-100 group px-3 flex gap-1.5 items-center text-[15px] py-1 rounded-2xl"
               rel="external"
               referrerPolicy="strict-origin"
               href="https://a11y-webring.club/random"
             >
-              Random website <ArrowUpRight size={12} aria-hidden />
+              Random website{' '}
+              <ArrowUpRight
+                size={12}
+                aria-hidden
+                className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform"
+              />
             </a>
           </li>
           <li>
             <a
-              className=" bg-gray-100 flex gap-1.5 items-center px-3 text-[15px] py-1 rounded-2xl"
+              className=" bg-gray-100 group flex gap-1.5 items-center px-3 text-[15px] py-1 rounded-2xl"
               rel="external"
               referrerPolicy="strict-origin"
               href="https://a11y-webring.club/next"
             >
-              Next website <ArrowUpRight size={12} aria-hidden />
+              Next website{' '}
+              <ArrowUpRight
+                size={12}
+                aria-hidden
+                className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform"
+              />
             </a>
           </li>
         </ul>
