@@ -23,7 +23,7 @@ export default function Home() {
               <>
                 <span
                   className="letter"
-                  style={{ '--index': index }}
+                  style={{ '--index': index } as React.CSSProperties}
                   key={index}
                 >
                   {letter}
