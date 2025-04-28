@@ -53,7 +53,7 @@ const Post = ({
         showLink
       >
         <section
-          className={`mt-10 font-reading selection:bg-[#dfdad9] font-normal prose language-${postData.language}`}
+          className={`mt-10 font-sans selection:bg-[#dfdad9] font-normal prose language-${postData.language}`}
           dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
         ></section>
       </PageWrapper>

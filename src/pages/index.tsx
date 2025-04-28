@@ -42,8 +42,8 @@ export default function Home() {
           >
             <motion.div className="rounded-lg text-[15px] dark:text-[#fefefe]">
               <p>
-                Hi, I&apos;m Kenny. I obsess over typefaces, css transitions,
-                animation and weird ui jags. I currently work at{' '}
+                Hi, I&apos;m Kenny. I am interested in typefaces, css
+                transitions, animation. I currently work at{' '}
                 <a href="https://www.mastra.ai" className="underline">
                   mastra.ai
                 </a>
