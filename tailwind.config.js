@@ -87,7 +87,6 @@ module.exports = {
       },
       fontFamily: {
         sans: ['var(--font-comm)', ...defaultTheme.fontFamily.sans],
-        reading: ['var(--font-sans)', ...defaultTheme.fontFamily.sans],
         mono: ['var(--font-fira)', ...defaultTheme.fontFamily.mono],
       },
       transitionProperty: {
