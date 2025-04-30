@@ -98,10 +98,13 @@ export default function Home() {
                 </motion.svg>
               </Link>
             </div>
-            <div className="w-full bg-ken-tertiary h-[0.8px]"></div>
-            <A11ySection />
           </motion.div>
         </motion.section>
+
+        <section className="mt-4 flex  items-center gap-4">
+          <NowPlayingSection />
+          <A11ySection />
+        </section>
       </PageWrapper>
     </>
   )
@@ -109,7 +112,7 @@ export default function Home() {
 
 const A11ySection = () => {
   return (
-    <div>
+    <div className="bg-[#fafafa] w-full card rounded-xl  px-3 py-1 text-sm flex gap-1.5 items-center h-20">
       <nav className="flex flex-col gap-2" aria-labelledby="a11y-webring-club">
         <p>
           This site is a member of the{' '}
@@ -122,15 +125,15 @@ const A11ySection = () => {
           </a>
           .
         </p>
-        <ul className="flex flex-col md:flex-row gap-2">
-          <li className="flex-1">
+        <ul className="flex  gap-2">
+          <li className="">
             <a
-              className=" bg-gray-100 justify-between group md:-ml-3 flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-2xl"
+              className=" bg-gray-100 card justify-between group flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-2xl"
               rel="external"
               referrerPolicy="strict-origin"
               href="https://a11y-webring.club/prev"
             >
-              Previous website{' '}
+              Previous
               <ArrowUpRight
                 size={12}
                 aria-hidden
@@ -138,14 +141,14 @@ const A11ySection = () => {
               />
             </a>
           </li>
-          <li className="flex-1">
+          <li className="">
             <a
-              className=" bg-gray-100 justify-between group px-3 flex gap-1.5 items-center text-[15px] py-1 rounded-2xl"
+              className=" bg-gray-100 card justify-between group px-3 flex gap-1.5 items-center text-[15px] py-1 rounded-2xl"
               rel="external"
               referrerPolicy="strict-origin"
               href="https://a11y-webring.club/random"
             >
-              Random website{' '}
+              Random
               <ArrowUpRight
                 size={12}
                 aria-hidden
@@ -153,14 +156,14 @@ const A11ySection = () => {
               />
             </a>
           </li>
-          <li className="flex-1">
+          <li className="">
             <a
-              className=" bg-gray-100 justify-between group flex gap-1.5 items-center px-3 text-[15px] py-1 rounded-2xl"
+              className=" bg-gray-100 card justify-between group flex gap-1.5 items-center px-3 text-[15px] py-1 rounded-2xl"
               rel="external"
               referrerPolicy="strict-origin"
               href="https://a11y-webring.club/next"
             >
-              Next website{' '}
+              Next
               <ArrowUpRight
                 size={12}
                 aria-hidden
@@ -174,4 +177,23 @@ const A11ySection = () => {
   )
 }
 
-export { A11ySection }
+const NowPlayingSection = () => {
+  return (
+    <div className="bg-white relative flex items-center rounded-xl card text-sm gap-1.5  h-20 w-1/4 font-mono">
+      <svg
+        id="play"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        className="w-5 h-5 mx-auto"
+      >
+        <path
+          stroke="#fafafa"
+          d="m21,11v-1h-1v-1h-2v-1h-2v-1h-1v-1h-2v-1h-2v-1h-1v-1h-2v-1h-2v-1h-3v1h-1v20h1v1h3v-1h2v-1h2v-1h1v-1h2v-1h2v-1h1v-1h2v-1h2v-1h1v-1h1v-2h-1Zm-2,2h-2v1h-2v1h-1v1h-2v1h-2v1h-1v1h-2v1h-2v1h-1V3h1v1h2v1h2v1h1v1h2v1h2v1h1v1h2v1h2v2Z"
+        />
+      </svg>
+      {/* <span className=" block w-full rounded-lg p-2 max-w-full bg-gray-100  left-2 text-xs card m-1 bottom-0">
+        WIP
+      </span> */}
+    </div>
+  )
+}

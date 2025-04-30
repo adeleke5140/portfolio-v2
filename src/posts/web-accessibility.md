@@ -1,7 +1,7 @@
 ---
 title: 'Web Accessibility statement'
 date: '2023-07-04'
-status: 'draft'
+status: 'completed'
 ---
 
 ## Introduction
