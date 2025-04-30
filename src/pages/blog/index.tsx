@@ -18,19 +18,21 @@ export type Post = {
 const Index = ({
   allPostsData,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const filteredPosts = allPostsData.filter((post) => {
-    if (isDevelopment) {
-      return post
-    } else {
-      if (
-        post.status !== 'draft' &&
-        post.status !== 'editing' &&
-        post.status !== 'archived'
-      ) {
+  const filteredPosts = allPostsData
+    .filter((post) => {
+      if (isDevelopment) {
         return post
+      } else {
+        if (
+          post.status !== 'draft' &&
+          post.status !== 'editing' &&
+          post.status !== 'archived'
+        ) {
+          return post
+        }
       }
-    }
-  })
+    })
+    .filter((post) => post.status == 'completed')
 
   return (
     <>

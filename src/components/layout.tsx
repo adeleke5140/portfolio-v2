@@ -5,7 +5,7 @@ interface LayoutProps {
 }
 
 const name = 'Kehinde Adeleke.'
-const siteTitle = 'Portfolio v2'
+const siteTitle = 'Kehinde Adeleke portfolio'
 
 const Layout = ({ children }: LayoutProps) => {
   return (
@@ -15,8 +15,7 @@ const Layout = ({ children }: LayoutProps) => {
         <meta name="description" content={`${name} website`} />
         <meta name="og:title" content={siteTitle} />
       </Head>
-      <div className="flex relative h-full pt-8 pb-8 min-h-screen flex-col ">
-        {/* <Nav /> */}
+      <div className="flex relative  h-full pt-8 pb-8 min-h-screen flex-col ">
         <main className="pt-10 h-full flex-1 md:pt-12 place-items-center w-full'">
           {children}
         </main>

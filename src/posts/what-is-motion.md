@@ -1,7 +1,7 @@
 ---
 title: 'What is motion on the web'
 date: '2025-01-26'
-status: 'published'
+status: 'completed'
 ---
 
 Motion is a form of storytelling. You tell a story by breathing life into otherwise static web experiences.
