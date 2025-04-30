@@ -39,7 +39,7 @@ export default function Home() {
           </div>
         }
       >
-        <motion.section>
+        <motion.section className="card bg-[#fafafa] rounded-2xl p-4">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -47,8 +47,8 @@ export default function Home() {
           >
             <motion.div className="rounded-lg text-[15px] dark:text-[#fefefe]">
               <p>
-                Hi, I&apos;m Kenny. I am interested in typefaces, css
-                transitions and animation. I currently work at{' '}
+                Hi, I&apos;m Kenny. I am exploring typefaces, design and motion.
+                I currently work at{' '}
                 <a
                   href="https://www.mastra.ai"
                   className="border-b border-black"
@@ -112,7 +112,7 @@ const A11ySection = () => {
     <div>
       <nav className="flex flex-col gap-2" aria-labelledby="a11y-webring-club">
         <p>
-          This site is a member of the
+          This site is a member of the{' '}
           <a
             className=" border-b border-black"
             rel="external"
@@ -122,10 +122,10 @@ const A11ySection = () => {
           </a>
           .
         </p>
-        <ul className="flex gap-2">
-          <li>
+        <ul className="flex flex-col md:flex-row gap-2">
+          <li className="flex-1">
             <a
-              className=" bg-gray-100 group -ml-3 flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-2xl"
+              className=" bg-gray-100 justify-between group md:-ml-3 flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-2xl"
               rel="external"
               referrerPolicy="strict-origin"
               href="https://a11y-webring.club/prev"
@@ -138,9 +138,9 @@ const A11ySection = () => {
               />
             </a>
           </li>
-          <li>
+          <li className="flex-1">
             <a
-              className=" bg-gray-100 group px-3 flex gap-1.5 items-center text-[15px] py-1 rounded-2xl"
+              className=" bg-gray-100 justify-between group px-3 flex gap-1.5 items-center text-[15px] py-1 rounded-2xl"
               rel="external"
               referrerPolicy="strict-origin"
               href="https://a11y-webring.club/random"
@@ -153,9 +153,9 @@ const A11ySection = () => {
               />
             </a>
           </li>
-          <li>
+          <li className="flex-1">
             <a
-              className=" bg-gray-100 group flex gap-1.5 items-center px-3 text-[15px] py-1 rounded-2xl"
+              className=" bg-gray-100 justify-between group flex gap-1.5 items-center px-3 text-[15px] py-1 rounded-2xl"
               rel="external"
               referrerPolicy="strict-origin"
               href="https://a11y-webring.club/next"
