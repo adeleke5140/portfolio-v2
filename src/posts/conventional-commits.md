@@ -1,7 +1,7 @@
 ---
 title: 'Conventional Commits: an exploration'
 date: '2023-03-19'
-status: 'draft'
+status: 'archived'
 ---
 
 ## Introduction

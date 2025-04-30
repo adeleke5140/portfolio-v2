@@ -1,11 +1,9 @@
-
-
+import { cn } from '@/lib/utils'
 import Image from 'next/image'
 
-export const ProfileOnline = () => {
- 
+export const ProfileOnline = ({ classname }: { classname?: string }) => {
   return (
-    <div className='mx-auto w-8 relative'>
+    <div className={cn('mx-auto w-8 relative', classname)}>
       <span
         className="min-w-[32px] w-8 h-8 will-change-transform "
         style={{
@@ -36,7 +34,7 @@ export const ProfileOnline = () => {
           </clipPath>
         </svg>
       </span>
-      <span className='bg-green-500 right-px bottom-px rounded-full absolute h-2 w-2'></span>
+      <span className="bg-green-500 right-px bottom-px rounded-full absolute h-2 w-2"></span>
     </div>
   )
 }

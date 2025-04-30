@@ -1,9 +1,11 @@
+import { craft } from '@/components/navigation/navigation'
 import { PageWrapper } from '@/components/pageWrapper'
+import { ProfileShine } from '@/components/profile-shine/profile-shine'
 import { ArrowUpRight } from 'lucide-react'
 import { motion } from 'motion/react'
 import Head from 'next/head'
-import Link from 'next/link'
 
+import Link from 'next/link'
 export default function Home() {
   const TITLE = 'Design Engineer'
   return (
@@ -18,20 +20,23 @@ export default function Home() {
       <PageWrapper
         showHeading
         heading={
-          <h1 className="text-xl">
-            {TITLE.split('').map((letter, index) => (
-              <>
-                <span
-                  className="letter"
-                  style={{ '--index': index } as React.CSSProperties}
-                  key={index}
-                >
-                  {letter}
-                </span>
-                {index === 5 ? ' ' : null}
-              </>
-            ))}
-          </h1>
+          <div className="flex w-full justify-between flex-row-reverse">
+            <ProfileShine classname="mx-0" />
+            <h1 className="text-xl">
+              {TITLE.split('').map((letter, index) => (
+                <>
+                  <span
+                    className="letter"
+                    style={{ '--index': index } as React.CSSProperties}
+                    key={index}
+                  >
+                    {letter}
+                  </span>
+                  {index === 5 ? ' ' : null}
+                </>
+              ))}
+            </h1>
+          </div>
         }
       >
         <motion.section>
@@ -43,8 +48,11 @@ export default function Home() {
             <motion.div className="rounded-lg text-[15px] dark:text-[#fefefe]">
               <p>
                 Hi, I&apos;m Kenny. I am interested in typefaces, css
-                transitions, animation. I currently work at{' '}
-                <a href="https://www.mastra.ai" className="underline">
+                transitions and animation. I currently work at{' '}
+                <a
+                  href="https://www.mastra.ai"
+                  className="border-b border-black"
+                >
                   mastra.ai
                 </a>
               </p>
@@ -60,16 +68,37 @@ export default function Home() {
 
             <div>
               Check out my{' '}
-              <Link className="underline" href="/craft">
-                Craft
+              <Link
+                className="border-b border-black gap-1 inline-flex items-center"
+                href="/craft"
+              >
+                <span>Craft</span> <span>{craft}</span>
               </Link>{' '}
-              and{' '}
-              <Link className="underline" href={'/blog'}>
-                Blog
+              <span> and </span>
+              <Link
+                className="border-b border-black inline-flex gap-1 items-center"
+                href={'/blog'}
+              >
+                <span>Blog </span>
+                <motion.svg
+                  className="w-3 h-3"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M5 21C5 12.2792 8.29485 3.55839 18.0725 3.00155C18.627 2.96997 19.0862 3.42569 18.9862 3.96975C18.3434 7.46729 14.5532 9.98373 14.5532 9.98373L15.9986 11.0634C16.338 11.3169 16.479 11.7528 16.2992 12.1355C15.5251 13.7832 12.8684 17.9956 5.93856 17.9956"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></path>
+                </motion.svg>
               </Link>
             </div>
             <div className="w-full bg-ken-tertiary h-[0.8px]"></div>
-
             <A11ySection />
           </motion.div>
         </motion.section>
@@ -83,9 +112,9 @@ const A11ySection = () => {
     <div>
       <nav className="flex flex-col gap-2" aria-labelledby="a11y-webring-club">
         <p>
-          This site is a member of the{' '}
+          This site is a member of the
           <a
-            className=" underline underline-offset-2"
+            className=" border-b border-black"
             rel="external"
             href="https://a11y-webring.club/"
           >

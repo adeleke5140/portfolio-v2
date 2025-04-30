@@ -8,9 +8,11 @@ module.exports = {
       typography: {
         DEFAULT: {
           css: {
+            h1: {
+              fontWeight: 400,
+            },
             h2: {
               fontSize: 16,
-              fontWeight: 600,
             },
             'code::before': {
               content: '',
@@ -91,6 +93,9 @@ module.exports = {
       },
       transitionProperty: {
         'transform-opacity': 'transform, opacity',
+      },
+      backgroundImage: {
+        macintosh: "url('/images/macintosh-blue.png')",
       },
     },
   },

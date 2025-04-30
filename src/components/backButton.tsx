@@ -1,5 +1,6 @@
 import { CornerUpLeft, Undo2 } from 'lucide-react'
 import Link from 'next/link'
+import { home } from './navigation/navigation'
 
 interface BackButtonProps {
   path: string
@@ -11,9 +12,9 @@ const BackButton = ({ path, text }: BackButtonProps) => {
     <div className="md:absolute -left-40 top-2">
       <Link
         href={path}
-        className="flex gap-2 font-serif items-center tracking-tighter font-extralight italic w-fit text-sm "
+        className="flex gap-2 underline items-center tracking-tighter font-extralight w-fit text-sm "
       >
-        <Undo2 size={12} />
+        {home}
         {text}
       </Link>
     </div>

@@ -1,7 +1,13 @@
+import { cn } from '@/lib/utils'
 import Image from 'next/image'
-export const ProfileShine = () => {
+export const ProfileShine = ({ classname }: { classname: string }) => {
   return (
-    <div className="mx-auto shimmer-parent flex justify-start items-stretch rounded-full overflow-hidden bg-clip-padding bg-[rgba(0,0,0,0.41)] w-7 h-7 relative group">
+    <div
+      className={cn(
+        'mx-auto shimmer-parent flex justify-start items-stretch rounded-full overflow-hidden bg-clip-padding bg-[rgba(0,0,0,0.41)] w-7 h-7 relative group',
+        classname
+      )}
+    >
       <Image
         src={'/profile.jpeg'}
         alt="a profile of kehinde"

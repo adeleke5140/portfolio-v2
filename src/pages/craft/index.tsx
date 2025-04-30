@@ -1,17 +1,12 @@
 import { CardAnimation } from '@/components/card-animation/card-animation'
 import { IntegrationMenu } from '@/components/integration-menu/integration-menu'
-import { Navigation } from '@/components/navigation/navigation'
 import { PageWrapper } from '@/components/pageWrapper'
-import { ProfileOnline } from '@/components/profile-online/profile-online'
-import { ProfileShine } from '@/components/profile-shine/profile-shine'
 
 import { ReactNode } from 'react'
 
 export const CraftText = ({ text }: { text: string }) => {
   return (
-    <p className="text-sm w-fit dark:bg-[#282828] dark:text-[#e5e5e5]  rounded-md px-0 py-2 ">
-      {text}
-    </p>
+    <p className="text-sm w-fit dark:bg-[#282828] dark:text-[#e5e5e5]  rounded-md px-0 py-2 "></p>
   )
 }
 
@@ -25,7 +20,7 @@ export const CraftContainer = ({ children }: { children: ReactNode }) => {
 
 export default function Index() {
   return (
-    <PageWrapper heading="Craft" path="/" showHeading>
+    <PageWrapper heading="Craft" path="/" backText="home" showLink showHeading>
       <section className="flex flex-col gap-4">
         <div>
           <CraftText text="Animated Card" />
@@ -33,6 +28,7 @@ export default function Index() {
             <CardAnimation />
           </CraftContainer>
         </div>
+        {/* Show on click */}
         <div>
           <CraftText text="Integration Menu" />
           <CraftContainer>
@@ -40,26 +36,19 @@ export default function Index() {
           </CraftContainer>
         </div>
 
-        <div>
+        {/* <div>
           <CraftText text="Position aware indicator" />
           <CraftContainer>
             <Navigation />
           </CraftContainer>
-        </div>
+        </div> */}
 
-        <div>
+        {/* <div>
           <CraftText text="Online indicator" />
           <CraftContainer>
             <ProfileOnline />
           </CraftContainer>
-        </div>
-
-        <div>
-          <CraftText text="Image Shimmer effect" />
-          <CraftContainer>
-            <ProfileShine />
-          </CraftContainer>
-        </div>
+        </div> */}
       </section>
     </PageWrapper>
   )

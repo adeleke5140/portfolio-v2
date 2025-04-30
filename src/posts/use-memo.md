@@ -1,7 +1,7 @@
 ---
 title: The useMemo hook
 date: '2023-02-11'
-status: 'draft'
+status: 'archived'
 language: 'jsx'
 ---
 

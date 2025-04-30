@@ -1,8 +1,8 @@
 ---
-title: "Binary search: a recursive approach"
+title: 'Binary search: a recursive approach'
 date: '2023-03-19'
-status: 'draft'
-language: "javascript"
+status: 'archived'
+language: 'javascript'
 ---
 
 ## Introduction

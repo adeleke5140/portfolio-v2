@@ -1,7 +1,7 @@
 ---
 title: Experience building NextJS, Tailwind Portfolio
 date: '2023-02-07'
-status: 'draft'
+status: 'archived'
 ---
 
 ## Introduction
