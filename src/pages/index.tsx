@@ -47,7 +47,7 @@ export default function Home() {
           >
             <motion.div className="rounded-lg text-[15px] dark:text-[#fefefe]">
               <p>
-                Hi, I&apos;m Kenny. I am exploring typefaces, design and motion.
+                Hi, I&apos;m Kenny. I am web craftsman with interest in typefaces, design and motion.
                 I currently work at{' '}
                 <a
                   href="https://www.mastra.ai"
