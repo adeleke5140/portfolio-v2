@@ -1,20 +1,12 @@
-import Head from 'next/head'
 
 interface LayoutProps {
   children: React.ReactNode
 }
 
-const name = 'Kehinde Adeleke.'
-const siteTitle = 'Kehinde Adeleke portfolio'
 
 const Layout = ({ children }: LayoutProps) => {
   return (
     <>
-      <Head>
-        <link rel="icon" href="/kehinde.ico" />
-        <meta name="description" content={`${name} website`} />
-        <meta name="og:title" content={siteTitle} />
-      </Head>
       <div className="flex relative  h-full pt-8 pb-8 min-h-screen flex-col ">
         <main className="pt-10 h-full flex-1 md:pt-12 place-items-center w-full'">
           {children}

@@ -1,3 +1,4 @@
+'use client'
 import { useState } from 'react'
 import { CardAmount } from './card-amount'
 import { CardHeader } from './card-header'
