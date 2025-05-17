@@ -20,9 +20,9 @@ export const CardHeader = () => {
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
           className="w-[0.875rem] dark:text-[#a5a5a5]"
         >
           <rect width="20" height="14" x="2" y="5" rx="2" />
@@ -57,9 +57,9 @@ export const CardHeader = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 className="w-[0.875rem]"
               >
                 <rect width="20" height="14" x="2" y="5" rx="2" />
@@ -77,9 +77,9 @@ export const CardHeader = () => {
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
           className="w-[0.875rem]"
         >
           <path d="M5 12h14" />

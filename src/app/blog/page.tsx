@@ -1,7 +1,6 @@
 import { PageWrapper } from '@/components/pageWrapper'
 import { formatDate } from '@/helpers/formatDate'
 import { getSortedPostsData } from '@/lib/posts'
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -15,9 +14,9 @@ export type Post = {
   language?: string
 }
 
-const Index = ({
-  allPostsData,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Index = () => {
+  const allPostsData = getSortedPostsData() as Array<Post>
+
   const filteredPosts = allPostsData
     .filter((post) => {
       if (isDevelopment) {
@@ -67,15 +66,6 @@ const Index = ({
       </PageWrapper>
     </>
   )
-}
-
-export const getStaticProps: GetStaticProps<{ allPostsData: Post[] }> = () => {
-  const allPostsData = getSortedPostsData()
-  return {
-    props: {
-      allPostsData,
-    },
-  }
 }
 
 export default Index

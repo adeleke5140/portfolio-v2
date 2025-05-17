@@ -1,3 +1,4 @@
+'use client'
 import { ReactNode } from 'react'
 import { BackButton } from './backButton'
 
@@ -20,7 +21,9 @@ const PageWrapper = ({
 }: PageWrapperProps) => {
   const slot =
     typeof heading == 'string' ? (
-      <h1 className="font-sans text-2xl">{heading}</h1>
+      <h1 className="font-sans font-medium tracking-tighter text-xl">
+        {heading}
+      </h1>
     ) : (
       heading
     )

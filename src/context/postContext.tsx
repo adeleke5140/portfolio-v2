@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import type { Post } from "@/pages/blog";
+import type { Post } from "@/app/blog/page";
 interface PostContextProps {
   post: Post[];
   updatePosts: (value: Post[]) => void;
