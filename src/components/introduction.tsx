@@ -2,6 +2,7 @@
 import { craft } from '@/components/navigation/navigation'
 import { PageWrapper } from '@/components/pageWrapper'
 import { ProfileShine } from '@/components/profile-shine/profile-shine'
+import { cn } from '@/lib/utils'
 import { ArrowUpRight } from 'lucide-react'
 import { motion } from 'motion/react'
 
@@ -19,7 +20,7 @@ export const Introduction = () => {
             {TITLE.split('').map((letter, index) => (
               <React.Fragment key={index + 'title'}>
                 <span
-                  className="letter"
+                  className={cn('letter', index > 5 ? 'text-blue-500' : '')}
                   style={{ '--index': index } as React.CSSProperties}
                 >
                   {letter}
@@ -41,7 +42,10 @@ export const Introduction = () => {
             <p>
               Hi, I&apos;m Kenny. I am web craftsman with interest in typefaces,
               design and motion. I currently work at{' '}
-              <a href="https://www.mastra.ai" className="border-b border-black">
+              <a
+                href="https://www.mastra.ai"
+                className="border-b border-blue-500 text-blue-500"
+              >
                 mastra.ai
               </a>
             </p>
@@ -58,14 +62,14 @@ export const Introduction = () => {
           <div>
             Check out my{' '}
             <Link
-              className="border-b border-black gap-1 inline-flex items-center"
+              className="border-b border-blue-500 text-blue-500 gap-1 inline-flex items-center"
               href="/craft"
             >
               <span>Craft</span> <span>{craft}</span>
             </Link>{' '}
             <span> and </span>
             <Link
-              className="border-b border-black inline-flex gap-1 items-center"
+              className="border-b border-blue-500 text-blue-500 inline-flex gap-1 items-center"
               href={'/blog'}
             >
               <span>Blog </span>
@@ -105,7 +109,7 @@ const A11ySection = () => {
         <p>
           This site is a member of the{' '}
           <a
-            className=" border-b border-black"
+            className="text-blue-500 border-b border-blue-500"
             rel="external"
             href="https://a11y-webring.club/"
           >
@@ -179,9 +183,6 @@ const NowPlayingSection = () => {
           d="m21,11v-1h-1v-1h-2v-1h-2v-1h-1v-1h-2v-1h-2v-1h-1v-1h-2v-1h-2v-1h-3v1h-1v20h1v1h3v-1h2v-1h2v-1h1v-1h2v-1h2v-1h1v-1h2v-1h2v-1h1v-1h1v-2h-1Zm-2,2h-2v1h-2v1h-1v1h-2v1h-2v1h-1v1h-2v1h-2v1h-1V3h1v1h2v1h2v1h1v1h2v1h2v1h1v1h2v1h2v2Z"
         />
       </svg>
-      {/* <span className=" block w-full rounded-lg p-2 max-w-full bg-gray-100  left-2 text-xs card m-1 bottom-0">
-          WIP
-        </span> */}
     </div>
   )
 }

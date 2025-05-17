@@ -1,8 +1,6 @@
-
 interface LayoutProps {
   children: React.ReactNode
 }
-
 
 const Layout = ({ children }: LayoutProps) => {
   return (
@@ -15,7 +13,7 @@ const Layout = ({ children }: LayoutProps) => {
           <div className="max-w-xl rounded-md md:px-6 mx-auto">
             <div className="px-6 py-3 text-[15px] md:px-0 md:pb-2 flex justify-between">
               <p className="text-sm">ltb.</p>
-              <p className="text-sm">&copy;{new Date().getFullYear()}&nbsp;</p>
+              <p className="text-sm">{new Date().getFullYear()}&nbsp;</p>
             </div>
           </div>
         </footer>

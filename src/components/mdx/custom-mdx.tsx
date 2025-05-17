@@ -2,7 +2,9 @@ import Link from 'next/link'
 import Image, { ImageProps } from 'next/image'
 import { MDXRemote, MDXRemoteProps } from 'next-mdx-remote/rsc'
 import { codeToHtml } from 'shiki'
-import React, { ReactNode } from 'react'
+import React, { ComponentPropsWithoutRef, ReactNode } from 'react'
+
+type ParagraphProps = ComponentPropsWithoutRef<'p'>
 
 function Table({ data }: { data: { headers: []; rows: Array<[]> } }) {
   const headers = data.headers.map((header, index) => (
@@ -127,6 +129,9 @@ export const newComponents = {
   h4: createHeading(4),
   h5: createHeading(5),
   h6: createHeading(6),
+  p: (props: ParagraphProps) => (
+    <p className="text-gray-500 leading-snug" {...props} />
+  ),
   Image: RoundedImage,
   a: CustomLink,
   code: Code,

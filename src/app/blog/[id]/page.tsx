@@ -22,8 +22,10 @@ const Post = async ({ params }: { params: { id: string } }) => {
       <PageWrapper
         heading={
           <div>
-            <h1 className="font-sans text-2xl">{postData.title}.</h1>
-            <p className="text-gray-700 text-xs">
+            <h1 className="font-sans text-xl font-medium tracking-tighter">
+              {postData.title}.
+            </h1>
+            <p className="text-gray-500 text-sm">
               {formatDate(postData.date!)}
             </p>
           </div>
