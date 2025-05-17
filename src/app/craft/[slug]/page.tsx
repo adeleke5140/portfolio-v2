@@ -1,14 +1,13 @@
 import { getBlogPosts } from '@/app/blog/utils'
-import { CustomMDX, newComponents } from '@/components/mdx/custom-mdx'
+import { CardAnimation } from '@/components/card-animation/card-animation'
+import { CraftContainer } from '@/components/craft-items/craft-container'
+import { Tabs } from '@/components/exclusion-tabs/tabs'
+import { components } from '@/components/mdx-components'
 import { PageWrapper } from '@/components/pageWrapper'
 import { formatDate } from '@/helpers/formatDate'
 import { promises as fs } from 'fs'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import path from 'path'
-import { CardAnimation } from '@/components/card-animation/card-animation'
-import { CraftContainer } from '@/components/craft-items/craft-container'
-import { Tabs } from '@/components/exclusion-tabs/tabs'
-import { components } from '@/components/mdx-components'
 
 export async function generateStaticParams() {
   const posts = getBlogPosts()
