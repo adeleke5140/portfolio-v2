@@ -1,4 +1,11 @@
-import { about, blog, craft, home, photos } from '../navigation/navigation'
+import {
+  about,
+  blog,
+  craft,
+  home,
+  photos,
+  tools,
+} from '../navigation/navigation'
 
 export const TABS = [
   {
@@ -20,5 +27,9 @@ export const TABS = [
   {
     name: 'About',
     icon: about,
+  },
+  {
+    name: 'Tools',
+    icon: tools,
   },
 ]

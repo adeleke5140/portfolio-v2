@@ -20,7 +20,7 @@ export const Introduction = () => {
             {TITLE.split('').map((letter, index) => (
               <React.Fragment key={index + 'title'}>
                 <span
-                  className={cn('letter', index > 5 ? 'text-blue-500' : '')}
+                  className="letter"
                   style={{ '--index': index } as React.CSSProperties}
                 >
                   {letter}
@@ -44,7 +44,7 @@ export const Introduction = () => {
               design and motion. I currently work at{' '}
               <a
                 href="https://www.mastra.ai"
-                className="border-b border-blue-500 text-blue-500"
+                className="border-b border-blue-500 text-blue-700"
               >
                 mastra.ai
               </a>
@@ -62,14 +62,14 @@ export const Introduction = () => {
           <div>
             Check out my{' '}
             <Link
-              className="border-b border-blue-500 text-blue-500 gap-1 inline-flex items-center"
+              className="border-b border-blue-500 text-blue-700 gap-1 inline-flex items-center"
               href="/craft"
             >
               <span>Craft</span> <span>{craft}</span>
             </Link>{' '}
             <span> and </span>
             <Link
-              className="border-b border-blue-500 text-blue-500 inline-flex gap-1 items-center"
+              className="border-b border-blue-500 text-blue-700 inline-flex gap-1 items-center"
               href={'/blog'}
             >
               <span>Blog </span>
@@ -109,7 +109,7 @@ const A11ySection = () => {
         <p>
           This site is a member of the{' '}
           <a
-            className="text-blue-500 border-b border-blue-500"
+            className="text-blue-700 border-b border-blue-500"
             rel="external"
             href="https://a11y-webring.club/"
           >

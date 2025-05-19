@@ -29,7 +29,7 @@ export default function Index() {
             >
               <Link
                 href={`/craft/${component.link}`}
-                className="max-w-full text-blue-500 underline underline-offset-2 decoration-blue-500"
+                className="max-w-full text-blue-700 underline underline-offset-2 decoration-blue-700"
               >
                 {component.title}
               </Link>

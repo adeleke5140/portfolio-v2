@@ -17,9 +17,8 @@ html {
   --gray-6: #343434;
 }
 
-html,
 body *::selection {
-  background: #dfdad9 !important;
+  background: #dfdad9;
 }
 
 .shimmer-parent {

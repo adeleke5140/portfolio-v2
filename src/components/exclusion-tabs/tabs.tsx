@@ -56,7 +56,7 @@ export function Tabs() {
       </ul>
 
       <div aria-hidden className="clip-path-container" ref={containerRef}>
-        <ul className="relative list-none flex w-full gap-2 max-w-[40rem] flex-wrap justify-start bg-blue-500">
+        <ul className="relative list-none flex w-full gap-2 max-w-[40rem] flex-wrap justify-start bg-blue-700">
           {TABS.map((tab) => (
             <li key={tab.name}>
               <button

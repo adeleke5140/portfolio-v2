@@ -11,6 +11,7 @@ import path from 'path'
 
 export async function generateStaticParams() {
   const posts = getBlogPosts()
+  console.log({ posts })
 
   return posts.map((post) => ({
     slug: post.slug,
