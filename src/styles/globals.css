@@ -9,12 +9,27 @@ html {
   background: rgb(248, 249, 250);
 }
 
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
 :root {
   --gray-1: #1a1a1a;
   --gray-2: #1c1c1c;
   --gray-3: #232323;
   --gray-4: #282828;
   --gray-6: #343434;
+  --sh-class: #7aa2f7;
+  --sh-sign: #89ddff;
+  --sh-string: #9ece6a;
+  --sh-keyword: #bb9af7;
+  --sh-comment: #565f89;
+  --sh-jsxliterals: #7aa2f7;
+  --sh-property: #73daca;
+  --sh-entity: #e0af68;
 }
 
 body *::selection {
@@ -88,4 +103,17 @@ h1 {
   overflow: hidden;
   transition: clip-path 0.25s ease;
   clip-path: inset(0px 78% 55% 0% round 17px);
+}
+
+pre {
+  background-color: #fafafa;
+  padding: 1em;
+  user-select: 'auto';
+  tab-size: '4';
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+code > span {
+  font-size: 13px;
 }

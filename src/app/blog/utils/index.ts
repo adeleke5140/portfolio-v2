@@ -1,6 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 
+type Tags = { name: string }
+
 export type Metadata = {
   title: string
   publishedAt: string
@@ -77,4 +79,8 @@ export function getBlogPosts() {
   return getMDXData(
     path.join(process.cwd(), 'src', 'app', 'craft', 'components')
   )
+}
+
+export function getBlogData() {
+  return getMDXData(path.join(process.cwd(), 'src', 'posts'))
 }

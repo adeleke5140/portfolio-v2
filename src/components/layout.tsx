@@ -5,8 +5,8 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <>
-      <div className="flex relative  h-full pt-8 pb-8 min-h-screen flex-col ">
-        <main className="pt-10 h-full flex-1 md:pt-12 place-items-center w-full'">
+      <div className="flex relative h-full pt-8 pb-8 min-h-screen flex-col ">
+        <main className="pt-10 flex-1 md:pt-12 place-items-center w-full'">
           {children}
         </main>
         <footer className="w-full mt-10 mb-2 md:px-6 ">

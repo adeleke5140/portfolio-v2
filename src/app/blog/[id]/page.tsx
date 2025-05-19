@@ -1,19 +1,47 @@
 import { formatDate } from '@/helpers/formatDate'
-import { getPostData } from '@/lib/posts'
+import { getPostData, getSortedPostsData } from '@/lib/posts'
 import Head from 'next/head'
 import type { Post } from '../page'
-
+import { promises as fs } from 'fs'
 import { PageWrapper } from '@/components/pageWrapper'
 import { BlogContent } from '../components/blog-content'
+import { getBlogData } from '../utils'
+import { compileMDX, MDXRemote } from 'next-mdx-remote/rsc'
+import { components } from '@/components/mdx/mdx-components'
+import path from 'path'
 
 interface PostData extends Post {
   contentHtml: string
 }
 
-const Post = async ({ params }: { params: { id: string } }) => {
-  const { id } = params
-  const postData = (await getPostData(id as string)) as PostData
+export async function generateStaticParams() {
+  const posts = getBlogData()
 
+  return posts.map((post) => ({
+    id: post.slug,
+  }))
+}
+
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const { id } = await params
+  const mdPath = path.join(process.cwd(), 'src/posts', `${id}.md`)
+
+  const content = await fs.readFile(mdPath, 'utf8')
+  const data = await compileMDX({
+    source: content,
+    options: {
+      parseFrontmatter: true,
+    },
+    components: {
+      ...components,
+    },
+  })
+
+  const postData = data.frontmatter as { title: string; date: string }
   return (
     <>
       <Head>
@@ -35,13 +63,8 @@ const Post = async ({ params }: { params: { id: string } }) => {
         showHeading
         showLink
       >
-        <BlogContent
-          contentHtml={postData.contentHtml}
-          language={postData.language as string}
-        />
+        {data.content}
       </PageWrapper>
     </>
   )
 }
-
-export default Post

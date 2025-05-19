@@ -27,7 +27,7 @@ export const components = {
   ),
   h4: (props: HeadingProps) => <h4 className="font-medium" {...props} />,
   p: (props: ParagraphProps) => (
-    <p className="text-gray-800 dark:text-zinc-300 leading-snug" {...props} />
+    <p className="text-gray-800 my-3 dark:text-zinc-300 leading-7" {...props} />
   ),
   ol: (props: ListProps) => (
     <ol
@@ -81,7 +81,7 @@ export const components = {
     const codeHTML = highlight(children as string)
     return (
       <code
-        className="font-mono bg-[#ededed] rounded-md p-1 text-sm"
+        className="font-mono bg-[#ededed] rounded-md p-1 text-xs"
         dangerouslySetInnerHTML={{ __html: codeHTML }}
         {...props}
       />

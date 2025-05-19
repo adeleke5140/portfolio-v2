@@ -2,7 +2,7 @@ import { getBlogPosts } from '@/app/blog/utils'
 import { CardAnimation } from '@/components/card-animation/card-animation'
 import { CraftContainer } from '@/components/craft-items/craft-container'
 import { Tabs } from '@/components/exclusion-tabs/tabs'
-import { components } from '@/components/mdx-components'
+import { components } from '@/components/mdx/mdx-components'
 import { PageWrapper } from '@/components/pageWrapper'
 import { formatDate } from '@/helpers/formatDate'
 import { promises as fs } from 'fs'
@@ -11,7 +11,6 @@ import path from 'path'
 
 export async function generateStaticParams() {
   const posts = getBlogPosts()
-  console.log({ posts })
 
   return posts.map((post) => ({
     slug: post.slug,
@@ -27,10 +26,13 @@ export default async function Page({
 }) {
   const slug = (await params).slug
 
-  const content = await fs.readFile(
-    path.join(process.cwd(), 'src/app/craft/components', `${slug}.mdx`),
-    'utf8'
+  const mdxPath = path.join(
+    process.cwd(),
+    'src/app/craft/components',
+    `${slug}.mdx`
   )
+
+  const content = await fs.readFile(mdxPath, 'utf8')
   const data = await compileMDX({
     source: content,
     options: {
