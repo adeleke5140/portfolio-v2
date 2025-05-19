@@ -1,3 +1,4 @@
+'use client'
 import { ReactNode } from 'react'
 import { BackButton } from './backButton'
 
@@ -20,12 +21,14 @@ const PageWrapper = ({
 }: PageWrapperProps) => {
   const slot =
     typeof heading == 'string' ? (
-      <h1 className="font-sans text-2xl">{heading}</h1>
+      <h1 className="font-sans font-medium tracking-tighter text-xl">
+        {heading}
+      </h1>
     ) : (
       heading
     )
   return (
-    <div className="relative px-6 max-w-xl mx-auto">
+    <div className="relative min-h-screen px-6 max-w-xl mx-auto">
       <div className="flex flex-col gap-8 mb-8">
         {showLink ? (
           <BackButton path={path ? path : ''} text={`Go ${backText}`} />
