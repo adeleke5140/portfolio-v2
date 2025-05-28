@@ -9,10 +9,10 @@ export const ProfileShine = ({ classname }: { classname: string }) => {
       )}
     >
       <Image
-        src={'/profile.jpeg'}
+        src={'/kehinde.webp'}
         alt="a profile of kehinde"
-        width={32}
-        height={32}
+        width={1080}
+        height={1045}
         loading="lazy"
         className=" w-full h-full mx-auto"
       />

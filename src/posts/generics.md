@@ -8,7 +8,7 @@ tag: typescript
 
 ## Introduction
 
-Learning Typescript has been a major\*\* \*\*boost to my career. The basics were not too difficult to grasp,
+Learning Typescript has been a major **boost** to my career. The basics were not too difficult to grasp,
 and after going through a Vscode Livestream and a couple of exercises from Matt Pocock, I believed I was
 ready. Until I met generics.
 

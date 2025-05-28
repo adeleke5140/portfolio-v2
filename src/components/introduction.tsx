@@ -2,12 +2,11 @@
 import { craft } from '@/components/navigation/navigation'
 import { PageWrapper } from '@/components/pageWrapper'
 import { ProfileShine } from '@/components/profile-shine/profile-shine'
-import { cn } from '@/lib/utils'
 import { ArrowUpRight } from 'lucide-react'
 import { motion } from 'motion/react'
 
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 export const Introduction = () => {
   const TITLE = 'Design Engineer'
   return (
@@ -44,7 +43,7 @@ export const Introduction = () => {
               design and motion. I currently work at{' '}
               <a
                 href="https://www.mastra.ai"
-                className="border-b border-blue-500 text-blue-700"
+                className="border-b border-[#e87400]   text-[#e87400]"
               >
                 mastra.ai
               </a>
@@ -62,17 +61,17 @@ export const Introduction = () => {
           <div>
             Check out my{' '}
             <Link
-              className="border-b border-blue-500 text-blue-700 gap-1 inline-flex items-center"
+              className="border-b border-[#e87400] text-[#e87400] gap-1 inline-flex items-center"
               href="/craft"
             >
-              <span>Craft</span> <span>{craft}</span>
+              <span className=" ">Craft</span> <span>{craft}</span>
             </Link>{' '}
             <span> and </span>
             <Link
-              className="border-b border-blue-500 text-blue-700 inline-flex gap-1 items-center"
+              className="border-b border-[#e87400] text-[#e87400] inline-flex gap-1 items-center"
               href={'/blog'}
             >
-              <span>Blog </span>
+              <span className=" ">Blog </span>
               <motion.svg
                 className="w-3 h-3"
                 xmlns="http://www.w3.org/2000/svg"
@@ -90,6 +89,16 @@ export const Introduction = () => {
                 ></path>
               </motion.svg>
             </Link>
+          </div>
+
+          <div className="text-[15px] dark:text-[#fefefe]">
+            You can reach me at:{' '}
+            <a
+              className="border-b border-[#e87400]   text-[#e87400]"
+              href="mailto:k@kehinde.me"
+            >
+              k@kehinde.me
+            </a>
           </div>
         </motion.div>
       </motion.section>
@@ -109,7 +118,7 @@ const A11ySection = () => {
         <p>
           This site is a member of the{' '}
           <a
-            className="text-blue-700 border-b border-blue-500"
+            className="text-[#e87400] border-b border-[#e87400]  "
             rel="external"
             href="https://a11y-webring.club/"
           >
@@ -170,19 +179,28 @@ const A11ySection = () => {
 }
 
 const NowPlayingSection = () => {
+  const [isPlaying, setIsPlaying] = useState(false)
   return (
-    <div className="bg-white relative flex items-center rounded-xl card text-sm gap-1.5  h-20 w-1/4 font-mono">
-      <svg
-        id="play"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        className="w-5 h-5 mx-auto"
+    <div className="bg-white group overflow-hidden relative flex justify-center items-center rounded-xl card text-sm gap-1.5  h-20 w-1/4 font-mono">
+      <button onClick={() => setIsPlaying(!isPlaying)} type="button">
+        <svg
+          id="play"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          className="w-5 h-5 mx-auto"
+        >
+          <path
+            stroke="#fafafa"
+            d="m21,11v-1h-1v-1h-2v-1h-2v-1h-1v-1h-2v-1h-2v-1h-1v-1h-2v-1h-2v-1h-3v1h-1v20h1v1h3v-1h2v-1h2v-1h1v-1h2v-1h2v-1h1v-1h2v-1h2v-1h1v-1h1v-2h-1Zm-2,2h-2v1h-2v1h-1v1h-2v1h-2v1h-1v1h-2v1h-2v1h-1V3h1v1h2v1h2v1h1v1h2v1h2v1h1v1h2v1h2v2Z"
+          />
+        </svg>
+      </button>
+      <span
+        data-playing={isPlaying}
+        className="absolute data-[playing=true]:translate-y-0 translate-y-[125%] transition-transform duration-[500ms] bg-[#fafafa] bottom-1 text-center rounded-xl px-2 w-[calc(100%-0.5rem)] left-1/2 card -translate-x-1/2 text-[#e87400]"
       >
-        <path
-          stroke="#fafafa"
-          d="m21,11v-1h-1v-1h-2v-1h-2v-1h-1v-1h-2v-1h-2v-1h-1v-1h-2v-1h-2v-1h-3v1h-1v20h1v1h3v-1h2v-1h2v-1h1v-1h2v-1h2v-1h1v-1h2v-1h2v-1h1v-1h1v-2h-1Zm-2,2h-2v1h-2v1h-1v1h-2v1h-2v1h-1v1h-2v1h-2v1h-1V3h1v1h2v1h2v1h1v1h2v1h2v1h1v1h2v1h2v2Z"
-        />
-      </svg>
+        no-op
+      </span>
     </div>
   )
 }
