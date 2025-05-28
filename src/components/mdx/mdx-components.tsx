@@ -1,6 +1,7 @@
 import React, { ComponentPropsWithoutRef } from 'react'
 import Link from 'next/link'
 import { highlight } from 'sugar-high'
+import { cn } from '@/lib/utils'
 
 type HeadingProps = ComponentPropsWithoutRef<'h1'>
 type ParagraphProps = ComponentPropsWithoutRef<'p'>
@@ -27,7 +28,10 @@ export const components = {
   ),
   h4: (props: HeadingProps) => <h4 className="font-medium" {...props} />,
   p: (props: ParagraphProps) => (
-    <p className="text-gray-800 my-3 dark:text-zinc-300 leading-7" {...props} />
+    <p
+      className="text-gray-800 my-3 mb-5 dark:text-zinc-300 leading-7"
+      {...props}
+    />
   ),
   ol: (props: ListProps) => (
     <ol
@@ -50,7 +54,7 @@ export const components = {
   ),
   a: ({ href, children, ...props }: AnchorProps) => {
     const className =
-      'text-blue-700 hover:text-blue-700 dark:text-gray-400 hover:dark:text-gray-300 dark:underline dark:underline-offset-2 dark:decoration-gray-800'
+      'text-blue-700 underline hover:text-blue-700 dark:text-gray-400 hover:dark:text-gray-300 dark:underline dark:underline-offset-2 dark:decoration-gray-800'
     if (href?.startsWith('/')) {
       return (
         <Link href={href} className={className} {...props}>
@@ -81,7 +85,7 @@ export const components = {
     const codeHTML = highlight(children as string)
     return (
       <code
-        className="font-mono bg-[#ededed] rounded-md p-1 text-xs"
+        className="font-mono bg-[#ededed] overflow-x-auto rounded-md p-1 text-xs"
         dangerouslySetInnerHTML={{ __html: codeHTML }}
         {...props}
       />
@@ -109,7 +113,7 @@ export const components = {
   ),
   blockquote: (props: BlockquoteProps) => (
     <blockquote
-      className="ml-[0.075em] border-l-3 border-gray-300 pl-4 text-gray-700 dark:border-zinc-600 dark:text-zinc-300"
+      className="ml-[0.075em] border-l-2 border-blue-700 pl-4 text-gray-700 dark:border-zinc-600 dark:text-zinc-300"
       {...props}
     />
   ),
