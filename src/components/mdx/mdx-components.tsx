@@ -54,7 +54,7 @@ export const components = {
   ),
   a: ({ href, children, ...props }: AnchorProps) => {
     const className =
-      'text-blue-700 underline hover:text-blue-700 dark:text-gray-400 hover:dark:text-gray-300 dark:underline dark:underline-offset-2 dark:decoration-gray-800'
+      'text-[#e87400] underline hover:text-[#e87400] dark:text-gray-400 hover:dark:text-gray-300 dark:underline dark:underline-offset-2 dark:decoration-gray-800'
     if (href?.startsWith('/')) {
       return (
         <Link href={href} className={className} {...props}>
@@ -113,7 +113,7 @@ export const components = {
   ),
   blockquote: (props: BlockquoteProps) => (
     <blockquote
-      className="ml-[0.075em] border-l-2 border-blue-700 pl-4 text-gray-700 dark:border-zinc-600 dark:text-zinc-300"
+      className="ml-[0.075em] border-l-2 border-[#e87400] pl-4 text-gray-700 dark:border-zinc-600 dark:text-zinc-300"
       {...props}
     />
   ),
