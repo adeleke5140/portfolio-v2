@@ -15,7 +15,7 @@ export const Introduction = () => {
       heading={
         <div className="flex w-full justify-between flex-row-reverse">
           <ProfileShine classname="mx-0" />
-          <h1 className="text-xl   tracking-tighter">
+          <h1 className="text-xl font-medium tracking-tighter">
             {TITLE.split('').map((letter, index) => (
               <React.Fragment key={index + 'title'}>
                 <span
