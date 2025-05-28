@@ -101,7 +101,7 @@ export const IntegrationMenu = () => {
           </span>
 
           <div className="flex gap-2 overflow-hidden pl-10 relative items-center">
-            <p className="text-sm relative transition-transform duration-300 delay-75 group-hover:-translate-x-5  text-blue-700 dark:text-blue-400 font-medium">
+            <p className="text-sm relative transition-transform duration-300 delay-75 group-hover:-translate-x-5  text-[#e87400] dark:text-blue-400 font-medium">
               fix-checkout-process
             </p>
 
@@ -127,7 +127,7 @@ export const IntegrationMenu = () => {
             <span className="text-gray-500 dark:text-[#a0a0a0]">#346</span>
           </span>
           <div className="flex gap-2 overflow-hidden pl-10 relative items-center">
-            <p className="text-sm relative transition-transform duration-300 delay-75 group-hover:-translate-x-5  text-blue-700 dark:text-blue-400 font-medium">
+            <p className="text-sm relative transition-transform duration-300 delay-75 group-hover:-translate-x-5  text-[#e87400] dark:text-blue-400 font-medium">
               update-api-docs
             </p>
             <div className="-right-4 group-hover:-translate-x-4 transition-transform duration-300 delay-75 absolute">
@@ -152,7 +152,7 @@ export const IntegrationMenu = () => {
             <span className="text-gray-500 dark:text-[#a0a0a0]">#205</span>
           </span>
           <div className="flex gap-2 overflow-hidden pl-10 relative items-center">
-            <p className="text-sm relative transition-transform duration-300 delay-75 group-hover:-translate-x-5  text-blue-700 dark:text-blue-400 font-medium">
+            <p className="text-sm relative transition-transform duration-300 delay-75 group-hover:-translate-x-5  text-[#e87400] dark:text-blue-400 font-medium">
               payment-gateway
             </p>
             <div className="-right-4 group-hover:-translate-x-4 transition-transform duration-300 delay-75 absolute">
