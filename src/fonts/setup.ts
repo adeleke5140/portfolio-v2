@@ -15,15 +15,14 @@ export const firaMono = Fira_Mono({
   variable: '--font-fira',
 })
 
-export const sans = Inter({
-  subsets: ['latin'],
+export const berkeleyMono = localFont({
+  src: './BerkeleyMono-Regular.otf',
   display: 'swap',
-  weight: ['400', '700'],
-  variable: '--font-sans',
+  variable: '--font-berkeley-mono',
 })
 
 export const fonts = {
   comm,
   firaMono,
-  sans,
+  berkeleyMono,
 }
