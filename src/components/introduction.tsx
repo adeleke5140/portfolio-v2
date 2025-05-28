@@ -103,7 +103,7 @@ export const Introduction = () => {
         </motion.div>
       </motion.section>
 
-      <section className="mt-4 flex  items-center gap-4">
+      <section className="mt-4 flex flex-wrap md:flex-nowrap items-center gap-4">
         <NowPlayingSection />
         <A11ySection />
       </section>
