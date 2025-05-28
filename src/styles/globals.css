@@ -22,14 +22,15 @@ h4 {
   --gray-3: #232323;
   --gray-4: #282828;
   --gray-6: #343434;
-  --sh-class: #7aa2f7;
-  --sh-sign: #89ddff;
-  --sh-string: #9ece6a;
-  --sh-keyword: #bb9af7;
+  --sh-class: #e85c5c;
+  --sh-sign: #1c1c1c;
+  --sh-string: #00a890;
+  --sh-keyword: #1c1c1c;
   --sh-comment: #565f89;
-  --sh-jsxliterals: #7aa2f7;
-  --sh-property: #73daca;
-  --sh-entity: #e0af68;
+  --sh-jsxliterals: #00a890;
+  --sh-property: #4c3fff;
+  --sh-entity: #00a890;
+  --sh-identifier: #e85c5c;
 }
 
 body *::selection {
@@ -90,10 +91,8 @@ h1 {
 }
 
 .card {
-  box-shadow:
-    0px 0px 0px 1px rgba(9, 9, 11, 0.08),
-    0px 1px 2px -1px rgba(9, 9, 11, 0.08),
-    0px 2px 4px 0px rgba(9, 9, 11, 0.04);
+  box-shadow: 0px 0px 0px 1px rgba(9, 9, 11, 0.08),
+    0px 1px 2px -1px rgba(9, 9, 11, 0.08), 0px 2px 4px 0px rgba(9, 9, 11, 0.04);
 }
 
 .clip-path-container {
@@ -116,4 +115,8 @@ pre {
 
 code > span {
   font-size: 13px;
+}
+
+pre {
+  overflow: auto;
 }
