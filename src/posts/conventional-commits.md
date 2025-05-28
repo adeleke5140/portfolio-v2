@@ -25,12 +25,14 @@ Conventional commits therefore aligns with this spec which makes it easier to wr
 
 Commits are structured as follows:
 
-```
-  <type>[optional scope]: <description>
+```ts
 
-  [optional body]
+<type>[optional scope]: <description>
 
-  [optional footer(s)]
+[optional body]
+
+[optional footer(s)]
+
 ```
 
 The required section of the commit is the type and the description. The scope, body and footer are optional.
@@ -49,13 +51,13 @@ does.
 
 An example of a commit message would be:
 
-```
+```ts
   feat: implement authorization using context API
 ```
 
 If there is a breaking change:
 
-```
+```ts
   feat!: implement ReactQuery for fetch rather than useEffect
 ```
 
