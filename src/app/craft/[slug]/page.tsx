@@ -1,4 +1,4 @@
-import { getBlogPosts } from '@/app/blog/utils'
+import { getCraftData } from '@/app/blog/utils'
 import { CardAnimation } from '@/components/card-animation/card-animation'
 import { CraftContainer } from '@/components/craft-items/craft-container'
 import { Tabs } from '@/components/exclusion-tabs/tabs'
@@ -10,10 +10,10 @@ import { compileMDX } from 'next-mdx-remote/rsc'
 import path from 'path'
 
 export async function generateStaticParams() {
-  const posts = getBlogPosts()
+  const data = getCraftData()
 
-  return posts.map((post) => ({
-    slug: post.slug,
+  return data.map((craft) => ({
+    slug: craft.slug,
   }))
 }
 

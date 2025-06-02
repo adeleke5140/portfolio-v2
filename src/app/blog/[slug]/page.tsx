@@ -1,34 +1,30 @@
-import { formatDate } from '@/helpers/formatDate'
-import { getPostData, getSortedPostsData } from '@/lib/posts'
-import Head from 'next/head'
-import type { Post } from '../page'
-import { promises as fs } from 'fs'
-import { PageWrapper } from '@/components/pageWrapper'
-import { BlogContent } from '../components/blog-content'
-import { getBlogData } from '../utils'
-import { compileMDX, MDXRemote } from 'next-mdx-remote/rsc'
 import { components } from '@/components/mdx/mdx-components'
+import { PageWrapper } from '@/components/pageWrapper'
+import { formatDate } from '@/helpers/formatDate'
+import { promises as fs } from 'fs'
+import { compileMDX } from 'next-mdx-remote/rsc'
+import Head from 'next/head'
 import path from 'path'
+import type { Post } from '../page'
+import { getBlogData } from '../utils'
 
-interface PostData extends Post {
-  contentHtml: string
-}
+
 
 export async function generateStaticParams() {
   const posts = getBlogData()
 
   return posts.map((post) => ({
-    id: post.slug,
+    slug: post.slug,
   }))
 }
 
 export default async function Page({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ slug: string }>
 }) {
-  const { id } = await params
-  const mdPath = path.join(process.cwd(), 'src/posts', `${id}.md`)
+  const slug = (await params).slug
+  const mdPath = path.join(process.cwd(), 'src/app/blog/posts', `${slug}.mdx`)
 
   const content = await fs.readFile(mdPath, 'utf8')
   const data = await compileMDX({
