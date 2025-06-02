@@ -7,7 +7,7 @@ const Layout = ({ children }: LayoutProps) => {
     <>
       <div className="relative min-h-screen pt-8 pb-8">
         <div
-          aria-hidden={true}
+          aria-hidden="true"
           className="fixed top-0 min-w-[1000px] z-10 h-[400px] left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.15] pointer-events-none"
           style={{
             background: 'radial-gradient(#e87400, transparent 50%)',
