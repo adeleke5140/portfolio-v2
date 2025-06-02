@@ -4,7 +4,7 @@ import matter from 'gray-matter'
 import { remark } from 'remark'
 import html from 'remark-html'
 
-const postsDirectory = path.join(process.cwd(), 'src/posts')
+const postsDirectory = path.join(process.cwd(), 'src/app/blog/posts')
 
 type Post = {
   id: string
@@ -14,13 +14,12 @@ type Post = {
 const getSortedPostsData = () => {
   const fileNames = fs.readdirSync(postsDirectory)
   const allPostsData = fileNames.map((fileName) => {
-    const id = fileName.replace(/\.md$/, '')
+    const id = fileName.replace(/\.mdx$/, '')
 
     const fullPath = path.join(postsDirectory, fileName)
     const fileContents = fs.readFileSync(fullPath, 'utf-8')
 
     const matterResult = matter(fileContents)
-
     return {
       id,
       ...matterResult.data,
