@@ -75,12 +75,12 @@ function getMDXData(dir: string) {
   })
 }
 
-export function getBlogPosts() {
+export function getCraftData() {
   return getMDXData(
     path.join(process.cwd(), 'src', 'app', 'craft', 'components')
   )
 }
 
 export function getBlogData() {
-  return getMDXData(path.join(process.cwd(), 'src', 'posts'))
+  return getMDXData(path.join(process.cwd(), 'src', 'app', 'blog', 'posts'))
 }
