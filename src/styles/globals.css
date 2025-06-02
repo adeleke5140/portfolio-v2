@@ -31,6 +31,7 @@ h4 {
   --sh-property: #4c3fff;
   --sh-entity: #00a890;
   --sh-identifier: #e85c5c;
+  --primary: #e87400;
 }
 
 body *::selection {
@@ -119,4 +120,15 @@ code > span {
 
 pre {
   overflow: auto;
+}
+
+
+.left-eye {
+   transition: transform ease-out 150ms;
+}
+
+a:has(svg.home-icon):hover{
+  .left-eye{
+    transform: translateX(1px);
+  }
 }
