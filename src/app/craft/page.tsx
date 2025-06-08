@@ -15,6 +15,12 @@ const items = [
     link: 'card',
     description: "Card animation inspired by Ramp's card",
   },
+  {
+    category: 'motion',
+    title: 'Integration Menu',
+    link: 'integration-menu',
+    description: 'Integration menu with notification',
+  },
 ]
 export default function Index() {
   return (
