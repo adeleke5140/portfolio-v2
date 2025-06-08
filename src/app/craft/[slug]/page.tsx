@@ -1,4 +1,5 @@
 import { getCraftData } from '@/app/blog/utils'
+import { IntegrationMenu } from '@/components/integration-menu/integration-menu'
 import { CardAnimation } from '@/components/card-animation/card-animation'
 import { CraftContainer } from '@/components/craft-items/craft-container'
 import { Tabs } from '@/components/exclusion-tabs/tabs'
@@ -42,6 +43,7 @@ export default async function Page({
       CraftContainer,
       CardAnimation,
       Tabs,
+      IntegrationMenu,
       ...components,
     },
   })
