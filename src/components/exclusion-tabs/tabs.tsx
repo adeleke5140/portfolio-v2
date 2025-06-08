@@ -38,7 +38,7 @@ export function Tabs() {
   }, [activeTab, activeTabElementRef, containerRef])
 
   return (
-    <div className="relative flex flex-col items-center w-fit my-0 mx-auto">
+    <div className="relative h-full flex flex-col justify-center items-center w-fit">
       <ul className="relative list-none flex w-full gap-2 max-w-[25rem] flex-wrap justify-start">
         {TABS.map((tab) => (
           <li key={tab.name}>
