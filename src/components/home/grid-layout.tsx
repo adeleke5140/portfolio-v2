@@ -10,7 +10,6 @@ export const GridLayout = ({
   return (
     <motion.div
       layoutId="wrapper"
-      exit={{ duration: 3 }}
       data-closed={showVariant}
       className="group w-[calc(100%-1.5rem)] top-20 left-[0.8rem] absolute"
     >
