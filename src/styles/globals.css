@@ -132,3 +132,28 @@ a:has(svg.home-icon):hover{
     transform: translateX(1px);
   }
 }
+
+@keyframes slide-up{
+  from{
+    transform: translateY(-100%);
+  }
+  to{
+    transform: translateY(var(--translate-distance)) scale(var(--scale-value))
+  }
+}
+
+div[data-card="card-2"]{
+  animation-delay: 500ms;
+}
+
+div[data-card="card-3"]{
+  animation-delay: 1s;
+}
+
+div[data-card="card-2"],
+div[data-card="card-3"]{
+  animation-name: slide-up;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0.17,0.84,0.44,1);
+  animation-fill-mode: forwards;
+}

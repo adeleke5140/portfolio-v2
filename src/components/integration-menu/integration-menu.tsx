@@ -62,14 +62,14 @@ export const IntegrationMenu = () => {
   return (
     <div className="grid place-items-center h-[294px] w-full">
       <motion.button
-        layoutId="wrapper"
+        layoutId="button-wrapper"
         onClick={() => setShowMenu(!showMenu)}
         style={{
           borderRadius: '16px',
         }}
         className="py-1 border border-gray-200 bg-white px-3 text-sm"
       >
-        <motion.span layoutId="title" className="block">
+        <motion.span layoutId="button-title" className="block">
           All Integrations
         </motion.span>
       </motion.button>
@@ -77,7 +77,7 @@ export const IntegrationMenu = () => {
         {showMenu ? (
           <motion.div
             ref={ref}
-            layoutId="wrapper"
+            layoutId="button-wrapper"
             className="absolute overflow-hidden "
           >
             <div
@@ -87,7 +87,7 @@ export const IntegrationMenu = () => {
               className="flex w-full flex-col gap-2 cursor-pointer border-[0.5px] dark:border-[#282828]  border-gray-200 bg-white dark:bg-[#1a1a1a] p-1.5 "
             >
               <motion.span
-                layoutId="title"
+                layoutId="button-title"
                 style={{
                   borderRadius: '9999px',
                 }}
@@ -97,7 +97,7 @@ export const IntegrationMenu = () => {
               </motion.span>
               <div className="bg-[#f7f8fa] dark:bg-[#232323] flex flex-col gap-1 rounded-xl p-3 font-mono">
                 {integrationItems.map((item) => (
-                  <IntegrationItem key={item.id} {...item} />
+                  <IntegrationItem key={item.title} {...item} />
                 ))}
               </div>
               <div className="flex overflow-hidden">
@@ -187,10 +187,18 @@ function IntegrationItem({
       onClick={() => {
         setCopy(true)
       }}
-      className="flex group items-center justify-between border-b border-dashed dark:border-b-[#343434] pb-1"
+      className="flex group/item items-center justify-between border-b border-dashed dark:border-b-[#343434] pb-1"
     >
       <span className="text-sm inline-flex gap-1 items-center">
-        <span className={`text-[${color}]`}>
+        <span
+          className={cn(
+            title === 'fix-checkout-process'
+              ? 'text-[#3fb950]'
+              : title === 'update-api-docs'
+              ? 'text-[#ab7df8]'
+              : 'text-[#3fb950]'
+          )}
+        >
           {icon ? (
             icon
           ) : (
@@ -211,11 +219,11 @@ function IntegrationItem({
       </span>
 
       <div className="flex gap-2 overflow-hidden pl-10 relative items-center">
-        <p className="text-sm relative transition-transform duration-300 delay-75 group-hover:-translate-x-5  text-blue-600 dark:text-blue-400 font-medium">
+        <p className="text-sm relative transition-transform duration-300 delay-75 group-hover/item:-translate-x-5  text-blue-600 dark:text-blue-400 font-medium">
           {title}
         </p>
 
-        <div className="-right-4 group-hover:-translate-x-4 transition-transform duration-300 delay-75 absolute">
+        <div className="-right-4 group-hover/item:-translate-x-4 transition-transform duration-300 delay-75 absolute">
           <CopyButton copy={copy} setCopy={setCopy} />
         </div>
       </div>
