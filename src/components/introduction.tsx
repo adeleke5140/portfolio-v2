@@ -38,9 +38,9 @@ export const Introduction = () => {
         <div className="flex flex-col text-[var(--gray-1)] text-[15px] gap-2 dark:border-[#282828] dark:bg-[#282828]">
           <div className="rounded-lg text-[15px] dark:text-[#fefefe]">
             <p>
-              Hi, I&apos;m Kenny. I am web craftsman so I like to build things
-              that spark joy, look cool and work really well. I currently work
-              at{' '}
+              Hi, I&apos;m Kenny. I am web craftsman so I care about the
+              products that I build. My craft is very dear to me. I currently
+              work at{' '}
               <a
                 href="https://www.mastra.ai"
                 className="border-b border-[#e87400]   text-[#e87400]"
