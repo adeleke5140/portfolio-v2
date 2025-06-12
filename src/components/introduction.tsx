@@ -38,8 +38,9 @@ export const Introduction = () => {
         <div className="flex flex-col text-[var(--gray-1)] text-[15px] gap-2 dark:border-[#282828] dark:bg-[#282828]">
           <div className="rounded-lg text-[15px] dark:text-[#fefefe]">
             <p>
-              Hi, I&apos;m Kenny. I am web craftsman who likes to build things
-              that spark joy. I currently work at{' '}
+              Hi, I&apos;m Kenny. I am web craftsman so I likes to build things
+              that spark joy, look cool and work really well. I currently work
+              at{' '}
               <a
                 href="https://www.mastra.ai"
                 className="border-b border-[#e87400]   text-[#e87400]"
@@ -51,8 +52,9 @@ export const Introduction = () => {
 
           <div>
             <p className="dark:text-[#fefefe] text-[15px] rounded-lg h-full">
-              I am drawn to design because of beauty. How beautiful and joyful
-              design can be used to tell stories.
+              I am drawn to design because of beauty. Beauty compels people to
+              use products. One thing I think about often is beautiful and
+              joyful design can be used to tell stories.
             </p>
           </div>
         </div>
