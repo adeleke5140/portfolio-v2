@@ -157,3 +157,41 @@ div[data-card="card-3"]{
   animation-timing-function: cubic-bezier(0.17,0.84,0.44,1);
   animation-fill-mode: forwards;
 }
+
+input[type="checkbox"] {
+  font:inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border-radius: 5px;
+  transition: transform 0.2s cubic-bezier(0.22,0.61,0.36,1), background-color 0.5s cubic-bezier(0.22,0.61,0.36,1);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 4px 0px;
+  display: grid;
+  place-content: center;
+  transform-origin: center center;
+  will-change: transform;
+  box-sizing: border-box;
+  
+  &:active{
+    transform: scale(0.8);
+  }
+
+  &::before{
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    border-radius: 5px;
+    transition: 120ms transform ease-out;
+    background: url("/check.svg") no-repeat center center;
+  }
+
+  &:checked{
+    background-color: #2a292a;
+    color: white;
+    &::before{
+      transform: scale(1)
+    }
+  }
+}
+

@@ -1,8 +1,9 @@
 import { getCraftData } from '@/app/blog/utils'
-import { IntegrationMenu } from '@/components/integration-menu/integration-menu'
-import { CardAnimation } from '@/components/card-animation/card-animation'
-import { CraftContainer } from '@/components/craft-items/craft-container'
-import { Tabs } from '@/components/exclusion-tabs/tabs'
+import { IntegrationMenu } from '@/components/craft/integration-menu/integration-menu'
+import { CardAnimation } from '@/components/craft/card-animation/card-animation'
+import { CraftContainer } from '@/components/craft/craft-items/craft-container'
+import { Tabs } from '@/components/craft/exclusion-tabs/tabs'
+import { RecaptchaButton } from '@/components/craft/recaptcha/recaptcha-button'
 import { components } from '@/components/mdx/mdx-components'
 import { PageWrapper } from '@/components/pageWrapper'
 import { formatDate } from '@/helpers/formatDate'
@@ -44,6 +45,7 @@ export default async function Page({
       CardAnimation,
       Tabs,
       IntegrationMenu,
+      RecaptchaButton,
       ...components,
     },
   })

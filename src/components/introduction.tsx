@@ -1,6 +1,6 @@
 'use client'
 import { PageWrapper } from '@/components/pageWrapper'
-import { ProfileShine } from '@/components/profile-shine/profile-shine'
+import { ProfileShine } from '@/components/craft/profile-shine/profile-shine'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import React, { useState } from 'react'
