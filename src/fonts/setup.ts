@@ -1,4 +1,4 @@
-import { Commissioner, Fira_Mono, Inter, clash } from 'next/font/google'
+import { Commissioner, Fira_Mono } from 'next/font/google'
 import localFont from 'next/font/local'
 
 export const comm = Commissioner({
