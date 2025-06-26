@@ -12,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <div
-      className={`min-h-screen font-sans  ${fonts.comm.variable} ${fonts.firaMono.variable} ${fonts.berkeleyMono.variable} bg-[rgb(248,249,250)] text-ken-black`}
+      className={`min-h-screen font-sans  ${fonts.comm.variable} ${fonts.clashDisplay.variable} ${fonts.berkeleyMono.variable} bg-[rgb(248,249,250)] text-ken-black`}
       id="container"
     >
       <Toaster />

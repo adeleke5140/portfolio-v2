@@ -16,6 +16,7 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-comm)', ...defaultTheme.fontFamily.sans],
         mono: ['var(--font-berkeley-mono)', ...defaultTheme.fontFamily.mono],
+        clash: ['var(--clash-display)', ...defaultTheme.fontFamily.sans],
       },
       transitionProperty: {
         'transform-opacity': 'transform, opacity',

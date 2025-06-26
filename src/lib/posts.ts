@@ -14,7 +14,10 @@ type Post = {
 const getSortedPostsData = () => {
   const fileNames = fs.readdirSync(postsDirectory)
   const allPostsData = fileNames.map((fileName) => {
-    const id = fileName.replace(/\.mdx$/, '')
+    let id = fileName.replace(/\.mdx$/, '')
+    if (id.includes('md')) {
+      id = id.replace(/\.md$/, '')
+    }
 
     const fullPath = path.join(postsDirectory, fileName)
     const fileContents = fs.readFileSync(fullPath, 'utf-8')

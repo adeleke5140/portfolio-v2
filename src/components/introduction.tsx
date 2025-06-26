@@ -12,9 +12,8 @@ export const Introduction = () => {
     <PageWrapper
       showHeading
       heading={
-        <div className="flex w-full justify-between flex-row-reverse">
-          <ProfileShine classname="mx-0" />
-          <h1 className="text-xl font-medium tracking-tighter">
+        <div className="flex w-full">
+          <h1 className="text-[48px] font-clash font-semibold flex-shrink-0 tracking-tighter">
             {TITLE.split('').map((letter, index) => (
               <React.Fragment key={index + 'title'}>
                 <span
@@ -51,9 +50,8 @@ export const Introduction = () => {
 
           <div>
             <p className="dark:text-[#fefefe] text-[15px] rounded-lg h-full">
-              I am drawn to design because of beauty. One thing I think about
-              often is how beautiful and joyful design can be used to tell
-              stories.
+              I am drawn to design because of beauty. My goal as a craftsman is
+              to infuse every piece of work with joy and care.
             </p>
           </div>
         </div>

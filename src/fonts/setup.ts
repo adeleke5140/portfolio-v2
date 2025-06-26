@@ -1,4 +1,4 @@
-import { Commissioner, Fira_Mono, Inter } from 'next/font/google'
+import { Commissioner, Fira_Mono, Inter, clash } from 'next/font/google'
 import localFont from 'next/font/local'
 
 export const comm = Commissioner({
@@ -21,8 +21,14 @@ export const berkeleyMono = localFont({
   variable: '--font-berkeley-mono',
 })
 
+export const clashDisplay = localFont({
+  src: './ClashDisplay-Variable.woff2',
+  display: 'swap',
+  variable: '--clash-display',
+})
+
 export const fonts = {
   comm,
-  firaMono,
+  clashDisplay,
   berkeleyMono,
 }
