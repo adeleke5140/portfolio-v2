@@ -1,14 +1,11 @@
 import { components } from '@/components/mdx/mdx-components'
 import { PageWrapper } from '@/components/pageWrapper'
-import { formatDate } from '@/helpers/formatDate'
 import { promises as fs } from 'fs'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import Head from 'next/head'
-import path from 'path'
-import type { Post } from '../page'
 import { getBlogData } from '../utils'
-
-
+import * as fsSync from 'fs'
+import path from 'path'
 
 export async function generateStaticParams() {
   const posts = getBlogData()
@@ -24,9 +21,13 @@ export default async function Page({
   params: Promise<{ slug: string }>
 }) {
   const slug = (await params).slug
-  const mdPath = path.join(process.cwd(), 'src/app/blog/posts', `${slug}.mdx`)
 
-  const content = await fs.readFile(mdPath, 'utf8')
+  const mdxPath = path.join(process.cwd(), 'src/app/blog/posts', `${slug}.mdx`)
+  const mdPath = path.join(process.cwd(), 'src/app/blog/posts', `${slug}.md`)
+
+  const blogPath = fsSync.existsSync(mdxPath) ? mdxPath : mdPath
+
+  const content = await fs.readFile(blogPath, 'utf8')
   const data = await compileMDX({
     source: content,
     options: {
@@ -46,12 +47,9 @@ export default async function Page({
       <PageWrapper
         heading={
           <div>
-            <h1 className="font-sans text-xl font-medium tracking-tighter">
-              {postData.title}.
+            <h1 className="font-clash text-[48px] font-semibold leading-[100%] tracking-[-0.96px]">
+              {postData.title}
             </h1>
-            <p className="text-gray-500 text-sm">
-              {formatDate(postData.date!)}
-            </p>
           </div>
         }
         path="/blog"

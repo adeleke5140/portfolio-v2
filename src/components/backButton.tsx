@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { home } from './navigation/navigation'
 
 interface BackButtonProps {
   path: string
@@ -20,7 +19,6 @@ const BackButton = ({ path, text }: BackButtonProps) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          
         >
           <path
             d="M20 6.5L17.4448 8.98386C16.6121 8.97828 15.7463 9.08581 14.8767 9.3188C14.0072 9.55178 13.2037 9.89153 12.4854 10.3127L8.23926 9.32674L9.11761 14.1907C8.79389 15.135 8.73348 16.1269 8.99221 17.0925C9.29987 18.2407 10.0169 19.1954 11 19.8962M5 20H19C19.5523 20 20 19.5523 20 19V5C20 4.44772 19.5523 4 19 4H5C4.44772 4 4 4.44772 4 5V19C4 19.5523 4.44772 20 5 20Z"

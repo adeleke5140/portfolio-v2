@@ -21,15 +21,15 @@ const PageWrapper = ({
 }: PageWrapperProps) => {
   const slot =
     typeof heading == 'string' ? (
-      <h1 className="font-sans font-medium tracking-tighter text-xl">
+      <h1 className="font-clash font-semibold leading-[100%] tracking-[-0.96px] text-[48px]">
         {heading}
       </h1>
     ) : (
       heading
     )
   return (
-    <div className="relative  px-6 max-w-xl mx-auto">
-      <div className="flex flex-col gap-8 mb-8">
+    <div className="relative px-6 max-w-[680px] mx-auto">
+      <div className="flex flex-col gap-8 mb-10">
         {showLink ? (
           <BackButton path={path ? path : ''} text={`Go ${backText}`} />
         ) : null}
