@@ -25,7 +25,7 @@ const items = [
 export default function Index() {
   return (
     <PageWrapper heading="Craft" path="/" backText="home" showLink showHeading>
-      <p className="mb-3 text-sm capitalize text-gray-500">motion</p>
+      <p className="mb-3 text-sm capitalize text-ken-grey ">motion</p>
       <div className="flex flex-col gap-6">
         {items.map((component) => {
           return (
@@ -39,7 +39,7 @@ export default function Index() {
               >
                 {component.title}
               </Link>
-              <p className="text-sm text-gray-500">{component.description}</p>
+              <p className="text-sm text-ken-grey">{component.description}</p>
             </div>
           )
         })}
