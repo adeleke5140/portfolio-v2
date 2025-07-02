@@ -5,15 +5,12 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <>
-      <div className="relative min-h-screen pt-8 pb-8">
+      <div className="relative flex flex-col min-h-screen pt-8 pb-8">
         <div
           aria-hidden="true"
           className="fixed top-0 min-w-[1000px] z-10 h-20 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.15] pointer-events-none"
-          style={{
-            background: 'radial-gradient(#e87400, transparent 50%)',
-          }}
         />
-        <main className="pt-10 md:pt-12 w-full">{children}</main>
+        <main className="pt-10 md:pt-12 flex-1 w-full">{children}</main>
         <footer className="w-full mt-10 mb-2 px-6 mx-auto max-w-[680px]">
           <div className="rounded-md flex justify-between items-center">
             <div className="py-1 px-2 bg-white rounded-xl text-[15px] flex justify-between">

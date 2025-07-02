@@ -7,10 +7,10 @@ interface BackButtonProps {
 
 const BackButton = ({ path, text }: BackButtonProps) => {
   return (
-    <div className="md:absolute -left-40 top-2">
+    <div>
       <Link
         href={path}
-        className="flex gap-2 underline items-center tracking-tighter font-extralight w-fit text-sm "
+        className="flex gap-2 underline items-center text-ken-grey tracking-tighter font-extralight w-fit text-sm "
       >
         <svg
           className="w-3 h-3 home-icon"

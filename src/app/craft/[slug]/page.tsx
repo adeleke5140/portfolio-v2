@@ -63,7 +63,7 @@ export default async function Page({
         </div>
       }
       path="/craft"
-      backText="to Craft"
+      backText="Craft"
       showHeading
       showLink
     >

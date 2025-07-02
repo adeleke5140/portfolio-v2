@@ -1,7 +1,6 @@
 import React, { ComponentPropsWithoutRef } from 'react'
 import Link from 'next/link'
 import { highlight } from 'sugar-high'
-import { cn } from '@/lib/utils'
 
 type HeadingProps = ComponentPropsWithoutRef<'h1'>
 type ParagraphProps = ComponentPropsWithoutRef<'p'>
@@ -31,7 +30,7 @@ export const components = {
   ),
   p: (props: ParagraphProps) => (
     <p
-      className="text-gray-800 px-[6px] mt-6 text-[15px] leading-[135%]"
+      className="text-gray-800 px-[6px] mt-6 text-[15px] leading-[1.6]"
       {...props}
     />
   ),
@@ -115,7 +114,7 @@ export const components = {
   ),
   blockquote: (props: BlockquoteProps) => (
     <blockquote
-      className="ml-[0.075em] border-l-2 border-[#e87400] pl-4 text-gray-700 dark:border-zinc-600 dark:text-zinc-300"
+      className="ml-[0.075em] [&>p]:py-2 bg-[hsl(30deg,100%,45%,6%)] border-l-2 border-[#e87400] pl-4 text-gray-700 dark:border-zinc-600 dark:text-zinc-300"
       {...props}
     />
   ),

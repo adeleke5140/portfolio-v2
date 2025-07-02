@@ -21,7 +21,7 @@ const PageWrapper = ({
 }: PageWrapperProps) => {
   const slot =
     typeof heading == 'string' ? (
-      <h1 className="font-clash font-semibold leading-[100%] tracking-[-0.96px] text-[48px]">
+      <h1 className="font-clash capitalize font-semibold leading-[100%] tracking-[-0.96px] text-[48px]">
         {heading}
       </h1>
     ) : (
@@ -29,9 +29,9 @@ const PageWrapper = ({
     )
   return (
     <div className="relative px-6 max-w-[680px] mx-auto">
-      <div className="flex flex-col gap-8 mb-10">
+      <div className="flex flex-col gap-5 mb-10">
         {showLink ? (
-          <BackButton path={path ? path : ''} text={`Go ${backText}`} />
+          <BackButton path={path ? path : ''} text={`${backText}`} />
         ) : null}
         {showHeading ? slot : null}
       </div>

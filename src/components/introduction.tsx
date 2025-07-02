@@ -31,7 +31,7 @@ export const Introduction = () => {
     >
       <section
         className={cn(
-          'bg-white transition-opacity duration-300 rounded-2xl rounded-bl-sm p-4'
+          'bg-white -mt-8 transition-opacity duration-300 rounded-2xl rounded-bl-sm p-4'
         )}
       >
         <div className="flex flex-col text-[var(--gray-1)] text-[15px] gap-2 dark:border-[#282828] dark:bg-[#282828]">

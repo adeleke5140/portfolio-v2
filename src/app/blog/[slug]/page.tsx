@@ -47,13 +47,18 @@ export default async function Page({
       <PageWrapper
         heading={
           <div>
-            <h1 className="font-clash text-[48px] font-semibold leading-[100%] tracking-[-0.96px]">
+            <h1
+              style={{
+                textWrap: 'pretty',
+              }}
+              className="font-clash capitalize text-[48px] font-semibold leading-[100%] tracking-[-0.96px]"
+            >
               {postData.title}
             </h1>
           </div>
         }
         path="/blog"
-        backText="to blog"
+        backText="Blog"
         showHeading
         showLink
       >

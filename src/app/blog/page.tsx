@@ -42,22 +42,22 @@ const Index = () => {
         <meta name="og:title" content="Blog" />
       </Head>
       <PageWrapper heading="Blog" path="/" showLink showHeading backText="home">
-        <section className="flex flex-col gap-4">
+        <section className="flex flex-col">
           {filteredPosts.map((post) => (
-            <div
+            <Link
               key={post.id}
-              className="pb-7 border-b border-b-[#dcdcdc] flex flex-col gap-1 "
+              href={`/blog/${post.id}`}
+              className="pb-7 hover:bg-gray-100 py-4 transition-colors duration-200 border-b border-b-[#dcdcdc] "
             >
-              <Link
-                href={`/blog/${post.id}`}
-                className="text-xl hover:underline  transition-all"
-              >
-                {post.title}
-              </Link>
-              <span className="text-sm text-gray-700">
-                {formatDate(post.date || Date.now().toString())}
-              </span>
-            </div>
+              <div className="flex hover:translate-x-2 flex-col gap-1 transition-transform ">
+                <p className="text-xl hover:underline  transition-all">
+                  {post.title}
+                </p>
+                <span className="text-sm text-gray-700">
+                  {formatDate(post.date || Date.now().toString())}
+                </span>
+              </div>
+            </Link>
           ))}
         </section>
       </PageWrapper>
