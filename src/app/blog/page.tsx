@@ -47,7 +47,7 @@ const Index = () => {
             <Link
               key={post.id}
               href={`/blog/${post.id}`}
-              className="pb-7 hover:bg-gray-100 py-4 transition-colors duration-200 border-b border-b-[#dcdcdc] "
+              className="pb-7  hover:bg-gray-100 py-4 transition-colors duration-200 border-b border-b-[#dcdcdc] "
             >
               <div className="flex hover:translate-x-2 flex-col gap-1 transition-transform ">
                 <p className="text-xl hover:underline  transition-all">

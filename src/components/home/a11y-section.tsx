@@ -1,9 +1,7 @@
-import { ArrowUpRight } from 'lucide-react'
-
 export const A11ySection = () => {
   return (
-    <div className="bg-white w-full rounded-2xl rounded-tl-sm  px-3 py-1 text-sm flex gap-1.5 items-center h-20">
-      <nav className="flex flex-col gap-2" aria-labelledby="a11y-webring-club">
+    <div className="px-0 w-full py-1 flex gap-1.5 items-center h-20">
+      <nav className="flex flex-col gap-3" aria-labelledby="a11y-webring-club">
         <p>
           This site is a member of the{' '}
           <a
@@ -15,7 +13,7 @@ export const A11ySection = () => {
           </a>
           .
         </p>
-        <ul className="flex  gap-2">
+        <ul className="flex gap-2">
           <li className="">
             <a
               className=" bg-gray-100 justify-between group flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-xl"
