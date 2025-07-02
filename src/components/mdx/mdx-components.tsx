@@ -29,10 +29,7 @@ export const components = {
     <h4 className="font-medium px-[6px]" {...props} />
   ),
   p: (props: ParagraphProps) => (
-    <p
-      className="text-gray-800 px-[6px] mt-6 text-[15px] leading-[1.6]"
-      {...props}
-    />
+    <p className="text-gray-800 mt-6 text-[15px] leading-[1.6]" {...props} />
   ),
   ol: (props: ListProps) => (
     <ol
