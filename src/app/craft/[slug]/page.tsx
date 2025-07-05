@@ -11,6 +11,11 @@ import { promises as fs } from 'fs'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import path from 'path'
 
+export const metadata = {
+  title: 'Craft',
+  description: 'UI playground',
+}
+
 export async function generateStaticParams() {
   const data = getCraftData()
 
@@ -54,12 +59,9 @@ export default async function Page({
     <PageWrapper
       heading={
         <div>
-          <h1 className="font-sans text-xl font-medium tracking-tighter">
+          <h1 className="font-sans text-xl font-semibold tracking-tight">
             {craftFrontMatter.title}
           </h1>
-          <p className="text-gray-500 text-sm">
-            {formatDate(craftFrontMatter.date)}
-          </p>
         </div>
       }
       path="/craft"

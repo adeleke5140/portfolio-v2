@@ -7,6 +7,11 @@ import { getBlogData } from '../utils'
 import * as fsSync from 'fs'
 import path from 'path'
 
+export const metadata = {
+  title: 'Blog',
+  description: 'Blog posts',
+}
+
 export async function generateStaticParams() {
   const posts = getBlogData()
 

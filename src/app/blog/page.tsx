@@ -6,6 +6,11 @@ import Link from 'next/link'
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
+export const metadata = {
+  title: 'Blog',
+  description: "Kehinde Adeleke's blog",
+}
+
 export type Post = {
   id: string
   date?: string

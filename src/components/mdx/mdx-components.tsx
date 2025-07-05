@@ -11,23 +11,21 @@ type BlockquoteProps = ComponentPropsWithoutRef<'blockquote'>
 
 export const components = {
   h1: (props: HeadingProps) => (
-    <h1 className="font-medium px-[6px] pt-12 mb-0" {...props} />
+    <h1 className="font-medium pt-12 mb-0" {...props} />
   ),
   h2: (props: HeadingProps) => (
     <h2
-      className="text-gray-800 px-[6px] dark:text-zinc-200 font-medium mt-8 mb-3"
+      className="text-gray-800 dark:text-zinc-200 font-medium mt-8 mb-3"
       {...props}
     />
   ),
   h3: (props: HeadingProps) => (
     <h3
-      className="text-gray-800 px-[6px] dark:text-zinc-200 font-medium mt-8 mb-3"
+      className="text-gray-800 dark:text-zinc-200 font-medium mt-8 mb-3"
       {...props}
     />
   ),
-  h4: (props: HeadingProps) => (
-    <h4 className="font-medium px-[6px]" {...props} />
-  ),
+  h4: (props: HeadingProps) => <h4 className="font-medium" {...props} />,
   p: (props: ParagraphProps) => (
     <p className="text-gray-800 mt-6 text-[15px] leading-[1.6]" {...props} />
   ),
@@ -83,7 +81,7 @@ export const components = {
     const codeHTML = highlight(children as string)
     return (
       <code
-        className="font-mono bg-[#ededed] overflow-x-auto rounded-md p-1 text-xs"
+        className="font-mono bg-[#ededed] overflow-x-auto rounded-md py-0.5 px-[3.6px] border border-[#e5e7eb] text-xs"
         dangerouslySetInnerHTML={{ __html: codeHTML }}
         {...props}
       />
