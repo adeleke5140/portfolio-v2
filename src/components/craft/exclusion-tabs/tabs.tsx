@@ -20,16 +20,19 @@ export function Tabs() {
         const clipLeft = offsetLeft
         const clipRight = offsetLeft + offsetWidth
         const clipBottom = offsetTop + offsetHeight
+        const clipTop = offsetTop
+
         const clipBottomValue = Number(
           100 - (clipBottom / container.offsetHeight) * 100
         ).toFixed()
-        const clipTop = offsetTop
+
         const clipTopValue = Number(
           (clipTop / container.offsetHeight) * 100
         ).toFixed()
         const clipRightValue = Number(
           100 - (clipRight / container.offsetWidth) * 100
         ).toFixed()
+
         container.style.clipPath = `inset(${clipTopValue}% ${clipRightValue}% ${clipBottomValue}% ${Number(
           (clipLeft / container.offsetWidth) * 100
         ).toFixed()}% round 17px)`
