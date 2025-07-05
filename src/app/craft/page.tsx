@@ -1,6 +1,10 @@
-'use client'
 import { PageWrapper } from '@/components/pageWrapper'
 import Link from 'next/link'
+
+export const metadata = {
+  title: 'Craft',
+  description: 'Craft components',
+}
 
 const items = [
   {
