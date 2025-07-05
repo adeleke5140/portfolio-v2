@@ -41,7 +41,7 @@ const BackButton = ({ path, text }: BackButtonProps) => {
             fill="var(--primary)"
           ></path>
         </svg>
-        <span>{text}</span>
+        <span className="capitalize">{text}</span>
       </Link>
     </div>
   )
