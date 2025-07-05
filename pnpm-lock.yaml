@@ -14,9 +14,6 @@ importers:
       '@mdx-js/react':
         specifier: ^3.1.0
         version: 3.1.0(@types/react@18.0.27)(react@19.1.0)
-      '@next/font':
-        specifier: ^14.2.15
-        version: 14.2.15(next@15.3.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       '@next/mdx':
         specifier: ^15.3.2
         version: 15.3.2(@mdx-js/loader@3.1.0(acorn@8.12.1))(@mdx-js/react@3.1.0(@types/react@18.0.27)(react@19.1.0))
@@ -303,11 +300,6 @@ packages:
 
   '@next/eslint-plugin-next@15.3.1':
     resolution: {integrity: sha512-oEs4dsfM6iyER3jTzMm4kDSbrQJq8wZw5fmT6fg2V3SMo+kgG+cShzLfEV20senZzv8VF+puNLheiGPlBGsv2A==}
-
-  '@next/font@14.2.15':
-    resolution: {integrity: sha512-QopYhBmCDDrNDynbi+ZD1hDZXmQXVFo7TmAFp4DQgO/kogz1OLbQ92hPigJbj572eZ3GaaVxNIyYVn3/eAsehg==}
-    peerDependencies:
-      next: '*'
 
   '@next/mdx@15.3.2':
     resolution: {integrity: sha512-D6lSSbVzn1EiPwrBKG5QzXClcgdqiNCL8a3/6oROinzgZnYSxbVmnfs0UrqygtGSOmgW7sdJJSEOy555DoAwvw==}
@@ -2996,10 +2988,6 @@ snapshots:
   '@next/eslint-plugin-next@15.3.1':
     dependencies:
       fast-glob: 3.3.1
-
-  '@next/font@14.2.15(next@15.3.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
-    dependencies:
-      next: 15.3.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
 
   '@next/mdx@15.3.2(@mdx-js/loader@3.1.0(acorn@8.12.1))(@mdx-js/react@3.1.0(@types/react@18.0.27)(react@19.1.0))':
     dependencies:
