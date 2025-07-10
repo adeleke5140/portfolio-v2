@@ -67,7 +67,7 @@ export const Introduction = () => {
               }}
               target="_blank"
               href="https://chromewebstore.google.com/detail/nihongo-speech/jhojfellcdlldagfemimnjebnfoodchf?authuser=0&hl=en-GB"
-              className="bg-white py-2 px-2 rounded-xl first-of-type:w-full lg:w-80 shadow grid-rows-[2fr,auto] gap-2 grid place-items-center"
+              className="bg-white py-2 px-2 rounded-xl first-of-type:w-full lg:w-80 lg:first-of-type:w-80 shadow grid-rows-[2fr,auto] gap-2 grid place-items-center"
             >
               <span className=" grid place-items-center min-h-[10rem] border border-[#f0f0f0] rounded-lg p-4 font-clash font-medium text-lg w-full bg-[#fcfcfc]">
                 <button
