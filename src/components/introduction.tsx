@@ -33,9 +33,9 @@ export const Introduction = () => {
             <div className="rounded-lg  dark:text-[#fefefe]">
               <p>
                 Hi, I&apos;m{' '}
-                <span className="font-clash font-medium">Kenny</span>. I like to
-                call myself a design engineer because I enjoy building lovely
-                interfaces that are pleasing to the eyes. I currently work at{' '}
+                <span className="font-clash font-medium">Kenny</span>. I am a
+                design engineer. I enjoy building beautiful and accessible
+                software and currently work at{' '}
                 <a
                   href="https://www.mastra.ai"
                   className="border-b border-[#e87400]   text-[#e87400]"
