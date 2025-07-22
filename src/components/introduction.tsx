@@ -51,7 +51,7 @@ export const Introduction = () => {
                 <span className="font-clash font-medium">craft</span>. A passion
                 I am dedicated to because in part, it helps build me as a
                 person. I am drawn to design because of beauty and I strive as a
-                craftsman is to infuse every piece of work with joy and care.
+                craftsman to infuse every piece of work with delight and care.
               </p>
             </div>
           </div>
