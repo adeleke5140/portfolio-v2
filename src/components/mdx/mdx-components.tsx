@@ -27,7 +27,7 @@ export const components = {
   ),
   h4: (props: HeadingProps) => <h4 className="font-medium" {...props} />,
   p: (props: ParagraphProps) => (
-    <p className="text-gray-800 mt-6 text-[15px] leading-[1.6]" {...props} />
+    <p className="text-gray-800 mt-6 leading-[1.6]" {...props} />
   ),
   ol: (props: ListProps) => (
     <ol
