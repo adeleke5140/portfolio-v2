@@ -16,7 +16,6 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-neue)', ...defaultTheme.fontFamily.sans],
         mono: ['var(--font-berkeley-mono)', ...defaultTheme.fontFamily.mono],
-        inter: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
         serif: ['var(--font-editorial-new)', ...defaultTheme.fontFamily.serif],
       },
       transitionProperty: {
