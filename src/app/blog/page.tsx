@@ -1,6 +1,7 @@
 import { PageWrapper } from '@/components/pageWrapper'
 import { formatDate } from '@/helpers/formatDate'
 import { getSortedPostsData } from '@/lib/posts'
+import { CloudCog } from 'lucide-react'
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -9,6 +10,13 @@ const isDevelopment = process.env.NODE_ENV === 'development'
 export const metadata = {
   title: 'Blog',
   description: "Kehinde Adeleke's blog",
+}
+
+function getYearFromDate(dateString?: string): number {
+  if (!dateString) return 2025
+
+  const date = new Date(dateString)
+  return date.getFullYear()
 }
 
 export type Post = {
@@ -37,6 +45,25 @@ const Index = () => {
       }
     })
     .filter((post) => post.status == 'completed')
+    .map((post) => ({
+      ...post,
+      year: getYearFromDate(post.date),
+    }))
+    .reverse()
+    .reduce(
+      (acc, curr) => {
+        if (!acc[curr.year]) {
+          acc[curr.year] = []
+        }
+        acc[curr.year].push(curr)
+        return acc
+      },
+      {} as Record<string, Post[]>
+    )
+
+  const sortedPostsByYear = Object.entries(filteredPosts).sort(
+    ([a], [b]) => parseInt(b) - parseInt(a)
+  )
 
   return (
     <>
@@ -46,23 +73,33 @@ const Index = () => {
         <meta name="description" content="Kehinde Adeleke's website" />
         <meta name="og:title" content="Blog" />
       </Head>
-      <PageWrapper heading="Blog" path="/" showLink showHeading backText="home">
+      <PageWrapper heading="Blog" showHeading>
         <section className="flex flex-col">
-          {filteredPosts.map((post) => (
-            <Link
-              key={post.id}
-              href={`/blog/${post.id}`}
-              className="pb-7  hover:bg-gray-100 py-4 transition-colors duration-200 border-b border-b-[#dcdcdc] "
+          {sortedPostsByYear.map(([year, posts]) => (
+            <div
+              key={year}
+              className="grid md:grid-cols-2 last:border-b-0 pt-10 first:pt-0 border-b border-b-[#dcdcdc] "
             >
-              <div className="flex hover:translate-x-2 flex-col gap-1 transition-transform ">
-                <p className="text-xl hover:underline  transition-all">
-                  {post.title}
-                </p>
-                <span className="text-sm text-gray-700">
-                  {formatDate(post.date || Date.now().toString())}
-                </span>
+              <h2 className="text-lg font-serif mb-4 text-ken-grey">{year}</h2>
+              <div>
+                {posts.map((post) => (
+                  <Link
+                    key={post.id}
+                    href={`/blog/${post.id}`}
+                    className="pb-7  hover:bg-gray-100 py-4 block mb-2 transition-colors duration-200 "
+                  >
+                    <div className="flex hover:translate-x-2 flex-col gap-1 transition-transform ">
+                      <p className="text-lg hover:underline  transition-all">
+                        {post.title}
+                      </p>
+                      <span className="text-sm text-gray-700">
+                        {formatDate(post.date || Date.now().toString())}
+                      </span>
+                    </div>
+                  </Link>
+                ))}
               </div>
-            </Link>
+            </div>
           ))}
         </section>
       </PageWrapper>
