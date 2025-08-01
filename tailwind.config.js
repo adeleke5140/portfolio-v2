@@ -14,12 +14,10 @@ module.exports = {
         'ken-tertiary': '#ededed',
       },
       fontFamily: {
-        sans: ['var(--font-comm)', ...defaultTheme.fontFamily.sans],
+        sans: ['var(--font-neue)', ...defaultTheme.fontFamily.sans],
         mono: ['var(--font-berkeley-mono)', ...defaultTheme.fontFamily.mono],
-        clash: ['var(--clash-display)', ...defaultTheme.fontFamily.sans],
-        sort: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
         inter: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
-        untitled: ['var(--untitled)', ...defaultTheme.fontFamily.sans],
+        serif: ['var(--font-editorial-new)', ...defaultTheme.fontFamily.serif],
       },
       transitionProperty: {
         'transform-opacity': 'transform, opacity',

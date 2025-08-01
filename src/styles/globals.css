@@ -129,7 +129,6 @@ pre {
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   overflow: auto;
-  box-shadow: 6px 6px 0 hsl(30deg 100% 45% / 6%);
 }
 
 code > span {
