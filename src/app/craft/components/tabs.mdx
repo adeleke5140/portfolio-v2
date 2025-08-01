@@ -1,15 +1,21 @@
 ---
 title: Multi-Line Exclusion Tabs
+description: the power of css clip-path
 date: '2025-05-17'
+tag: css
 ---
 
 Exclusion tabs inspired by [Paco](https://paco.me/craft/tabs) using [WAAPI](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) and Clip-path. I extend it to support wrapped content with `flex-wrap` on the parent container.
 
-You can use a `span` element and move that based on the active item, but `CSS` is pretty powerful right now and there's so much we can do with it. The trick is to use `clip-path` to create a mask that reveals only the active tab.
+The typical way of creating exclusive tabs is by using motion with a  `span` element. You move that based on the active item and that creates the smooth effect.
+
+Motion is an extra dependency and `CSS` is powerful which means we can solve the problem with the extra dep
+
+The trick is to use `clip-path` to create a mask that reveals only the active tab.
 
 <br />
 
-<CraftContainer>
+<CraftContainer className="bg-white">
   <Tabs />
 </CraftContainer>
 
