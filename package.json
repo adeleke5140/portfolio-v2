@@ -28,6 +28,7 @@
     "next-mdx-remote": "^5.0.0",
     "prismjs": "^1.29.0",
     "react": "19.1.0",
+    "react-aria-components": "^1.11.0",
     "react-dom": "19.1.0",
     "reading-time": "^1.5.0",
     "remark": "^14.0.2",

@@ -1,4 +1,4 @@
-import { motion } from 'motion/react'
+import { motion, Variants } from 'motion/react'
 import { durations } from './card-spend-duration'
 
 const durationAmount = {
@@ -120,7 +120,7 @@ const ProgressRing = ({
           r={radius}
           fill="none"
           style={{ stroke: '#d0de0d' }}
-          variants={circleVariants}
+          variants={circleVariants as Variants}
           initial="hidden"
           animate="visible"
           strokeWidth={strokeWidth}

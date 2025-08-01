@@ -1,19 +1,4 @@
-import { Commissioner, Fira_Mono } from 'next/font/google'
 import localFont from 'next/font/local'
-
-export const comm = Commissioner({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['400', '500'],
-  variable: '--font-comm',
-})
-
-export const firaMono = Fira_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['400'],
-  variable: '--font-fira',
-})
 
 export const berkeleyMono = localFont({
   src: './BerkeleyMono-Regular.otf',
@@ -21,14 +6,52 @@ export const berkeleyMono = localFont({
   variable: '--font-berkeley-mono',
 })
 
-export const clashDisplay = localFont({
-  src: './ClashDisplay-Variable.woff2',
+export const neue = localFont({
+  src: [
+    {
+      path: './PPNeueMontreal-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './PPNeueMontreal-Medium.woff2',
+      weight: '500',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-neue',
   display: 'swap',
-  variable: '--clash-display',
+})
+
+export const editorialNew = localFont({
+  src: [
+    {
+      path: './PPEditorialNew-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './PPEditorialNew-Italic.woff2',
+      weight: '400',
+      style: 'italic',
+    },
+    {
+      path: './PPEditorialNew-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: './PPEditorialNew-Heavy.woff2',
+      weight: '900',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-editorial-new',
+  display: 'swap',
 })
 
 export const fonts = {
-  comm,
-  clashDisplay,
   berkeleyMono,
+  neue,
+  editorialNew,
 }

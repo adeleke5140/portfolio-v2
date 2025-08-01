@@ -1,24 +1,26 @@
-'use client'
-import { Toaster } from 'sonner'
+import Link from 'next/link'
 
-import { PostContextWrapper } from '@/context/postContext'
-import { Layout } from './layout'
-import { fonts } from '@/fonts/setup'
-
-export default function RootLayout({
-  children,
-}: {
+interface RootLayoutProps {
   children: React.ReactNode
-}) {
+}
+
+export const RootLayout = ({ children }: RootLayoutProps) => {
   return (
-    <div
-      className={`min-h-screen font-sans  ${fonts.comm.variable} ${fonts.clashDisplay.variable} ${fonts.berkeleyMono.variable} bg-[rgb(248,249,250)] text-ken-black`}
-      id="container"
-    >
-      <Toaster />
-      <PostContextWrapper>
-        <Layout>{children}</Layout>
-      </PostContextWrapper>
-    </div>
+    <>
+      <div className="relative flex flex-col min-h-screen max-w-[1440px]  mx-auto pb-8">
+        <nav className="flex gap-4 border-b-[0.5px] px-3 md:px-0  border-b-[#dcdcdc]  h-full items-center justify-end py-5">
+          <Link href="/craft" className="text-lg">
+            Craft
+          </Link>
+          <Link href="/blog" className="text-lg">
+            Blog
+          </Link>
+          <Link href="/" className="text-lg">
+            Home
+          </Link>
+        </nav>
+        <main className="flex-1 w-full">{children}</main>
+      </div>
+    </>
   )
 }

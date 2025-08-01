@@ -1,4 +1,4 @@
-import { motion } from 'motion/react'
+import { motion, Variants } from 'motion/react'
 import { container, item } from './variants'
 
 export const CardStatus = () => {
@@ -11,7 +11,7 @@ export const CardStatus = () => {
         className="flex gap-2 items-center"
       >
         <motion.div
-          variants={item}
+          variants={item as Variants}
           className="rounded-full grid place-items-center h-4 w-4 p-1 bg-[#e4f222]"
         >
           <svg
@@ -30,7 +30,7 @@ export const CardStatus = () => {
           </svg>
         </motion.div>
         <motion.svg
-          variants={item}
+          variants={item as Variants}
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
@@ -51,7 +51,7 @@ export const CardStatus = () => {
           <path d="M8.5 16.429a5 5 0 0 1 7 0" />
         </motion.svg>
         <motion.div
-          variants={item}
+          variants={item as Variants}
           className="border dark:border-[#343434] items-center gap-1.5 flex rounded-md px-1 py-0.5  border-[e6e6e6]"
         >
           <svg

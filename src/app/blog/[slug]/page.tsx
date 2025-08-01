@@ -6,10 +6,62 @@ import Head from 'next/head'
 import { getBlogData } from '../utils'
 import * as fsSync from 'fs'
 import path from 'path'
+import { formatDate } from '@/helpers/formatDate'
 
-export const metadata = {
-  title: 'Blog',
-  description: 'Blog posts',
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const slug = (await params).slug
+
+  const mdxPath = path.join(process.cwd(), 'src/app/blog/posts', `${slug}.mdx`)
+  const mdPath = path.join(process.cwd(), 'src/app/blog/posts', `${slug}.md`)
+
+  const blogPath = fsSync.existsSync(mdxPath) ? mdxPath : mdPath
+
+  try {
+    const content = await fs.readFile(blogPath, 'utf8')
+    const data = await compileMDX({
+      source: content,
+      options: {
+        parseFrontmatter: true,
+      },
+    })
+
+    const frontmatter = data.frontmatter as {
+      title: string
+      date: string
+      description?: string
+    }
+
+    return {
+      title: frontmatter.title,
+      description:
+        frontmatter.description || `Read ${frontmatter.title} on Kenny's blog`,
+      openGraph: {
+        title: frontmatter.title,
+        description:
+          frontmatter.description ||
+          `Read ${frontmatter.title} on Kenny's blog`,
+        type: 'article',
+        publishedTime: frontmatter.date,
+        url: `https://kehinde.xyz/blog/${slug}`,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: frontmatter.title,
+        description:
+          frontmatter.description ||
+          `Read ${frontmatter.title} on Kenny's blog`,
+      },
+    }
+  } catch (error) {
+    return {
+      title: 'Blog Post',
+      description: 'A blog post by Kenny',
+    }
+  }
 }
 
 export async function generateStaticParams() {
@@ -51,23 +103,25 @@ export default async function Page({
       </Head>
       <PageWrapper
         heading={
-          <div>
+          <div className="border-b-[0.5px] py-6  border-b-[#dcdcdc]">
             <h1
               style={{
                 textWrap: 'pretty',
               }}
-              className="font-clash capitalize text-[48px] font-semibold leading-[100%] tracking-[-0.96px]"
+              className="font-serif  py-8  lg:leading-[1.2em] capitalize text-[48px] lg:text-7xl lg:font-medium font-semibold leading-[100%] lg:tracking-[-.06em] tracking-[-0.96px]"
             >
               {postData.title}
             </h1>
+
+            <span className="text-sm text-gray-700 mt-4 inline-block">
+              {formatDate(postData.date || Date.now().toString())}
+            </span>
           </div>
         }
-        path="/blog"
-        backText="Blog"
         showHeading
-        showLink
+        classname="max-w-none lg:pt-0"
       >
-        {data.content}
+        <div className="max-w-[40rem] pt-8 mx-auto">{data.content}</div>
       </PageWrapper>
     </>
   )

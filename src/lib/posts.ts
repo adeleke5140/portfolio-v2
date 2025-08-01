@@ -5,6 +5,7 @@ import { remark } from 'remark'
 import html from 'remark-html'
 
 const postsDirectory = path.join(process.cwd(), 'src/app/blog/posts')
+const craftDirectory = path.join(process.cwd(), 'src/app/craft/components')
 
 type Post = {
   id: string
@@ -69,4 +70,30 @@ const getPostData = async (id: string) => {
   }
 }
 
-export { getSortedPostsData, getAllPostsIds, getPostData }
+const getSortedCraftData = () => {
+  const fileNames = fs.readdirSync(craftDirectory)
+  const allCraftData = fileNames.map((fileName) => {
+    const id = fileName.replace(/\.mdx$/, '')
+    const fullPath = path.join(craftDirectory, fileName)
+    const fileContents = fs.readFileSync(fullPath, 'utf-8')
+    const matterResult = matter(fileContents)
+    
+    return {
+      id,
+      ...matterResult.data,
+    }
+  })
+  
+  return allCraftData.sort((a: Post, b: Post) => {
+    if (a.date && b.date) {
+      if (a.date < b.date) {
+        return 1
+      } else {
+        return -1
+      }
+    }
+    return 0
+  })
+}
+
+export { getSortedPostsData, getAllPostsIds, getPostData, getSortedCraftData }

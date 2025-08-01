@@ -109,7 +109,7 @@ export const IntegrationMenu = () => {
                   >
                     {current == integration.name ? (
                       <motion.span
-                        layoutId="im"
+                        layoutId="movable"
                         style={{
                           borderRadius: 9999,
                         }}
@@ -195,8 +195,8 @@ function IntegrationItem({
             title === 'fix-checkout-process'
               ? 'text-[#3fb950]'
               : title === 'update-api-docs'
-              ? 'text-[#ab7df8]'
-              : 'text-[#3fb950]'
+                ? 'text-[#ab7df8]'
+                : 'text-[#3fb950]'
           )}
         >
           {icon ? (

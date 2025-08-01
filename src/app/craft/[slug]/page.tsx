@@ -11,9 +11,61 @@ import { promises as fs } from 'fs'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import path from 'path'
 
-export const metadata = {
-  title: 'Craft',
-  description: 'UI playground',
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const slug = (await params).slug
+
+  const mdxPath = path.join(
+    process.cwd(),
+    'src/app/craft/components',
+    `${slug}.mdx`
+  )
+
+  try {
+    const content = await fs.readFile(mdxPath, 'utf8')
+    const data = await compileMDX({
+      source: content,
+      options: {
+        parseFrontmatter: true,
+      },
+    })
+
+    const frontmatter = data.frontmatter as {
+      title: string
+      date: string
+      description?: string
+    }
+
+    return {
+      title: frontmatter.title,
+      description:
+        frontmatter.description ||
+        `Explore ${frontmatter.title} - UI craft by Kenny`,
+      openGraph: {
+        title: frontmatter.title,
+        description:
+          frontmatter.description ||
+          `Explore ${frontmatter.title} - UI craft by Kenny`,
+        type: 'website',
+        url: `https://kehinde.xyz/craft/${slug}`,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: frontmatter.title,
+        description:
+          frontmatter.description ||
+          `Explore ${frontmatter.title} - UI craft by Kenny`,
+      },
+    }
+  } catch (error) {
+    return {
+      title: 'Craft',
+      description: 'UI playground by Kenny',
+    }
+  }
 }
 
 export async function generateStaticParams() {
@@ -56,20 +108,8 @@ export default async function Page({
   })
   const craftFrontMatter = data.frontmatter as { title: string; date: string }
   return (
-    <PageWrapper
-      heading={
-        <div>
-          <h1 className="font-sans text-xl font-semibold tracking-tight">
-            {craftFrontMatter.title}
-          </h1>
-        </div>
-      }
-      path="/craft"
-      backText="Craft"
-      showHeading
-      showLink
-    >
-      {data.content}
+    <PageWrapper heading={craftFrontMatter.title} showHeading>
+      <div className="max-w-[680px] mx-auto">{data.content}</div>
     </PageWrapper>
   )
 }

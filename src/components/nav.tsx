@@ -19,7 +19,7 @@ export const Nav = () => {
             <Link
               href={link.href}
               className={cn(
-                'text-sm relative dark:text-[#e5e5e5] grid place-items-center px-3 py-1 font-sm'
+                'text-sm md:px-0 relative dark:text-[#e5e5e5] grid place-items-center px-3 py-1 font-sm'
               )}
             >
               <span>{link.name}</span>
