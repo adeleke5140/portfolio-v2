@@ -1,4 +1,9 @@
-import { Commissioner, Fira_Mono } from 'next/font/google'
+import {
+  Commissioner,
+  Fira_Mono,
+  Sorts_Mill_Goudy,
+  Inter_Tight,
+} from 'next/font/google'
 import localFont from 'next/font/local'
 
 export const comm = Commissioner({
@@ -27,8 +32,24 @@ export const clashDisplay = localFont({
   variable: '--clash-display',
 })
 
+export const sort = Sorts_Mill_Goudy({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: '400',
+  variable: '--font-inter',
+})
+
+export const inter = Inter_Tight({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500'],
+  variable: '--font-inter',
+})
+
 export const fonts = {
   comm,
   clashDisplay,
   berkeleyMono,
+  sort,
+  inter,
 }

@@ -10,8 +10,8 @@ export const Introduction = () => {
     <PageWrapper
       showHeading
       heading={
-        <div className="flex w-full">
-          <h1 className="text-[48px] mb-10 font-clash font-semibold flex-shrink-0 tracking-tighter">
+        <div className="flex w-full border-y-[0.5px]  border-y-[#dcdcdc] py-8">
+          <h1 className="text-[48px] lg:font-medium lg:text-7xl lg:tracking-[-0.06em] lg:leading-[1.2em] font-inter font-semibold flex-shrink-0 tracking-tighter">
             {TITLE.split('').map((letter, index) => (
               <React.Fragment key={index + 'title'}>
                 <span
@@ -26,14 +26,14 @@ export const Introduction = () => {
           </h1>
         </div>
       }
+      classname="max-w-none"
     >
-      <div className="flex gap-8 flex-col">
-        <section className=" -mt-8 transition-[opacity,shadow] duration-300 rounded-2xl rounded-bl-sm px-0">
+      {/* <div className="flex gap-16 pt-8 max-w-[40rem] mx-auto flex-col">
+        <section className="px-0">
           <div className="flex flex-col text-[var(--gray-1)] gap-2 dark:border-[#282828] dark:bg-[#282828]">
             <div className="rounded-lg  dark:text-[#fefefe]">
-              <p>
-                Hi, I&apos;m{' '}
-                <span className="font-clash font-medium">Kenny</span>. I am a
+              <p className="text-[17px]">
+                Hi, I&apos;m <span className="font-medium">Kenny</span>. I am a
                 design engineer. I enjoy building beautiful and accessible
                 software and currently work at{' '}
                 <a
@@ -46,19 +46,18 @@ export const Introduction = () => {
             </div>
 
             <div>
-              <p className="rounded-lg h-full">
-                My work is my{' '}
-                <span className="font-clash font-medium">craft</span>. A passion
-                I am dedicated to because in part, it helps build me as a
-                person. I am drawn to design because of beauty and I strive as a
-                craftsman to infuse every piece of work with delight and care.
+              <p className="rounded-lg h-full text-[17px]">
+                My work is my <span className="font-medium">craft</span>. A
+                passion I am dedicated to because in part, it helps build me as
+                a person. I am drawn to design because of beauty and I strive as
+                a craftsman to infuse every piece of work with delight and care.
               </p>
             </div>
           </div>
         </section>
 
         <section className="flex flex-col gap-5">
-          <p className="font-medium text-lg">Projects</p>
+          <p className="font-medium text-[17px]">Projects</p>
           <div>
             <a
               style={{
@@ -69,7 +68,7 @@ export const Introduction = () => {
               href="https://chromewebstore.google.com/detail/nihongo-speech/jhojfellcdlldagfemimnjebnfoodchf?authuser=0&hl=en-GB"
               className="bg-white py-2 px-2 rounded-xl first-of-type:w-full lg:w-80 lg:first-of-type:w-80 shadow grid-rows-[2fr,auto] gap-2 grid place-items-center"
             >
-              <span className=" grid place-items-center min-h-[10rem] border border-[#f0f0f0] rounded-lg p-4 font-clash font-medium text-lg w-full bg-[#fcfcfc]">
+              <span className=" grid place-items-center min-h-[10rem] border border-[#f0f0f0] rounded-lg p-4 font-inter font-medium text-lg w-full bg-[#fcfcfc]">
                 <button
                   type="button"
                   className="flex preview-button items-center justify-center w-8 h-8 rounded-full  transition-colors"
@@ -100,7 +99,7 @@ export const Introduction = () => {
         </section>
 
         <section className="flex flex-col gap-4">
-          <p className="font-medium text-lg">Craft</p>
+          <p className="font-medium text-[17px]">Craft</p>
           <ul className="flex flex-col">
             <li>
               <Link
@@ -108,21 +107,6 @@ export const Introduction = () => {
                 className="hover:bg-gray-100 rounded-lg group w-full inline-flex justify-between px-1 py-4"
               >
                 <span className="transition-transform inline-flex gap-1 items-center group-hover:translate-x-2">
-                  <svg
-                    width="15"
-                    height="15"
-                    viewBox="0 0 15 15"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="hidden lg:block"
-                  >
-                    <path
-                      d="M13.9 0.499976C13.9 0.279062 13.7209 0.0999756 13.5 0.0999756C13.2791 0.0999756 13.1 0.279062 13.1 0.499976V1.09998H12.5C12.2791 1.09998 12.1 1.27906 12.1 1.49998C12.1 1.72089 12.2791 1.89998 12.5 1.89998H13.1V2.49998C13.1 2.72089 13.2791 2.89998 13.5 2.89998C13.7209 2.89998 13.9 2.72089 13.9 2.49998V1.89998H14.5C14.7209 1.89998 14.9 1.72089 14.9 1.49998C14.9 1.27906 14.7209 1.09998 14.5 1.09998H13.9V0.499976ZM11.8536 3.14642C12.0488 3.34168 12.0488 3.65826 11.8536 3.85353L10.8536 4.85353C10.6583 5.04879 10.3417 5.04879 10.1465 4.85353C9.9512 4.65827 9.9512 4.34169 10.1465 4.14642L11.1464 3.14643C11.3417 2.95116 11.6583 2.95116 11.8536 3.14642ZM9.85357 5.14642C10.0488 5.34168 10.0488 5.65827 9.85357 5.85353L2.85355 12.8535C2.65829 13.0488 2.34171 13.0488 2.14645 12.8535C1.95118 12.6583 1.95118 12.3417 2.14645 12.1464L9.14646 5.14642C9.34172 4.95116 9.65831 4.95116 9.85357 5.14642ZM13.5 5.09998C13.7209 5.09998 13.9 5.27906 13.9 5.49998V6.09998H14.5C14.7209 6.09998 14.9 6.27906 14.9 6.49998C14.9 6.72089 14.7209 6.89998 14.5 6.89998H13.9V7.49998C13.9 7.72089 13.7209 7.89998 13.5 7.89998C13.2791 7.89998 13.1 7.72089 13.1 7.49998V6.89998H12.5C12.2791 6.89998 12.1 6.72089 12.1 6.49998C12.1 6.27906 12.2791 6.09998 12.5 6.09998H13.1V5.49998C13.1 5.27906 13.2791 5.09998 13.5 5.09998ZM8.90002 0.499976C8.90002 0.279062 8.72093 0.0999756 8.50002 0.0999756C8.2791 0.0999756 8.10002 0.279062 8.10002 0.499976V1.09998H7.50002C7.2791 1.09998 7.10002 1.27906 7.10002 1.49998C7.10002 1.72089 7.2791 1.89998 7.50002 1.89998H8.10002V2.49998C8.10002 2.72089 8.2791 2.89998 8.50002 2.89998C8.72093 2.89998 8.90002 2.72089 8.90002 2.49998V1.89998H9.50002C9.72093 1.89998 9.90002 1.72089 9.90002 1.49998C9.90002 1.27906 9.72093 1.09998 9.50002 1.09998H8.90002V0.499976Z"
-                      fill="currentColor"
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                    ></path>
-                  </svg>
                   Multi line exclusion tabs
                 </span>
                 <span className="border-dashed border-t relative top-3 w-1/4 lg:w-1/2 inline-block"></span>
@@ -133,7 +117,7 @@ export const Introduction = () => {
         </section>
 
         <section className="flex flex-col gap-4">
-          <p className="font-medium text-lg">Writing</p>
+          <p className="font-medium text-lg lg:text-xl">Writing</p>
           <ul className="flex flex-col">
             <li>
               <Link
@@ -141,33 +125,6 @@ export const Introduction = () => {
                 className="hover:bg-gray-100 rounded-lg group w-full inline-flex justify-between px-1 py-4"
               >
                 <span className="transition-transform inline-flex gap-1 items-center group-hover:translate-x-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    className="hidden lg:block"
-                  >
-                    <title>feather</title>
-                    <g fill="currentColor">
-                      <path
-                        d="m14.451,9.699c-.513,3.998-3.934,4.571-7.451,4.003"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.2"
-                      ></path>
-                      <path
-                        d="m3,17s1.469-12.904,14-14c-.627,1.093-.642,2.918-1.06,4.748-.587,2.252-2.615,2.532-5.1,2.532"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.2"
-                      ></path>
-                    </g>
-                  </svg>
                   Motion on the web
                 </span>
                 <span className="border-dashed border-t relative top-3 w-1/4 lg:w-1/2 inline-block"></span>
@@ -178,7 +135,7 @@ export const Introduction = () => {
         </section>
 
         <A11ySection />
-      </div>
+      </div> */}
     </PageWrapper>
   )
 }

@@ -59,7 +59,7 @@ export default async function Page({
     <PageWrapper
       heading={
         <div>
-          <h1 className="font-sans text-xl font-semibold tracking-tight">
+          <h1 className="font-inter text-[48px] font-semibold tracking-tight">
             {craftFrontMatter.title}
           </h1>
         </div>

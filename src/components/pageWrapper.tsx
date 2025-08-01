@@ -1,4 +1,5 @@
 'use client'
+import { cn } from '@/lib/utils'
 import { ReactNode } from 'react'
 import { BackButton } from './backButton'
 
@@ -9,6 +10,7 @@ interface PageWrapperProps {
   showHeading?: boolean
   showLink?: boolean
   backText?: string
+  classname?: string
 }
 
 const PageWrapper = ({
@@ -18,17 +20,18 @@ const PageWrapper = ({
   showHeading = false,
   showLink = false,
   backText,
+  classname,
 }: PageWrapperProps) => {
   const slot =
     typeof heading == 'string' ? (
-      <h1 className="font-clash mb-10 capitalize font-semibold leading-[100%] tracking-[-0.96px] text-[48px]">
+      <h1 className="font-inter mb-10 capitalize font-semibold leading-[100%] tracking-[-0.96px] text-[48px]">
         {heading}
       </h1>
     ) : (
       heading
     )
   return (
-    <div className="relative px-6 max-w-[680px] mx-auto">
+    <div className={cn('relative px-6 max-w-[680px] mx-auto', classname)}>
       <div className="flex flex-col gap-5">
         {showLink ? (
           <BackButton path={path ? path : ''} text={`${backText}`} />
