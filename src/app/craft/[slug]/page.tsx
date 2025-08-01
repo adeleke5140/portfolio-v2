@@ -17,13 +17,13 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }) {
   const slug = (await params).slug
-  
+
   const mdxPath = path.join(
     process.cwd(),
     'src/app/craft/components',
     `${slug}.mdx`
   )
-  
+
   try {
     const content = await fs.readFile(mdxPath, 'utf8')
     const data = await compileMDX({
@@ -32,35 +32,32 @@ export async function generateMetadata({
         parseFrontmatter: true,
       },
     })
-    
-    const frontmatter = data.frontmatter as { 
+
+    const frontmatter = data.frontmatter as {
       title: string
       date: string
       description?: string
     }
-    
+
     return {
       title: frontmatter.title,
-      description: frontmatter.description || `Explore ${frontmatter.title} - UI craft by Kenny`,
+      description:
+        frontmatter.description ||
+        `Explore ${frontmatter.title} - UI craft by Kenny`,
       openGraph: {
         title: frontmatter.title,
-        description: frontmatter.description || `Explore ${frontmatter.title} - UI craft by Kenny`,
+        description:
+          frontmatter.description ||
+          `Explore ${frontmatter.title} - UI craft by Kenny`,
         type: 'website',
-        url: `https://kehinde.me/craft/${slug}`,
-        images: [
-          {
-            url: `/api/og/craft/${slug}?title=${encodeURIComponent(frontmatter.title)}&description=${encodeURIComponent(frontmatter.description || `Explore ${frontmatter.title} - UI craft by Kenny`)}`,
-            width: 1200,
-            height: 630,
-            alt: frontmatter.title,
-          },
-        ],
+        url: `https://kehinde.xyz/craft/${slug}`,
       },
       twitter: {
         card: 'summary_large_image',
         title: frontmatter.title,
-        description: frontmatter.description || `Explore ${frontmatter.title} - UI craft by Kenny`,
-        images: [`/api/og/craft/${slug}?title=${encodeURIComponent(frontmatter.title)}&description=${encodeURIComponent(frontmatter.description || `Explore ${frontmatter.title} - UI craft by Kenny`)}`],
+        description:
+          frontmatter.description ||
+          `Explore ${frontmatter.title} - UI craft by Kenny`,
       },
     }
   } catch (error) {

@@ -46,15 +46,7 @@ export async function generateMetadata({
           `Read ${frontmatter.title} on Kenny's blog`,
         type: 'article',
         publishedTime: frontmatter.date,
-        url: `https://kehinde.me/blog/${slug}`,
-        images: [
-          {
-            url: `/api/og/blog/${slug}?title=${encodeURIComponent(frontmatter.title)}&description=${encodeURIComponent(frontmatter.description || `Read ${frontmatter.title} on Kenny's blog`)}`,
-            width: 1200,
-            height: 630,
-            alt: frontmatter.title,
-          },
-        ],
+        url: `https://kehinde.xyz/blog/${slug}`,
       },
       twitter: {
         card: 'summary_large_image',
@@ -62,9 +54,6 @@ export async function generateMetadata({
         description:
           frontmatter.description ||
           `Read ${frontmatter.title} on Kenny's blog`,
-        images: [
-          `/api/og/blog/${slug}?title=${encodeURIComponent(frontmatter.title)}&description=${encodeURIComponent(frontmatter.description || `Read ${frontmatter.title} on Kenny's blog`)}`,
-        ],
       },
     }
   } catch (error) {
