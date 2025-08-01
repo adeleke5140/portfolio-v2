@@ -1,6 +1,5 @@
 'use client'
 import { PageWrapper } from '@/components/pageWrapper'
-import Link from 'next/link'
 import React from 'react'
 import { A11ySection } from './home/a11y-section'
 
