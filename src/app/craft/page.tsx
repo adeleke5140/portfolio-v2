@@ -13,10 +13,18 @@ export type CraftItem = {
   tag?: string
   date?: string
   description?: string
+  status?: 'draft' | 'ready-to-go' | 'archived'
+}
+
+const filterIfProd = (data: Array<CraftItem>) => {
+  if (process.env.NODE_ENV == 'production') {
+    return data.filter((item) => item.status !== 'draft')
+  }
+  return data
 }
 
 export default function Index() {
-  const allCraftData = getSortedCraftData() as Array<CraftItem>
+  const allCraftData = filterIfProd(getSortedCraftData()) as Array<CraftItem>
 
   const craftsByCategory = allCraftData.reduce(
     (acc, craft) => {
