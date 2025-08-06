@@ -1,23 +1,25 @@
 ---
-title: 'Fixed positioning causing layout shift'
+title: 'Fixed positioning causes layout shift'
 date: '2025-08-06'
 status: 'in-progress'
 tag: 'css'
 ---
 
-I recently built a `fixed` movable navbar in a NextJS project. It had an interesting mask effect that I will write about soon, so that as you moved the navbar, you see what was behind it.
+I recently built a `fixed` movable navbar at Mastra. It had an interesting mask effect that I will write about soon, so that as you moved the navbar, you see what was behind it.
 
 It worked as expected except for one problem. Everytime I refreshed, the navbar caused the page to jump to a random section. There were a couple of internal page links and each refresh auto-scrolled the page to that section. It was jarring.
 
-This was uninteded and it was caused because of the layout of my html.
+The reason for the bug was the layout of my html.
 
-Here is a rough layout of how it was setup:
+Here is how it was setup:
 
 ```jsx
-<div>
-    <FixedNav/>
-    <OtherContent/>
-</div>
+<body>
+  <div>
+      <FixedNav/>
+      <OtherContent/>
+  </div>
+</body>
 ```
 
 The fix was to take the nav out of the container for the rest of the content and move it to the body
