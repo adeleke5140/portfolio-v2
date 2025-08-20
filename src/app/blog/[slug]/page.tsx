@@ -7,6 +7,10 @@ import { getBlogData } from '../utils'
 import * as fsSync from 'fs'
 import path from 'path'
 import { formatDate } from '@/helpers/formatDate'
+import {
+  FinalCodeBlock,
+  InitialCodeBlock,
+} from '../components/initial-code-block'
 
 export async function generateMetadata({
   params,
@@ -91,6 +95,8 @@ export default async function Page({
       parseFrontmatter: true,
     },
     components: {
+      InitialCodeBlock,
+      FinalCodeBlock,
       ...components,
     },
   })

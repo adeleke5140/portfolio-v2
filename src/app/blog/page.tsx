@@ -44,7 +44,6 @@ const Index = () => {
         }
       }
     })
-    .filter((post) => post.status == 'completed')
     .map((post) => ({
       ...post,
       year: getYearFromDate(post.date),

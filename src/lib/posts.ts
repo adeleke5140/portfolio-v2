@@ -31,9 +31,9 @@ const getSortedPostsData = () => {
   })
   return allPostsData.sort((a: Post, b: Post) => {
     if (a.date < b.date) {
-      return 1
-    } else {
       return -1
+    } else {
+      return 1
     }
   })
 }
@@ -77,13 +77,13 @@ const getSortedCraftData = () => {
     const fullPath = path.join(craftDirectory, fileName)
     const fileContents = fs.readFileSync(fullPath, 'utf-8')
     const matterResult = matter(fileContents)
-    
+
     return {
       id,
       ...matterResult.data,
     }
   })
-  
+
   return allCraftData.sort((a: Post, b: Post) => {
     if (a.date && b.date) {
       if (a.date < b.date) {

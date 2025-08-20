@@ -48,8 +48,7 @@ export const Introduction = () => {
               <p className="rounded-lg h-full text-[17px]">
                 My work is my <span className="font-medium">craft</span>. A
                 passion I am dedicated to because it builds me as a person. I
-                strive as a craftsman to infuse every piece of work with delight
-                and care.
+                strive to infuse every piece of work with delight and care.
               </p>
             </div>
           </div>
