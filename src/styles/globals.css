@@ -22,7 +22,7 @@ h4 {
   --gray-3: #232323;
   --gray-4: #282828;
   --gray-6: #343434;
-  --sh-class: #1c1c1c;
+  /*--sh-class: #1c1c1c;
   --sh-sign: #1c1c1c;
   --sh-string: #1c1c1c;
   --sh-keyword: #00a890;
@@ -30,7 +30,18 @@ h4 {
   --sh-jsxliterals: #1c1c1c;
   --sh-property: #4c3fff;
   --sh-entity: #1c1c1c;
-  --sh-identifier: #1c1c1c;
+  --sh-identifier: #1c1c1c;*/
+
+  --sh-identifier: #354150;
+  --sh-keyword: #6f6f6f;
+  --sh-string: #6f6f6f;
+  --sh-class: #000000;
+  --sh-property: #6f6f6f;
+  --sh-entity: #000000;
+  --sh-jsxliterals: #000000;
+  --sh-sign: #8f8f8f;
+  --sh-comment: #6f6f6f;
+
   --primary: #e87400;
   --outline: oklch(0.68 0.17 53.04 / 0.44);
   --gradient-stop-1: oklch(0.52 0.02 266.33 / 0.85);
@@ -121,12 +132,12 @@ h1 {
 }
 
 pre {
-  background-color: #fafafa;
+  background: linear-gradient(to top, #f8f8f8, #fcfcfc);
   padding: 1em;
   margin-top: 0.5em;
   user-select: 'auto';
   tab-size: '4';
-  border: 1px solid #e5e7eb;
+  border: 1px solid hsl(0 0% 92% / 1);
   border-radius: 8px;
   overflow: auto;
 }
