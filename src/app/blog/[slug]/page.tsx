@@ -11,6 +11,7 @@ import {
   FinalCodeBlock,
   InitialCodeBlock,
 } from '../components/initial-code-block'
+import { getPostData } from '@/lib/posts'
 
 export async function generateMetadata({
   params,
@@ -23,6 +24,8 @@ export async function generateMetadata({
   const mdPath = path.join(process.cwd(), 'src/app/blog/posts', `${slug}.md`)
 
   const blogPath = fsSync.existsSync(mdxPath) ? mdxPath : mdPath
+
+  const data = await getPostData(slug)
 
   try {
     const content = await fs.readFile(blogPath, 'utf8')

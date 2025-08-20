@@ -52,21 +52,18 @@ const getAllPostsIds = () => {
   return ids
 }
 
-const getPostData = async (id: string) => {
-  const fullPath = path.join(postsDirectory, `${id}.md`)
-  const fileContents = fs.readFileSync(fullPath, 'utf8')
+const getPostData = async (id: string): Promise<{ title: string }> => {
+  const mdxPath = path.join(process.cwd(), 'src/app/blog/posts', `${id}.mdx`)
+  const mdPath = path.join(process.cwd(), 'src/app/blog/posts', `${id}.md`)
+
+  const blogPath = fs.existsSync(mdxPath) ? mdxPath : mdPath
+
+  const fileContents = fs.readFileSync(blogPath, 'utf8')
 
   const matterResult = matter(fileContents)
 
-  const processedContent = await remark()
-    .use(html)
-    .process(matterResult.content)
-  const contentHtml = processedContent.toString()
-
   return {
-    id,
-    contentHtml,
-    ...matterResult.data,
+    title: matterResult.data?.title,
   }
 }
 
