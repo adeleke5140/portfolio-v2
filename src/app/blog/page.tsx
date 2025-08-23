@@ -1,7 +1,6 @@
 import { PageWrapper } from '@/components/pageWrapper'
 import { formatDate } from '@/helpers/formatDate'
 import { getSortedPostsData } from '@/lib/posts'
-import { CloudCog } from 'lucide-react'
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -85,9 +84,9 @@ const Index = () => {
                   <Link
                     key={post.id}
                     href={`/blog/${post.id}`}
-                    className="pb-7  hover:bg-gray-100 py-4 block mb-2 transition-colors duration-200 "
+                    className="pb-7  hover:bg-gray-100 group rounded-md py-4 block mb-2 transition-colors duration-200 "
                   >
-                    <div className="flex hover:translate-x-2 flex-col gap-1 transition-transform ">
+                    <div className="flex group-hover:translate-x-2 flex-col gap-1 transition-transform ">
                       <p className="text-lg hover:underline  transition-all">
                         {post.title}
                       </p>

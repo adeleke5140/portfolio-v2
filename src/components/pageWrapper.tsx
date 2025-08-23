@@ -31,7 +31,7 @@ const PageWrapper = ({
       heading
     )
   return (
-    <div className={cn('relative px-6 md:px-0 mx-auto', classname)}>
+    <div className={cn('relative px-6 2xl:px-0 mx-auto', classname)}>
       <div className="flex flex-col gap-5">
         {showLink ? (
           <BackButton path={path ? path : ''} text={`${backText}`} />
