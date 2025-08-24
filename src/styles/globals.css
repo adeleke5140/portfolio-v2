@@ -240,3 +240,18 @@ input[type='checkbox'] {
     border-color: var(--active-button-border);
   }
 }
+
+@keyframes rotate {
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+button.reset {
+  animation-duration: 300ms;
+  animation-fill-mode: backwards;
+}
+
+button.reset[data-rotate='true'] {
+  animation-name: rotate;
+}
