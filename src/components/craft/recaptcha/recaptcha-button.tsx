@@ -1,7 +1,7 @@
 'use client'
 
+import { AnimatePresence, motion, useMotionValue } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
 
 function Reset({ doStuff }: { doStuff: () => void }) {
   const [rotate, setRotate] = useState(false)
@@ -40,36 +40,18 @@ function Reset({ doStuff }: { doStuff: () => void }) {
   )
 }
 
-const Canvas = (props: React.ComponentProps<'canvas'>) => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null)
-
-  const draw = (ctx: CanvasRenderingContext2D) => {
-    ctx.fillStyle = '#000000'
-    ctx.beginPath()
-    ctx.arc(50, 100, 10, 0, 2 * Math.PI)
-    ctx.fill()
-  }
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const context = canvas.getContext('2d', { antialias: true })
-
-    if (!context) return
-    //Our first draw
-    draw(context)
-  }, [draw])
-
-  return <canvas ref={canvasRef} {...props} />
-}
-
 export const RecaptchaButton = () => {
   const [loading, setLoading] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
 
+  const handleReset = () => {
+    setIsVisible(false)
+    setLoading(false)
+  }
+
   return (
     <div className="p-8 flex flex-col gap-2">
-      <Reset doStuff={() => setIsVisible(false)} />
+      <Reset doStuff={handleReset} />
       <motion.label
         layout
         transition={{
@@ -125,55 +107,7 @@ export const RecaptchaButton = () => {
             }}
             className="h-80 w-80 flex flex-col pb-4 gap-4 bg-[#fafafa] rounded-2xl p-1 shadow-[rgba(149,157,165,0.2)_0px_17px_19px_0px]"
           >
-            <div
-              style={{
-                boxShadow:
-                  '0px 0px 0px 0.5px #0000000f,0px 0.5px 2px -1px #0000000f,0px 1px 2px 0px #0000000a',
-              }}
-              className=" relative overflow-hidden h-[calc(100%-3rem)] rounded-2xl w-full bg-[#fff] "
-            >
-              <svg
-                className="absolute inset-0"
-                width="100%"
-                height="100%"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <defs>
-                  <pattern
-                    id="dotPattern"
-                    x="0"
-                    y="0"
-                    width="20"
-                    height="20"
-                    patternUnits="userSpaceOnUse"
-                  >
-                    <circle cx="2" cy="2" r="0.5" fill="#4135353d" />
-                  </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#dotPattern)" />
-              </svg>
-
-              <div className="px-4 relative z-30 py-4">
-                <p
-                  style={{
-                    fontFamily: 'Nunito',
-                  }}
-                  className="font-semibold"
-                >
-                  Connect the Numbers in Order
-                </p>
-                <p
-                  style={{
-                    fontFamily: 'Nunito',
-                  }}
-                  className="text-gray-500 text-xs"
-                >
-                  (1 to 8)
-                </p>
-              </div>
-
-              <Canvas />
-            </div>
+            <DrawingSection />
             <div className="self-end px-4">
               <button
                 type="button"
@@ -189,12 +123,158 @@ export const RecaptchaButton = () => {
                 }}
                 disabled={loading}
                 data-loading={loading}
-                className="bg-[#006cff] shadow-md min-w-[88.02px] data-[loading=true]:opacity-50 rounded-full px-2 py-1 text-white font-semibold"
+                className="bg-[#006cff] shadow-md min-w-[88.02px] data-[loading=true]:opacity-50 data-[completed=false]:opacity-50 data-[completed=false]:cursor-not-allowed rounded-full px-2 py-1 text-white font-semibold"
               >
                 {loading ? 'Verifying' : 'Verify'}
               </button>
             </div>
           </motion.div>
+        ) : null}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+function DrawingSection() {
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+  const [isActive, setIsActive] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const containerEl = containerRef.current
+
+    if (!containerEl) return
+
+    const parentEl = containerEl.parentElement
+    if (!parentEl) return
+
+    parentEl.style.cursor = 'none'
+    const handleMouseMove = (e: MouseEvent) => {
+      x.set(e.clientX)
+      y.set(e.clientY)
+    }
+
+    const handleMouseEnter = (e: MouseEvent) => {
+      x.set(e.clientX)
+      y.set(e.clientY)
+      setIsActive(true)
+    }
+
+    const handleMouseLeave = () => {
+      setIsActive(false)
+    }
+
+    parentEl.addEventListener('mousemove', handleMouseMove)
+    parentEl.addEventListener('mouseenter', handleMouseEnter)
+    parentEl.addEventListener('mouseleave', handleMouseLeave)
+
+    return () => {
+      parentEl.style.cursor = ''
+      parentEl.removeEventListener('mousemove', handleMouseMove)
+      parentEl.removeEventListener('mouseenter', handleMouseEnter)
+      parentEl.removeEventListener('mouseleave', handleMouseLeave)
+    }
+  }, [])
+  return (
+    <div
+      style={{
+        boxShadow:
+          '0px 0px 0px 0.5px #0000000f,0px 0.5px 2px -1px #0000000f,0px 1px 2px 0px #0000000a',
+      }}
+      className="relative overflow-hidden h-[calc(100%-3rem)] rounded-2xl w-full bg-[#fff]"
+    >
+      <svg
+        className="absolute inset-0"
+        width="100%"
+        height="100%"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <pattern
+            id="dotPattern"
+            x="0"
+            y="0"
+            width="20"
+            height="20"
+            patternUnits="userSpaceOnUse"
+          >
+            <circle cx="2" cy="2" r="0.5" fill="#4135353d" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#dotPattern)" />
+      </svg>
+
+      <div className="px-4 relative z-30 py-4">
+        <p
+          style={{
+            fontFamily: 'Nunito',
+          }}
+          className="font-semibold select-none"
+        >
+          Connect the Numbers in Order
+        </p>
+        <p
+          style={{
+            fontFamily: 'Nunito',
+          }}
+          className="text-gray-500 text-xs select-none"
+        >
+          (1 to 8)
+        </p>
+      </div>
+
+      <div ref={containerRef} />
+      <AnimatePresence>
+        {isActive ? (
+          <motion.svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            className="size-7 fixed pointer-events-none"
+            viewBox="0 0 512 512"
+            style={{
+              top: y,
+              left: x,
+            }}
+            initial={{
+              scale: 0,
+              opacity: 0,
+            }}
+            animate={{
+              scale: 1,
+              opacity: 1,
+            }}
+            exit={{
+              scale: 0,
+              opacity: 0,
+            }}
+          >
+            <path
+              fill="#FF6E83"
+              d="M462.555 51.464c-27.492-27.492-58.857-40.701-70.055-29.503l-75.72 75.72l99.558 99.558l75.72-75.72c11.198-11.198-2.011-42.562-29.503-70.055"
+            />
+            <path
+              fill="#BFBCAF"
+              d="M414.557 99.462c-31.367-31.367-67.151-46.437-79.927-33.661l-77.54 77.54L370.678 256.93l77.54-77.54c12.776-12.776-2.294-48.561-33.661-79.928"
+            />
+            <path
+              fill="#2B2622"
+              d="M115.545 449.979L47.25 479.683c-4.97 2.162-10.752-.115-12.913-5.085a9.86 9.86 0 0 1 0-7.828l29.705-68.295c8.622-19.823 31.681-28.903 51.504-20.281s28.903 31.681 20.281 51.504c-4.102 9.429-11.55 16.462-20.282 20.281"
+            />
+            <path
+              fill="#FFD469"
+              d="M403.416 223.955q.111-.155.216-.315c9.851-14.117-5.223-48.099-35.188-78.064c-29.966-29.966-63.949-45.039-78.065-35.187q-.157.104-.311.213c-.127.094-.259.183-.383.281c-.348.268-.688.551-1.007.87l-.161.161h-.001v.001L108.477 291.954s-50.978 126.152-31.77 145.359s145.359-31.77 145.359-31.77l180.2-180.2c.319-.319.603-.659.871-1.008c.097-.123.185-.254.279-.38"
+            />
+            <path
+              fill="#E5AA6E"
+              d="m108.477 291.954l-4.002 24.94c-.589 3.668 2.588 6.835 6.254 6.237l17.873-2.919c3.53-.576 6.647 2.349 6.296 5.908l-1.99 20.174c-.349 3.542 2.737 6.461 6.253 5.915l18.063-2.802c3.693-.573 6.853 2.66 6.195 6.339l-3.09 17.282c-.636 3.559 2.309 6.739 5.906 6.376l20.33-2.05c3.43-.346 6.314 2.542 5.963 5.971l-2.096 20.51c-.361 3.529 2.696 6.455 6.206 5.941l25.871-3.79l-145.8 61.009c11.631-11.631-18.485-41.748-30.117-30.117z"
+            />
+            <path
+              fill="#FFB636"
+              d="M145.892 298.543a6.79 6.79 0 0 1-4.801-11.591l150.356-150.356a6.79 6.79 0 0 1 9.602 9.603L150.693 296.554a6.77 6.77 0 0 1-4.801 1.989m43.211 36.421l150.355-150.356a6.79 6.79 0 1 0-9.602-9.603L179.5 325.362a6.79 6.79 0 0 0 9.603 9.602m38.41 38.409l150.355-150.355a6.79 6.79 0 1 0-9.602-9.603L217.91 363.771a6.79 6.79 0 0 0 9.603 9.602"
+            />
+          </motion.svg>
         ) : null}
       </AnimatePresence>
     </div>
