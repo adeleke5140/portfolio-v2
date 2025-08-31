@@ -97,7 +97,7 @@ h1 {
 }
 
 .letter {
-  display: inline-flex;
+  display: inline-block;
   animation-name: animate-in;
   animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
   animation-delay: calc(0.03s * var(--index));
@@ -255,3 +255,52 @@ button.reset {
 button.reset[data-rotate='true'] {
   animation-name: rotate;
 }
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0
+  }
+}
+
+
+
+label::after{
+  opacity: 0;
+  transform: translateX(calc(var(--move-x, 0) * 10px)) translateY(-50%);
+  top:50%;
+  transition: transform 0.3s ease;
+}
+
+label:focus-within{
+  &::after{
+    animation: fade-in 200ms linear forwards;
+  }
+}
+
+@keyframes fade-in{ 
+  50%{
+    background-color: hsl(251deg,9%,74%)
+  }
+  100%{
+    opacity: 100;
+    background-color: #000
+  }
+}
+
+
+/* label#hourLabel ::after{ 
+  display: inline-block;
+  animation: fade-out 200ms linear infinite;
+} */

@@ -1,12 +1,12 @@
 import { getCraftData } from '@/app/blog/utils'
-import { IntegrationMenu } from '@/components/craft/integration-menu/integration-menu'
 import { CardAnimation } from '@/components/craft/card-animation/card-animation'
 import { CraftContainer } from '@/components/craft/craft-items/craft-container'
 import { Tabs } from '@/components/craft/exclusion-tabs/tabs'
+import { IntegrationMenu } from '@/components/craft/integration-menu/integration-menu'
 import { RecaptchaButton } from '@/components/craft/recaptcha/recaptcha-button'
+import { SplitToEdit } from '@/components/craft/split-to-edit/split-to-edit'
 import { components } from '@/components/mdx/mdx-components'
 import { PageWrapper } from '@/components/pageWrapper'
-import { formatDate } from '@/helpers/formatDate'
 import { promises as fs } from 'fs'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import path from 'path'
@@ -103,6 +103,7 @@ export default async function Page({
       Tabs,
       IntegrationMenu,
       RecaptchaButton,
+      SplitToEdit,
       ...components,
     },
   })
