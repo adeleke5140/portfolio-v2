@@ -2,6 +2,7 @@
 import { PageWrapper } from '@/components/pageWrapper'
 import React from 'react'
 import { A11ySection } from './home/a11y-section'
+import { motion } from 'motion/react'
 
 const connection = [
   {
@@ -32,12 +33,14 @@ export const Introduction = () => {
           <h1 className="text-[48px] font-medium lg:text-7xl lg:tracking-[-0.06em] lg:leading-[1.2em] font-serif tracking-tighter">
             {TITLE.split('').map((letter, index) => (
               <React.Fragment key={index + 'title'}>
-                <span
-                  className="letter"
-                  style={{ '--index': index } as React.CSSProperties}
+                <motion.span
+                  className="inline"
+                  initial={{
+                    y: 20,
+                  }}
                 >
                   {letter}
-                </span>
+                </motion.span>
                 {index === 5 ? ' ' : null}
               </React.Fragment>
             ))}
@@ -46,7 +49,7 @@ export const Introduction = () => {
       }
       classname="max-w-none"
     >
-      <div className="flex gap-16 pt-8 max-w-[40rem] flex-col">
+      <div className="flex gap-10 pt-8 max-w-[40rem] flex-col">
         <section className="px-0">
           <div className="flex flex-col text-[var(--gray-1)] gap-2 dark:border-[#282828] dark:bg-[#282828]">
             <div className="rounded-lg  dark:text-[#fefefe]">
@@ -74,19 +77,20 @@ export const Introduction = () => {
         </section>
 
         <section className="flex flex-col gap-5">
-          <p className="font-medium text-[17px]">Currently Building</p>
+          <p className="font-medium text-[17px]">Building</p>
+          <p>
+            I am an active japanese learner so I am working on software to make
+            it easier for me. You can check it out below.
+          </p>
           <div>
             <a
               target="_blank"
               href="https://chromewebstore.google.com/detail/nihongo-speech/jhojfellcdlldagfemimnjebnfoodchf?authuser=0&hl=en-GB"
-              className="bg-white inline-block py-2 px-2 rounded-xl w-full"
+              className="inline-block group rounded-xl w-full"
             >
-              <span className="flex items-center border border-[#f0f0f0] rounded-lg p-4 font-medium text-lg w-full bg-[#fcfcfc]">
-                <span className="flex justify-self-start px-3 py-2 flex-col gap-0.5">
-                  <span className=" inline-block">Hanashi</span>
-                  <span className="text-sm text-ken-grey ">
-                    Dynamic japanese readings with AI Voices
-                  </span>
+              <span className="flex justify-self-start flex-col gap-0.5">
+                <span className=" bg-gray-100 group-hover:underline justify-between group flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-xl">
+                  Hanashi
                 </span>
               </span>
             </a>
@@ -100,7 +104,7 @@ export const Introduction = () => {
               <a
                 target="_blank"
                 href={con.value}
-                className="capitalize bg-gray-100 justify-between group flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-xl"
+                className="capitalize  hover:underline bg-gray-100 justify-between group flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-xl"
                 rel="external"
                 referrerPolicy="strict-origin"
               >
