@@ -77,7 +77,7 @@ export const SplitToEdit = () => {
             <motion.span
               style={{
                 fontFamily: 'Nunito',
-                margin: p ? '0 0 0 0' : '0 0 0 12px',
+                margin: p ? '0 0 0 1px' : '0 0 0 12px',
               }}
               className="font-bold inline-block text-[hsl(251deg,9%,74%)]"
             >
@@ -111,7 +111,7 @@ export const SplitToEdit = () => {
             <motion.span
               style={{
                 fontFamily: 'Nunito',
-                margin: p ? '0 0 0 0' : '0 0 0 12px',
+                margin: p ? '0 0 0 1px' : '0 0 0 12px',
               }}
               className="font-bold inline-block text-[hsl(251deg,9%,74%)]"
             >
