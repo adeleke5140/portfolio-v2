@@ -14,6 +14,7 @@ export type CraftItem = {
   date?: string
   description?: string
   status?: 'draft' | 'ready-to-go' | 'archived'
+  isNew?: boolean
 }
 
 const filterIfProd = (data: Array<CraftItem>) => {
@@ -26,17 +27,14 @@ const filterIfProd = (data: Array<CraftItem>) => {
 export default function Index() {
   const allCraftData = filterIfProd(getSortedCraftData()) as Array<CraftItem>
 
-  const craftsByCategory = allCraftData.reduce(
-    (acc, craft) => {
-      const category = craft.tag || 'uncategorized'
-      if (!acc[category]) {
-        acc[category] = []
-      }
-      acc[category].push(craft)
-      return acc
-    },
-    {} as Record<string, CraftItem[]>
-  )
+  const craftsByCategory = allCraftData.reduce((acc, craft) => {
+    const category = craft.tag || 'uncategorized'
+    if (!acc[category]) {
+      acc[category] = []
+    }
+    acc[category].push(craft)
+    return acc
+  }, {} as Record<string, CraftItem[]>)
 
   const sortedCategories = Object.entries(craftsByCategory).sort(([a], [b]) =>
     a.localeCompare(b)
@@ -58,11 +56,14 @@ export default function Index() {
                 <Link
                   href={`/craft/${craft.id}`}
                   key={craft.id}
-                  className="pb-7  hover:bg-gray-100 py-4 block mb-2 transition-colors duration-200 "
+                  className="pb-7 group hover:bg-gray-100 rounded-md py-4 block mb-2 transition-colors duration-200 "
                 >
-                  <div className="flex hover:translate-x-2 flex-col gap-1 transition-transform ">
-                    <p className="text-lg hover:underline  transition-all">
-                      {craft.title}
+                  <div className="flex group-hover:translate-x-2 flex-col gap-1 transition-transform ">
+                    <p className="flex gap-2 items-center">
+                      <span className="text-lg  hover:underline  transition-all">
+                        {craft.title}
+                      </span>
+                      <span>{craft.isNew ? <NewBadge /> : ''}</span>
                     </p>
                     {craft.description && (
                       <p className="text-sm text-ken-grey">
@@ -77,5 +78,13 @@ export default function Index() {
         ))}
       </section>
     </PageWrapper>
+  )
+}
+
+function NewBadge() {
+  return (
+    <span className="bg-gray-100 text-[var(--primary)] group-hover:bg-white transition-colors font-medium px-2 py-0.5 rounded-lg text-xs">
+      new
+    </span>
   )
 }

@@ -22,15 +22,6 @@ h4 {
   --gray-3: #232323;
   --gray-4: #282828;
   --gray-6: #343434;
-  /*--sh-class: #1c1c1c;
-  --sh-sign: #1c1c1c;
-  --sh-string: #1c1c1c;
-  --sh-keyword: #00a890;
-  --sh-comment: #1c1c1c;
-  --sh-jsxliterals: #1c1c1c;
-  --sh-property: #4c3fff;
-  --sh-entity: #1c1c1c;
-  --sh-identifier: #1c1c1c;*/
 
   --sh-identifier: #354150;
   --sh-keyword: #6f6f6f;
@@ -298,9 +289,3 @@ label:focus-within{
     background-color: #000
   }
 }
-
-
-/* label#hourLabel ::after{ 
-  display: inline-block;
-  animation: fade-out 200ms linear infinite;
-} */
