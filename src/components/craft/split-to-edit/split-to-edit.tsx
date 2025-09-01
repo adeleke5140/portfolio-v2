@@ -1,4 +1,5 @@
 'use client'
+import { cn } from '@/lib/utils'
 import { useEffect, useRef, useState } from 'react'
 
 export const SplitToEdit = () => {
@@ -10,6 +11,7 @@ export const SplitToEdit = () => {
     hour: 0,
     min: 9,
   })
+  const [playAnimation, setPlayAnimation] = useState(false)
 
   useEffect(() => {
     const hourEl = hourRef.current
@@ -33,65 +35,90 @@ export const SplitToEdit = () => {
     }))
   }, [min])
   return (
-    <div className="flex gap-3 items-center">
-      <div className="bg-[hsl(255deg,31%,97%)] flex gap-2 h-10 p-2 rounded-lg">
-        <Label
-          htmlFor="hour"
-          style={
-            {
-              '--move-x': length.hour,
-            } as React.CSSProperties
-          }
+    <div>
+      <div className="flex items-center">
+        <div
+          className={cn(
+            'bg-[hsl(255deg,31%,97%)] transition-transform h-10 p-2 rounded-[0.65rem]',
+            playAnimation ? 'translate-x-0 pr-0' : 'pr-2 -translate-x-2',
+            playAnimation ? 'rounded-r-none' : '',
+            playAnimation ? '[&_label]:gap-0.5' : ''
+          )}
         >
-          <Input
-            id="hour"
-            type="text"
-            ref={hourRef}
-            value={hour}
-            setValue={setHour}
-          />
-          <span
-            style={{
-              fontFamily: 'Nunito',
-            }}
-            className="font-bold  text-[hsl(251deg,9%,74%)]"
+          <Label
+            htmlFor="hour"
+            style={
+              {
+                '--move-x': length.hour,
+              } as React.CSSProperties
+            }
           >
-            Hr.
-          </span>
-        </Label>
-      </div>
-      <div className="bg-[hsl(255deg,31%,97%)] h-10 max-w-fit p-2 rounded-lg">
-        <Label
-          htmlFor="min"
-          style={
-            {
-              '--move-x': length.min,
-            } as React.CSSProperties
-          }
+            <Input
+              id="hour"
+              type="text"
+              ref={hourRef}
+              value={hour}
+              setValue={setHour}
+            />
+            <span
+              style={{
+                fontFamily: 'Nunito',
+              }}
+              className="font-bold text-[hsl(251deg,9%,74%)]"
+            >
+              Hr.
+            </span>
+          </Label>
+        </div>
+        <div
+          className={cn(
+            'bg-[hsl(255deg,31%,97%)] transition-[border-radius] h-10 max-w-fit p-2 rounded-[0.65rem]',
+            playAnimation ? 'pl-0' : 'pl-2',
+            playAnimation ? 'rounded-none' : '',
+            playAnimation ? '[&_label]:gap-0.5' : ''
+          )}
         >
-          <Input
-            ref={minRef}
-            id="min"
-            type="text"
-            value={min}
-            setValue={setMin}
-          />
-          <span
-            style={{
-              fontFamily: 'Nunito',
-            }}
-            className="font-bold text-[hsl(251deg,9%,74%)]"
+          <Label
+            htmlFor="min"
+            style={
+              {
+                '--move-x': length.min,
+              } as React.CSSProperties
+            }
           >
-            Min.
-          </span>
-        </Label>
+            <Input
+              ref={minRef}
+              id="min"
+              type="text"
+              value={min}
+              setValue={setMin}
+            />
+            <span
+              style={{
+                fontFamily: 'Nunito',
+              }}
+              className="font-bold text-[hsl(251deg,9%,74%)]"
+            >
+              Min.
+            </span>
+          </Label>
+        </div>
+        <button
+          aria-label="submit"
+          onClick={() => setPlayAnimation((prev) => !prev)}
+          className={cn(
+            'text-black rounded-[0.65rem] transition-transform h-10 bg-[hsl(255deg,31%,97%)] p-3',
+            playAnimation ? 'translate-x-0' : 'translate-x-2',
+            playAnimation ? 'rounded-l-none' : ''
+          )}
+        >
+          {playAnimation ? (
+            <Pen className="size-4" />
+          ) : (
+            <CheckMark className="size-4" />
+          )}
+        </button>
       </div>
-      <button
-        aria-label="submit"
-        className="text-black rounded-lg h-10 bg-[hsl(255deg,31%,97%)] p-3 "
-      >
-        <CheckMark className="size-4" />
-      </button>
     </div>
   )
 }
@@ -108,6 +135,27 @@ const CheckMark = ({ className }: { className: string }) => {
         <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
       </svg>
     </>
+  )
+}
+
+const Pen = ({ className }: { className: string }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="32"
+      height="32"
+      viewBox="0 0 32 32"
+      className={className}
+    >
+      <path
+        d="M18.086,5.5,3.293,20.293a1.008,1.008,0,0,0-.27.49l-2,9A1,1,0,0,0,2,31a1.067,1.067,0,0,0,.217-.023l9-2a1.008,1.008,0,0,0,.49-.27L26.5,13.914Z"
+        fill="#92909d"
+      />
+      <path
+        d="M30.121,6.051,25.949,1.878a3.006,3.006,0,0,0-4.242,0L19.5,4.086,27.914,12.5l2.208-2.207A3.007,3.007,0,0,0,30.121,6.051Z"
+        fill="#92909d"
+      />
+    </svg>
   )
 }
 
@@ -128,6 +176,7 @@ const Input = ({
   setValue,
   type,
   ref,
+  className,
 }: React.ComponentProps<'input'> & {
   setValue: (val: string) => void
 }) => {
@@ -148,7 +197,10 @@ const Input = ({
       style={{
         fontFamily: 'Nunito',
       }}
-      className="w-5 focus:outline-none caret-transparent  font-bold bg-transparent"
+      className={cn(
+        'w-5 focus:outline-none caret-transparent  font-bold bg-transparent',
+        className
+      )}
     />
   )
 }
