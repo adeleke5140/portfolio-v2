@@ -1,7 +1,14 @@
 'use client'
+
 import { cn } from '@/lib/utils'
 import { useEffect, useRef, useState } from 'react'
+import { motion } from 'motion/react'
 
+const t = {
+  duration: 0.6,
+  type: 'spring',
+  bounce: 0.6,
+}
 export const SplitToEdit = () => {
   const [hour, setHour] = useState('')
   const [min, setMin] = useState('')
@@ -11,7 +18,7 @@ export const SplitToEdit = () => {
     hour: 0,
     min: 9,
   })
-  const [playAnimation, setPlayAnimation] = useState(false)
+  const [p, setP] = useState(false)
 
   useEffect(() => {
     const hourEl = hourRef.current
@@ -37,12 +44,19 @@ export const SplitToEdit = () => {
   return (
     <div>
       <div className="flex items-center">
-        <div
+        <motion.div
+          style={{
+            borderRadius: p ? '10.4px 0 0 10.4px' : '10.4px',
+          }}
+          initial={false}
+          animate={{
+            x: p ? 0 : -10,
+            padding: p ? '8px 0 8px 8px' : '8px',
+          }}
+          transition={t}
           className={cn(
-            'bg-[hsl(255deg,31%,97%)] transition-transform h-10 p-2 rounded-[0.65rem]',
-            playAnimation ? 'translate-x-0 pr-0' : 'pr-2 -translate-x-2',
-            playAnimation ? 'rounded-r-none' : '',
-            playAnimation ? '[&_label]:gap-0.5' : ''
+            'bg-[hsl(255deg,31%,97%)] h-10 rounded-[0.65rem]'
+            // p ? '[&_label]:gap-0.5' : ''
           )}
         >
           <Label
@@ -60,23 +74,24 @@ export const SplitToEdit = () => {
               value={hour}
               setValue={setHour}
             />
-            <span
+            <motion.span
               style={{
                 fontFamily: 'Nunito',
+                margin: p ? '0 0 0 0' : '0 0 0 12px',
               }}
-              className="font-bold text-[hsl(251deg,9%,74%)]"
+              className="font-bold inline-block text-[hsl(251deg,9%,74%)]"
             >
               Hr.
-            </span>
+            </motion.span>
           </Label>
-        </div>
-        <div
-          className={cn(
-            'bg-[hsl(255deg,31%,97%)] transition-[border-radius] h-10 max-w-fit p-2 rounded-[0.65rem]',
-            playAnimation ? 'pl-0' : 'pl-2',
-            playAnimation ? 'rounded-none' : '',
-            playAnimation ? '[&_label]:gap-0.5' : ''
-          )}
+        </motion.div>
+        <motion.div
+          className={cn('bg-[hsl(255deg,31%,97%)] h-10 max-w-fit')}
+          style={{
+            borderRadius: p ? '0' : '10.4px',
+            padding: p ? '8px 0px 8px 0px' : '8px',
+          }}
+          transition={t}
         >
           <Label
             htmlFor="min"
@@ -93,31 +108,38 @@ export const SplitToEdit = () => {
               value={min}
               setValue={setMin}
             />
-            <span
+            <motion.span
               style={{
                 fontFamily: 'Nunito',
+                margin: p ? '0 0 0 0' : '0 0 0 12px',
               }}
-              className="font-bold text-[hsl(251deg,9%,74%)]"
+              className="font-bold inline-block text-[hsl(251deg,9%,74%)]"
             >
               Min.
-            </span>
+            </motion.span>
           </Label>
-        </div>
-        <button
+        </motion.div>
+        <motion.button
+          initial={false}
+          style={{
+            borderRadius: p ? '0 10.4px 10.4px 0' : '10.4px',
+          }}
+          animate={{
+            x: p ? 0 : 10,
+          }}
+          transition={t}
           aria-label="submit"
-          onClick={() => setPlayAnimation((prev) => !prev)}
+          onClick={() => setP((prev) => !prev)}
           className={cn(
-            'text-black rounded-[0.65rem] transition-transform h-10 bg-[hsl(255deg,31%,97%)] p-3',
-            playAnimation ? 'translate-x-0' : 'translate-x-2',
-            playAnimation ? 'rounded-l-none' : ''
+            'text-black h-10 bg-[hsl(255deg,31%,97%)] p-3'
+            // playAnimation ? 'translate-x-0' : 'translate-x-2',
+            // playAnimation ? 'rounded-l-none' : ''
           )}
         >
-          {playAnimation ? (
-            <Pen className="size-4" />
-          ) : (
-            <CheckMark className="size-4" />
-          )}
-        </button>
+          <span>
+            {p ? <Pen className="size-4" /> : <CheckMark className="size-4" />}
+          </span>
+        </motion.button>
       </div>
     </div>
   )
@@ -163,7 +185,7 @@ const Label = ({ children, ...rest }: React.ComponentProps<'label'>) => {
   return (
     <label
       {...rest}
-      className="flex px-1 gap-3 items-center relative after:absolute after:rounded-md after:content-[''] after:h-5 after:w-[1.5px]"
+      className="flex px-1 items-center relative after:absolute after:rounded-md after:content-[''] after:h-5 after:w-[1.5px]"
     >
       {children}
     </label>
