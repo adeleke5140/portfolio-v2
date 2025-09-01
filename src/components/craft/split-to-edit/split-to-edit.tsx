@@ -1,9 +1,14 @@
 'use client'
 
 import { cn } from '@/lib/utils'
+import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
-import { motion } from 'motion/react'
+import { CheckMark, Pen } from './icons'
 
+const buttonIcons = {
+  edit: <Pen className="size-4" />,
+  done: <CheckMark className="size-4" />,
+}
 const t = {
   duration: 0.6,
   type: 'spring',
@@ -19,6 +24,7 @@ export const SplitToEdit = () => {
     min: 9,
   })
   const [p, setP] = useState(false)
+  const [buttonState, setButtonState] = useState<'edit' | 'done'>('edit')
 
   useEffect(() => {
     const hourEl = hourRef.current
@@ -129,55 +135,26 @@ export const SplitToEdit = () => {
           }}
           transition={t}
           aria-label="submit"
-          onClick={() => setP((prev) => !prev)}
-          className={cn(
-            'text-black h-10 bg-[hsl(255deg,31%,97%)] p-3'
-            // playAnimation ? 'translate-x-0' : 'translate-x-2',
-            // playAnimation ? 'rounded-l-none' : ''
-          )}
+          onClick={() => {
+            setP((prev) => !prev)
+            setButtonState((prev) => {
+              if (prev === 'done') {
+                return 'edit'
+              }
+              return 'done'
+            })
+          }}
+          className="text-black relative h-10 bg-[hsl(255deg,31%,97%)] p-3"
         >
-          <span>
-            {p ? <Pen className="size-4" /> : <CheckMark className="size-4" />}
-          </span>
+          <span className="inline-block z-20 rounded-[10.4px] absolute inset-0  bg-[hsl(318deg,51.72%,54.51%,0%)]" />
+          <AnimatePresence initial={false} mode="wait">
+            <motion.span className="inline-block relative bottom-0.5">
+              {buttonIcons[buttonState]}
+            </motion.span>
+          </AnimatePresence>
         </motion.button>
       </div>
     </div>
-  )
-}
-
-const CheckMark = ({ className }: { className: string }) => {
-  return (
-    <>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 448 512"
-        fill="currentColor"
-        className={className}
-      >
-        <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-      </svg>
-    </>
-  )
-}
-
-const Pen = ({ className }: { className: string }) => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="32"
-      height="32"
-      viewBox="0 0 32 32"
-      className={className}
-    >
-      <path
-        d="M18.086,5.5,3.293,20.293a1.008,1.008,0,0,0-.27.49l-2,9A1,1,0,0,0,2,31a1.067,1.067,0,0,0,.217-.023l9-2a1.008,1.008,0,0,0,.49-.27L26.5,13.914Z"
-        fill="#92909d"
-      />
-      <path
-        d="M30.121,6.051,25.949,1.878a3.006,3.006,0,0,0-4.242,0L19.5,4.086,27.914,12.5l2.208-2.207A3.007,3.007,0,0,0,30.121,6.051Z"
-        fill="#92909d"
-      />
-    </svg>
   )
 }
 
