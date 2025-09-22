@@ -4,6 +4,9 @@ import { cn } from '@/lib/utils'
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
 import { CheckMark, Pen } from './icons'
+import { Nunito } from 'next/font/google'
+
+const nunito = Nunito({ subsets: ['latin'] })
 
 const buttonIcons = {
   edit: <Pen className="size-4" />,
@@ -12,7 +15,7 @@ const buttonIcons = {
 const t = {
   duration: 0.6,
   type: 'spring',
-  bounce: 0.6,
+  bounce: 0.5,
 }
 export const SplitToEdit = () => {
   const [hour, setHour] = useState('')
@@ -82,10 +85,12 @@ export const SplitToEdit = () => {
             />
             <motion.span
               style={{
-                fontFamily: 'Nunito',
                 margin: p ? '0 0 0 1px' : '0 0 0 12px',
               }}
-              className="font-bold inline-block text-[hsl(251deg,9%,74%)]"
+              className={cn(
+                'font-bold inline-block text-[hsl(251deg,9%,74%)]',
+                nunito.className
+              )}
             >
               Hr.
             </motion.span>
@@ -116,10 +121,12 @@ export const SplitToEdit = () => {
             />
             <motion.span
               style={{
-                fontFamily: 'Nunito',
                 margin: p ? '0 0 0 1px' : '0 0 0 12px',
               }}
-              className="font-bold inline-block text-[hsl(251deg,9%,74%)]"
+              className={cn(
+                'font-bold inline-block text-[hsl(251deg,9%,74%)]',
+                nunito.className
+              )}
             >
               Min.
             </motion.span>
