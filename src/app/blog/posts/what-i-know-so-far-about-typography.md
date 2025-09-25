@@ -5,7 +5,7 @@ date: '2025-09-23'
 status: 'completed'
 ---
 
-This post would not have made it out of the draft if I had let perfectionism win. Thank you [Simon Wilson](https://x.com/simonsarris/status/1970284756169540072). Amazing things do occur on x.com – the everything app.
+This post would not have made it out of the draft if I had let perfectionism win. Thank you [Simon Sarris](https://x.com/simonsarris/status/1970284756169540072). Amazing things do occur on x.com – the everything app.
 
 In my 1 and a half year at Mastra, I have worked on the marketing website, the docs and a couple of brand assets, specifically og images. I even create some of them myself in Sketch because making images is really fun. What this has exposed me to is fonts, lots and lots of them.
 
