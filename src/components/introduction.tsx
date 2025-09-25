@@ -80,7 +80,7 @@ export const Introduction = () => {
           <p className="font-medium text-[17px]">Building</p>
           <p>
             I am an active japanese learner so I am working on software to make
-            it easier for me. You can check it out below.
+            learning it easier. You can check it out below.
           </p>
           <div>
             <a

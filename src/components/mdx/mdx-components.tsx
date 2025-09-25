@@ -1,6 +1,7 @@
 import React, { ComponentPropsWithoutRef } from 'react'
 import Link from 'next/link'
 import { highlight } from 'sugar-high'
+import { LetterSpacingPlayground } from '../letter-spacing-playground'
 
 type HeadingProps = ComponentPropsWithoutRef<'h1'>
 type ParagraphProps = ComponentPropsWithoutRef<'p'>
@@ -33,10 +34,7 @@ export const components = {
     />
   ),
   ul: (props: ListProps) => (
-    <ul
-      className="text-gray-800 dark:text-zinc-300 list-disc pl-5 space-y-1"
-      {...props}
-    />
+    <ul className="text-gray-800 block list-disc pl-5 my-2" {...props} />
   ),
   li: (props: ListItemProps) => <li className="pl-1" {...props} />,
   em: (props: ComponentPropsWithoutRef<'em'>) => (
@@ -110,4 +108,5 @@ export const components = {
       {...props}
     />
   ),
+  LetterSpacingPlayground,
 }
