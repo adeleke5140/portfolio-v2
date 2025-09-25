@@ -2,7 +2,7 @@
 title: What I know so far about typography
 description: types make and break the web
 date: '2025-09-23'
-status: 'draft'
+status: 'completed'
 ---
 
 This post would not have made it out of the draft if I had let perfectionism win. Thank you [Simon Wilson](https://x.com/simonsarris/status/1970284756169540072). Amazing things do occur on x.com – the everything app.
