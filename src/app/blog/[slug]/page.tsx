@@ -117,7 +117,7 @@ export default async function Page({
               style={{
                 textWrap: 'pretty',
               }}
-              className="font-serif  py-8  lg:leading-[1.2em] capitalize text-[48px] lg:text-7xl font-medium leading-[100%] lg:tracking-[-.06em] tracking-[-0.96px]"
+              className="font-serif  py-8  leading-[1.2em] capitalize text-[48px] lg:text-7xl font-medium  lg:tracking-[-.06em] tracking-[-0.96px]"
             >
               {postData.title}
             </h1>
