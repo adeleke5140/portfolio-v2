@@ -24,7 +24,7 @@ const connection = [
 ]
 
 export const Introduction = () => {
-  const TITLE = 'Design Engineer'
+  const TITLE = 'Artist'
   return (
     <PageWrapper
       showHeading
@@ -54,23 +54,24 @@ export const Introduction = () => {
           <div className="flex flex-col text-[var(--gray-1)] gap-2 dark:border-[#282828] dark:bg-[#282828]">
             <div className="rounded-lg  dark:text-[#fefefe]">
               <p className="text-[17px]">
-                Hi, I&apos;m <span className="font-medium">Kenny,</span> a
-                design engineer. I enjoy building beautiful and accessible
-                software. I currently work at{' '}
+                Hi, I'm <span className="font-medium">Kenny.</span> When I was
+                eight, I wanted to be an artist, the closest thing to that right
+                now is a design engineer. I currently work at{' '}
                 <a
                   href="https://www.mastra.ai"
                   className="border-b border-[#e87400]   text-[#e87400]"
                 >
                   mastra.ai
                 </a>{' '}
+                where I strive to build beautiful and accessible software.
               </p>
             </div>
 
             <div>
               <p className="rounded-lg h-full text-[17px]">
                 My work is my <span className="font-medium">craft</span>. A
-                passion I am dedicated to because it builds me as a person. I
-                strive to infuse every piece of work with delight and care.
+                passion I am dedicated to because it also builds me as a person.
+                I strive to infuse every piece of work with care.
               </p>
             </div>
           </div>
