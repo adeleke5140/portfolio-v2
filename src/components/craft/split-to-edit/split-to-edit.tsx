@@ -63,10 +63,7 @@ export const SplitToEdit = () => {
             padding: p ? '8px 0 8px 8px' : '8px',
           }}
           transition={t}
-          className={cn(
-            'bg-[hsl(255deg,31%,97%)] h-10 rounded-[0.65rem]'
-            // p ? '[&_label]:gap-0.5' : ''
-          )}
+          className="bg-[hsl(255deg,31%,97%)] h-10 rounded-[0.65rem]"
         >
           <Label
             htmlFor="hour"

@@ -7,7 +7,7 @@ interface RootLayoutProps {
 export const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <>
-      <div className="relative flex flex-col min-h-screen max-w-[1440px]  mx-auto pb-8">
+      <div className="relative flex flex-col min-h-screen max-w-[1280px]  mx-auto pb-8">
         <nav className="flex gap-4 border-b-[0.5px] px-3 md:px-0  border-b-[#dcdcdc]  h-full items-center justify-end py-5">
           <Link href="/craft" className="text-lg">
             Craft
