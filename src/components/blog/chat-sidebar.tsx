@@ -1,15 +1,13 @@
 'use client'
 
-import { useChatPersistence } from '@/hooks/use-chat-persistence'
 import { cn } from '@/lib/utils'
 import { useChat } from '@ai-sdk/react'
-import { DefaultChatTransport, UIDataTypes, UIMessage, UITools } from 'ai'
+import { DefaultChatTransport } from 'ai'
 import { RotateCcw, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import useSWR from 'swr'
-import { Shimmer } from '../ai-elements/shimmer'
+import { Shimmer } from './shimmer'
 
 interface ChatSidebarProps {
   isOpen: boolean
@@ -17,10 +15,8 @@ interface ChatSidebarProps {
 }
 
 function toSpaceCase(str: string) {
-  return str.replace(/([A-Z])/g, ' $1').trim()
+  return str?.replace(/([A-Z])/g, ' $1').trim()
 }
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
 export const ChatSidebar = ({ isOpen, onClose }: ChatSidebarProps) => {
   const messagesEndRef = useRef<HTMLDivElement>(null)
