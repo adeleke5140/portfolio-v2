@@ -24,26 +24,13 @@ const connection = [
 ]
 
 export const Introduction = () => {
-  const TITLE = 'Design Engineer'
   return (
     <PageWrapper
       showHeading
       heading={
         <div className="flex w-full border-b-[0.5px]  relative overflow-y-clip  border-b-[#dcdcdc] py-8">
           <h1 className="text-[48px] font-medium lg:text-7xl lg:tracking-[-0.06em] lg:leading-[1.2em] font-serif tracking-tighter">
-            {TITLE.split('').map((letter, index) => (
-              <React.Fragment key={index + 'title'}>
-                <motion.span
-                  className="inline"
-                  initial={{
-                    y: 20,
-                  }}
-                >
-                  {letter}
-                </motion.span>
-                {index === 5 ? ' ' : null}
-              </React.Fragment>
-            ))}
+            Design Engineer
           </h1>
         </div>
       }
