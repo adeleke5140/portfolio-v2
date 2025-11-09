@@ -9,7 +9,7 @@ export const LetterSpacingPlayground = () => {
   const sampleText = 'Jack the Giant Slayer'
 
   return (
-    <div className="flex border bg-white p-2 flex-col gap-2 rounded-xl my-8">
+    <div className="flex border border-gray-200 bg-white p-2 flex-col gap-2 rounded-xl my-8">
       <motion.div
         className="text-2xl border border-[hsl(0,0%,92%)] rounded-lg p-6 py-5 font-medium text-gray-900 leading-relaxed bg-gradient-to-t from-[#f8f8f8] to-[#fcfcfc]"
         style={{
