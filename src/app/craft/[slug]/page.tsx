@@ -6,7 +6,7 @@ import { IntegrationMenu } from '@/components/craft/integration-menu/integration
 import { RecaptchaButton } from '@/components/craft/recaptcha/recaptcha-button'
 import { SplitToEdit } from '@/components/craft/split-to-edit/split-to-edit'
 import { components } from '@/components/mdx/mdx-components'
-import { PageWrapper } from '@/components/pageWrapper'
+import { PageWrapper } from '@/components/page-wrapper'
 import { promises as fs } from 'fs'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import path from 'path'

@@ -1,8 +1,6 @@
 'use client'
-import { PageWrapper } from '@/components/pageWrapper'
-import React from 'react'
+import { PageWrapper } from '@/components/page-wrapper'
 import { A11ySection } from './home/a11y-section'
-import { motion } from 'motion/react'
 
 const connection = [
   {
@@ -28,7 +26,7 @@ export const Introduction = () => {
     <PageWrapper
       showHeading
       heading={
-        <div className="flex w-full border-b-[0.5px]  relative overflow-y-clip  border-b-[#dcdcdc] py-8">
+        <div className="py-8">
           <h1 className="text-[48px] font-medium lg:text-7xl lg:tracking-[-0.06em] lg:leading-[1.2em] font-serif tracking-tighter">
             Design Engineer
           </h1>
@@ -40,7 +38,7 @@ export const Introduction = () => {
         <section className="px-0">
           <div className="flex flex-col text-[var(--gray-1)] gap-2 dark:border-[#282828] dark:bg-[#282828]">
             <div className="rounded-lg  dark:text-[#fefefe]">
-              <p className="text-[17px]">
+              <p className="text-[17px] tracking-tight">
                 Hi, I'm <span className="font-medium">Kenny.</span> When I was
                 eight, I wanted to be an artist, the closest thing to that right
                 now is a design engineer. I currently work at{' '}
@@ -55,7 +53,7 @@ export const Introduction = () => {
             </div>
 
             <div>
-              <p className="rounded-lg h-full text-[17px]">
+              <p className="rounded-lg h-full text-[17px] tracking-tight">
                 My work is my <span className="font-medium">craft</span>. A
                 passion I am dedicated to because it also builds me as a person.
                 I strive to infuse every piece of work with care.
@@ -74,7 +72,7 @@ export const Introduction = () => {
             <a
               target="_blank"
               href="https://chromewebstore.google.com/detail/nihongo-speech/jhojfellcdlldagfemimnjebnfoodchf?authuser=0&hl=en-GB"
-              className="inline-block group rounded-xl w-full"
+              className="inline-block group rounded-xl w-fit"
             >
               <span className="flex justify-self-start flex-col gap-0.5">
                 <span className=" bg-gray-100 group-hover:underline justify-between group flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-xl">
