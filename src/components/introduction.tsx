@@ -50,7 +50,7 @@ export const Introduction = () => {
                 >
                   mastra.ai
                 </a>{' '}
-                where I strive to build beautiful and accessible software.
+                on the Docs team.
               </p>
             </div>
 

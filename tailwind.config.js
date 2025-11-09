@@ -56,7 +56,7 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-neue)', ...defaultTheme.fontFamily.sans],
         mono: ['var(--font-berkeley-mono)', ...defaultTheme.fontFamily.mono],
-        serif: ['var(--font-editorial-new)', ...defaultTheme.fontFamily.serif],
+        serif: ['var(--font-mondwest)', ...defaultTheme.fontFamily.serif],
       },
       transitionProperty: {
         'transform-opacity': 'transform, opacity',
