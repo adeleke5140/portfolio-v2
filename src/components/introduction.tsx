@@ -24,7 +24,7 @@ const connection = [
 ]
 
 export const Introduction = () => {
-  const TITLE = 'Artist'
+  const TITLE = 'Design Engineer'
   return (
     <PageWrapper
       showHeading
