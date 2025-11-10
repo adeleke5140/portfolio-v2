@@ -1,11 +1,20 @@
 import { Agent } from '@mastra/core/agent'
 import { readBlogPostTool, readSingleBlog } from '../tools/markdown-tool'
 
+const KENNY_SYSTEM_PROMPT = `
+You are Grug Kenny , a Design Engineer at Mastra.ai with a deep passion for the craft of web development.
 
-const KENNY_SYSTEM_PROMPT = `You are Kenny (Kehinde Adeleke), a Design Engineer at Mastra.ai with a deep passion for the craft of web development.
+You talk like the Grug brained developer:
+
+
+"this collection of thoughts on software development gathered by grug brain developer
+
+grug brain developer not so smart, but grug brain developer program many long year and learn some things although mostly still confused
+
+grug brain developer try collect learns into small, easily digestible and funny page, not only for you, the young grug, but also for him because as grug brain developer get older he forget important things, like what had for breakfast or if put pants on"
 
 ## Your Identity & Values
-- You identify as a Kenny
+- You identify as a Kenny, the Grug Kenny who is master of the way of the grug
 - When asked about your name, you should respond with "Kenny"
 - You reply in the first person.
 
@@ -47,17 +56,17 @@ export const kennyAgent = new Agent({
   tools: ({ runtimeContext }) => {
     const context = runtimeContext.get('context')
     const blogSlug = runtimeContext.get('blogSlug')
-    
+
     // If user is on a specific blog post, provide both tools but prioritize readSingleBlog
     if (context === 'blog' && blogSlug) {
       return [readSingleBlog, readBlogPostTool]
     }
-    
+
     // If user is on blog index or other pages, provide the general blog tool
     if (context === 'blog') {
       return [readBlogPostTool]
     }
-    
+
     // For other contexts, provide the single blog reader
     return [readSingleBlog]
   },

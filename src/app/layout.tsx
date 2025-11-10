@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <body>
         <div
-          className={`min-h-screen font-sans max-w-[1028px] mx-auto ${fonts.mondwest.variable} ${fonts.berkeleyMono.variable} ${fonts.neue.variable} ${fonts.editorialNew.variable} ${fonts.mori.variable} bg-[rgb(248,249,250)] text-ken-black`}
+          className={`min-h-screen font-sans max-w-[1028px] mx-auto ${fonts.mondwest.variable} ${fonts.berkeleyMono.variable} ${fonts.neue.variable} ${fonts.editorialNew.variable} bg-[rgb(248,249,250)] text-ken-black`}
           id="container"
         >
           <Toaster />

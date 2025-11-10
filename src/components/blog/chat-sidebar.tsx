@@ -51,10 +51,18 @@ export const ChatSidebar = ({ isOpen, onClose }: ChatSidebarProps) => {
   // Show thinking indicator when:
   // 1. Status is 'submitted' (request sent, waiting for response)
   // 2. Status is 'streaming' but the last message is from user (assistant hasn't started responding yet)
+  // 3. Status is 'streaming' and the last assistant message has no text content yet
   const lastMessage = messages[messages.length - 1]
+  const lastMessageHasContent = lastMessage?.parts.some(
+    (part) => part.type === 'text' && part.text && part.text.trim()
+  )
   const isThinking =
     status === 'submitted' ||
-    (status === 'streaming' && lastMessage && lastMessage.role === 'user')
+    (status === 'streaming' && lastMessage && lastMessage.role === 'user') ||
+    (status === 'streaming' &&
+      lastMessage &&
+      lastMessage.role === 'assistant' &&
+      !lastMessageHasContent)
 
   useEffect(() => {
     if (isOpen) {
@@ -66,7 +74,6 @@ export const ChatSidebar = ({ isOpen, onClose }: ChatSidebarProps) => {
     <AnimatePresence initial={false}>
       {isOpen && (
         <>
-          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -76,12 +83,11 @@ export const ChatSidebar = ({ isOpen, onClose }: ChatSidebarProps) => {
             onClick={onClose}
           />
 
-          {/* Sidebar */}
           <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+            initial={{ x: '50%', opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: '50%', opacity: 0 }}
+            transition={{ type: 'spring', bounce: 0.3 }}
             className={cn(
               'fixed right-2 h-[500px]  bottom-2 z-50',
               'w-full md:w-[400px]',
@@ -92,7 +98,7 @@ export const ChatSidebar = ({ isOpen, onClose }: ChatSidebarProps) => {
             {/* Header */}
             <div className="flex rounded-t-[20px] items-center justify-between p-4">
               <div>
-                <h2 className="font-semibold text-gray-900">Ask Kenny</h2>
+                <h2 className="font-serif text-gray-900">Ask Kenny</h2>
               </div>
               <div className="flex items-center gap-2">
                 <button
@@ -116,10 +122,23 @@ export const ChatSidebar = ({ isOpen, onClose }: ChatSidebarProps) => {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
-              <Conversation>
-                <ConversationContent>
-                  {messages.map((message) => (
+            <Conversation className="flex-1 overflow-y-auto">
+              <ConversationContent className="p-4 space-y-4">
+                {messages.map((message, messageIndex) => {
+                  // Check if message has any text content
+                  const hasTextContent = message.parts.some(
+                    (part) =>
+                      part.type === 'text' && part.text && part.text.trim()
+                  )
+
+                  // Skip rendering empty assistant messages when thinking
+                  const isEmptyAssistant =
+                    !hasTextContent && message.role === 'assistant'
+                  if (isEmptyAssistant) {
+                    return null
+                  }
+
+                  return (
                     <Message
                       from={message.role as 'user' | 'assistant'}
                       key={message.id}
@@ -139,24 +158,24 @@ export const ChatSidebar = ({ isOpen, onClose }: ChatSidebarProps) => {
                         })}
                       </MessageContent>
                     </Message>
-                  ))}
+                  )
+                })}
 
-                  {/* Show thinking indicator as an assistant message */}
-                  {isThinking && (
-                    <Message from="assistant">
-                      <MessageContent>
-                        <div className="flex items-center">
-                          <Shimmer duration={1} className="font-mono text-xs">
-                            Thinking...
-                          </Shimmer>
-                        </div>
-                      </MessageContent>
-                    </Message>
-                  )}
-                </ConversationContent>
-                <ConversationScrollButton />
-              </Conversation>
-            </div>
+                {/* Show thinking indicator when waiting for response */}
+                {isThinking && (
+                  <Message from="assistant" key="thinking">
+                    <MessageContent>
+                      <div className="flex items-center">
+                        <Shimmer duration={1} className="font-mono text-xs">
+                          Thinking...
+                        </Shimmer>
+                      </div>
+                    </MessageContent>
+                  </Message>
+                )}
+              </ConversationContent>
+              <ConversationScrollButton />
+            </Conversation>
 
             {/* Input */}
             <form
@@ -177,7 +196,7 @@ export const ChatSidebar = ({ isOpen, onClose }: ChatSidebarProps) => {
                   )}
                 >
                   <div className="text-center text-gray-500 text-sm">
-                    <p className="border flex items-center gap-1 border-gray-100 bg-gray-50 rounded-full text-xs p-2 text-left w-fit">
+                    <p className="border flex items-center gap-1 border-gray-100 bg-gray-50 rounded-full text-xs px-[10px] py-[5px] text-left w-fit">
                       {blog}
                       {blogSlug || context}
                     </p>

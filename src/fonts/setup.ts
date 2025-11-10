@@ -40,23 +40,6 @@ export const mondwest = localFont({
   display: 'swap',
 })
 
-export const mori = localFont({
-  src: [
-    {
-      path: './PPMori-Regular.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: './PPMori-SemiBold.woff2',
-      weight: '600',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-mori',
-  display: 'swap',
-})
-
 export const editorialNew = localFont({
   src: [
     {
@@ -89,5 +72,4 @@ export const fonts = {
   neue,
   editorialNew,
   mondwest,
-  mori,
 }
