@@ -3,51 +3,67 @@
 import { cn } from '@/lib/utils'
 import { useChat } from '@ai-sdk/react'
 import { DefaultChatTransport } from 'ai'
-import { RotateCcw, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import { Shimmer } from './shimmer'
-
+import {
+  Conversation,
+  ConversationContent,
+  ConversationScrollButton,
+} from '../ai-elements/conversation'
+import { Loader } from '../ai-elements/loader'
+import { Message, MessageContent } from '../ai-elements/message'
+import { Response } from '../ai-elements/response'
+import { Shimmer } from '../ai-elements/shimmer'
+import { blog } from '../craft/navigation/navigation'
 interface ChatSidebarProps {
   isOpen: boolean
   onClose: () => void
 }
 
-function toSpaceCase(str: string) {
-  return str?.replace(/([A-Z])/g, ' $1').trim()
-}
-
 export const ChatSidebar = ({ isOpen, onClose }: ChatSidebarProps) => {
-  const messagesEndRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
   const [input, setInput] = useState('')
+
+  const pathname = usePathname()
+
+  // Extract context information from the current path
+  const pathSegments = pathname.split('/').filter(Boolean)
+  const isOnBlogPost = pathSegments[0] === 'blog' && pathSegments[1]
+  const blogSlug = isOnBlogPost ? pathSegments[1] : null
+  const context = isOnBlogPost ? 'blog' : pathSegments[0] || 'home'
 
   const { messages, sendMessage, status } = useChat({
     transport: new DefaultChatTransport({
       api: '/api/agent',
+      body: {
+        context: context, // 'blog', 'craft', 'home', etc.
+        blogSlug: blogSlug, // The specific blog post slug if on a blog post
+        pathname: pathname, // Full pathname for reference
+      },
     }),
   })
 
+  console.log({ blogSlug, context, pathname })
+
   const isLoading = status === 'streaming' || status === 'submitted'
 
-  const pathname = usePathname()
-  const path = toSpaceCase(pathname.split('/')[2])
+  // Show thinking indicator when:
+  // 1. Status is 'submitted' (request sent, waiting for response)
+  // 2. Status is 'streaming' but the last message is from user (assistant hasn't started responding yet)
+  const lastMessage = messages[messages.length - 1]
+  const isThinking =
+    status === 'submitted' ||
+    (status === 'streaming' && lastMessage && lastMessage.role === 'user')
 
-  // Auto-scroll to bottom
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
-
-  // Focus input when sidebar opens
   useEffect(() => {
     if (isOpen) {
-      inputRef.current?.focus()
+      textareaRef.current?.focus()
     }
   }, [isOpen])
 
   return (
-    <AnimatePresence>
+    <AnimatePresence initial={false}>
       {isOpen && (
         <>
           {/* Backdrop */}
@@ -67,63 +83,79 @@ export const ChatSidebar = ({ isOpen, onClose }: ChatSidebarProps) => {
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
             className={cn(
-              'fixed right-2 h-[400px]  bottom-2 z-50',
+              'fixed right-2 h-[500px]  bottom-2 z-50',
               'w-full md:w-[400px]',
               'bg-white border border-gray-200',
-              'flex flex-col rounded-[16px] shadow-2xl'
+              'flex flex-col rounded-[20px] shadow-2xl'
             )}
           >
             {/* Header */}
-            <div className="flex rounded-t-[16px] items-center justify-between p-4 border-b border-gray-200 bg-gray-50">
+            <div className="flex rounded-t-[20px] items-center justify-between p-4">
               <div>
                 <h2 className="font-semibold text-gray-900">Ask Kenny</h2>
               </div>
               <div className="flex items-center gap-2">
-                {messages.length > 0 && (
-                  <button
-                    onClick={() => {}}
-                    className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
-                    title="Clear chat"
-                  >
-                    <RotateCcw className="w-4 h-4 text-gray-600" />
-                  </button>
-                )}
                 <button
                   onClick={onClose}
-                  className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
+                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                   aria-label="Close chat"
                 >
-                  <X className="w-5 h-5 text-gray-600" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    id="window-close-solid"
+                    viewBox="0 0 24 24"
+                    className="size-5 "
+                  >
+                    <path
+                      fill="var(--primary)"
+                      d="m22,2v-1H2v1h-1v20h1v1h20v-1h1V2h-1Zm-4,7h-1v1h-1v1h-1v2h1v1h1v1h1v1h-1v1h-1v1h-1v-1h-1v-1h-1v-1h-2v1h-1v1h-1v1h-1v-1h-1v-1h-1v-1h1v-1h1v-1h1v-2h-1v-1h-1v-1h-1v-1h1v-1h1v-1h1v1h1v1h1v1h2v-1h1v-1h1v-1h1v1h1v1h1v1Z"
+                    />
+                  </svg>
                 </button>
               </div>
             </div>
 
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
-              {messages.length === 0 && (
-                <div className="text-center text-gray-500 text-sm">
-                  <p>Ask me about {path}</p>
-                </div>
-              )}
+              <Conversation>
+                <ConversationContent>
+                  {messages.map((message) => (
+                    <Message
+                      from={message.role as 'user' | 'assistant'}
+                      key={message.id}
+                    >
+                      <MessageContent>
+                        {message.parts.map((part, i) => {
+                          switch (part.type) {
+                            case 'text':
+                              return (
+                                <Response key={`${message.id}-${i}`}>
+                                  {part.text}
+                                </Response>
+                              )
+                            default:
+                              return null
+                          }
+                        })}
+                      </MessageContent>
+                    </Message>
+                  ))}
 
-              {messages.map((message) => (
-                <div key={message.id}>
-                  {message.role === 'user' ? 'User: ' : 'AI: '}
-                  {message.parts.map((part, index) =>
-                    part.type === 'text' ? (
-                      <span key={index}>{part.text}</span>
-                    ) : null
+                  {/* Show thinking indicator as an assistant message */}
+                  {isThinking && (
+                    <Message from="assistant">
+                      <MessageContent>
+                        <div className="flex items-center">
+                          <Shimmer duration={1} className="font-mono text-xs">
+                            Thinking...
+                          </Shimmer>
+                        </div>
+                      </MessageContent>
+                    </Message>
                   )}
-                </div>
-              ))}
-
-              {isLoading && (
-                <div className="flex items-center justify-center p-8 size-full">
-                  <Shimmer>Thinking a bit...</Shimmer>
-                </div>
-              )}
-
-              <div ref={messagesEndRef} />
+                </ConversationContent>
+                <ConversationScrollButton />
+              </Conversation>
             </div>
 
             {/* Input */}
@@ -135,44 +167,63 @@ export const ChatSidebar = ({ isOpen, onClose }: ChatSidebarProps) => {
                   setInput('')
                 }
               }}
-              className="p-4 border-t rounded-b-xl border-gray-200 bg-white"
+              className="p-4 rounded-b-[20px]  bg-white"
             >
-              <div className="flex">
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={input || ''}
-                  onChange={(e) => setInput(e.target.value || '')}
-                  placeholder="Ask Kenny anything..."
-                  disabled={isLoading}
+              <div className="overflow-hidden relative">
+                <div
                   className={cn(
-                    'flex-1 px-4 py-2.5',
-                    'border border-gray-300 focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary)]',
-                    'outline-none transition-all',
-                    'disabled:bg-gray-100 disabled:cursor-not-allowed',
-                    'text-sm'
+                    'flex flex-col gap-2 px-4 py-2.5 h-32 rounded-[16px] border-r-0',
+                    'border border-[#dcdcdc] focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary)]'
                   )}
-                />
+                >
+                  <div className="text-center text-gray-500 text-sm">
+                    <p className="border flex items-center gap-1 border-gray-100 bg-gray-50 rounded-full text-xs p-2 text-left w-fit">
+                      {blog}
+                      {blogSlug || context}
+                    </p>
+                  </div>
+
+                  <textarea
+                    ref={textareaRef}
+                    value={input || ''}
+                    onChange={(e) => setInput(e.target.value || '')}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault()
+                        sendMessage({ text: input })
+                        setInput('')
+                      }
+                    }}
+                    placeholder="Ask Kenny about this post..."
+                    disabled={isLoading}
+                    className="w-full h-full outline-none  disabled:bg-inherit resize-none disabled:cursor-not-allowed text-sm"
+                  />
+                </div>
+
                 <button
                   type="submit"
                   className={cn(
-                    'px-4 py-2.5 ',
-                    'bg-[var(--primary)] rounded-r-md text-white',
-                    'hover:bg-[#d66800] active:scale-95',
+                    'size-8 absolute bottom-2 right-2',
+                    'bg-[var(--primary)] rounded-full text-white',
+                    'hover:bg-[var(--primary)] active:scale-95',
                     'transition-all',
-                    'disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[var(--primary)]',
+                    'disabled:cursor-not-allowed disabled:hover:bg-[var(--primary)]',
                     'flex items-center justify-center'
                   )}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    className="size-5"
-                    fill="currentColor"
-                  >
-                    <path d="m22,9v-2h-1v-2h-1v-1h-1v-1h-2v-1h-2v-1h-6v1h-2v1h-2v1h-1v1h-1v2h-1v2h-1v6h1v2h1v2h1v1h1v1h2v1h2v1h6v-1h2v-1h2v-1h1v-1h1v-2h1v-2h1v-6h-1Zm-1,6h-1v2h-1v2h-2v1h-2v1h-6v-1h-2v-1h-2v-2h-1v-2h-1v-6h1v-2h1v-2h2v-1h2v-1h6v1h2v1h2v2h1v2h1v6Z" />
-                    <polygon points="17 11 17 13 16 13 16 14 15 14 15 15 14 15 14 16 13 16 13 17 12 17 12 13 6 13 6 11 12 11 12 7 13 7 13 8 14 8 14 9 15 9 15 10 16 10 16 11 17 11" />
-                  </svg>
+                  {isLoading ? (
+                    <Loader />
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      className="size-5 -rotate-90"
+                      fill="currentColor"
+                    >
+                      <path d="m22,9v-2h-1v-2h-1v-1h-1v-1h-2v-1h-2v-1h-6v1h-2v1h-2v1h-1v1h-1v2h-1v2h-1v6h1v2h1v2h1v1h1v1h2v1h2v1h6v-1h2v-1h2v-1h1v-1h1v-2h1v-2h1v-6h-1Zm-1,6h-1v2h-1v2h-2v1h-2v1h-6v-1h-2v-1h-2v-2h-1v-2h-1v-6h1v-2h1v-2h2v-1h2v-1h6v1h2v1h2v2h1v2h1v6Z" />
+                      <polygon points="17 11 17 13 16 13 16 14 15 14 15 15 14 15 14 16 13 16 13 17 12 17 12 13 6 13 6 11 12 11 12 7 13 7 13 8 14 8 14 9 15 9 15 10 16 10 16 11 17 11" />
+                    </svg>
+                  )}
                 </button>
               </div>
             </form>
