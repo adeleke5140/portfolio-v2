@@ -23,6 +23,23 @@ export const neue = localFont({
   display: 'swap',
 })
 
+export const mondwest = localFont({
+  src: [
+    {
+      path: './PPMondwest-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './PPMondwest-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-mondwest',
+  display: 'swap',
+})
+
 export const editorialNew = localFont({
   src: [
     {
@@ -54,4 +71,5 @@ export const fonts = {
   berkeleyMono,
   neue,
   editorialNew,
+  mondwest,
 }

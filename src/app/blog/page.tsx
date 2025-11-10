@@ -1,4 +1,4 @@
-import { PageWrapper } from '@/components/pageWrapper'
+import { PageWrapper } from '@/components/page-wrapper'
 import { formatDate } from '@/helpers/formatDate'
 import { getSortedPostsData } from '@/lib/posts'
 import Head from 'next/head'

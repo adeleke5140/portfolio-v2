@@ -1,4 +1,4 @@
-import { PageWrapper } from '@/components/pageWrapper'
+import { PageWrapper } from '@/components/page-wrapper'
 import { getSortedCraftData } from '@/lib/posts'
 import Link from 'next/link'
 
@@ -27,14 +27,17 @@ const filterIfProd = (data: Array<CraftItem>) => {
 export default function Index() {
   const allCraftData = filterIfProd(getSortedCraftData()) as Array<CraftItem>
 
-  const craftsByCategory = allCraftData.reduce((acc, craft) => {
-    const category = craft.tag || 'uncategorized'
-    if (!acc[category]) {
-      acc[category] = []
-    }
-    acc[category].push(craft)
-    return acc
-  }, {} as Record<string, CraftItem[]>)
+  const craftsByCategory = allCraftData.reduce(
+    (acc, craft) => {
+      const category = craft.tag || 'uncategorized'
+      if (!acc[category]) {
+        acc[category] = []
+      }
+      acc[category].push(craft)
+      return acc
+    },
+    {} as Record<string, CraftItem[]>
+  )
 
   const sortedCategories = Object.entries(craftsByCategory).sort(([a], [b]) =>
     a.localeCompare(b)

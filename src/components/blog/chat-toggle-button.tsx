@@ -16,9 +16,9 @@ export const ChatToggleButton = ({
     <button
       onClick={onClick}
       className={cn(
-        'fixed bottom-6 rounded-xl right-6 z-30',
+        'fixed border border-gray-200 bottom-6 rounded-xl right-6 z-30',
         'flex items-center gap-2 px-4 py-3',
-        ' text-white border',
+        ' text-white',
         'hover:scale-105 active:scale-95',
         'transition-all duration-200',
         'font-medium text-sm',

@@ -1,8 +1,6 @@
 'use client'
-import { PageWrapper } from '@/components/pageWrapper'
-import React from 'react'
+import { PageWrapper } from '@/components/page-wrapper'
 import { A11ySection } from './home/a11y-section'
-import { motion } from 'motion/react'
 
 const connection = [
   {
@@ -24,26 +22,13 @@ const connection = [
 ]
 
 export const Introduction = () => {
-  const TITLE = 'Design Engineer'
   return (
     <PageWrapper
       showHeading
       heading={
-        <div className="flex w-full border-b-[0.5px]  relative overflow-y-clip  border-b-[#dcdcdc] py-8">
+        <div className="py-8">
           <h1 className="text-[48px] font-medium lg:text-7xl lg:tracking-[-0.06em] lg:leading-[1.2em] font-serif tracking-tighter">
-            {TITLE.split('').map((letter, index) => (
-              <React.Fragment key={index + 'title'}>
-                <motion.span
-                  className="inline"
-                  initial={{
-                    y: 20,
-                  }}
-                >
-                  {letter}
-                </motion.span>
-                {index === 5 ? ' ' : null}
-              </React.Fragment>
-            ))}
+            Design Engineer
           </h1>
         </div>
       }
@@ -56,22 +41,21 @@ export const Introduction = () => {
               <p className="text-[17px]">
                 Hi, I'm <span className="font-medium">Kenny.</span> When I was
                 eight, I wanted to be an artist, the closest thing to that right
-                now is a design engineer. I currently work at{' '}
+                now is a design engineer.
+              </p>
+            </div>
+
+            <div>
+              <p className="rounded-lg h-full text-[17px]">
+                My craft builds me as a person and I strive to infuse every
+                piece of work with care. I currently work on the Docs and
+                Website team at{' '}
                 <a
                   href="https://www.mastra.ai"
                   className="border-b border-[#e87400]   text-[#e87400]"
                 >
                   mastra.ai
                 </a>{' '}
-                where I strive to build beautiful and accessible software.
-              </p>
-            </div>
-
-            <div>
-              <p className="rounded-lg h-full text-[17px]">
-                My work is my <span className="font-medium">craft</span>. A
-                passion I am dedicated to because it also builds me as a person.
-                I strive to infuse every piece of work with care.
               </p>
             </div>
           </div>
@@ -87,7 +71,7 @@ export const Introduction = () => {
             <a
               target="_blank"
               href="https://chromewebstore.google.com/detail/nihongo-speech/jhojfellcdlldagfemimnjebnfoodchf?authuser=0&hl=en-GB"
-              className="inline-block group rounded-xl w-full"
+              className="inline-block group rounded-xl w-fit"
             >
               <span className="flex justify-self-start flex-col gap-0.5">
                 <span className=" bg-gray-100 group-hover:underline justify-between group flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-xl">

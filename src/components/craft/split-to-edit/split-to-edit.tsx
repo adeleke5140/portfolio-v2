@@ -2,9 +2,9 @@
 
 import { cn } from '@/lib/utils'
 import { AnimatePresence, motion } from 'motion/react'
+import { Nunito } from 'next/font/google'
 import { useEffect, useRef, useState } from 'react'
 import { CheckMark, Pen } from './icons'
-import { Nunito } from 'next/font/google'
 
 const nunito = Nunito({ subsets: ['latin'] })
 
@@ -63,7 +63,7 @@ export const SplitToEdit = () => {
             padding: p ? '8px 0 8px 8px' : '8px',
           }}
           transition={t}
-          className="bg-[hsl(255deg,31%,97%)] h-10 rounded-[0.65rem]"
+          className="bg-gray-100/50 h-10 rounded-[0.65rem]"
         >
           <Label
             htmlFor="hour"
@@ -94,7 +94,7 @@ export const SplitToEdit = () => {
           </Label>
         </motion.div>
         <motion.div
-          className={cn('bg-[hsl(255deg,31%,97%)] h-10 max-w-fit')}
+          className={cn('bg-gray-100/50 h-10 max-w-fit')}
           style={{
             borderRadius: p ? '0' : '10.4px',
             padding: p ? '8px 0px 8px 0px' : '8px',
@@ -148,7 +148,7 @@ export const SplitToEdit = () => {
               return 'done'
             })
           }}
-          className="text-black relative h-10 bg-[hsl(255deg,31%,97%)] p-3"
+          className="text-black relative h-10 bg-gray-100/50 p-3"
         >
           <span className="inline-block z-20 rounded-[10.4px] absolute inset-0  bg-[hsl(318deg,51.72%,54.51%,0%)]" />
           <AnimatePresence initial={false} mode="wait">

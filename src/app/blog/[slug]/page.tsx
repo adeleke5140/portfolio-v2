@@ -1,5 +1,5 @@
 import { components } from '@/components/mdx/mdx-components'
-import { PageWrapper } from '@/components/pageWrapper'
+import { PageWrapper } from '@/components/page-wrapper'
 import { promises as fs } from 'fs'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import Head from 'next/head'
