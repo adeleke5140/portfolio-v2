@@ -1,6 +1,6 @@
 interface PostWrapperProps {
-  path: string;
-  children: React.ReactNode;
+  path: string
+  children: React.ReactNode
 }
 
 const PostWrapper = ({ children }: PostWrapperProps) => {
@@ -10,7 +10,7 @@ const PostWrapper = ({ children }: PostWrapperProps) => {
         <div className="flex flex-col gap-5">{children}</div>
       </section>
     </div>
-  );
-};
+  )
+}
 
-export { PostWrapper };
+export { PostWrapper }

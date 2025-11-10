@@ -38,25 +38,24 @@ export const Introduction = () => {
         <section className="px-0">
           <div className="flex flex-col text-[var(--gray-1)] gap-2 dark:border-[#282828] dark:bg-[#282828]">
             <div className="rounded-lg  dark:text-[#fefefe]">
-              <p className="text-[17px] tracking-tight">
+              <p className="text-[17px]">
                 Hi, I'm <span className="font-medium">Kenny.</span> When I was
                 eight, I wanted to be an artist, the closest thing to that right
-                now is a design engineer. I currently work at{' '}
+                now is a design engineer.
+              </p>
+            </div>
+
+            <div>
+              <p className="rounded-lg h-full text-[17px]">
+                My craft builds me as a person and I strive to infuse every
+                piece of work with care. I currently work on the Docs and
+                Website team at{' '}
                 <a
                   href="https://www.mastra.ai"
                   className="border-b border-[#e87400]   text-[#e87400]"
                 >
                   mastra.ai
                 </a>{' '}
-                on the Docs team.
-              </p>
-            </div>
-
-            <div>
-              <p className="rounded-lg h-full text-[17px] tracking-tight">
-                My work is my <span className="font-medium">craft</span>. A
-                passion I am dedicated to because it also builds me as a person.
-                I strive to infuse every piece of work with care.
               </p>
             </div>
           </div>
