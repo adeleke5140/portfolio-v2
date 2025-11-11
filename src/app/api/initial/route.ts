@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { convertMessages } from '@mastra/core/agent'
 import { mastra } from '@/mastra'
 
-const myAgent = mastra.getAgent('kennyAgent')
+const myAgent = mastra.getAgent('alfredAgent')
 
 export async function GET() {
   const result = await (

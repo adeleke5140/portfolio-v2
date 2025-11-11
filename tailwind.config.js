@@ -53,20 +53,20 @@ module.exports = {
   				'5': 'hsl(var(--chart-5))'
   			}
   		},
-  		fontFamily: {
-  			sans: [
-  				'var(--font-neue)',
-                    ...defaultTheme.fontFamily.sans
-                ],
-  			mono: [
-  				'var(--font-berkeley-mono)',
-                    ...defaultTheme.fontFamily.mono
-                ],
-  			serif: [
-  				'var(--font-editorial-new)',
-                    ...defaultTheme.fontFamily.serif
-                ]
-  		},
+        fontFamily: {
+          sans: [
+            'var(--font-instrument-sans)',
+            ...defaultTheme.fontFamily.sans,
+          ],
+          mono: [
+            'var(--font-berkeley-mono)',
+            ...defaultTheme.fontFamily.mono,
+          ],
+          serif: [
+            'var(--font-instrument-serif)',
+            ...defaultTheme.fontFamily.serif,
+          ],
+        },
   		transitionProperty: {
   			'transform-opacity': 'transform, opacity'
   		},

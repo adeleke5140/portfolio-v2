@@ -16,10 +16,10 @@ export async function POST(req: NextRequest) {
     }
 
     // Get the agent from the Mastra instance
-    const kennyAgent = mastra.getAgent('kennyAgent')
+    const alfredAgent = mastra.getAgent('alfredAgent')
 
     // Stream the response with AI SDK v5 format
-    const stream = await kennyAgent.stream(messages, {
+    const stream = await alfredAgent.stream(messages, {
       format: 'aisdk', // Enable AI SDK v5 compatibility
       memory: {
         thread: 'user-session',
