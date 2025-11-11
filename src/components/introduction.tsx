@@ -83,7 +83,7 @@ export const Introduction = () => {
             I am an active japanese learner so I am working on software to make
             learning it easier. You can check it out below.
           </p>
-          <div>
+          <div className="flex flex-col gap-2">
             <a
               target="_blank"
               href="https://chromewebstore.google.com/detail/nihongo-speech/jhojfellcdlldagfemimnjebnfoodchf?authuser=0&hl=en-GB"
@@ -92,6 +92,19 @@ export const Introduction = () => {
               <span className="flex justify-self-start flex-col gap-0.5">
                 <span className=" bg-gray-100 group-hover:underline justify-between group flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-xl">
                   Hanashi
+                </span>
+              </span>
+            </a>
+            <a
+              href="/alfred"
+              className="inline-block group rounded-xl w-full"
+            >
+              <span className="flex justify-self-start flex-col gap-0.5">
+                <span className="bg-gradient-to-br from-blue-500 to-purple-600 text-white group-hover:from-blue-600 group-hover:to-purple-700 transition-all justify-between group flex gap-1.5 text-[15px] items-center px-3 py-2 rounded-xl font-medium">
+                  Alfred AI Assistant 🤖
+                </span>
+                <span className="text-xs text-gray-600 px-3">
+                  Chat with Alfred about your Slack messages and Linear tickets
                 </span>
               </span>
             </a>
