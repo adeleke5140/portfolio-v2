@@ -55,6 +55,7 @@ module.exports = {
   		},
   		fontFamily: {
   			sans: [
+  				'var(--font-instrument-sans)',
   				'var(--font-neue)',
                     ...defaultTheme.fontFamily.sans
                 ],
@@ -63,6 +64,7 @@ module.exports = {
                     ...defaultTheme.fontFamily.mono
                 ],
   			serif: [
+  				'var(--font-instrument-serif)',
   				'var(--font-editorial-new)',
                     ...defaultTheme.fontFamily.serif
                 ]

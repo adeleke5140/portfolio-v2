@@ -83,7 +83,7 @@ export const Introduction = () => {
             I am an active japanese learner so I am working on software to make
             learning it easier. You can check it out below.
           </p>
-          <div>
+          <div className="flex flex-col gap-2">
             <a
               target="_blank"
               href="https://chromewebstore.google.com/detail/nihongo-speech/jhojfellcdlldagfemimnjebnfoodchf?authuser=0&hl=en-GB"
@@ -92,6 +92,28 @@ export const Introduction = () => {
               <span className="flex justify-self-start flex-col gap-0.5">
                 <span className=" bg-gray-100 group-hover:underline justify-between group flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-xl">
                   Hanashi
+                </span>
+              </span>
+            </a>
+            <a
+              href="/alfred"
+              className="inline-block group w-full"
+            >
+              <span className="flex justify-self-start flex-col gap-1">
+                <span className="bg-[#6B46C1] border-4 border-black text-white group-hover:bg-[#7C3AED] transition-all justify-between group flex gap-2 text-[15px] items-center px-3 py-2 font-mono font-bold"
+                  style={{ imageRendering: 'pixelated' }}
+                >
+                  <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="14" y="2" width="4" height="4" fill="currentColor"/>
+                    <rect x="8" y="8" width="16" height="12" fill="currentColor"/>
+                    <rect x="12" y="12" width="4" height="4" fill="#000"/>
+                    <rect x="20" y="12" width="4" height="4" fill="#000"/>
+                    <rect x="10" y="20" width="12" height="8" fill="currentColor"/>
+                  </svg>
+                  ALFRED.EXE
+                </span>
+                <span className="text-xs text-gray-600 px-3 font-mono">
+                  &gt; AI COFOUNDER FOR SLACK + LINEAR
                 </span>
               </span>
             </a>
