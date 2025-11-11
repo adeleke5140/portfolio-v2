@@ -11,6 +11,7 @@
   "dependencies": {
     "@ai-sdk/anthropic": "^2.0.37",
     "@ai-sdk/react": "^2.0.77",
+    "@linear/sdk": "^63.4.0",
     "@mastra/ai-sdk": "^0.2.3",
     "@mastra/core": "^0.22.2",
     "@mastra/libsql": "^0.16.1",
@@ -30,6 +31,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tooltip": "^1.2.8",
     "@radix-ui/react-use-controllable-state": "^1.2.2",
+    "@slack/web-api": "^7.12.0",
     "@types/mdx": "^2.0.13",
     "@types/node": "18.11.18",
     "@types/react": "19.1.0",
