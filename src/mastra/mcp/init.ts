@@ -5,9 +5,14 @@ export interface MCPServerConfig {
     command: string
     args?: string[]
     env?: Record<string, string>
+    transport?: 'stdio'
   }
   linear?: {
-    command: string
+    url?: string
+    headers?: Record<string, string>
+    transport?: 'sse'
+    // Legacy stdio support (deprecated, use official SSE server)
+    command?: string
     args?: string[]
     env?: Record<string, string>
   }
@@ -20,6 +25,7 @@ export async function initializeMCPServers(config: MCPServerConfig) {
     connections.push(
       mcpClientManager
         .connect('slack', {
+          transport: config.slack.transport || 'stdio',
           command: config.slack.command,
           args: config.slack.args,
           env: config.slack.env,
@@ -37,6 +43,9 @@ export async function initializeMCPServers(config: MCPServerConfig) {
     connections.push(
       mcpClientManager
         .connect('linear', {
+          transport: config.linear.transport || (config.linear.url ? 'sse' : 'stdio'),
+          url: config.linear.url,
+          headers: config.linear.headers,
           command: config.linear.command,
           args: config.linear.args,
           env: config.linear.env,
@@ -83,14 +92,25 @@ export function getMCPConfig(): MCPServerConfig {
     }
   }
 
-  // Linear MCP Server (jerhadf/linear-mcp-server)
-  // Runs via npx
-  if (process.env.LINEAR_API_KEY) {
+  // Linear MCP Server - Official Linear MCP Server (SSE)
+  // Uses SSE transport at https://mcp.linear.app/sse
+  if (process.env.LINEAR_API_KEY || process.env.LINEAR_ACCESS_TOKEN) {
+    const accessToken = process.env.LINEAR_ACCESS_TOKEN || process.env.LINEAR_API_KEY
     config.linear = {
-      command: process.env.LINEAR_MCP_COMMAND || 'npx',
+      transport: 'sse',
+      url: process.env.LINEAR_MCP_URL || 'https://mcp.linear.app/sse',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  } else if (process.env.LINEAR_MCP_COMMAND) {
+    // Fallback to legacy stdio server if command is explicitly set
+    config.linear = {
+      transport: 'stdio',
+      command: process.env.LINEAR_MCP_COMMAND,
       args: process.env.LINEAR_MCP_ARGS?.split(' ') || ['-y', 'linear-mcp-server'],
       env: {
-        LINEAR_API_KEY: process.env.LINEAR_API_KEY,
+        LINEAR_API_KEY: process.env.LINEAR_API_KEY || '',
       },
     }
   }

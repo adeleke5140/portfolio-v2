@@ -32,7 +32,7 @@ The Slack MCP server is a Go binary. You have a few options:
 
 #### Linear MCP Server
 
-The Linear MCP server runs via npm/npx and will be automatically installed.
+Linear provides an **official MCP server** that uses SSE (Server-Sent Events) transport. This is the recommended way to use Linear with MCP.
 
 ### Environment Variables
 
@@ -51,12 +51,13 @@ SLACK_MCP_XOXD_TOKEN=xoxd-your-token-here
 # SLACK_MCP_COMMAND=/path/to/slack-mcp-server
 # SLACK_MCP_ARGS=--port 13080
 
-# Linear MCP Configuration
-LINEAR_API_KEY=your-linear-api-key-here
+# Linear MCP Configuration (Official SSE Server)
+LINEAR_ACCESS_TOKEN=your-linear-access-token-here
+# OR use LINEAR_API_KEY (will be used as access token)
+# LINEAR_API_KEY=your-linear-api-key-here
 
-# Optional: Custom command (defaults to npx)
-# LINEAR_MCP_COMMAND=npx
-# LINEAR_MCP_ARGS=-y linear-mcp-server
+# Optional: Custom URL (defaults to https://mcp.linear.app/sse)
+# LINEAR_MCP_URL=https://mcp.linear.app/sse
 ```
 
 ### Getting Slack Tokens
@@ -69,11 +70,15 @@ You can extract Slack tokens from your browser:
 
 Alternatively, use OAuth to get an `xoxp` token.
 
-### Getting Linear API Key
+### Getting Linear Access Token
+
+For the official Linear MCP server, you need a Linear access token:
 
 1. Go to your Linear workspace settings: `https://linear.app/YOUR-TEAM/settings/api`
-2. Create a new API key
-3. Copy the key to your `.env.local` file
+2. Create a new Personal API Key
+3. Copy the key to your `.env.local` file as `LINEAR_ACCESS_TOKEN` (or `LINEAR_API_KEY`)
+
+The official Linear MCP server uses SSE transport and is hosted at `https://mcp.linear.app/sse`.
 
 ### Installation
 
@@ -114,12 +119,13 @@ Once the app is running and MCP servers are connected, you can ask Alfred:
 - `channels_list` - List all channels
 - `conversations_add_message` - Post messages (disabled by default)
 
-### Linear Tools (from linear-mcp-server)
-- `linear_search_issues` - Search issues with filters
-- `linear_get_user_issues` - Get issues assigned to a user
-- `linear_create_issue` - Create new issues
-- `linear_update_issue` - Update existing issues
-- `linear_add_comment` - Add comments to issues
+### Linear Tools (from official Linear MCP server)
+The official Linear MCP server provides comprehensive tools for managing Linear issues. Available tools are discovered dynamically and may include:
+- Issue search and filtering
+- Issue creation and updates
+- Comment management
+- Team and project management
+- And more (discovered automatically)
 
 ## Architecture
 
@@ -175,7 +181,8 @@ src/
 ## Notes
 
 - MCP servers need to be running and accessible for the tools to work
-- The Slack MCP server uses stdio transport
-- The Linear MCP server runs via npx and uses stdio transport
+- The Slack MCP server uses stdio transport (local process)
+- The Linear MCP server uses SSE transport (remote server at https://mcp.linear.app/sse)
 - Tools are discovered dynamically, so new tools added to MCP servers will be automatically available
-- Make sure your Slack tokens and Linear API key have the necessary permissions
+- Make sure your Slack tokens and Linear access token have the necessary permissions
+- The official Linear MCP server requires authentication via Bearer token in the Authorization header
