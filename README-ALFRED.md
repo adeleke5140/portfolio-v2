@@ -8,8 +8,9 @@ Alfred is an AI-powered assistant that helps you manage your work across Slack a
 - 💬 **Slack Integration**: Query unread messages, search conversations, and send messages
 - 📋 **Linear Integration**: View and manage your issues/tickets
 - 🔌 **MCP Architecture**: Uses official MCP servers for Slack and Linear
-- 🎨 **Modern UI**: Clean, responsive interface with Instrument Sans and Instrument Serif fonts
+- 🎨 **Pixel Art UI**: Retro pixel art theme with monospace fonts and chunky borders
 - ⚡ **Real-time Streaming**: Powered by Vercel AI SDK and Mastra
+- 🔗 **Connection Status**: View integration status and health on `/alfred/connections`
 
 ## Setup
 
@@ -54,6 +55,14 @@ pnpm dev
 ```
 
 Visit `http://localhost:3000/alfred` to start chatting with Alfred!
+
+### 4. Check Connection Status
+
+Visit `http://localhost:3000/alfred/connections` to view the status of your integrations:
+- ✅ See if Slack and Linear are connected
+- 🔄 Test connections with the refresh button
+- 📝 View configuration details
+- 🔗 Quick links to configure each service
 
 ## Usage
 
@@ -104,18 +113,22 @@ The Alfred agent is configured in `/src/mastra/agents/alfred.ts`:
 src/
 ├── app/
 │   ├── alfred/
-│   │   └── page.tsx          # Alfred chat UI
+│   │   ├── page.tsx               # Alfred chat UI
+│   │   └── connections/
+│   │       └── page.tsx           # Connection status page
 │   └── api/
 │       └── alfred/
-│           └── route.ts       # Alfred API endpoint
+│           ├── route.ts           # Alfred API endpoint
+│           └── status/
+│               └── route.ts       # Connection status API
 ├── mastra/
 │   ├── agents/
-│   │   └── alfred.ts          # Alfred agent configuration
+│   │   └── alfred.ts              # Alfred agent configuration
 │   ├── mcp/
-│   │   └── config.ts          # MCP client configuration
-│   └── index.ts               # Mastra instance
+│   │   └── config.ts              # MCP client configuration
+│   └── index.ts                   # Mastra instance
 └── fonts/
-    └── setup.ts               # Font configuration
+    └── setup.ts                   # Font configuration
 ```
 
 ## Troubleshooting

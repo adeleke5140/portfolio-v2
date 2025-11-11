@@ -71,18 +71,26 @@ export default function AlfredPage() {
       {/* Pixel art header */}
       <header className="border-b-4 border-black dark:border-white bg-white dark:bg-[#0a0a0a]">
         <div className="max-w-4xl mx-auto px-4 py-4">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-[#6B46C1] text-white flex items-center justify-center" style={{ imageRendering: 'pixelated' }}>
-              <PixelRobot size={40} />
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-[#6B46C1] text-white flex items-center justify-center" style={{ imageRendering: 'pixelated' }}>
+                <PixelRobot size={40} />
+              </div>
+              <div>
+                <h1 className="font-mono text-2xl font-bold text-black dark:text-white tracking-tight">
+                  ALFRED.EXE
+                </h1>
+                <p className="font-mono text-xs text-gray-600 dark:text-gray-400 tracking-wide">
+                  AI COFOUNDER v1.0
+                </p>
+              </div>
             </div>
-            <div>
-              <h1 className="font-mono text-2xl font-bold text-black dark:text-white tracking-tight">
-                ALFRED.EXE
-              </h1>
-              <p className="font-mono text-xs text-gray-600 dark:text-gray-400 tracking-wide">
-                AI COFOUNDER v1.0
-              </p>
-            </div>
+            <a
+              href="/alfred/connections"
+              className="px-4 py-2 bg-black dark:bg-white text-white dark:text-black border-2 border-black dark:border-white font-mono font-bold text-xs hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+            >
+              CONNECTIONS
+            </a>
           </div>
         </div>
       </header>
