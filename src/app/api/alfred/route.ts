@@ -1,4 +1,4 @@
-import { mastra } from '@/mastra'
+import { getAlfredAgent } from '@/mastra/agents/alfred'
 import { NextRequest, NextResponse } from 'next/server'
 
 export const runtime = 'nodejs'
@@ -15,8 +15,8 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // Get the Alfred agent from the Mastra instance
-    const alfredAgent = mastra.getAgent('alfredAgent')
+    // Get the Alfred agent (will initialize MCP servers and discover tools)
+    const alfredAgent = await getAlfredAgent()
 
     // Stream the response with AI SDK v5 format
     const stream = await alfredAgent.stream(messages, {

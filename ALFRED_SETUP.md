@@ -6,42 +6,74 @@ A proof-of-concept AI assistant built with Next.js, Mastra, and MCP (Model Conte
 
 - 🤖 AI-powered assistant named Alfred
 - 💬 Chat interface using AI SDK React components
-- 📱 Slack integration via MCP
-- 📋 Linear integration via MCP
+- 📱 Slack integration via MCP (using [korotovsky/slack-mcp-server](https://github.com/korotovsky/slack-mcp-server))
+- 📋 Linear integration via MCP (using [jerhadf/linear-mcp-server](https://github.com/jerhadf/linear-mcp-server))
 - 🎨 Modern UI with shadcn components
 - ✨ Instrument Sans (body) and Instrument Serif (header) fonts
+- 🔧 Dynamic tool discovery from MCP servers
 
 ## Setup
 
 ### Prerequisites
 
 1. Node.js and pnpm installed
-2. Slack MCP server configured
-3. Linear MCP server configured
+2. Slack tokens (xoxc/xoxd or xoxp token)
+3. Linear API key
 
 ### MCP Server Setup
 
-You'll need to set up MCP servers for Slack and Linear. These typically run as separate processes and communicate via stdio.
+#### Slack MCP Server
 
-#### Option 1: Using Environment Variables
+The Slack MCP server is a Go binary. You have a few options:
 
-Create a `.env.local` file:
+1. **Download the binary** from [releases](https://github.com/korotovsky/slack-mcp-server/releases)
+2. **Use Docker**: `docker pull korotovsky/slack-mcp-server`
+3. **Build from source**: Follow instructions in the [repository](https://github.com/korotovsky/slack-mcp-server)
+
+#### Linear MCP Server
+
+The Linear MCP server runs via npm/npx and will be automatically installed.
+
+### Environment Variables
+
+Create a `.env.local` file in the project root:
 
 ```env
 # Slack MCP Configuration
-SLACK_MCP_COMMAND=npx
-SLACK_MCP_ARGS=-y @modelcontextprotocol/server-slack
-SLACK_BOT_TOKEN=your-slack-bot-token
+# Option 1: Using xoxc/xoxd tokens (browser tokens)
+SLACK_MCP_XOXC_TOKEN=xoxc-your-token-here
+SLACK_MCP_XOXD_TOKEN=xoxd-your-token-here
+
+# Option 2: Using xoxp token (OAuth token)
+# SLACK_MCP_XOXP_TOKEN=xoxp-your-token-here
+
+# Optional: Custom command if binary is not in PATH
+# SLACK_MCP_COMMAND=/path/to/slack-mcp-server
+# SLACK_MCP_ARGS=--port 13080
 
 # Linear MCP Configuration
-LINEAR_MCP_COMMAND=npx
-LINEAR_MCP_ARGS=-y @modelcontextprotocol/server-linear
-LINEAR_API_KEY=your-linear-api-key
+LINEAR_API_KEY=your-linear-api-key-here
+
+# Optional: Custom command (defaults to npx)
+# LINEAR_MCP_COMMAND=npx
+# LINEAR_MCP_ARGS=-y linear-mcp-server
 ```
 
-#### Option 2: Manual Configuration
+### Getting Slack Tokens
 
-You can also configure MCP servers programmatically by modifying `/src/mastra/mcp/init.ts`.
+You can extract Slack tokens from your browser:
+1. Open Slack in your browser
+2. Open Developer Tools (F12)
+3. Go to Application/Storage → Cookies → `https://app.slack.com`
+4. Find cookies: `d` (xoxd token) and look for `xoxc` in localStorage or network requests
+
+Alternatively, use OAuth to get an `xoxp` token.
+
+### Getting Linear API Key
+
+1. Go to your Linear workspace settings: `https://linear.app/YOUR-TEAM/settings/api`
+2. Create a new API key
+3. Copy the key to your `.env.local` file
 
 ### Installation
 
@@ -61,10 +93,33 @@ Visit `http://localhost:3000/alfred` to access the Alfred assistant.
 
 Once the app is running and MCP servers are connected, you can ask Alfred:
 
-- "What unread messages do I have in Slack?"
-- "What are my current tickets in Linear?"
-- "Show me unread messages from the engineering channel"
-- "What Linear issues are assigned to me?"
+- **Slack:**
+  - "What unread messages do I have in Slack?"
+  - "Show me messages from the #general channel"
+  - "Search for messages about 'deployment'"
+  - "List all channels"
+
+- **Linear:**
+  - "What are my current tickets in Linear?"
+  - "Show me high priority issues"
+  - "Search for issues assigned to me"
+  - "Create a new issue for bug fixing"
+
+## Available MCP Tools
+
+### Slack Tools (from slack-mcp-server)
+- `conversations_history` - Get messages from channels/DMs
+- `conversations_replies` - Get thread replies
+- `conversations_search_messages` - Search messages with filters
+- `channels_list` - List all channels
+- `conversations_add_message` - Post messages (disabled by default)
+
+### Linear Tools (from linear-mcp-server)
+- `linear_search_issues` - Search issues with filters
+- `linear_get_user_issues` - Get issues assigned to a user
+- `linear_create_issue` - Create new issues
+- `linear_update_issue` - Update existing issues
+- `linear_add_comment` - Add comments to issues
 
 ## Architecture
 
@@ -73,6 +128,7 @@ Once the app is running and MCP servers are connected, you can ask Alfred:
 - **UI Components**: shadcn/ui
 - **MCP Integration**: @modelcontextprotocol/sdk
 - **Fonts**: Instrument Sans (body), Instrument Serif (headers)
+- **Dynamic Tool Discovery**: Tools are discovered from MCP servers at runtime
 
 ## Project Structure
 
@@ -83,25 +139,43 @@ src/
 │   │   ├── page.tsx          # Main Alfred UI
 │   │   └── layout.tsx        # Layout without RootLayout wrapper
 │   └── api/
-│       └── alfred/
-│           └── route.ts      # API route for Alfred agent
+│       ├── alfred/
+│       │   └── route.ts      # API route for Alfred agent
+│       └── mcp/
+│           └── init/
+│               └── route.ts  # MCP initialization
 ├── components/
 │   └── ui/                   # shadcn components
 ├── mastra/
 │   ├── agents/
-│   │   └── alfred.ts         # Alfred agent definition
+│   │   └── alfred.ts         # Alfred agent (dynamic tool discovery)
 │   ├── mcp/
 │   │   ├── client.ts         # MCP client manager
-│   │   └── init.ts           # MCP initialization
+│   │   └── init.ts           # MCP initialization logic
 │   └── tools/
-│       ├── slack-tool.ts     # Slack MCP tool wrapper
-│       └── linear-tool.ts    # Linear MCP tool wrapper
+│       └── mcp-tool-wrapper.ts # Dynamic MCP tool wrapper
 └── fonts/
     └── setup.ts              # Font configuration
 ```
 
+## How It Works
+
+1. When the Alfred agent is first accessed, it:
+   - Initializes MCP servers (Slack and Linear) based on environment variables
+   - Discovers available tools from each MCP server
+   - Creates Mastra Tool wrappers for each MCP tool
+   - Initializes the agent with all discovered tools
+
+2. When a user asks a question:
+   - The agent analyzes the request
+   - Selects appropriate MCP tools to use
+   - Calls the tools via MCP protocol
+   - Formats and returns the results
+
 ## Notes
 
 - MCP servers need to be running and accessible for the tools to work
-- The current implementation uses stdio transport for MCP communication
-- Make sure your Slack bot token and Linear API key have the necessary permissions
+- The Slack MCP server uses stdio transport
+- The Linear MCP server runs via npx and uses stdio transport
+- Tools are discovered dynamically, so new tools added to MCP servers will be automatically available
+- Make sure your Slack tokens and Linear API key have the necessary permissions

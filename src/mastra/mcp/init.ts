@@ -53,30 +53,47 @@ export async function initializeMCPServers(config: MCPServerConfig) {
   await Promise.allSettled(connections)
 }
 
-// Default configuration - can be overridden via environment variables
+// Default configuration - uses actual MCP servers
 export function getMCPConfig(): MCPServerConfig {
-  return {
-    slack: process.env.SLACK_MCP_COMMAND
-      ? {
-          command: process.env.SLACK_MCP_COMMAND,
-          args: process.env.SLACK_MCP_ARGS?.split(' ') || [],
-          env: {
-            ...(process.env.SLACK_BOT_TOKEN && {
-              SLACK_BOT_TOKEN: process.env.SLACK_BOT_TOKEN,
-            }),
-          },
-        }
-      : undefined,
-    linear: process.env.LINEAR_MCP_COMMAND
-      ? {
-          command: process.env.LINEAR_MCP_COMMAND,
-          args: process.env.LINEAR_MCP_ARGS?.split(' ') || [],
-          env: {
-            ...(process.env.LINEAR_API_KEY && {
-              LINEAR_API_KEY: process.env.LINEAR_API_KEY,
-            }),
-          },
-        }
-      : undefined,
+  const config: MCPServerConfig = {}
+
+  // Slack MCP Server (korotovsky/slack-mcp-server)
+  // Can be run via binary or docker
+  // For now, we'll use environment variables to configure
+  if (process.env.SLACK_MCP_XOXC_TOKEN || process.env.SLACK_MCP_XOXP_TOKEN) {
+    config.slack = {
+      // Default: expects slack-mcp-server binary in PATH
+      // Or use: docker run korotovsky/slack-mcp-server
+      command: process.env.SLACK_MCP_COMMAND || 'slack-mcp-server',
+      args: process.env.SLACK_MCP_ARGS?.split(' ') || [],
+      env: {
+        ...(process.env.SLACK_MCP_XOXC_TOKEN && {
+          SLACK_MCP_XOXC_TOKEN: process.env.SLACK_MCP_XOXC_TOKEN,
+        }),
+        ...(process.env.SLACK_MCP_XOXD_TOKEN && {
+          SLACK_MCP_XOXD_TOKEN: process.env.SLACK_MCP_XOXD_TOKEN,
+        }),
+        ...(process.env.SLACK_MCP_XOXP_TOKEN && {
+          SLACK_MCP_XOXP_TOKEN: process.env.SLACK_MCP_XOXP_TOKEN,
+        }),
+        ...(process.env.SLACK_MCP_PORT && {
+          SLACK_MCP_PORT: process.env.SLACK_MCP_PORT,
+        }),
+      },
+    }
   }
+
+  // Linear MCP Server (jerhadf/linear-mcp-server)
+  // Runs via npx
+  if (process.env.LINEAR_API_KEY) {
+    config.linear = {
+      command: process.env.LINEAR_MCP_COMMAND || 'npx',
+      args: process.env.LINEAR_MCP_ARGS?.split(' ') || ['-y', 'linear-mcp-server'],
+      env: {
+        LINEAR_API_KEY: process.env.LINEAR_API_KEY,
+      },
+    }
+  }
+
+  return config
 }
