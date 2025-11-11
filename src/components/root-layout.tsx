@@ -6,21 +6,31 @@ interface RootLayoutProps {
 
 export const RootLayout = ({ children }: RootLayoutProps) => {
   return (
-    <>
-      <div className="relative flex flex-col min-h-screen max-w-[1280px]  mx-auto pb-8">
-        <nav className="flex gap-4 border-b-[0.5px] px-3 md:px-0  border-b-[#dcdcdc]  h-full items-center justify-end py-5">
-          <Link href="/craft" className="text-lg">
-            Craft
-          </Link>
-          <Link href="/blog" className="text-lg">
-            Blog
-          </Link>
-          <Link href="/" className="text-lg">
-            Home
-          </Link>
-        </nav>
-        <main className="flex-1 w-full">{children}</main>
-      </div>
-    </>
+    <div className="relative mx-auto flex min-h-screen w-full max-w-[1280px] flex-col px-0 pb-8">
+      <nav className="flex items-center justify-between border-b border-b-[#dcdcdc] px-4 py-6 md:px-0">
+        <Link href="/" className="font-serif text-xl font-semibold tracking-tight">
+          Alfred
+        </Link>
+        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+          <a
+            href="https://mastra.ai/docs/tools-mcp/mcp-overview"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-ken-black"
+          >
+            MCP docs
+          </a>
+          <a
+            href="https://mastra.ai/"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-ken-black"
+          >
+            Mastra
+          </a>
+        </div>
+      </nav>
+      <main className="flex-1 w-full">{children}</main>
+    </div>
   )
 }

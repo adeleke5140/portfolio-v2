@@ -1,14 +1,16 @@
-import { RootLayout } from '@/components/root-layout'
 import { fonts } from '@/fonts/setup'
 import '@/styles/globals.css'
 import { Toaster } from 'sonner'
+import { RootLayout } from '@/components/root-layout'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>
+      <body
+        className={`${fonts.instrumentSans.variable} ${fonts.instrumentSerif.variable} ${fonts.berkeleyMono.variable} antialiased`}
+      >
         <div
-          className={`min-h-screen font-sans ${fonts.berkeleyMono.variable} ${fonts.neue.variable} ${fonts.editorialNew.variable} bg-[rgb(248,249,250)] text-ken-black`}
+          className="min-h-screen font-sans bg-[rgb(248,249,250)] text-ken-black"
           id="container"
         >
           <Toaster />
