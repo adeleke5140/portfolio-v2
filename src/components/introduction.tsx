@@ -97,14 +97,23 @@ export const Introduction = () => {
             </a>
             <a
               href="/alfred"
-              className="inline-block group rounded-xl w-full"
+              className="inline-block group w-full"
             >
-              <span className="flex justify-self-start flex-col gap-0.5">
-                <span className="bg-gradient-to-br from-blue-500 to-purple-600 text-white group-hover:from-blue-600 group-hover:to-purple-700 transition-all justify-between group flex gap-1.5 text-[15px] items-center px-3 py-2 rounded-xl font-medium">
-                  Alfred AI Assistant 🤖
+              <span className="flex justify-self-start flex-col gap-1">
+                <span className="bg-[#6B46C1] border-4 border-black text-white group-hover:bg-[#7C3AED] transition-all justify-between group flex gap-2 text-[15px] items-center px-3 py-2 font-mono font-bold"
+                  style={{ imageRendering: 'pixelated' }}
+                >
+                  <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="14" y="2" width="4" height="4" fill="currentColor"/>
+                    <rect x="8" y="8" width="16" height="12" fill="currentColor"/>
+                    <rect x="12" y="12" width="4" height="4" fill="#000"/>
+                    <rect x="20" y="12" width="4" height="4" fill="#000"/>
+                    <rect x="10" y="20" width="12" height="8" fill="currentColor"/>
+                  </svg>
+                  ALFRED.EXE
                 </span>
-                <span className="text-xs text-gray-600 px-3">
-                  Chat with Alfred about your Slack messages and Linear tickets
+                <span className="text-xs text-gray-600 px-3 font-mono">
+                  &gt; AI COFOUNDER FOR SLACK + LINEAR
                 </span>
               </span>
             </a>
