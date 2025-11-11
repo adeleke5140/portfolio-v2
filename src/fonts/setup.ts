@@ -1,4 +1,5 @@
 import localFont from 'next/font/local'
+import { Instrument_Sans, Instrument_Serif } from 'next/font/google'
 
 export const berkeleyMono = localFont({
   src: './BerkeleyMono-Regular.otf',
@@ -50,8 +51,23 @@ export const editorialNew = localFont({
   display: 'swap',
 })
 
+export const instrumentSans = Instrument_Sans({
+  subsets: ['latin'],
+  variable: '--font-instrument-sans',
+  display: 'swap',
+})
+
+export const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  variable: '--font-instrument-serif',
+  display: 'swap',
+  weight: ['400', '700'],
+})
+
 export const fonts = {
   berkeleyMono,
   neue,
   editorialNew,
+  instrumentSans,
+  instrumentSerif,
 }

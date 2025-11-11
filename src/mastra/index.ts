@@ -8,3 +8,6 @@ export const mastra = new Mastra({
     url: ':memory:',
   }),
 })
+
+// Note: alfredAgent is initialized dynamically via getAlfredAgent()
+// because it needs to discover MCP tools at runtime
