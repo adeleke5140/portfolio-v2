@@ -17,6 +17,7 @@
     "@mastra/memory": "^0.15.9",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
+    "@modelcontextprotocol/sdk": "^1.21.1",
     "@next/mdx": "^15.3.2",
     "@radix-ui/colors": "^0.1.8",
     "@radix-ui/react-avatar": "^1.1.10",
