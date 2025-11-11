@@ -57,7 +57,7 @@ export const IntegrationMenu = () => {
   const [current, setCurrent] = useState('github')
   const [showMenu, setShowMenu] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
-  useOnClickOutside(ref, () => setShowMenu(false))
+  useOnClickOutside(ref as React.RefObject<HTMLElement>, () => setShowMenu(false))
 
   return (
     <div className="grid place-items-center h-[294px] w-full">
