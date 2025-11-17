@@ -68,6 +68,27 @@ export const KenAssistant = ({ isOpen, onClose }: ChatSidebarProps) => {
     }
   }, [isOpen])
 
+  // Refocus textarea after streaming completes
+  const prevStatusRef = useRef(status)
+  useEffect(() => {
+    // When streaming/submitted changes to idle (not loading), refocus
+    const wasLoading =
+      prevStatusRef.current === 'streaming' ||
+      prevStatusRef.current === 'submitted'
+    const isNowIdle = status !== 'streaming' && status !== 'submitted'
+
+    if (wasLoading && isNowIdle && isOpen) {
+      // Small delay to ensure DOM has updated
+      const timer = setTimeout(() => {
+        textareaRef.current?.focus()
+      }, 100)
+      prevStatusRef.current = status
+      return () => clearTimeout(timer)
+    }
+
+    prevStatusRef.current = status
+  }, [status, isOpen])
+
   return (
     <AnimatePresence initial={false}>
       {isOpen && (
