@@ -16,6 +16,10 @@ import { Message, MessageContent } from '../ai-elements/message'
 import { Response } from '../ai-elements/response'
 import { TextShimmer } from '../ai-elements/shimmer'
 import { blog } from '../craft/navigation/navigation'
+
+function transFormDashToSpaceCase(str: string) {
+  return str.replace(/-/g, ' ')
+}
 interface ChatSidebarProps {
   isOpen: boolean
   onClose: () => void
@@ -27,18 +31,19 @@ export const KenAssistant = ({ isOpen, onClose }: ChatSidebarProps) => {
 
   const pathname = usePathname()
 
-  // Extract context information from the current path
-  const pathSegments = pathname.split('/').filter(Boolean)
-  const isOnBlogPost = pathSegments[0] === 'blog' && pathSegments[1]
-  const blogSlug = isOnBlogPost ? pathSegments[1] : null
-  const context = isOnBlogPost ? 'blog' : pathSegments[0] || 'home'
+  const currentPath = pathname.split('/').filter(Boolean)
+  const isOnBlogPost = currentPath[0] === 'blog'
+  const context = isOnBlogPost
+    ? currentPath[1] == null
+      ? 'blog'
+      : currentPath[1]
+    : 'blog'
 
   const { messages, sendMessage, status } = useChat({
     transport: new DefaultChatTransport({
       api: '/api/agent',
       body: {
         context: context, // 'blog', 'craft', 'home', etc.
-        blogSlug: blogSlug, // The specific blog post slug if on a blog post
         pathname: pathname, // Full pathname for reference
       },
     }),
@@ -108,7 +113,7 @@ export const KenAssistant = ({ isOpen, onClose }: ChatSidebarProps) => {
             exit={{ x: '50%', opacity: 0 }}
             transition={{ type: 'spring', bounce: 0.3 }}
             className={cn(
-              'fixed right-2 h-fit max-h-[calc(100%_-_70px)] min-h-[500px]  bottom-2 z-50',
+              'fixed right-2 h-[500px]  bottom-2 z-50',
               'w-full md:w-[450px]',
               'bg-white border border-gray-200',
               'flex flex-col rounded-t-[20px] rounded-b-[48px] shadow-2xl'
@@ -214,7 +219,7 @@ export const KenAssistant = ({ isOpen, onClose }: ChatSidebarProps) => {
                   <div className="text-center text-gray-500 text-sm">
                     <p className="border flex items-center gap-1 border-[#dcdcdc]/50 bg-gray-50 rounded-full text-xs px-[10px] py-[5px] text-left w-fit">
                       {blog}
-                      {blogSlug || context}
+                      {context}
                     </p>
                   </div>
 
@@ -232,7 +237,7 @@ export const KenAssistant = ({ isOpen, onClose }: ChatSidebarProps) => {
                     placeholder={
                       context === 'blog'
                         ? "You can ask about what I've written."
-                        : `Ask Kenny about ${context}`
+                        : `Ask Kenny about ${transFormDashToSpaceCase(context)}`
                     }
                     disabled={isLoading}
                     className="w-full h-full outline-none  disabled:bg-inherit resize-none disabled:cursor-not-allowed text-sm"
