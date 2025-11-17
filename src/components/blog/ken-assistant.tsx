@@ -108,7 +108,7 @@ export const KenAssistant = ({ isOpen, onClose }: ChatSidebarProps) => {
             exit={{ x: '50%', opacity: 0 }}
             transition={{ type: 'spring', bounce: 0.3 }}
             className={cn(
-              'fixed right-2 h-fit max-h-[calc(100%_-_20px)] min-h-[500px]  bottom-2 z-50',
+              'fixed right-2 h-fit max-h-[calc(100%_-_70px)] min-h-[500px]  bottom-2 z-50',
               'w-full md:w-[450px]',
               'bg-white border border-gray-200',
               'flex flex-col rounded-t-[20px] rounded-b-[48px] shadow-2xl'
