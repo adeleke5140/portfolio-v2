@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 export const blog = (
   <svg
-    className="w-3 h-3"
+    className="w-3 h-3 shrink-0"
     xmlns="http://www.w3.org/2000/svg"
     width="24"
     height="24"
