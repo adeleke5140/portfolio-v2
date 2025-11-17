@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, motion, Transition } from 'motion/react'
 import { Nunito } from 'next/font/google'
 import { useEffect, useRef, useState } from 'react'
 import { CheckMark, Pen } from './icons'
@@ -16,7 +16,7 @@ const t = {
   duration: 0.6,
   type: 'spring',
   bounce: 0.5,
-}
+} as Transition
 export const SplitToEdit = () => {
   const [hour, setHour] = useState('')
   const [min, setMin] = useState('')
