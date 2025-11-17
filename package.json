@@ -9,12 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^2.0.37",
-    "@ai-sdk/react": "^2.0.77",
-    "@mastra/ai-sdk": "^0.2.3",
-    "@mastra/core": "^0.22.2",
-    "@mastra/libsql": "^0.16.1",
-    "@mastra/memory": "^0.15.9",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.3.2",
@@ -35,7 +29,6 @@
     "@types/react": "19.1.0",
     "@types/react-dom": "19.1.0",
     "@xyflow/react": "^12.9.0",
-    "ai": "^5.0.77",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",

@@ -1,21 +1,27 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { AnimatePresence, motion } from 'motion/react'
+import {
+  AnimatePresence,
+  AnimationGeneratorType,
+  motion,
+  Transition,
+} from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
 import { CheckMark, Pen } from './icons'
 import { Nunito } from 'next/font/google'
 
 const nunito = Nunito({ subsets: ['latin'] })
 
-const buttonIcons = {
-  edit: <Pen className="size-4" />,
-  done: <CheckMark className="size-4" />,
-}
 const t = {
   duration: 0.6,
   type: 'spring',
   bounce: 0.5,
+} as Transition
+
+const buttonIcons = {
+  edit: <Pen className="size-4" />,
+  done: <CheckMark className="size-4" />,
 }
 export const SplitToEdit = () => {
   const [hour, setHour] = useState('')
