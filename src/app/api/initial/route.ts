@@ -5,12 +5,14 @@ import { mastra } from '@/mastra'
 const myAgent = mastra.getAgent('kennyAgent')
 
 export async function GET() {
-  const result = await (
-    await myAgent.getMemory()
-  )?.query({
-    threadId: 'user-session',
+  const mem = await myAgent.getMemory()
+  if (!mem) return []
+
+  const res = await mem.query({
+    threadId: 'blog',
+    resourceId: 'chat-sesion',
   })
 
-  const messages = convertMessages(result?.uiMessages || []).to('AIV5.UI')
+  const messages = convertMessages(res?.uiMessages || []).to('AIV5.UI')
   return NextResponse.json(messages)
 }

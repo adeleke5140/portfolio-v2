@@ -24,17 +24,19 @@ export async function POST(req: NextRequest) {
     runtimeContext.set('blogSlug', blogSlug)
     runtimeContext.set('pathname', pathname)
 
-    console.log({ context, blogSlug, pathname })
-
     // Stream the response with AI SDK v5 format
     const stream = await kennyAgent.stream(messages, {
       format: 'aisdk', // Enable AI SDK v5 compatibility
-      runtimeContext
+      runtimeContext,
+      memory: {
+        thread: blogSlug || 'blog',
+        resource: 'chat-session',
+      },
     })
 
     // Return the stream response (AI SDK v5 compatible)
     return stream.toUIMessageStreamResponse({
-      sendSources: true
+      sendSources: true,
     })
   } catch (error) {
     console.error('Agent error:', error)
