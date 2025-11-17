@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
-import { ChatSidebar } from '@/components/blog/chat-sidebar'
-import { ChatToggleButton } from '@/components/blog/chat-toggle-button'
+import { KenAssistant } from '@/components/blog/ken-assistant'
+import { ToggleKen } from '@/components/blog/toggle-ken'
 import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 
 export default function BlogLayout({
   children,
@@ -16,8 +16,8 @@ export default function BlogLayout({
   return (
     <>
       {children}
-      <ChatToggleButton onClick={() => setIsChatOpen(true)} />
-      <ChatSidebar
+      <ToggleKen onClick={() => setIsChatOpen(true)} />
+      <KenAssistant
         key={pathname}
         isOpen={isChatOpen}
         onClose={() => setIsChatOpen(false)}
