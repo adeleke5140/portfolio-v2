@@ -13,6 +13,7 @@
     "@ai-sdk/react": "^2.0.77",
     "@mastra/ai-sdk": "^0.2.3",
     "@mastra/core": "^0.22.2",
+    "@mastra/langfuse": "^0.2.3",
     "@mastra/libsql": "^0.16.1",
     "@mastra/memory": "^0.15.9",
     "@mdx-js/loader": "^3.1.0",

@@ -20,6 +20,9 @@ importers:
       '@mastra/core':
         specifier: ^0.22.2
         version: 0.22.2(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.76)
+      '@mastra/langfuse':
+        specifier: ^0.2.3
+        version: 0.2.3(@mastra/core@0.22.2(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.76))
       '@mastra/libsql':
         specifier: ^0.16.1
         version: 0.16.1(@mastra/core@0.22.2(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.76))
@@ -678,6 +681,11 @@ packages:
     engines: {node: '>=20'}
     peerDependencies:
       zod: ^3.25.0 || ^4.0.0
+
+  '@mastra/langfuse@0.2.3':
+    resolution: {integrity: sha512-WZ77jDhTBytB7JZq2UrG4I/2XhVJvq8RT5WTIr1rE9if59TX0oV7E6En0KNuJzQ38ZD/MX8b+qUfVAOFi5UWPg==}
+    peerDependencies:
+      '@mastra/core': '>=0.18.1-0 <0.25.0-0'
 
   '@mastra/libsql@0.16.1':
     resolution: {integrity: sha512-jkYCsv00qzhjq4nyscChovW8cfeb8r8VkgzW+iPU9SBLu7pDX2HGgC/WSvSOeH1Ll0twqL2iql6gKXGAnDmRfw==}
@@ -4454,6 +4462,14 @@ packages:
   kolorist@1.8.0:
     resolution: {integrity: sha512-Y+60/zizpJ3HRH8DCss+q95yr6145JXZo46OTpFvDZWLfRCE4qChOyk1b26nMaNpfHHgxagk9dXT5OP0Tfe+dQ==}
 
+  langfuse-core@3.38.6:
+    resolution: {integrity: sha512-EcZXa+DK9FJdi1I30+u19eKjuBJ04du6j2Nybk19KKCuraLczg/ppkTQcGvc4QOk//OAi3qUHrajUuV74RXsBQ==}
+    engines: {node: '>=18'}
+
+  langfuse@3.38.6:
+    resolution: {integrity: sha512-mtwfsNGIYvObRh+NYNGlJQJDiBN+Wr3Hnr++wN25mxuOpSTdXX+JQqVCyAqGL5GD2TAXRZ7COsN42Vmp9krYmg==}
+    engines: {node: '>=18'}
+
   langium@3.3.1:
     resolution: {integrity: sha512-QJv/h939gDpvT+9SiLVlY7tZC3xB2qK57v0J04Sh9wpMb6MP1q8gB21L3WIo8T5P1MSMg3Ep14L7KkDCFG3y4w==}
     engines: {node: '>=16.0.0'}
@@ -4891,6 +4907,10 @@ packages:
 
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
+
+  mustache@4.2.0:
+    resolution: {integrity: sha512-71ippSywq5Yb7/tVYyGbkBggbU8H3u5Rz56fH60jGFgr8uHwxs+aSKeqmluIVzM0m0kB7xQjKS6qPfd0b2ZoqQ==}
+    hasBin: true
 
   mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
@@ -6768,6 +6788,11 @@ snapshots:
       - supports-color
       - valibot
       - zod-openapi
+
+  '@mastra/langfuse@0.2.3(@mastra/core@0.22.2(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.76))':
+    dependencies:
+      '@mastra/core': 0.22.2(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.76)
+      langfuse: 3.38.6
 
   '@mastra/libsql@0.16.1(@mastra/core@0.22.2(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.76))':
     dependencies:
@@ -11629,6 +11654,14 @@ snapshots:
 
   kolorist@1.8.0: {}
 
+  langfuse-core@3.38.6:
+    dependencies:
+      mustache: 4.2.0
+
+  langfuse@3.38.6:
+    dependencies:
+      langfuse-core: 3.38.6
+
   langium@3.3.1:
     dependencies:
       chevrotain: 11.0.3
@@ -12454,6 +12487,8 @@ snapshots:
   ms@2.0.0: {}
 
   ms@2.1.3: {}
+
+  mustache@4.2.0: {}
 
   mz@2.7.0:
     dependencies:
