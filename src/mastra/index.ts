@@ -1,7 +1,7 @@
 import { Mastra } from '@mastra/core'
-import { kennyAgent } from './agents/kenny'
-import { LibSQLStore } from '@mastra/libsql'
 import { LangfuseExporter } from '@mastra/langfuse'
+import { LibSQLStore } from '@mastra/libsql'
+import { kennyAgent } from './agents/kenny'
 
 type MastraInstance = ReturnType<typeof createMastraInstance>
 
@@ -13,7 +13,7 @@ function createMastraInstance() {
   return new Mastra({
     agents: { kennyAgent },
     storage: new LibSQLStore({
-      url: ':memory:',
+      url: 'file:data/mastra.db',
     }),
     observability: {
       configs: {
