@@ -24,14 +24,16 @@ const PageWrapper = ({
 }: PageWrapperProps) => {
   const slot =
     typeof heading == 'string' ? (
-      <h1 className="font-serif text-left py-10 lg:text-7xl font-medium w-full mb-10 capitalize leading-[100%] tracking-[-0.96px] text-[48px]">
+      <h1 className="font-serif text-left py-10 lg:text-5xl font-medium w-full capitalize leading-[100%] tracking-[-0.96px] text-[48px]">
         {heading}
       </h1>
     ) : (
       heading
     )
   return (
-    <div className={cn('relative px-6 2xl:px-0 mx-auto', classname)}>
+    <div
+      className={cn('relative max-w-[680px] px-6 2xl:px-0 mx-auto', classname)}
+    >
       <div className="flex flex-col gap-5">
         {showLink ? (
           <BackButton path={path ? path : ''} text={`${backText}`} />
