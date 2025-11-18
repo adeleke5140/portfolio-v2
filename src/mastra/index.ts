@@ -13,7 +13,7 @@ function createMastraInstance() {
   return new Mastra({
     agents: { kennyAgent },
     storage: new LibSQLStore({
-      url: 'file:data/mastra.db',
+      url: 'file:agent-memory.db',
     }),
     observability: {
       configs: {
