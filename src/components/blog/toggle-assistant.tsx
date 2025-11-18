@@ -3,17 +3,14 @@
 import { cn } from '@/lib/utils'
 
 interface ChatToggleButtonProps {
-  onClick: () => void
   className?: string
 }
 
-export const ToggleKen = ({ onClick, className }: ChatToggleButtonProps) => {
+export const ToggleAssistant = ({ className }: ChatToggleButtonProps) => {
   return (
-    <button
-      onClick={onClick}
+    <div
       className={cn(
-        'fixed bottom-6 rounded-xl right-6 z-30',
-        'flex items-center gap-2 px-4 py-3',
+        'flex items-center cursor-pointer gap-2 px-4 py-3',
         ' text-white',
         'hover:scale-105 active:scale-95',
         'transition-all duration-200',
@@ -75,6 +72,6 @@ export const ToggleKen = ({ onClick, className }: ChatToggleButtonProps) => {
         </g>
       </svg>
       <span className="text-black">Ask Ken</span>
-    </button>
+    </div>
   )
 }
