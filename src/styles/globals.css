@@ -38,8 +38,7 @@ h4 {
   --gradient-stop-1: oklch(0.52 0.02 266.33 / 0.85);
   --gradient-stop-2: oklch(0.74 0.05 268.37 / 0.34);
   --gradient-stop-3: oklch(0.48 0.02 266.76 / 0.84);
-  --shadow:
-    inset 0 1px 0 oklch(1 0 0 / 0.2), inset 0 -1px 0 oklch(0 0 0 / 0.2),
+  --shadow: inset 0 1px 0 oklch(1 0 0 / 0.2), inset 0 -1px 0 oklch(0 0 0 / 0.2),
     0 1px 2px oklch(0 0 0 / 0.2);
   --text-shadow: 0 1px rgb(0 11 15 / 40%);
   --border: #e3e3e3;
@@ -105,10 +104,8 @@ h1 {
 }
 
 .card {
-  box-shadow:
-    0px 0px 0px 1px rgba(9, 9, 11, 0.08),
-    0px 1px 2px -1px rgba(9, 9, 11, 0.08),
-    0px 2px 4px 0px rgba(9, 9, 11, 0.04);
+  box-shadow: 0px 0px 0px 1px rgba(9, 9, 11, 0.08),
+    0px 1px 2px -1px rgba(9, 9, 11, 0.08), 0px 2px 4px 0px rgba(9, 9, 11, 0.04);
 }
 
 .clip-path-container {
@@ -174,8 +171,7 @@ input[type='checkbox'] {
   width: 1.15em;
   height: 1.15em;
   border-radius: 5px;
-  transition:
-    transform 0.2s cubic-bezier(0.22, 0.61, 0.36, 1),
+  transition: transform 0.2s cubic-bezier(0.22, 0.61, 0.36, 1),
     background-color 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 4px 0px;
   display: grid;
@@ -218,9 +214,7 @@ input[type='checkbox'] {
   color: var(--secondary);
   text-shadow: var(--text-shadow);
   box-shadow: var(--shadow);
-  transition:
-    transform 0.1s ease-out,
-    border 0.1s ease-out;
+  transition: transform 0.1s ease-out, border 0.1s ease-out;
 
   &:active {
     transform: scale(0.98);
@@ -363,36 +357,14 @@ label:focus-within {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
 }
 
 @layer base {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+* {
+  outline-color: var(--primary);
 }
