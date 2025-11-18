@@ -1,0 +1,214 @@
+'use client'
+
+import { useChat } from '@ai-sdk/react'
+import { DefaultChatTransport } from 'ai'
+import { usePathname } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
+import {
+  Conversation,
+  ConversationContent,
+  ConversationScrollButton,
+} from '../ai-elements/conversation'
+import { MaximizeIcon } from '../ai-elements/loader'
+import { Message, MessageContent } from '../ai-elements/message'
+import { Response } from '../ai-elements/response'
+import { TextShimmer } from '../ai-elements/shimmer'
+import { Form } from './form'
+
+interface ChatSidebarProps {
+  isOpen: boolean
+  onClose: () => void
+  isMaximized: boolean
+  setIsMaximized: (isMaximized: boolean) => void
+}
+
+export const KenAssistant = ({
+  isOpen,
+  onClose,
+  isMaximized,
+  setIsMaximized,
+}: ChatSidebarProps) => {
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const [input, setInput] = useState('')
+
+  const pathname = usePathname()
+
+  const currentPath = pathname.split('/').filter(Boolean)
+  const isOnBlogPost = currentPath[0] === 'blog'
+  const context = isOnBlogPost
+    ? currentPath[1] == null
+      ? 'blog'
+      : currentPath[1]
+    : 'blog'
+
+  const blogSlug = isOnBlogPost && currentPath[1] ? currentPath[1] : null
+
+  const { messages, sendMessage, setMessages, status } = useChat({
+    transport: new DefaultChatTransport({
+      api: '/api/agent',
+      body: {
+        context: context,
+        blogSlug: blogSlug,
+        pathname: pathname,
+      },
+    }),
+  })
+
+  useEffect(() => {
+    const fetchMessages = async () => {
+      const url = blogSlug
+        ? `/api/initial?blogSlug=${encodeURIComponent(blogSlug)}`
+        : '/api/initial'
+      const res = await fetch(url)
+      const data = await res.json()
+      setMessages([...data])
+    }
+    fetchMessages()
+  }, [setMessages, blogSlug])
+
+  const isLoading = status === 'streaming' || status === 'submitted'
+
+  // Show thinking indicator when:
+  // 1. Status is 'submitted' (request sent, waiting for response)
+  // 2. Status is 'streaming' but the last message is from user (assistant hasn't started responding yet)
+  // 3. Status is 'streaming' and the last assistant message has no text content yet
+  const lastMessage = messages[messages.length - 1]
+  const lastMessageHasContent = lastMessage?.parts.some(
+    (part) => part.type === 'text' && part.text && part.text.trim()
+  )
+  const isThinking =
+    status === 'submitted' ||
+    (status === 'streaming' && lastMessage && lastMessage.role === 'user') ||
+    (status === 'streaming' &&
+      lastMessage &&
+      lastMessage.role === 'assistant' &&
+      !lastMessageHasContent)
+
+  useEffect(() => {
+    if (isOpen) {
+      textareaRef.current?.focus()
+    }
+  }, [isOpen])
+
+  // Refocus textarea after streaming completes
+  const prevStatusRef = useRef(status)
+  useEffect(() => {
+    // When streaming/submitted changes to idle (not loading), refocus
+    const wasLoading =
+      prevStatusRef.current === 'streaming' ||
+      prevStatusRef.current === 'submitted'
+    const isNowIdle = status !== 'streaming' && status !== 'submitted'
+
+    if (wasLoading && isNowIdle && isOpen) {
+      // Small delay to ensure DOM has updated
+      const timer = setTimeout(() => {
+        textareaRef.current?.focus()
+      }, 100)
+      prevStatusRef.current = status
+      return () => clearTimeout(timer)
+    }
+
+    prevStatusRef.current = status
+  }, [status, isOpen])
+
+  return (
+    <div className="flex  h-full flex-col">
+      <div className="flex rounded-t-3xl items-center justify-between p-4">
+        <div>
+          <h2 className="font-serif text-gray-900">Ask Ken</h2>
+        </div>
+        <div className="flex items-center gap-1">
+          <button
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            aria-label="Maximize chat"
+            onClick={() => setIsMaximized(!isMaximized)}
+          >
+            <MaximizeIcon className="size-5" />
+          </button>
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            aria-label="Close chat"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              id="window-close-solid"
+              viewBox="0 0 24 24"
+              className="size-5 "
+            >
+              <path
+                fill="var(--primary)"
+                d="m22,2v-1H2v1h-1v20h1v1h20v-1h1V2h-1Zm-4,7h-1v1h-1v1h-1v2h1v1h1v1h1v1h-1v1h-1v1h-1v-1h-1v-1h-1v-1h-2v1h-1v1h-1v1h-1v-1h-1v-1h-1v-1h1v-1h1v-1h1v-2h-1v-1h-1v-1h-1v-1h1v-1h1v-1h1v1h1v1h1v1h2v-1h1v-1h1v-1h1v1h1v1h1v1Z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <Conversation className="flex-1 relative font-sans overflow-y-auto">
+        <ConversationContent className="p-4">
+          {messages.map((message, messageIndex) => {
+            // Check if message has any text content
+            const hasTextContent = message.parts.some(
+              (part) => part.type === 'text' && part.text && part.text.trim()
+            )
+
+            // Skip rendering empty assistant messages when thinking
+            const isEmptyAssistant =
+              !hasTextContent && message.role === 'assistant'
+            if (isEmptyAssistant) {
+              return null
+            }
+
+            return (
+              <Message
+                from={message.role as 'user' | 'assistant'}
+                key={message.id}
+              >
+                <MessageContent>
+                  {message.parts.map((part, i) => {
+                    switch (part.type) {
+                      case 'text':
+                        return (
+                          <Response key={`${message.id}-${i}`}>
+                            {part.text}
+                          </Response>
+                        )
+                      default:
+                        return null
+                    }
+                  })}
+                </MessageContent>
+              </Message>
+            )
+          })}
+
+          {/* Show thinking indicator when waiting for response */}
+          {isThinking && (
+            <Message from="assistant" key="thinking">
+              <MessageContent>
+                <div className="flex items-center">
+                  <TextShimmer duration={1} className="text-xs">
+                    Gnuggling....
+                  </TextShimmer>
+                </div>
+              </MessageContent>
+            </Message>
+          )}
+        </ConversationContent>
+        <ConversationScrollButton />
+      </Conversation>
+
+      <Form
+        input={input}
+        setInput={setInput}
+        sendMessage={(message) => sendMessage({ text: message })}
+        isLoading={isLoading}
+        textareaRef={
+          textareaRef as unknown as React.RefObject<HTMLTextAreaElement>
+        }
+        context={context}
+      />
+    </div>
+  )
+}
