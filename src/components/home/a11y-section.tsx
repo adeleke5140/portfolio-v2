@@ -16,7 +16,7 @@ export const A11ySection = () => {
         <ul className="flex gap-2">
           <li className="">
             <a
-              className=" bg-gray-100 hover:underline justify-between group flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-xl"
+              className="hover:underline justify-between group flex gap-1.5 text-[15px] items-center px-3 py-1 -ml-2 rounded-xl"
               rel="external"
               referrerPolicy="strict-origin"
               href="https://a11y-webring.club/prev"
@@ -26,7 +26,7 @@ export const A11ySection = () => {
           </li>
           <li className="">
             <a
-              className=" bg-gray-100  hover:underline justify-between group px-3 flex gap-1.5 items-center text-[15px] py-1 rounded-xl"
+              className="  hover:underline justify-between group px-3 flex gap-1.5 items-center text-[15px] py-1 rounded-xl"
               rel="external"
               referrerPolicy="strict-origin"
               href="https://a11y-webring.club/random"
@@ -36,7 +36,7 @@ export const A11ySection = () => {
           </li>
           <li className="">
             <a
-              className=" bg-gray-100  hover:underline justify-between group flex gap-1.5 items-center px-3 text-[15px] py-1 rounded-xl"
+              className="  hover:underline justify-between group flex gap-1.5 items-center px-3 text-[15px] py-1 rounded-xl"
               rel="external"
               referrerPolicy="strict-origin"
               href="https://a11y-webring.club/next"
