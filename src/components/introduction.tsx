@@ -1,6 +1,7 @@
 'use client'
 import { PageWrapper } from '@/components/page-wrapper'
 import { A11ySection } from './home/a11y-section'
+import Link from 'next/link'
 
 const connection = [
   {
@@ -26,33 +27,42 @@ export const Introduction = () => {
     <PageWrapper
       showHeading
       heading={
-        <div className="py-8">
-          <h1 className="text-[48px] font-medium lg:text-7xl lg:tracking-[-0.06em] lg:leading-[1.2em] font-serif tracking-tighter">
-            Design Engineer
+        <div className="py-8 pb-4">
+          <h1 className="text-[48px] font-medium lg:text-5xl lg:tracking-[-0.06em] lg:leading-[1.2em] font-serif tracking-tighter">
+            Kehinde Adeleke
           </h1>
+          <nav className="flex cursor-pointer items-center py-5">
+            <Link
+              href="/craft"
+              className="text-ken-grey -ml-3 px-3 py-1 rounded-xl "
+            >
+              Craft
+            </Link>
+            <Link href="/blog" className="text-ken-grey px-3 py-1 rounded-xl ">
+              Blog
+            </Link>
+          </nav>
         </div>
       }
-      classname="max-w-none"
     >
-      <div className="flex gap-10 pt-8 max-w-[40rem] flex-col">
+      <div className="flex gap-10  max-w-[40rem] flex-col">
         <section className="px-0">
           <div className="flex flex-col text-[var(--gray-1)] gap-2 dark:border-[#282828] dark:bg-[#282828]">
             <div className="rounded-lg  dark:text-[#fefefe]">
-              <p className="text-[17px]">
-                Hi, I'm <span className="font-medium">Kenny.</span> When I was
-                eight, I wanted to be an artist, the closest thing to that right
-                now is a design engineer.
+              <p>
+                Hi, I'm Kenny. When I was eight, I wanted to be an artist, the
+                closest thing to that right now is a design engineer.
               </p>
             </div>
 
             <div>
-              <p className="rounded-lg h-full text-[17px]">
+              <p>
                 My craft builds me as a person and I strive to infuse every
                 piece of work with care. I currently work on the Docs and
                 Website team at{' '}
                 <a
                   href="https://www.mastra.ai"
-                  className="border-b border-[#e87400]   text-[#e87400]"
+                  className="underline decoration-[#e87400]   text-[#e87400]"
                 >
                   mastra.ai
                 </a>{' '}
@@ -61,35 +71,14 @@ export const Introduction = () => {
           </div>
         </section>
 
-        <section className="flex flex-col gap-5">
-          <p className="font-medium text-[17px]">Building</p>
-          <p>
-            I am an active japanese learner so I am working on software to make
-            learning it easier. You can check it out below.
-          </p>
-          <div>
-            <a
-              target="_blank"
-              href="https://chromewebstore.google.com/detail/nihongo-speech/jhojfellcdlldagfemimnjebnfoodchf?authuser=0&hl=en-GB"
-              className="inline-block group rounded-xl w-fit"
-            >
-              <span className="flex justify-self-start flex-col gap-0.5">
-                <span className=" bg-gray-100 group-hover:underline justify-between group flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-xl">
-                  Hanashi
-                </span>
-              </span>
-            </a>
-          </div>
-        </section>
-
-        <section className="flex flex-col gap-5">
-          <p className="font-medium text-[17px]">Connect</p>
+        <section className="flex flex-col gap-3">
+          <p className="font-medium text-ken-grey font-serif">Socials</p>
           <div className="flex gap-2">
             {connection.map((con) => (
               <a
                 target="_blank"
                 href={con.value}
-                className="capitalize  hover:underline bg-gray-100 justify-between group flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-xl"
+                className="capitalize  hover:underline first:-ml-3 justify-between group flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-xl"
                 rel="external"
                 referrerPolicy="strict-origin"
               >
