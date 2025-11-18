@@ -1,7 +1,6 @@
-import { cn } from '@/lib/utils'
-import { BlogIcon } from '../craft/navigation/navigation'
-import { transFormDashToSpaceCase } from '@/lib/utils'
+import { cn, transFormDashToSpaceCase } from '@/lib/utils'
 import { Loader } from '../ai-elements/loader'
+import { BlogIcon } from '../craft/navigation/navigation'
 
 interface FormProps {
   input: string
@@ -21,7 +20,7 @@ export const Form = ({
   context,
 }: FormProps) => {
   return (
-    <form className="p-4 rounded-b-3xl">
+    <form className="p-4">
       <div className="relative">
         <div
           className={cn(
