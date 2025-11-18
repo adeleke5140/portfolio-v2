@@ -18,9 +18,15 @@ const POSTS_DIRECTORY = path.join(getProjectRoot(), 'src/app/blog/posts')
 
 export const readSingleBlog = createTool({
   id: 'read-single-blog',
-  description: 'Reads a single blog post by its file path. If no path is provided, automatically reads the current blog post the user is viewing (from runtime context). Use this for contextual queries like "summarize this post".',
+  description:
+    'Reads a single blog post by its file path. If no path is provided, automatically reads the current blog post the user is viewing (from runtime context). Use this for contextual queries like "summarize this post".',
   inputSchema: z.object({
-    path: z.string().optional().describe('The file path to the blog post (e.g., "precise-types.mdx"). If not provided, uses the current blog post from runtime context.')
+    path: z
+      .string()
+      .optional()
+      .describe(
+        'The file path to the blog post (e.g., "precise-types.mdx"). If not provided, uses the current blog post from runtime context.'
+      ),
   }),
   outputSchema: z.object({
     content: z.string(),
@@ -36,14 +42,16 @@ export const readSingleBlog = createTool({
   }),
   execute: async ({ context, runtimeContext }) => {
     let filePath: string | undefined = context?.path
-    
+
     // If no path provided, try to get it from runtime context
     if (!filePath) {
       const blogSlug = runtimeContext?.get('blogSlug')
       if (blogSlug && typeof blogSlug === 'string') {
         filePath = blogSlug
       } else {
-        throw new Error('No blog post specified and user is not currently viewing a blog post')
+        throw new Error(
+          'No blog post specified and user is not currently viewing a blog post'
+        )
       }
     }
 
@@ -69,7 +77,7 @@ export const readSingleBlog = createTool({
         const baseName = path.basename(filePath, path.extname(filePath))
         const mdPath = path.join(POSTS_DIRECTORY, `${baseName}.md`)
         const mdxPath = path.join(POSTS_DIRECTORY, `${baseName}.mdx`)
-        
+
         if (fs.existsSync(mdPath)) {
           fullPath = mdPath
         } else if (fs.existsSync(mdxPath)) {
@@ -81,7 +89,7 @@ export const readSingleBlog = createTool({
 
       const fileContents = fs.readFileSync(fullPath, 'utf8')
       const { data, content } = matter(fileContents)
-      
+
       // Extract slug from filename
       const fileName = path.basename(fullPath)
       const slug = fileName.replace(/\.(md|mdx)$/, '')
@@ -100,25 +108,17 @@ export const readSingleBlog = createTool({
       }
     } catch (error) {
       throw new Error(
-        `Failed to read blog post: ${error instanceof Error ? error.message : 'Unknown error'}`
+        `Failed to read blog post: ${
+          error instanceof Error ? error.message : 'Unknown error'
+        }`
       )
     }
   },
 })
 
-export const readBlogPostTool = createTool({
-  id: 'read-blog-post',
-  description:
-    "Reads blog post content from Kenny's portfolio. If no slug is provided, returns a list of all available posts. If a slug is provided, returns the full content and metadata of that specific post.",
-  inputSchema: z.object({
-    slug: z
-      .string()
-      .optional()
-      .describe(
-        'The slug of the blog post to read (e.g., "what-i-know-so-far-about-typography"). If not provided, returns list of all posts.'
-      )
-      .default('all'),
-  }),
+export const readAllBlogs = createTool({
+  id: 'read-all-blogs',
+  description: "Reads all blog posts from Kenny's portfolio.",
   outputSchema: z.object({
     posts: z
       .array(
@@ -143,65 +143,26 @@ export const readBlogPostTool = createTool({
       })
       .optional(),
   }),
-  execute: async ({ context }) => {
-    const slug = context?.slug
+  execute: async () => {
+    const files = fs.readdirSync(POSTS_DIRECTORY)
+    const posts = files
+      .filter((file) => file.endsWith('.md') || file.endsWith('.mdx'))
+      .map((file) => {
+        const filePath = path.join(POSTS_DIRECTORY, file)
+        const fileContents = fs.readFileSync(filePath, 'utf8')
+        const { data } = matter(fileContents)
+        const slug = file.replace(/\.(md|mdx)$/, '')
 
-    // If slug === all, list all posts
-    if (slug === 'all') {
-      const files = fs.readdirSync(POSTS_DIRECTORY)
-      const posts = files
-        .filter((file) => file.endsWith('.md') || file.endsWith('.mdx'))
-        .map((file) => {
-          const filePath = path.join(POSTS_DIRECTORY, file)
-          const fileContents = fs.readFileSync(filePath, 'utf8')
-          const { data } = matter(fileContents)
-          const slug = file.replace(/\.(md|mdx)$/, '')
-
-          return {
-            slug,
-            title: data.title || slug,
-            description: data.description,
-            date: data.date,
-            status: data.status || 'unknown',
-          }
-        })
-        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-
-      return { posts }
-    }
-
-    // Read specific post
-    try {
-      const mdPath = path.join(POSTS_DIRECTORY, `${slug}.md`)
-      const mdxPath = path.join(POSTS_DIRECTORY, `${slug}.mdx`)
-
-      let filePath: string
-      if (fs.existsSync(mdPath)) {
-        filePath = mdPath
-      } else if (fs.existsSync(mdxPath)) {
-        filePath = mdxPath
-      } else {
-        throw new Error(`Post not found: ${slug}`)
-      }
-
-      const fileContents = fs.readFileSync(filePath, 'utf8')
-      const { data, content } = matter(fileContents)
-
-      return {
-        content,
-        metadata: {
-          title: data.title,
+        return {
+          slug,
+          title: data.title || slug,
           description: data.description,
           date: data.date,
-          status: data.status,
-          tag: data.tag,
-          language: data.language,
-        },
-      }
-    } catch (error) {
-      throw new Error(
-        `Failed to read post: ${error instanceof Error ? error.message : 'Unknown error'}`
-      )
-    }
+          status: data.status || 'unknown',
+        }
+      })
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+
+    return { posts }
   },
 })
