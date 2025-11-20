@@ -9,7 +9,7 @@ import {
   ConversationContent,
   ConversationScrollButton,
 } from '../ai-elements/conversation'
-import { MaximizeIcon } from '../ai-elements/loader'
+import { Loader, MaximizeIcon } from '../ai-elements/loader'
 import { Message, MessageContent } from '../ai-elements/message'
 import { Response } from '../ai-elements/response'
 import { TextShimmer } from '../ai-elements/shimmer'
@@ -30,6 +30,7 @@ export const KenAssistant = ({
 }: ChatSidebarProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const [input, setInput] = useState('')
+  const [isLoadingMessages, setIsLoadingMessages] = useState(true)
 
   const pathname = usePathname()
 
@@ -56,12 +57,17 @@ export const KenAssistant = ({
 
   useEffect(() => {
     const fetchMessages = async () => {
-      const url = blogSlug
-        ? `/api/initial?blogSlug=${encodeURIComponent(blogSlug)}`
-        : '/api/initial'
-      const res = await fetch(url)
-      const data = await res.json()
-      setMessages([...data])
+      setIsLoadingMessages(true)
+      try {
+        const url = blogSlug
+          ? `/api/initial?blogSlug=${encodeURIComponent(blogSlug)}`
+          : '/api/initial'
+        const res = await fetch(url)
+        const data = await res.json()
+        setMessages([...data])
+      } finally {
+        setIsLoadingMessages(false)
+      }
     }
     fetchMessages()
   }, [setMessages, blogSlug])
@@ -157,56 +163,62 @@ export const KenAssistant = ({
         }}
         className="flex-1 relative font-sans overflow-y-auto"
       >
-        <ConversationContent className="p-4 pt-0">
-          {messages.map((message, messageIndex) => {
-            // Check if message has any text content
-            const hasTextContent = message.parts.some(
-              (part) => part.type === 'text' && part.text && part.text.trim()
-            )
+        {isLoadingMessages && messages.length === 0 ? (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Loader className="text-[var(--primary)] duration-500" />
+          </div>
+        ) : (
+          <ConversationContent className="p-4">
+            {messages.map((message, messageIndex) => {
+              // Check if message has any text content
+              const hasTextContent = message.parts.some(
+                (part) => part.type === 'text' && part.text && part.text.trim()
+              )
 
-            // Skip rendering empty assistant messages when thinking
-            const isEmptyAssistant =
-              !hasTextContent && message.role === 'assistant'
-            if (isEmptyAssistant) {
-              return null
-            }
+              // Skip rendering empty assistant messages when thinking
+              const isEmptyAssistant =
+                !hasTextContent && message.role === 'assistant'
+              if (isEmptyAssistant) {
+                return null
+              }
 
-            return (
-              <Message
-                from={message.role as 'user' | 'assistant'}
-                key={message.id}
-              >
+              return (
+                <Message
+                  from={message.role as 'user' | 'assistant'}
+                  key={message.id}
+                >
+                  <MessageContent>
+                    {message.parts.map((part, i) => {
+                      switch (part.type) {
+                        case 'text':
+                          return (
+                            <Response key={`${message.id}-${i}`}>
+                              {part.text}
+                            </Response>
+                          )
+                        default:
+                          return null
+                      }
+                    })}
+                  </MessageContent>
+                </Message>
+              )
+            })}
+
+            {/* Show thinking indicator when waiting for response */}
+            {isThinking && (
+              <Message from="assistant" key="thinking">
                 <MessageContent>
-                  {message.parts.map((part, i) => {
-                    switch (part.type) {
-                      case 'text':
-                        return (
-                          <Response key={`${message.id}-${i}`}>
-                            {part.text}
-                          </Response>
-                        )
-                      default:
-                        return null
-                    }
-                  })}
+                  <div className="flex items-center">
+                    <TextShimmer duration={1} className="text-xs">
+                      Gnuggling....
+                    </TextShimmer>
+                  </div>
                 </MessageContent>
               </Message>
-            )
-          })}
-
-          {/* Show thinking indicator when waiting for response */}
-          {isThinking && (
-            <Message from="assistant" key="thinking">
-              <MessageContent>
-                <div className="flex items-center">
-                  <TextShimmer duration={1} className="text-xs">
-                    Gnuggling....
-                  </TextShimmer>
-                </div>
-              </MessageContent>
-            </Message>
-          )}
-        </ConversationContent>
+            )}
+          </ConversationContent>
+        )}
         <ConversationScrollButton />
       </Conversation>
 
