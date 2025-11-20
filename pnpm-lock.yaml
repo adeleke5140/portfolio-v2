@@ -35,6 +35,9 @@ importers:
       '@mastra/voice-elevenlabs':
         specifier: ^0.11.12
         version: 0.11.12(@mastra/core@0.22.2(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.76))(zod@3.25.76)
+      '@mastra/voice-openai':
+        specifier: ^0.11.12
+        version: 0.11.12(@mastra/core@0.22.2(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.76))(ws@8.18.3)(zod@3.25.76)
       '@mdx-js/loader':
         specifier: ^3.1.0
         version: 3.1.0(acorn@8.15.0)
@@ -733,6 +736,12 @@ packages:
 
   '@mastra/voice-elevenlabs@0.11.12':
     resolution: {integrity: sha512-KfOVQ5cz50/bGgWmdEqlun0upDNCqRpdxcAPNPBt1YbOsnEjdL3OTsXe+V2ki5/SD74NnG5yi/PdmD6/5glxZA==}
+    peerDependencies:
+      '@mastra/core': '>=0.18.1-0 <0.25.0-0'
+      zod: ^3.25.0 || ^4.0.0
+
+  '@mastra/voice-openai@0.11.12':
+    resolution: {integrity: sha512-LiZNXrNY0Td0jxIkwsCgIQ8WSrGOK9FWD2/L/IJkj+YEgRYHvfVG5143Cl6+TlV5ckdOYJeA8pluwImvjz4RNg==}
     peerDependencies:
       '@mastra/core': '>=0.18.1-0 <0.25.0-0'
       zod: ^3.25.0 || ^4.0.0
@@ -5161,6 +5170,18 @@ packages:
   oniguruma-to-es@4.3.3:
     resolution: {integrity: sha512-rPiZhzC3wXwE59YQMRDodUwwT9FZ9nNBwQQfsd1wfdtlKEyCdRV0avrTcSZ5xlIvGRVPd/cx6ZN45ECmS39xvg==}
 
+  openai@5.23.2:
+    resolution: {integrity: sha512-MQBzmTulj+MM5O8SKEk/gL8a7s5mktS9zUtAkU257WjvobGc9nKcBuVwjyEEcb9SI8a8Y2G/mzn3vm9n1Jlleg==}
+    hasBin: true
+    peerDependencies:
+      ws: ^8.18.0
+      zod: ^3.23.8
+    peerDependenciesMeta:
+      ws:
+        optional: true
+      zod:
+        optional: true
+
   openapi-types@12.1.3:
     resolution: {integrity: sha512-N4YtSYJqghVu4iek2ZUvcN/0aqH1kRDuNqzcycDxhOUpg7GdvLa2F3DgS6yBNhInhv2r/6I0Flkn7CqL8+nIcw==}
 
@@ -6997,6 +7018,14 @@ snapshots:
       zod: 3.25.76
     transitivePeerDependencies:
       - encoding
+
+  '@mastra/voice-openai@0.11.12(@mastra/core@0.22.2(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.76))(ws@8.18.3)(zod@3.25.76)':
+    dependencies:
+      '@mastra/core': 0.22.2(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.76)
+      openai: 5.23.2(ws@8.18.3)(zod@3.25.76)
+      zod: 3.25.76
+    transitivePeerDependencies:
+      - ws
 
   '@mdx-js/loader@3.1.0(acorn@8.15.0)':
     dependencies:
@@ -12884,6 +12913,11 @@ snapshots:
       oniguruma-parser: 0.12.1
       regex: 6.0.1
       regex-recursion: 6.0.2
+
+  openai@5.23.2(ws@8.18.3)(zod@3.25.76):
+    optionalDependencies:
+      ws: 8.18.3
+      zod: 3.25.76
 
   openapi-types@12.1.3: {}
 
