@@ -24,12 +24,12 @@ export const Form = ({
       <div className="relative">
         <div
           className={cn(
-            'flex flex-col focus-within:outline focus-within:outline-[var(--primary)] shadow-[0px_10px_24px_-6px_#0000001a,0px_2px_4px_-1px_#0000000f,0_0_0_1px_#54483114] gap-2 px-4 py-2.5 h-32 rounded-[1.25rem] border-r-0'
+            'flex flex-col focus-visible:outline focus-visible:outline-[var(--primary)] shadow-[0px_10px_24px_-6px_#0000001a,0px_2px_4px_-1px_#0000000f,0_0_0_1px_#54483114] gap-2 px-4 py-2.5 h-32 rounded-[1.25rem] border-r-0'
           )}
         >
           <div className="text-center text-gray-500 text-sm">
-            <p className="border flex items-center gap-1 border-[#dcdcdc]/50 bg-gray-50 rounded-full text-xs px-[10px] py-[5px] text-left w-fit">
-              <BlogIcon />
+            <p className="border flex font-sans items-center gap-1 border-[#dcdcdc]/50 bg-gray-100 rounded-full text-xs px-[10px] py-[5px] text-left w-fit">
+              <BlogIcon className="size-3" />
               {context}
             </p>
           </div>
@@ -58,7 +58,7 @@ export const Form = ({
           type="submit"
           className={cn(
             'size-8 absolute bottom-2 right-2',
-            'bg-[var(--primary)] rounded-full text-white',
+            'bg-[var(--primary)] backdrop-blur-sm rounded-full text-white',
             'hover:bg-[var(--primary)] active:scale-95',
             'transition-all',
             'disabled:cursor-not-allowed disabled:hover:bg-[var(--primary)]',
