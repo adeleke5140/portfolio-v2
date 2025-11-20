@@ -17,31 +17,52 @@ export default function BlogLayout({
   children: React.ReactNode
 }) {
   const [isMaximized, setIsMaximized] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
     <div>
       {children}
-      <div className="bg-white w-[400px] flex flex-col justify-end fixed top-0 bottom-0 right-0 h-full">
-        <KenAssistant
-          isOpen={true}
-          onClose={() => {}}
-          isMaximized={false}
-          setIsMaximized={() => {}}
-        />
-      </div>
-      {/* <AssistantPopover /> */}
+      {isMaximized && isOpen ? (
+        <div className="bg-white w-[400px] z-40 flex flex-col justify-end fixed top-0 bottom-0 right-0 h-full">
+          <KenAssistant
+            isOpen={true}
+            onClose={() => {
+              setIsOpen(false)
+            }}
+            setIsMaximized={setIsMaximized}
+            setIsOpen={setIsOpen}
+          />
+        </div>
+      ) : null}
+      <AssistantPopover
+        setIsMaximized={setIsMaximized}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
     </div>
   )
 }
 
-function AssistantPopover() {
+function AssistantPopover({
+  setIsMaximized,
+  isOpen,
+  setIsOpen,
+}: {
+  setIsMaximized: React.Dispatch<React.SetStateAction<boolean>>
+  isOpen: boolean
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+}) {
   const [isChatOpen, setIsChatOpen] = useState(false)
   const pathname = usePathname()
-  const [isMaximized, setIsMaximized] = useState(false)
 
   return (
-    <div className={cn('fixed bottom-6 rounded-xl right-6 z-30')}>
+    <div className={cn('fixed bottom-6 right-6 z-30')}>
       <Popover open={isChatOpen} onOpenChange={setIsChatOpen}>
-        <PopoverTrigger onClick={() => setIsChatOpen(true)}>
+        <PopoverTrigger
+          data-trigger-from-sidebar={isOpen}
+          onClick={() => setIsChatOpen(true)}
+          className="data-[state=open]:translate-y-[120%] data-[state=closed]:translate-y-0 transition-all duration-300"
+        >
           <ToggleAssistant />
         </PopoverTrigger>
         <PopoverContent
@@ -60,8 +81,8 @@ function AssistantPopover() {
               key={pathname}
               isOpen={isChatOpen}
               onClose={() => setIsChatOpen(false)}
-              isMaximized={isMaximized}
               setIsMaximized={setIsMaximized}
+              setIsOpen={setIsOpen}
             />
           </div>
         </PopoverContent>
