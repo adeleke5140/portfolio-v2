@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@source "../../node_modules/streamdown/dist/index.js";
 
 body,
 html {
@@ -9,7 +10,6 @@ html {
   background: rgb(248, 249, 250);
 }
 
-h1,
 h2,
 h3,
 h4 {
@@ -23,6 +23,7 @@ h4 {
   --gray-4: #282828;
   --gray-6: #343434;
 
+  /* Sugar High variables (for MDX) */
   --sh-identifier: #354150;
   --sh-keyword: #6f6f6f;
   --sh-string: #6f6f6f;
@@ -367,4 +368,26 @@ label:focus-within {
 
 * {
   outline-color: var(--primary);
+}
+
+div[data-code-block-container='true'] {
+  border: none !important;
+  background: transparent;
+}
+
+div[data-code-block-header='true'] {
+  display: none;
+  border: none !important;
+}
+
+div[data-code-block='true'] {
+  border: none;
+}
+
+.streamdown code {
+  line-height: 1.8;
+}
+
+.streamdown p {
+  margin-block-start: 1.25rem;
 }
