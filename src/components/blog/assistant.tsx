@@ -35,6 +35,7 @@ export const KenAssistant = ({
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const [playingMessageId, setPlayingMessageId] = useState<string | null>(null)
   const [loadingMessageId, setLoadingMessageId] = useState<string | null>(null)
+  const [pausedMessageId, setPausedMessageId] = useState<string | null>(null)
 
   const pathname = usePathname()
 
@@ -126,19 +127,30 @@ export const KenAssistant = ({
 
   // Function to handle play button click
   const handlePlayAudio = async (messageId: string, text: string) => {
-    // If already playing this message, stop it
+    // If currently playing this message, pause it
     if (playingMessageId === messageId && audioRef.current) {
       audioRef.current.pause()
-      audioRef.current.src = ''
-      setPlayingMessageId(null)
+      setPausedMessageId(messageId)
       return
     }
 
-    // Stop any currently playing audio
+    // If paused, resume playback
+    if (pausedMessageId === messageId && audioRef.current) {
+      audioRef.current.play().catch((error) => {
+        console.error('Error resuming audio:', error)
+        setPlayingMessageId(null)
+        setPausedMessageId(null)
+      })
+      setPausedMessageId(null)
+      return
+    }
+
+    // Stop any currently playing audio and clear it
     if (audioRef.current) {
       audioRef.current.pause()
       audioRef.current.src = ''
       setPlayingMessageId(null)
+      setPausedMessageId(null)
     }
 
     setLoadingMessageId(messageId)
@@ -166,27 +178,53 @@ export const KenAssistant = ({
       const audio = new Audio(audioUrl)
       audioRef.current = audio
       setLoadingMessageId(null)
-      setPlayingMessageId(messageId)
 
-      audio.play().catch((error) => {
-        console.error('Error playing audio:', error)
-        setPlayingMessageId(null)
-        URL.revokeObjectURL(audioUrl)
+      // Track when audio actually starts playing
+      audio.addEventListener('play', () => {
+        setPlayingMessageId(messageId)
+      })
+
+      // Track when audio is paused
+      audio.addEventListener('pause', () => {
+        // Only clear if it's actually paused and not ended
+        if (!audio.ended) {
+          setPlayingMessageId(null)
+          setPausedMessageId(messageId)
+        }
+      })
+
+      // Track when audio is actively playing (after buffering)
+      audio.addEventListener('playing', () => {
+        setPlayingMessageId(messageId)
       })
 
       // Clean up object URL after playback completes
       audio.addEventListener('ended', () => {
         setPlayingMessageId(null)
+        setPausedMessageId(null)
         URL.revokeObjectURL(audioUrl)
+        // Clear the audio ref when finished
+        if (audioRef.current === audio) {
+          audioRef.current = null
+        }
       })
 
       audio.addEventListener('error', () => {
         setPlayingMessageId(null)
+        setPausedMessageId(null)
+        URL.revokeObjectURL(audioUrl)
+      })
+
+      audio.play().catch((error) => {
+        console.error('Error playing audio:', error)
+        setPlayingMessageId(null)
+        setPausedMessageId(null)
         URL.revokeObjectURL(audioUrl)
       })
     } catch (error) {
       console.error('Error generating audio:', error)
       setLoadingMessageId(null)
+      setPausedMessageId(null)
     }
   }
 
@@ -288,7 +326,8 @@ export const KenAssistant = ({
                 : ''
 
             const isPlaying = playingMessageId === message.id
-            const isLoading = loadingMessageId === message.id
+            const isPaused = pausedMessageId === message.id
+            const isLoadingAudio = loadingMessageId === message.id
             const showPlayButton =
               message.role === 'assistant' && fullText.length > 0
 
@@ -316,13 +355,19 @@ export const KenAssistant = ({
                     {showPlayButton && (
                       <button
                         onClick={() => handlePlayAudio(message.id, fullText)}
-                        disabled={isLoading}
+                        disabled={isLoadingAudio}
                         className="self-start p-1.5 hover:bg-gray-100 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                        aria-label={isPlaying ? 'Stop audio' : 'Play audio'}
+                        aria-label={
+                          isPlaying
+                            ? 'Pause audio'
+                            : isPaused
+                            ? 'Resume audio'
+                            : 'Play audio'
+                        }
                       >
-                        {isLoading ? (
+                        {isLoadingAudio ? (
                           <Loader2 className="size-4 animate-spin text-gray-600" />
-                        ) : (
+                        ) : isPlaying ? (
                           <svg
                             id="sound-on"
                             xmlns="http://www.w3.org/2000/svg"
@@ -332,6 +377,17 @@ export const KenAssistant = ({
                             <polygon points="17 15 17 14 16 14 16 13 17 13 17 11 16 11 16 10 17 10 17 9 18 9 18 10 19 10 19 14 18 14 18 15 17 15" />
                             <polygon points="23 10 23 14 22 14 22 16 21 16 21 17 20 17 20 18 19 18 19 17 18 17 18 16 19 16 19 15 20 15 20 14 21 14 21 10 20 10 20 9 19 9 19 8 18 8 18 7 19 7 19 6 20 6 20 7 21 7 21 8 22 8 22 10 23 10" />
                             <path d="m11,2v1h-1v1h-1v1h-1v1h-1v1h-1v1H1v8h5v1h1v1h1v1h1v1h1v1h1v1h3V2h-3Zm1,17h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1H3v-4h4v-1h1v-1h1v-1h1v-1h1v-1h1v14Z" />
+                          </svg>
+                        ) : (
+                          <svg
+                            id="sound-paused"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            className="size-4"
+                          >
+                            <path d="m11,2v1h-1v1h-1v1h-1v1h-1v1h-1v1H1v8h5v1h1v1h1v1h1v1h1v1h1v1h3V2h-3Zm1,17h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1H3v-4h4v-1h1v-1h1v-1h1v-1h1v-1h1v14Z" />
+                            <rect x="17" y="9" width="2" height="6" />
+                            <rect x="21" y="9" width="2" height="6" />
                           </svg>
                         )}
                       </button>
