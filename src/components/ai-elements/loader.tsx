@@ -95,7 +95,7 @@ export const Loader = ({ className, size = 16, ...props }: LoaderProps) => (
       xmlns="http://www.w3.org/2000/svg"
       id="spinner-solid"
       viewBox="0 0 24 24"
-      className="size-5 text-white"
+      className="size-5"
     >
       <polygon
         fill="currentColor"
