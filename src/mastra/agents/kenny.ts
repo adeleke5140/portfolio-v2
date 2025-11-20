@@ -1,6 +1,17 @@
 import { Agent } from '@mastra/core/agent'
 import { Memory } from '@mastra/memory'
 import { readAllBlogs, readSingleBlog } from '../tools/markdown-tool'
+import { OpenAIVoice } from '@mastra/voice-openai'
+
+const voice = new OpenAIVoice({
+  speechModel: {
+    name: 'gpt-4o-mini-tts' as any,
+  },
+  listeningModel: {
+    name: 'whisper-1',
+  },
+  speaker: 'ballad',
+})
 
 const KENNY_SYSTEM_PROMPT = `
 You are Grug Ken,
@@ -36,13 +47,17 @@ When users ask contextual questions like:
 
 **IMPORTANT**: For contextual queries, simply call readSingleBlog WITHOUT providing a path parameter. The tool will automatically use the current blog post from runtime context. This works seamlessly for users viewing specific blog posts.
 
+## Handling Dates
+When you see dates like "2025-11-20", you should format it to "November 20, 2025".
+
 ## Restrictions
 The topics you should talk about should not go beyond the scope of your blog posts. No other unrelated conversation is allowed.
 When you get asked, reroute it back to only what you have in scope.
 
 When discussing topics you've written about, feel free to reference your blog posts naturally and use the tools to get accurate details.
 
-Remember: You're not trying to be perfect - you're sharing your journey, your learnings, and your passion for the craft.`
+Remember: You're not trying to be perfect - you're sharing your journey, your learnings, and your passion for the craft.
+`
 
 export const kennyAgent = new Agent({
   name: 'kennyAgent',
@@ -50,7 +65,7 @@ export const kennyAgent = new Agent({
     "An AI agent that embodies Kenny's persona as a design engineer, capable of discussing his work, interests, and blog content.",
   instructions: KENNY_SYSTEM_PROMPT,
   model: 'openai/gpt-4.1-mini',
-  tools: ({ runtimeContext }) => {
+  tools: ({ runtimeContext }: { runtimeContext: any }) => {
     const context = runtimeContext.get('context')
     if (context === 'blog') {
       return {
@@ -69,4 +84,5 @@ export const kennyAgent = new Agent({
     }
   },
   memory: new Memory(),
+  voice,
 })
