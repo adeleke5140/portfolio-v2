@@ -65,6 +65,9 @@ export const KenAssistant = ({
         const res = await fetch(url)
         const data = await res.json()
         setMessages([...data])
+      } catch (error) {
+        console.error(error)
+        setMessages([])
       } finally {
         setIsLoadingMessages(false)
       }
@@ -149,7 +152,7 @@ export const KenAssistant = ({
               className="size-5 "
             >
               <path
-                fill="black"
+                fill="currentColor"
                 d="m22,2v-1H2v1h-1v20h1v1h20v-1h1V2h-1Zm-4,7h-1v1h-1v1h-1v2h1v1h1v1h1v1h-1v1h-1v1h-1v-1h-1v-1h-1v-1h-2v1h-1v1h-1v1h-1v-1h-1v-1h-1v-1h1v-1h1v-1h1v-2h-1v-1h-1v-1h-1v-1h1v-1h1v-1h1v1h1v1h1v1h2v-1h1v-1h1v-1h1v1h1v1h1v1Z"
               />
             </svg>
@@ -169,63 +172,59 @@ export const KenAssistant = ({
         }}
         className="flex-1 relative font-sans overflow-y-auto"
       >
+        {isLoadingMessages && messages.length === 0 && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <Loader className="text-[var(--primary)] duration-500" />
+          </div>
+        )}
         <ConversationContent className="p-4">
-          {isLoadingMessages && messages.length === 0 ? (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Loader className="text-[var(--primary)] duration-500" />
-            </div>
-          ) : (
-            <>
-              {messages.map((message, messageIndex) => {
-                // Check if message has any text content
-                const hasTextContent = message.parts.some(
-                  (part) =>
-                    part.type === 'text' && part.text && part.text.trim()
-                )
+          {messages.map((message, messageIndex) => {
+            // Check if message has any text content
+            const hasTextContent = message.parts.some(
+              (part) => part.type === 'text' && part.text && part.text.trim()
+            )
 
-                // Skip rendering empty assistant messages when thinking
-                const isEmptyAssistant =
-                  !hasTextContent && message.role === 'assistant'
-                if (isEmptyAssistant) {
-                  return null
-                }
+            // Skip rendering empty assistant messages when thinking
+            const isEmptyAssistant =
+              !hasTextContent && message.role === 'assistant'
+            if (isEmptyAssistant) {
+              return null
+            }
 
-                return (
-                  <Message
-                    from={message.role as 'user' | 'assistant'}
-                    key={message.id}
-                  >
-                    <MessageContent>
-                      {message.parts.map((part, i) => {
-                        switch (part.type) {
-                          case 'text':
-                            return (
-                              <Response key={`${message.id}-${i}`}>
-                                {part.text}
-                              </Response>
-                            )
-                          default:
-                            return null
-                        }
-                      })}
-                    </MessageContent>
-                  </Message>
-                )
-              })}
+            return (
+              <Message
+                from={message.role as 'user' | 'assistant'}
+                key={message.id}
+              >
+                <MessageContent>
+                  {message.parts.map((part, i) => {
+                    switch (part.type) {
+                      case 'text':
+                        return (
+                          <Response key={`${message.id}-${i}`}>
+                            {part.text}
+                          </Response>
+                        )
+                      default:
+                        return null
+                    }
+                  })}
+                </MessageContent>
+              </Message>
+            )
+          })}
 
-              {/* Show thinking indicator when waiting for response */}
-              {isThinking && (
-                <Message from="assistant" key="thinking">
-                  <MessageContent>
-                    <div className="flex items-center">
-                      <TextShimmer duration={1} className="text-xs">
-                        Gnuggling....
-                      </TextShimmer>
-                    </div>
-                  </MessageContent>
-                </Message>
-              )}
-            </>
+          {/* Show thinking indicator when waiting for response */}
+          {isThinking && (
+            <Message from="assistant" key="thinking">
+              <MessageContent>
+                <div className="flex items-center">
+                  <TextShimmer duration={1} className="text-xs">
+                    Gnuggling....
+                  </TextShimmer>
+                </div>
+              </MessageContent>
+            </Message>
           )}
         </ConversationContent>
         <ConversationScrollButton />
