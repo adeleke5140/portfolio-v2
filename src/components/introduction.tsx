@@ -27,18 +27,21 @@ export const Introduction = () => {
     <PageWrapper
       showHeading
       heading={
-        <div className="py-8 pb-4">
+        <div className="py-8 pb-3">
           <h1 className="text-[48px] font-medium lg:text-5xl lg:tracking-[-0.06em] lg:leading-[1.2em] font-serif tracking-tighter">
             Kehinde Adeleke
           </h1>
           <nav className="flex cursor-pointer items-center py-5">
             <Link
               href="/craft"
-              className="text-ken-grey -ml-3 px-3 py-1 rounded-xl "
+              className="text-ken-grey font-serif -ml-3 px-3 py-1 rounded-xl "
             >
               Craft
             </Link>
-            <Link href="/blog" className="text-ken-grey px-3 py-1 rounded-xl ">
+            <Link
+              href="/blog"
+              className="text-ken-grey font-serif px-3 py-1 rounded-xl "
+            >
               Blog
             </Link>
           </nav>
@@ -78,7 +81,7 @@ export const Introduction = () => {
               <a
                 target="_blank"
                 href={con.value}
-                className="capitalize  hover:underline first:-ml-3 justify-between group flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-xl"
+                className="capitalize hover:bg-gray-100  hover:underline first:-ml-3 justify-between group flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-xl"
                 rel="external"
                 referrerPolicy="strict-origin"
               >
