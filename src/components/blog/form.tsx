@@ -20,7 +20,7 @@ export const Form = ({
   context,
 }: FormProps) => {
   return (
-    <form className="p-4">
+    <form className="p-4 pt-0">
       <div className="relative">
         <div
           className={cn(
@@ -67,7 +67,7 @@ export const Form = ({
           disabled={isLoading}
         >
           {isLoading ? (
-            <Loader />
+            <Loader className="text-white" />
           ) : (
             <svg
               xmlns="http://www.w3.org/2000/svg"
