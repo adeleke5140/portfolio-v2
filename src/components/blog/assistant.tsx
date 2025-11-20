@@ -18,15 +18,15 @@ import { Form } from './form'
 interface ChatSidebarProps {
   isOpen: boolean
   onClose: () => void
-  isMaximized: boolean
-  setIsMaximized: (isMaximized: boolean) => void
+  setIsMaximized: React.Dispatch<React.SetStateAction<boolean>>
+  setIsOpen: (isOpen: boolean) => void
 }
 
 export const KenAssistant = ({
   isOpen,
   onClose,
-  isMaximized,
   setIsMaximized,
+  setIsOpen,
 }: ChatSidebarProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const [input, setInput] = useState('')
@@ -127,12 +127,18 @@ export const KenAssistant = ({
           <button
             className="p-2 hover:bg-gray-100 rounded-full transition-colors"
             aria-label="Maximize chat"
-            onClick={() => setIsMaximized(!isMaximized)}
+            onClick={() => {
+              setIsMaximized((prev) => !prev)
+              setIsOpen(true)
+            }}
           >
             <MaximizeIcon className="size-5" />
           </button>
           <button
-            onClick={onClose}
+            onClick={() => {
+              onClose()
+              setIsOpen(false)
+            }}
             className="p-2 hover:bg-gray-100 rounded-full transition-colors"
             aria-label="Close chat"
           >
@@ -143,7 +149,7 @@ export const KenAssistant = ({
               className="size-5 "
             >
               <path
-                fill="var(--primary)"
+                fill="black"
                 d="m22,2v-1H2v1h-1v20h1v1h20v-1h1V2h-1Zm-4,7h-1v1h-1v1h-1v2h1v1h1v1h1v1h-1v1h-1v1h-1v-1h-1v-1h-1v-1h-2v1h-1v1h-1v1h-1v-1h-1v-1h-1v-1h1v-1h1v-1h1v-2h-1v-1h-1v-1h-1v-1h1v-1h1v-1h1v1h1v1h1v1h2v-1h1v-1h1v-1h1v1h1v1h1v1Z"
               />
             </svg>
@@ -158,8 +164,8 @@ export const KenAssistant = ({
           maskSize: 'calc(100% - 16px) 100%, 16px 100%',
           maskPosition: '0px 0px, 100% 0px',
           maskRepeat: 'no-repeat, no-repeat',
-          scrollbarGutter: 'stable',
-          scrollbarColor: '#dcdcdc transparent',
+          // scrollbarGutter: 'stable',
+          // scrollbarColor: '#dcdcdc transparent',
         }}
         className="flex-1 relative font-sans overflow-y-auto"
       >
