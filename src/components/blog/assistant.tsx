@@ -145,8 +145,19 @@ export const KenAssistant = ({
         </div>
       </div>
 
-      <Conversation className="flex-1 relative font-sans overflow-y-auto">
-        <ConversationContent className="p-4">
+      <Conversation
+        style={{
+          maskImage:
+            'linear-gradient(transparent 0px, black 32px, black calc(100% - 32px), transparent 100%), linear-gradient(black, black)',
+          maskSize: 'calc(100% - 16px) 100%, 16px 100%',
+          maskPosition: '0px 0px, 100% 0px',
+          maskRepeat: 'no-repeat, no-repeat',
+          scrollbarGutter: 'stable',
+          scrollbarColor: '#dcdcdc transparent',
+        }}
+        className="flex-1 relative font-sans overflow-y-auto"
+      >
+        <ConversationContent className="p-4 pt-0">
           {messages.map((message, messageIndex) => {
             // Check if message has any text content
             const hasTextContent = message.parts.some(
