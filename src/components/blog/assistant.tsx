@@ -2,6 +2,7 @@
 
 import { useChat } from '@ai-sdk/react'
 import { DefaultChatTransport } from 'ai'
+import { Loader2 } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import {
@@ -31,6 +32,9 @@ export const KenAssistant = ({
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const [input, setInput] = useState('')
   const [isLoadingMessages, setIsLoadingMessages] = useState(true)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+  const [playingMessageId, setPlayingMessageId] = useState<string | null>(null)
+  const [loadingMessageId, setLoadingMessageId] = useState<string | null>(null)
 
   const pathname = usePathname()
 
@@ -120,6 +124,82 @@ export const KenAssistant = ({
     prevStatusRef.current = status
   }, [status, isOpen])
 
+  // Function to handle play button click
+  const handlePlayAudio = async (messageId: string, text: string) => {
+    // If already playing this message, stop it
+    if (playingMessageId === messageId && audioRef.current) {
+      audioRef.current.pause()
+      audioRef.current.src = ''
+      setPlayingMessageId(null)
+      return
+    }
+
+    // Stop any currently playing audio
+    if (audioRef.current) {
+      audioRef.current.pause()
+      audioRef.current.src = ''
+      setPlayingMessageId(null)
+    }
+
+    setLoadingMessageId(messageId)
+
+    try {
+      const response = await fetch('/api/voice', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text }),
+      })
+
+      if (!response.ok) {
+        console.error('Failed to generate audio:', response.statusText)
+        setLoadingMessageId(null)
+        return
+      }
+
+      // Create audio blob and play it
+      const audioBlob = await response.blob()
+      const audioUrl = URL.createObjectURL(audioBlob)
+
+      // Create new audio element and play
+      const audio = new Audio(audioUrl)
+      audioRef.current = audio
+      setLoadingMessageId(null)
+      setPlayingMessageId(messageId)
+
+      audio.play().catch((error) => {
+        console.error('Error playing audio:', error)
+        setPlayingMessageId(null)
+        URL.revokeObjectURL(audioUrl)
+      })
+
+      // Clean up object URL after playback completes
+      audio.addEventListener('ended', () => {
+        setPlayingMessageId(null)
+        URL.revokeObjectURL(audioUrl)
+      })
+
+      audio.addEventListener('error', () => {
+        setPlayingMessageId(null)
+        URL.revokeObjectURL(audioUrl)
+      })
+    } catch (error) {
+      console.error('Error generating audio:', error)
+      setLoadingMessageId(null)
+    }
+  }
+
+  // Cleanup audio on unmount
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause()
+        audioRef.current.src = ''
+      }
+    }
+  }, [])
+
   return (
     <div className="flex  h-full flex-col">
       <div className="flex rounded-t-3xl items-center justify-between p-4">
@@ -191,24 +271,72 @@ export const KenAssistant = ({
               return null
             }
 
+            // Extract text content for assistant messages
+            const textParts =
+              message.role === 'assistant'
+                ? message.parts.filter(
+                    (part): part is { type: 'text'; text: string } =>
+                      part.type === 'text' &&
+                      typeof part.text === 'string' &&
+                      part.text.trim().length > 0
+                  )
+                : []
+
+            const fullText =
+              textParts.length > 0
+                ? textParts.map((part) => part.text).join(' ')
+                : ''
+
+            const isPlaying = playingMessageId === message.id
+            const isLoading = loadingMessageId === message.id
+            const showPlayButton =
+              message.role === 'assistant' && fullText.length > 0
+
             return (
               <Message
                 from={message.role as 'user' | 'assistant'}
                 key={message.id}
               >
-                <MessageContent>
-                  {message.parts.map((part, i) => {
-                    switch (part.type) {
-                      case 'text':
-                        return (
-                          <Response key={`${message.id}-${i}`}>
-                            {part.text}
-                          </Response>
-                        )
-                      default:
-                        return null
-                    }
-                  })}
+                <MessageContent className="relative group">
+                  <div className="flex flex-col gap-2">
+                    <div>
+                      {message.parts.map((part, i) => {
+                        switch (part.type) {
+                          case 'text':
+                            return (
+                              <Response key={`${message.id}-${i}`}>
+                                {part.text}
+                              </Response>
+                            )
+                          default:
+                            return null
+                        }
+                      })}
+                    </div>
+                    {showPlayButton && (
+                      <button
+                        onClick={() => handlePlayAudio(message.id, fullText)}
+                        disabled={isLoading}
+                        className="self-start p-1.5 hover:bg-gray-100 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        aria-label={isPlaying ? 'Stop audio' : 'Play audio'}
+                      >
+                        {isLoading ? (
+                          <Loader2 className="size-4 animate-spin text-gray-600" />
+                        ) : (
+                          <svg
+                            id="sound-on"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            className="size-4"
+                          >
+                            <polygon points="17 15 17 14 16 14 16 13 17 13 17 11 16 11 16 10 17 10 17 9 18 9 18 10 19 10 19 14 18 14 18 15 17 15" />
+                            <polygon points="23 10 23 14 22 14 22 16 21 16 21 17 20 17 20 18 19 18 19 17 18 17 18 16 19 16 19 15 20 15 20 14 21 14 21 10 20 10 20 9 19 9 19 8 18 8 18 7 19 7 19 6 20 6 20 7 21 7 21 8 22 8 22 10 23 10" />
+                            <path d="m11,2v1h-1v1h-1v1h-1v1h-1v1h-1v1H1v8h5v1h1v1h1v1h1v1h1v1h1v1h3V2h-3Zm1,17h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1H3v-4h4v-1h1v-1h1v-1h1v-1h1v-1h1v14Z" />
+                          </svg>
+                        )}
+                      </button>
+                    )}
+                  </div>
                 </MessageContent>
               </Message>
             )
