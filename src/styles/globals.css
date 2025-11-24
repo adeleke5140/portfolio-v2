@@ -391,3 +391,16 @@ div[data-code-block='true'] {
 .streamdown p {
   margin-block-start: 1.25rem;
 }
+
+@keyframes animate-in-out {
+  0% {
+    transform: translateX(-10%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-in-out {
+  animation: animate-in-out 1s ease-in-out infinite;
+}
