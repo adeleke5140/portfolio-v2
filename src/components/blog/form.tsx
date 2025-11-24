@@ -1,6 +1,9 @@
 import { cn, transFormDashToSpaceCase } from '@/lib/utils'
 import { Loader } from '../ai-elements/loader'
 import { BlogIcon } from '../craft/navigation/navigation'
+import { useState } from 'react'
+import { Popover } from '../ui/popover'
+import { PopoverContent, PopoverTrigger } from '@radix-ui/react-popover'
 
 interface FormProps {
   input: string
@@ -9,6 +12,7 @@ interface FormProps {
   isLoading: boolean
   textareaRef: React.RefObject<HTMLTextAreaElement>
   context: string
+  recentArticles?: Array<{ id: string; title: string }>
 }
 
 export const Form = ({
@@ -18,7 +22,9 @@ export const Form = ({
   isLoading,
   textareaRef,
   context,
+  recentArticles = [],
 }: FormProps) => {
+  const [openPopover, setOpenPopover] = useState(false)
   return (
     <form className="p-4 pt-0">
       <div className="relative">
@@ -37,7 +43,12 @@ export const Form = ({
           <textarea
             ref={textareaRef}
             value={input || ''}
-            onChange={(e) => setInput(e.target.value || '')}
+            onChange={(e) => {
+              if (e.target.value === '@') {
+                setOpenPopover(true)
+              }
+              setInput(e.target.value)
+            }}
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault()
@@ -52,6 +63,44 @@ export const Form = ({
             }
             className="w-full font-sans bg-inherit h-full outline-none  disabled:bg-inherit resize-none disabled:cursor-not-allowed text-sm"
           />
+          <div className="absolute top-[2.8rem] left-[0.9rem]">
+            <Popover
+              modal={false}
+              open={openPopover}
+              onOpenChange={setOpenPopover}
+            >
+              <PopoverTrigger className="">
+                {input === '@' ? input : ''}
+              </PopoverTrigger>
+              <PopoverContent
+                side="top"
+                className="bg-white relative left-[7rem]  font-sans w-64 max-h-80 overflow-y-auto rounded-xl p-2 shadow"
+              >
+                <div className="flex flex-col gap-1">
+                  {recentArticles.length > 0 ? (
+                    recentArticles.map((article) => (
+                      <button
+                        key={article.id}
+                        type="button"
+                        onClick={() => {
+                          setInput(`@${article.id} `)
+                          setOpenPopover(false)
+                          textareaRef.current?.focus()
+                        }}
+                        className="text-left px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors text-sm"
+                      >
+                        {article.title}
+                      </button>
+                    ))
+                  ) : (
+                    <p className="text-gray-500 text-sm px-3 py-2">
+                      No recent articles
+                    </p>
+                  )}
+                </div>
+              </PopoverContent>
+            </Popover>
+          </div>
         </div>
 
         <button
