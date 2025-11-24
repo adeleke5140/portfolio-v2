@@ -21,6 +21,7 @@ interface ChatSidebarProps {
   onClose: () => void
   setIsMaximized: React.Dispatch<React.SetStateAction<boolean>>
   setIsOpen: (isOpen: boolean) => void
+  recentArticles: Array<{ id: string; title: string }>
 }
 
 export const KenAssistant = ({
@@ -28,6 +29,7 @@ export const KenAssistant = ({
   onClose,
   setIsMaximized,
   setIsOpen,
+  recentArticles,
 }: ChatSidebarProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const [input, setInput] = useState('')
@@ -36,6 +38,26 @@ export const KenAssistant = ({
   const [playingMessageId, setPlayingMessageId] = useState<string | null>(null)
   const [loadingMessageId, setLoadingMessageId] = useState<string | null>(null)
   const [pausedMessageId, setPausedMessageId] = useState<string | null>(null)
+  const [agentMode, setAgentMode] = useState<'normal' | 'grug'>('normal')
+
+  // Handle agent mode change and clear messages
+  const handleAgentModeChange = async (newMode: 'normal' | 'grug') => {
+    setAgentMode(newMode)
+    setIsLoadingMessages(true)
+    try {
+      const url = blogSlug
+        ? `/api/initial?blogSlug=${encodeURIComponent(blogSlug)}`
+        : '/api/initial'
+      const res = await fetch(url)
+      const data = await res.json()
+      setMessages([...data])
+    } catch (error) {
+      console.error(error)
+      setMessages([])
+    } finally {
+      setIsLoadingMessages(false)
+    }
+  }
 
   const pathname = usePathname()
 
@@ -56,6 +78,7 @@ export const KenAssistant = ({
         context: context,
         blogSlug: blogSlug,
         pathname: pathname,
+        agentMode: agentMode,
       },
     }),
   })
@@ -241,8 +264,19 @@ export const KenAssistant = ({
   return (
     <div className="flex  h-full flex-col">
       <div className="flex rounded-t-3xl items-center justify-between p-4">
-        <div>
-          <h2 className="font-serif text-gray-900">Ask Ken</h2>
+        <div className="flex items-center gap-3">
+          <h2 className="font-serif text-gray-900">Ask</h2>
+          <select
+            value={agentMode}
+            onChange={(e) =>
+              handleAgentModeChange(e.target.value as 'normal' | 'grug')
+            }
+            className="font-serif text-gray-900 bg-gray-50 border border-gray-200 rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300 hover:bg-gray-100 transition-colors"
+            disabled={isLoading}
+          >
+            <option value="normal">Kenny</option>
+            <option value="grug">Grug Kenny</option>
+          </select>
         </div>
         <div className="flex items-center gap-1">
           <button
@@ -423,6 +457,7 @@ export const KenAssistant = ({
           textareaRef as unknown as React.RefObject<HTMLTextAreaElement>
         }
         context={context}
+        recentArticles={recentArticles}
       />
     </div>
   )
