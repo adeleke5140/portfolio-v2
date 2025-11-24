@@ -2,6 +2,7 @@ import { Mastra } from '@mastra/core'
 import { LangfuseExporter } from '@mastra/langfuse'
 import { LibSQLStore } from '@mastra/libsql'
 import { kennyAgent } from './agents/kenny'
+import { kennyVoiceAgent } from './agents/kenny-voice'
 
 type MastraInstance = ReturnType<typeof createMastraInstance>
 
@@ -11,7 +12,7 @@ const globalForMastra = globalThis as typeof globalThis & {
 
 function createMastraInstance() {
   return new Mastra({
-    agents: { kennyAgent },
+    agents: { kennyAgent, kennyVoiceAgent },
     storage: new LibSQLStore({
       url: 'file:agent-memory.db',
     }),
