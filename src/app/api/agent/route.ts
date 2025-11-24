@@ -7,7 +7,7 @@ export const runtime = 'nodejs'
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { messages, context, blogSlug, pathname } = body
+    const { messages, context, blogSlug, pathname, agentMode = 'normal' } = body
 
     if (!messages || !Array.isArray(messages)) {
       return NextResponse.json(
@@ -23,6 +23,7 @@ export async function POST(req: NextRequest) {
     runtimeContext.set('context', context)
     runtimeContext.set('blogSlug', blogSlug)
     runtimeContext.set('pathname', pathname)
+    runtimeContext.set('agentMode', agentMode)
 
     // Stream the response with AI SDK v5 format
     const stream = await kennyAgent.stream(messages, {
