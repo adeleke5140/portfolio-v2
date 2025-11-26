@@ -5,14 +5,6 @@ import { BlogAssistantWrapper } from '@/components/blog/blog-assistant-wrapper'
 import { getSortedPostsData } from '@/lib/posts'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const posts = getSortedPostsData()
-  const recentArticles = posts
-    .slice(-10)
-    .reverse()
-    .map((post) => ({
-      id: post.id,
-      title: (post as any).title!,
-    }))
   return (
     <html lang="en">
       <body
@@ -26,7 +18,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="relative flex flex-col min-h-screen max-w-[1280px]  mx-auto pb-8">
             <main className="flex-1 mt-16 w-full">{children}</main>
           </div>
-          <BlogAssistantWrapper recentArticles={recentArticles} />
+          <BlogAssistantWrapper />
         </div>
       </body>
     </html>
