@@ -10,25 +10,22 @@ import {
   ConversationContent,
   ConversationScrollButton,
 } from '../ai-elements/conversation'
-import { Loader, MaximizeIcon } from '../ai-elements/loader'
+import { Loader } from '../ai-elements/loader'
 import { Message, MessageContent } from '../ai-elements/message'
 import { Response } from '../ai-elements/response'
 import { TextShimmer } from '../ai-elements/shimmer'
+import { AssistantHeader } from './assistant-header'
 import { Form } from './form'
 
 interface ChatSidebarProps {
   isOpen: boolean
   onClose: () => void
-  setIsMaximized: React.Dispatch<React.SetStateAction<boolean>>
-  setIsOpen: (isOpen: boolean) => void
   recentArticles: Array<{ id: string; title: string }>
 }
 
 export const KenAssistant = ({
   isOpen,
   onClose,
-  setIsMaximized,
-  setIsOpen,
   recentArticles,
 }: ChatSidebarProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -79,8 +76,13 @@ export const KenAssistant = ({
         setIsLoadingMessages(false)
       }
     }
-    fetchMessages()
-  }, [setMessages, blogSlug])
+
+    setTimeout(() => {
+      if (isOpen) {
+        fetchMessages()
+      }
+    }, 500)
+  }, [setMessages, isOpen, blogSlug])
 
   const isLoading = status === 'streaming' || status === 'submitted'
 
@@ -106,8 +108,8 @@ export const KenAssistant = ({
     }
   }, [isOpen])
 
-  // Refocus textarea after streaming completes
   const prevStatusRef = useRef(status)
+
   useEffect(() => {
     // When streaming/submitted changes to idle (not loading), refocus
     const wasLoading =
@@ -127,7 +129,6 @@ export const KenAssistant = ({
     prevStatusRef.current = status
   }, [status, isOpen])
 
-  // Function to handle play button click
   const handlePlayAudio = async (messageId: string, text: string) => {
     // If currently playing this message, pause it
     if (playingMessageId === messageId && audioRef.current) {
@@ -230,7 +231,6 @@ export const KenAssistant = ({
     }
   }
 
-  // Cleanup audio on unmount
   useEffect(() => {
     return () => {
       if (audioRef.current) {
@@ -242,43 +242,7 @@ export const KenAssistant = ({
 
   return (
     <div className="flex  h-full flex-col">
-      <div className="flex rounded-t-3xl items-center justify-between p-4">
-        <div className="flex items-center gap-3">
-          <h2 className="font-serif text-gray-900">Ask Kenny</h2>
-        </div>
-        <div className="flex items-center gap-1">
-          <button
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-            aria-label="Maximize chat"
-            onClick={() => {
-              setIsMaximized((prev) => !prev)
-              setIsOpen(true)
-            }}
-          >
-            <MaximizeIcon className="size-5" />
-          </button>
-          <button
-            onClick={() => {
-              onClose()
-              setIsOpen(false)
-            }}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-            aria-label="Close chat"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              id="window-close-solid"
-              viewBox="0 0 24 24"
-              className="size-5 "
-            >
-              <path
-                fill="currentColor"
-                d="m22,2v-1H2v1h-1v20h1v1h20v-1h1V2h-1Zm-4,7h-1v1h-1v1h-1v2h1v1h1v1h1v1h-1v1h-1v1h-1v-1h-1v-1h-1v-1h-2v1h-1v1h-1v1h-1v-1h-1v-1h-1v-1h1v-1h1v-1h1v-2h-1v-1h-1v-1h-1v-1h1v-1h1v-1h1v1h1v1h1v1h2v-1h1v-1h1v-1h1v1h1v1h1v1Z"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
+      <AssistantHeader onClose={onClose} />
 
       <Conversation
         style={{
@@ -400,7 +364,6 @@ export const KenAssistant = ({
             )
           })}
 
-          {/* Show thinking indicator when waiting for response */}
           {isThinking && (
             <Message from="assistant" key="thinking">
               <MessageContent>
