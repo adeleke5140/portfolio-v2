@@ -7,11 +7,44 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
-import { BlogAssistantProvider, useBlogAssistant } from './assistant-context'
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query'
+import { useAtom } from 'jotai'
+import { isChatOpenAtom, isOpenAtom, maximizedAtom } from './assistant-context'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { usePathname } from 'next/navigation'
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 2, // 2 minutes
+    },
+  },
+})
 
 function BlogAssistantPortal() {
-  const { isMaximized, isOpen, isChatOpen, setIsChatOpen, setIsOpen } =
-    useBlogAssistant()
+  const [isMaximized] = useAtom(maximizedAtom)
+  const [isOpen, setIsOpen] = useAtom(isOpenAtom)
+  const [isChatOpen, setIsChatOpen] = useAtom(isChatOpenAtom)
+
+  const {
+    isPending,
+    error,
+    data: savedMessages,
+  } = useQuery({
+    queryKey: ['savedMessages'],
+    queryFn: async () => {
+      const url = `/api/initial`
+      const res = await fetch(url)
+      if (!res.ok) {
+        throw new Error('Failed to fetch initial messages')
+      }
+      return res.json()
+    },
+  })
 
   return (
     <>
@@ -23,6 +56,8 @@ function BlogAssistantPortal() {
               setIsOpen(false)
             }}
             recentArticles={[]}
+            savedMessages={error ? [] : savedMessages}
+            isLoadingSavedMessages={isPending}
           />
         </div>
       ) : null}
@@ -36,9 +71,11 @@ function BlogAssistantPortal() {
             <ToggleAssistant />
           </PopoverTrigger>
           <PopoverContent
-            data-state={isChatOpen ? 'open' : 'closed'}
+            onInteractOutside={(e) => {
+              e.preventDefault()
+            }}
             side="top"
-            className="w-fit transition-transform duration-300 shadow-none p-0 mr-2 rounded-none border-none bg-transparent"
+            className="w-fit shadow-none p-0 mr-2 rounded-none border-none bg-transparent"
           >
             <div
               className={cn(
@@ -52,6 +89,8 @@ function BlogAssistantPortal() {
                 isOpen={isChatOpen}
                 onClose={() => setIsChatOpen(false)}
                 recentArticles={[]}
+                savedMessages={error ? [] : savedMessages}
+                isLoadingSavedMessages={isPending}
               />
             </div>
           </PopoverContent>
@@ -63,8 +102,9 @@ function BlogAssistantPortal() {
 
 export function BlogAssistantWrapper() {
   return (
-    <BlogAssistantProvider>
+    <QueryClientProvider client={queryClient}>
       <BlogAssistantPortal />
-    </BlogAssistantProvider>
+      <ReactQueryDevtools initialIsOpen={true} />
+    </QueryClientProvider>
   )
 }
