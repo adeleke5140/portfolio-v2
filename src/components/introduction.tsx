@@ -79,6 +79,7 @@ export const Introduction = () => {
           <div className="flex gap-2">
             {connection.map((con) => (
               <a
+                key={con.name}
                 target="_blank"
                 href={con.value}
                 className="capitalize hover:bg-gray-100  hover:underline first:-ml-3 justify-between group flex gap-1.5 text-[15px] items-center px-3 py-1 rounded-xl"
