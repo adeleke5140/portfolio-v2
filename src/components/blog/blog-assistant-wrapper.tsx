@@ -1,5 +1,4 @@
 'use client'
-
 import { KenAssistant } from '@/components/blog/assistant'
 import { ToggleAssistant } from '@/components/blog/toggle-assistant'
 import {
@@ -8,18 +7,11 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
-import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { BlogAssistantProvider, useBlogAssistant } from './assistant-context'
 
-interface BlogAssistantWrapperProps {
-  recentArticles: Array<{ id: string; title: string }>
-}
-
-export function BlogAssistantWrapper({ recentArticles }: BlogAssistantWrapperProps) {
-  const [isMaximized, setIsMaximized] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
-  const [isChatOpen, setIsChatOpen] = useState(false)
-  const pathname = usePathname()
+function BlogAssistantPortal() {
+  const { isMaximized, isOpen, isChatOpen, setIsChatOpen, setIsOpen } =
+    useBlogAssistant()
 
   return (
     <>
@@ -30,13 +22,11 @@ export function BlogAssistantWrapper({ recentArticles }: BlogAssistantWrapperPro
             onClose={() => {
               setIsOpen(false)
             }}
-            setIsMaximized={setIsMaximized}
-            setIsOpen={setIsOpen}
-            recentArticles={recentArticles}
+            recentArticles={[]}
           />
         </div>
       ) : null}
-      
+
       <div className={cn('fixed bottom-6 right-6 z-30')}>
         <Popover open={isChatOpen} onOpenChange={setIsChatOpen}>
           <PopoverTrigger
@@ -46,8 +36,9 @@ export function BlogAssistantWrapper({ recentArticles }: BlogAssistantWrapperPro
             <ToggleAssistant />
           </PopoverTrigger>
           <PopoverContent
+            data-state={isChatOpen ? 'open' : 'closed'}
             side="top"
-            className="w-fit shadow-none p-0 mr-2 rounded-none border-none bg-transparent"
+            className="w-fit transition-transform duration-300 shadow-none p-0 mr-2 rounded-none border-none bg-transparent"
           >
             <div
               className={cn(
@@ -58,12 +49,9 @@ export function BlogAssistantWrapper({ recentArticles }: BlogAssistantWrapperPro
               )}
             >
               <KenAssistant
-                key={pathname}
                 isOpen={isChatOpen}
                 onClose={() => setIsChatOpen(false)}
-                setIsMaximized={setIsMaximized}
-                setIsOpen={setIsOpen}
-                recentArticles={recentArticles}
+                recentArticles={[]}
               />
             </div>
           </PopoverContent>
@@ -73,3 +61,10 @@ export function BlogAssistantWrapper({ recentArticles }: BlogAssistantWrapperPro
   )
 }
 
+export function BlogAssistantWrapper() {
+  return (
+    <BlogAssistantProvider>
+      <BlogAssistantPortal />
+    </BlogAssistantProvider>
+  )
+}
