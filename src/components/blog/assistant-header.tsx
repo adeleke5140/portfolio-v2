@@ -1,14 +1,16 @@
 'use client'
 
+import { useAtom } from 'jotai'
 import { MaximizeIcon } from '../ai-elements/loader'
-import { useBlogAssistant } from './assistant-context'
+import { isOpenAtom, maximizedAtom } from './assistant-context'
 
 interface AssistantHeaderProps {
   onClose: () => void
 }
 
 export const AssistantHeader = ({ onClose }: AssistantHeaderProps) => {
-  const { setIsMaximized, setIsOpen } = useBlogAssistant()
+  const [isMaximized, setIsMaximized] = useAtom(maximizedAtom)
+  const [isOpen, setIsOpen] = useAtom(isOpenAtom)
 
   return (
     <div className="flex rounded-t-3xl items-center justify-between p-4">
@@ -20,8 +22,8 @@ export const AssistantHeader = ({ onClose }: AssistantHeaderProps) => {
           className="p-2 hover:bg-gray-100 rounded-full transition-colors"
           aria-label="Maximize chat"
           onClick={() => {
-            setIsMaximized((prev) => !prev)
-            setIsOpen(true)
+            setIsMaximized(!isMaximized)
+            setIsOpen(!isOpen)
           }}
         >
           <MaximizeIcon className="size-4 text-ken-grey" />
