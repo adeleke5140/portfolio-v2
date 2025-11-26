@@ -1,8 +1,7 @@
+import { BlogAssistantWrapper } from '@/components/blog/blog-assistant-wrapper'
 import { fonts } from '@/fonts/setup'
 import '@/styles/globals.css'
 import { Toaster } from 'sonner'
-import { BlogAssistantWrapper } from '@/components/blog/blog-assistant-wrapper'
-import { getSortedPostsData } from '@/lib/posts'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
