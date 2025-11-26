@@ -1,7 +1,7 @@
 'use client'
 
 import { useChat } from '@ai-sdk/react'
-import { DefaultChatTransport } from 'ai'
+import { DefaultChatTransport, UIMessage } from 'ai'
 import { Loader2 } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
@@ -21,23 +21,25 @@ interface ChatSidebarProps {
   isOpen: boolean
   onClose: () => void
   recentArticles: Array<{ id: string; title: string }>
+  savedMessages: UIMessage[]
+  isLoadingSavedMessages: boolean
 }
 
 export const KenAssistant = ({
   isOpen,
   onClose,
   recentArticles,
+  savedMessages,
+  isLoadingSavedMessages,
 }: ChatSidebarProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const [input, setInput] = useState('')
-  const [isLoadingMessages, setIsLoadingMessages] = useState(true)
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const [playingMessageId, setPlayingMessageId] = useState<string | null>(null)
   const [loadingMessageId, setLoadingMessageId] = useState<string | null>(null)
   const [pausedMessageId, setPausedMessageId] = useState<string | null>(null)
 
   const pathname = usePathname()
-
   const currentPath = pathname.split('/').filter(Boolean)
   const isOnBlogPost = currentPath[0] === 'blog'
   const context = isOnBlogPost
@@ -47,8 +49,10 @@ export const KenAssistant = ({
     : 'blog'
 
   const blogSlug = isOnBlogPost && currentPath[1] ? currentPath[1] : null
+  const chatId = blogSlug ? `blog:${blogSlug}` : 'blog:index'
 
   const { messages, sendMessage, setMessages, status } = useChat({
+    id: chatId,
     transport: new DefaultChatTransport({
       api: '/api/agent',
       body: {
@@ -59,30 +63,14 @@ export const KenAssistant = ({
     }),
   })
 
+  // Hydrate the chat store from saved messages when they change
   useEffect(() => {
-    const fetchMessages = async () => {
-      setIsLoadingMessages(true)
-      try {
-        const url = blogSlug
-          ? `/api/initial?blogSlug=${encodeURIComponent(blogSlug)}`
-          : '/api/initial'
-        const res = await fetch(url)
-        const data = await res.json()
-        setMessages([...data])
-      } catch (error) {
-        console.error(error)
-        setMessages([])
-      } finally {
-        setIsLoadingMessages(false)
-      }
-    }
+    if (!isOpen) return
+    if (isLoadingSavedMessages) return
+    if (!savedMessages || savedMessages.length === 0) return
 
-    setTimeout(() => {
-      if (isOpen) {
-        fetchMessages()
-      }
-    }, 500)
-  }, [setMessages, isOpen, blogSlug])
+    setMessages(savedMessages)
+  }, [chatId, isLoadingSavedMessages, isOpen, savedMessages, setMessages])
 
   const isLoading = status === 'streaming' || status === 'submitted'
 
@@ -256,7 +244,7 @@ export const KenAssistant = ({
         }}
         className="flex-1 relative font-sans overflow-y-auto"
       >
-        {isLoadingMessages && messages.length === 0 && (
+        {isLoadingSavedMessages && messages.length === 0 && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <Loader className="text-[var(--primary)] duration-500" />
           </div>
