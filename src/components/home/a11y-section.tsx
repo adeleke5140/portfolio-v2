@@ -1,11 +1,11 @@
 export const A11ySection = () => {
   return (
-    <div className="px-0 w-full py-1 flex gap-1.5 items-center h-20">
+    <div className="px-0 w-full border-y border-[#dcdcdc7e] py-10 flex gap-1.5 items-center">
       <nav className="flex flex-col gap-3" aria-labelledby="a11y-webring-club">
-        <p>
+        <p className="text-[17.5px]">
           This site is a member of the{' '}
           <a
-            className="text-[#e87400] border-b border-[#e87400]  "
+            className="text-primary border-b border-primary  "
             rel="external"
             href="https://a11y-webring.club/"
           >
@@ -16,7 +16,7 @@ export const A11ySection = () => {
         <ul className="flex gap-2">
           <li className="">
             <a
-              className="hover:underline hover:bg-gray-100 justify-between group flex gap-1.5 text-[15px] items-center px-3 py-1 -ml-2 rounded-xl"
+              className="hover:underline  justify-between group flex gap-1.5 text-[17.5px] items-center px-3 py-1 -ml-2 rounded-xl"
               rel="external"
               referrerPolicy="strict-origin"
               href="https://a11y-webring.club/prev"
@@ -26,7 +26,7 @@ export const A11ySection = () => {
           </li>
           <li className="">
             <a
-              className="  hover:underline hover:bg-gray-100 justify-between group px-3 flex gap-1.5 items-center text-[15px] py-1 rounded-xl"
+              className="  hover:underline  justify-between group px-3 flex gap-1.5 items-center text-[17.5px] py-1 rounded-xl"
               rel="external"
               referrerPolicy="strict-origin"
               href="https://a11y-webring.club/random"
@@ -36,7 +36,7 @@ export const A11ySection = () => {
           </li>
           <li className="">
             <a
-              className="  hover:underline hover:bg-gray-100 justify-between group flex gap-1.5 items-center px-3 text-[15px] py-1 rounded-xl"
+              className="  hover:underline  justify-between group flex gap-1.5 items-center px-3 text-[17.5px] py-1 rounded-xl"
               rel="external"
               referrerPolicy="strict-origin"
               href="https://a11y-webring.club/next"

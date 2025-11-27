@@ -11,6 +11,7 @@ import {
   InitialCodeBlock,
 } from '../components/initial-code-block'
 import { getBlogData } from '../utils'
+import { formatDate } from '@/helpers/formatDate'
 
 export async function generateMetadata({
   params,
@@ -114,12 +115,15 @@ export default async function Page({
         path="/blog"
         backText="Blog"
         heading={
-          <div>
+          <div className="py-10 pt-24 border-b border-[#dcdcdc7e] pb-6">
+            <span className="text-ken-grey text-[15px]">
+              {formatDate(postData.date)}
+            </span>
             <h1
               style={{
                 textWrap: 'pretty',
               }}
-              className="leading-[1.2em] font-serif capitalize text-[48px] lg:text-5xl py-10 pb-6 lg:tracking-[-.06em] tracking-[-0.96px]"
+              className="leading-[1.2em] text-[40px]  lg:tracking-[-.06em] tracking-[-0.96px]"
             >
               {postData.title}
             </h1>

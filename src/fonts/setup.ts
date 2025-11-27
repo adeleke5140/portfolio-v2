@@ -1,3 +1,4 @@
+import { Newsreader } from 'next/font/google'
 import localFont from 'next/font/local'
 
 export const berkeleyMono = localFont({
@@ -6,70 +7,14 @@ export const berkeleyMono = localFont({
   variable: '--font-berkeley-mono',
 })
 
-export const neue = localFont({
-  src: [
-    {
-      path: './PPNeueMontreal-Regular.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: './PPNeueMontreal-Medium.woff2',
-      weight: '500',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-neue',
+export const newsreader = Newsreader({
+  subsets: ['latin'],
+  variable: '--font-newsreader',
   display: 'swap',
-})
-
-export const mondwest = localFont({
-  src: [
-    {
-      path: './PPMondwest-Regular.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: './PPMondwest-Bold.woff2',
-      weight: '700',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-mondwest',
-  display: 'swap',
-})
-
-export const editorialNew = localFont({
-  src: [
-    {
-      path: './PPEditorialNew-Regular.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: './PPEditorialNew-Italic.woff2',
-      weight: '400',
-      style: 'italic',
-    },
-    {
-      path: './PPEditorialNew-Bold.woff2',
-      weight: '700',
-      style: 'normal',
-    },
-    {
-      path: './PPEditorialNew-Heavy.woff2',
-      weight: '900',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-editorial-new',
-  display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
 })
 
 export const fonts = {
   berkeleyMono,
-  neue,
-  editorialNew,
-  mondwest,
+  newsreader,
 }

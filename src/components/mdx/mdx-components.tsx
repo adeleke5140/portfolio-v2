@@ -30,7 +30,7 @@ export const components = {
     <h4 className="font-serif font-medium" {...props} />
   ),
   p: (props: ParagraphProps) => (
-    <p className="text-gray-800 text-[16px] mt-6 leading-[1.6]" {...props} />
+    <p className="text-ken-grey text-[20px] my-6 leading-[30px]" {...props} />
   ),
   ol: (props: ListProps) => (
     <ol
