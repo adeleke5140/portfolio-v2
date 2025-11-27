@@ -25,7 +25,7 @@ export const BlogIcon = ({ className }: { className?: string }) => {
   )
 }
 
-export const photos = ({ className }: { className?: string }) => {
+export const PhotosIcon = ({ className }: { className?: string }) => {
   return (
     <svg
       className={cn('w-4 h-4 shrink-0', className)}

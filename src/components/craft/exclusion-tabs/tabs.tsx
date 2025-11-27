@@ -53,7 +53,7 @@ export function Tabs() {
               }}
               className="cursor-pointer flex h-[34px] items-center gap-2 p-4 text-sm text-black focus:outline-0"
             >
-              {tab.icon}
+              <tab.icon />
               {tab.name}
             </button>
           </li>
@@ -72,7 +72,7 @@ export function Tabs() {
                 className="text-white cursor-pointer flex h-[34px] items-center gap-2 p-4 text-sm focus:outline-0"
                 tabIndex={-1}
               >
-                {tab.icon}
+                <tab.icon />
                 {tab.name}
               </button>
             </li>

@@ -12,15 +12,15 @@ const globalForMastra = globalThis as typeof globalThis & {
 }
 
 function createMastraInstance() {
-  const dbUrl = isProd ? process.env.TURSO_DB_URL : 'file:agent-memory.db'
-  const token = isProd ? process.env.TURSO_TOKEN : undefined
-  // if (!dbUrl || !token) {
-  //   throw new Error('TURSO_DB_URL or TURSO_TOKEN is not set')
-  // }
+  const prodDbUrl = process.env.TURSO_DB_URL || ''
+  const prodDbToken = process.env.TURSO_TOKEN || ''
+  const dbUrl = prodDbUrl ? prodDbUrl : 'file:agent-memory.db'
+  const token = prodDbToken ? prodDbToken : ''
+
   return new Mastra({
     agents: { kennyAgent, kennyVoiceAgent },
     storage: new LibSQLStore({
-      url: dbUrl!,
+      url: dbUrl,
       authToken: token,
     }),
     observability: {
