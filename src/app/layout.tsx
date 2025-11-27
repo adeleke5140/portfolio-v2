@@ -11,7 +11,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         className={`${fonts.newsreader.variable} ${fonts.berkeleyMono.variable}`}
       >
         <div
-          className={`min-h-screen font-sans outline outline-pink-200  bg-[#fdfdfa] text-ken-black`}
+          className={`min-h-screen font-sans outline outline-pink-200  bg-[rgb(248,249,250)] text-ken-black`}
           id="container"
         >
           <Toaster />

@@ -27,17 +27,14 @@ const filterIfProd = (data: Array<CraftItem>) => {
 export default function Index() {
   const allCraftData = filterIfProd(getSortedCraftData()) as Array<CraftItem>
 
-  const craftsByCategory = allCraftData.reduce(
-    (acc, craft) => {
-      const category = craft.tag || 'uncategorized'
-      if (!acc[category]) {
-        acc[category] = []
-      }
-      acc[category].push(craft)
-      return acc
-    },
-    {} as Record<string, CraftItem[]>
-  )
+  const craftsByCategory = allCraftData.reduce((acc, craft) => {
+    const category = craft.tag || 'uncategorized'
+    if (!acc[category]) {
+      acc[category] = []
+    }
+    acc[category].push(craft)
+    return acc
+  }, {} as Record<string, CraftItem[]>)
 
   const sortedCategories = Object.entries(craftsByCategory).sort(([a], [b]) =>
     a.localeCompare(b)
@@ -59,7 +56,7 @@ export default function Index() {
                 <Link
                   href={`/craft/${craft.id}`}
                   key={craft.id}
-                  className="pb-7 group hover:bg-gray-100 rounded-md py-4 block mb-2 transition-colors duration-200 "
+                  className="pb-7 group rounded-md py-4 block mb-2 transition-colors duration-200 "
                 >
                   <div className="flex group-hover:translate-x-2 flex-col gap-1 transition-transform ">
                     <p className="flex gap-2 items-center">

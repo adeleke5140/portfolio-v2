@@ -68,13 +68,13 @@ export const Introduction = () => {
         <A11ySection />
 
         <div className="flex items-center justify-between">
-          <div className="flex gap-2">
+          <div className="flex">
             {connection.map((con) => (
               <a
                 key={con.name}
                 target="_blank"
                 href={con.value}
-                className="capitalize text-ken-grey hover:bg-gray-100  hover:underline first:-ml-3 justify-between group flex gap-1.5 text-[17.5px] items-center px-3 py-1 rounded-xl"
+                className="capitalize text-ken-grey hover:underline first:-ml-3 justify-between group flex gap-1.5 text-[17.5px] items-center px-3 py-1 rounded-xl"
                 rel="external"
                 referrerPolicy="strict-origin"
               >

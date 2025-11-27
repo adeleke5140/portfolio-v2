@@ -50,7 +50,7 @@ export const components = {
   ),
   a: ({ href, children, ...props }: AnchorProps) => {
     const className =
-      'text-[#e87400] underline hover:text-[#e87400] dark:text-gray-400 hover:dark:text-gray-300 dark:underline dark:underline-offset-2 dark:decoration-gray-800'
+      'text-primary underline group-hover:text-primary dark:text-gray-400 group-hover:dark:text-gray-300 dark:underline dark:underline-offset-2 dark:decoration-gray-800'
     if (href?.startsWith('/')) {
       return (
         <Link href={href} className={className} {...props}>
@@ -81,7 +81,7 @@ export const components = {
     const codeHTML = highlight(children as string)
     return (
       <code
-        className="font-mono bg-[#ededed] overflow-x-auto rounded-md py-0.5 px-[3.6px] border border-[#e5e7eb] text-xs"
+        className="font-mono bg-[#ededed] overflow-x-auto rounded-[6px] py-0.5 px-[3.6px] border border-[#e5e7eb] text-xs"
         dangerouslySetInnerHTML={{ __html: codeHTML }}
         {...props}
       />

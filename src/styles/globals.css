@@ -57,6 +57,11 @@ body *::selection {
   --shimmer-after-transform: skewX(45deg) translateX(-150%);
 }
 
+pre {
+  scrollbar-gutter: stable;
+  scrollbar-color: #dcdcdc transparent;
+}
+
 .shimmer {
   overflow: hidden;
   background: rgba(255, 255, 255, 0.36);

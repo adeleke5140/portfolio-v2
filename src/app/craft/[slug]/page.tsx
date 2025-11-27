@@ -1,4 +1,5 @@
 import { getCraftData } from '@/app/blog/utils'
+import { formatDate } from '@/helpers/formatDate'
 import { CardAnimation } from '@/components/craft/card-animation/card-animation'
 import { CraftContainer } from '@/components/craft/craft-items/craft-container'
 import { Tabs } from '@/components/craft/exclusion-tabs/tabs'
@@ -109,7 +110,24 @@ export default async function Page({
   })
   const craftFrontMatter = data.frontmatter as { title: string; date: string }
   return (
-    <PageWrapper heading={craftFrontMatter.title} showHeading>
+    <PageWrapper
+      heading={
+        <div className="py-10 pt-24 border-b border-[#dcdcdc7e] pb-6">
+          <span className="text-ken-grey text-[15px]">
+            {formatDate(craftFrontMatter.date)}
+          </span>
+          <h1
+            style={{
+              textWrap: 'pretty',
+            }}
+            className="leading-[1.2em] text-[40px]  lg:tracking-[-.06em] tracking-[-0.96px]"
+          >
+            {craftFrontMatter.title}
+          </h1>
+        </div>
+      }
+      showHeading
+    >
       <div className="max-w-[680px] mx-auto">{data.content}</div>
     </PageWrapper>
   )

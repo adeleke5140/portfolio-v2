@@ -1,5 +1,5 @@
 ---
-title: What I know so far about typography
+title: What I know so far about Typography
 description: types make and break the web
 date: '2025-09-23'
 status: 'completed'

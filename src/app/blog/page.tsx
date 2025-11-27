@@ -83,10 +83,10 @@ const Index = () => {
                   <Link
                     key={post.id}
                     href={`/blog/${post.id}`}
-                    className="pb-7 px-2 last:border-b-0 border-b hover:bg-gray-100 group rounded-2xl rounded-b-none py-4 block mb-2 transition-colors duration-200 "
+                    className="pb-7 px-2 last:border-b-0 border-b group rounded-2xl rounded-b-none py-4 block mb-2 transition-colors duration-200 "
                   >
                     <div className="flex group-hover:translate-x-2 flex-col gap-1 transition-transform ">
-                      <p className="text-lg hover:underline  transition-all">
+                      <p className="text-lg group-hover:underline  transition-all">
                         {post.title}
                       </p>
                       <span className="text-sm text-gray-700">
