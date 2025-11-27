@@ -3,7 +3,7 @@
 import { useChat } from '@ai-sdk/react'
 import { DefaultChatTransport, UIMessage } from 'ai'
 import { Loader2 } from 'lucide-react'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import {
   Conversation,
@@ -17,7 +17,11 @@ import { TextShimmer } from '../ai-elements/shimmer'
 import { AssistantHeader } from './assistant-header'
 import { Form } from './form'
 
+function generateNewThreadId() {
+  return 'new'
+}
 interface ChatSidebarProps {
+  threadId?: string
   isOpen: boolean
   onClose: () => void
   recentArticles: Array<{ id: string; title: string }>
@@ -26,6 +30,7 @@ interface ChatSidebarProps {
 }
 
 export const KenAssistant = ({
+  threadId,
   isOpen,
   onClose,
   recentArticles,
@@ -39,6 +44,9 @@ export const KenAssistant = ({
   const [loadingMessageId, setLoadingMessageId] = useState<string | null>(null)
   const [pausedMessageId, setPausedMessageId] = useState<string | null>(null)
 
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
   const pathname = usePathname()
   const currentPath = pathname.split('/').filter(Boolean)
   const isOnBlogPost = currentPath[0] === 'blog'
@@ -48,20 +56,39 @@ export const KenAssistant = ({
       : currentPath[1]
     : 'blog'
 
-  const blogSlug = isOnBlogPost && currentPath[1] ? currentPath[1] : null
-  const chatId = blogSlug ? `blog:${blogSlug}` : 'blog:index'
+  const urlThreadId = searchParams.get('t')
+  const initialThreadId = urlThreadId ? urlThreadId : generateNewThreadId()
+
+  useEffect(() => {
+    if (!initialThreadId) return
+    const params = new URLSearchParams(searchParams.toString())
+    params.set('t', initialThreadId)
+    router.push(`${pathname}?${params.toString()}`)
+  }, [initialThreadId, pathname, searchParams, router])
 
   const { messages, sendMessage, setMessages, status } = useChat({
-    id: chatId,
+    id: initialThreadId,
     transport: new DefaultChatTransport({
       api: '/api/agent',
       body: {
         context: context,
-        blogSlug: blogSlug,
         pathname: pathname,
+        threadId: initialThreadId,
       },
     }),
   })
+
+  const handleNewChat = () => {
+    const newThreadId = generateNewThreadId()
+
+    const params = new URLSearchParams(searchParams.toString())
+    params.set('t', newThreadId)
+
+    const url = `${pathname}?${params.toString()}`
+
+    setMessages([])
+    router.push(url, { scroll: false })
+  }
 
   // Hydrate the chat store from saved messages when they change
   useEffect(() => {
@@ -70,7 +97,13 @@ export const KenAssistant = ({
     if (!savedMessages || savedMessages.length === 0) return
 
     setMessages(savedMessages)
-  }, [chatId, isLoadingSavedMessages, isOpen, savedMessages, setMessages])
+  }, [
+    initialThreadId,
+    isLoadingSavedMessages,
+    isOpen,
+    savedMessages,
+    setMessages,
+  ])
 
   const isLoading = status === 'streaming' || status === 'submitted'
 
@@ -228,9 +261,11 @@ export const KenAssistant = ({
     }
   }, [])
 
+  const isLoadingInitially =
+    isLoadingSavedMessages && savedMessages?.length === 0
   return (
     <div className="flex  h-full flex-col">
-      <AssistantHeader onClose={onClose} />
+      <AssistantHeader onClose={onClose} onNewChat={handleNewChat} />
 
       <Conversation
         style={{
@@ -244,11 +279,11 @@ export const KenAssistant = ({
         }}
         className="flex-1 relative font-sans overflow-y-auto"
       >
-        {isLoadingSavedMessages && messages.length === 0 && (
+        {isLoadingInitially ? (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <Loader className="text-[var(--primary)] duration-500" />
           </div>
-        )}
+        ) : null}
         <ConversationContent className="p-4">
           {messages.map((message, messageIndex) => {
             // Check if message has any text content

@@ -6,9 +6,13 @@ import { isOpenAtom, maximizedAtom } from './assistant-context'
 
 interface AssistantHeaderProps {
   onClose: () => void
+  onNewChat?: () => void
 }
 
-export const AssistantHeader = ({ onClose }: AssistantHeaderProps) => {
+export const AssistantHeader = ({
+  onClose,
+  onNewChat,
+}: AssistantHeaderProps) => {
   const [isMaximized, setIsMaximized] = useAtom(maximizedAtom)
   const [isOpen, setIsOpen] = useAtom(isOpenAtom)
 
@@ -17,7 +21,16 @@ export const AssistantHeader = ({ onClose }: AssistantHeaderProps) => {
       <div className="flex items-center gap-3">
         <h2 className="font-serif text-gray-900">Ask Kenny</h2>
       </div>
-      <div className="flex items-center ">
+      <div className="flex items-center gap-1">
+        {onNewChat && (
+          <button
+            className="px-3 font-sans py-1 text-xs rounded-full border border-gray-200 hover:bg-gray-100 transition-colors"
+            type="button"
+            onClick={onNewChat}
+          >
+            New chat
+          </button>
+        )}
         <button
           className="p-2 hover:bg-gray-100 rounded-full transition-colors"
           aria-label="Maximize chat"

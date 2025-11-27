@@ -12,10 +12,10 @@ import {
   QueryClientProvider,
   useQuery,
 } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { useAtom } from 'jotai'
 import { isChatOpenAtom, isOpenAtom, maximizedAtom } from './assistant-context'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { usePathname } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,21 +29,25 @@ function BlogAssistantPortal() {
   const [isMaximized] = useAtom(maximizedAtom)
   const [isOpen, setIsOpen] = useAtom(isOpenAtom)
   const [isChatOpen, setIsChatOpen] = useAtom(isChatOpenAtom)
+  const searchParams = useSearchParams()
+  const threadId = searchParams.get('t')
 
+  console.log('threadId', threadId)
   const {
     isPending,
     error,
     data: savedMessages,
   } = useQuery({
-    queryKey: ['savedMessages'],
+    queryKey: ['savedMessages', threadId],
     queryFn: async () => {
-      const url = `/api/initial`
+      const url = `/api/initial?threadId=${threadId}`
       const res = await fetch(url)
       if (!res.ok) {
         throw new Error('Failed to fetch initial messages')
       }
       return res.json()
     },
+    enabled: !!threadId,
   })
 
   return (
@@ -51,6 +55,7 @@ function BlogAssistantPortal() {
       {isMaximized && isOpen ? (
         <div className="bg-white w-[400px] z-40 flex flex-col justify-end fixed top-0 bottom-0 right-0 h-full">
           <KenAssistant
+            threadId={threadId ?? undefined}
             isOpen={true}
             onClose={() => {
               setIsOpen(false)
@@ -86,6 +91,7 @@ function BlogAssistantPortal() {
               )}
             >
               <KenAssistant
+                threadId={threadId ?? undefined}
                 isOpen={isChatOpen}
                 onClose={() => setIsChatOpen(false)}
                 recentArticles={[]}
@@ -104,7 +110,7 @@ export function BlogAssistantWrapper() {
   return (
     <QueryClientProvider client={queryClient}>
       <BlogAssistantPortal />
-      <ReactQueryDevtools initialIsOpen={true} />
+      <ReactQueryDevtools initialIsOpen={true} buttonPosition="top-left" />
     </QueryClientProvider>
   )
 }

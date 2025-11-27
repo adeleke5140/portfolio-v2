@@ -7,7 +7,7 @@ export const runtime = 'nodejs'
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { messages, context, blogSlug, pathname, agentMode = 'normal' } = body
+    const { messages, context, blogSlug, pathname, threadId } = body
 
     if (!messages || !Array.isArray(messages)) {
       return NextResponse.json(
@@ -16,29 +16,31 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // Get the agent from the Mastra instance
     const kennyAgent = mastra.getAgent('kennyAgent')
 
     const runtimeContext = new RuntimeContext()
     runtimeContext.set('context', context)
     runtimeContext.set('blogSlug', blogSlug)
     runtimeContext.set('pathname', pathname)
-    runtimeContext.set('agentMode', agentMode)
 
-    // Stream the response with AI SDK v5 format
+    const existingThreadId = threadId
+      ? threadId
+      : `session-${Date.now().toString(36).slice(0, 8)}`
+
     const stream = await kennyAgent.stream(messages, {
-      format: 'aisdk', // Enable AI SDK v5 compatibility
+      format: 'aisdk',
       runtimeContext,
       memory: {
-        thread: blogSlug || 'blog',
+        thread: existingThreadId,
         resource: 'chat-session',
       },
     })
 
-    // Return the stream response (AI SDK v5 compatible)
-    return stream.toUIMessageStreamResponse({
+    const response = stream.toUIMessageStreamResponse({
       sendSources: true,
     })
+    response.headers.set('X-Thread-Id', existingThreadId)
+    return response
   } catch (error) {
     console.error('Agent error:', error)
     return NextResponse.json(
