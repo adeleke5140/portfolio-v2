@@ -13,11 +13,16 @@ export async function GET(req: NextRequest) {
 
   const threadId = threadIdFromQuery || 'blog'
 
-  const res = await mem.query({
-    threadId,
-    resourceId: 'chat-session',
-  })
+  try {
+    const res = await mem.query({
+      threadId,
+      resourceId: 'chat-session',
+    })
 
-  const messages = convertMessages(res?.uiMessages || []).to('AIV5.UI')
-  return NextResponse.json(messages)
+    const messages = convertMessages(res?.uiMessages || []).to('AIV5.UI')
+    return NextResponse.json(messages)
+  } catch (error) {
+    console.error('Error fetching initial messages:', error)
+    return NextResponse.json([])
+  }
 }
