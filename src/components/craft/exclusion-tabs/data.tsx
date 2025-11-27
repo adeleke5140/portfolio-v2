@@ -1,35 +1,35 @@
 import {
-  about,
-  blog,
-  craft,
-  home,
-  photos,
-  tools,
+  AboutIcon,
+  BlogIcon,
+  CraftIcon,
+  HomeIcon,
+  PhotosIcon,
+  ToolsIcon,
 } from '../navigation/navigation'
 
 export const TABS = [
   {
     name: 'Home',
-    icon: home,
+    icon: HomeIcon,
   },
   {
     name: 'Blog',
-    icon: blog,
+    icon: BlogIcon,
   },
   {
     name: 'Craft',
-    icon: craft,
+    icon: CraftIcon,
   },
   {
     name: 'Photos',
-    icon: photos,
+    icon: PhotosIcon,
   },
   {
     name: 'About',
-    icon: about,
+    icon: AboutIcon,
   },
   {
     name: 'Tools',
-    icon: tools,
+    icon: ToolsIcon,
   },
 ]

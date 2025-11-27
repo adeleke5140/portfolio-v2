@@ -9,7 +9,7 @@ This post would not have made it out of the draft if I had let perfectionism win
 
 In my 1 and a half year at Mastra, I have worked on the marketing website, the docs and a couple of brand assets, specifically og images. I even create some of them myself in Sketch because making images is really fun. What this has exposed me to is fonts, lots and lots of them.
 
-We currently use **Inter**, **Tasa Explorer** and **Geist Mono** on the website, blog, and docs. And **Sorts Mill Goudy** with **Hack Grotesk** for the tsconf.ai page. Types have been really fun to work with.
+We currently use Inter, Tasa Explorer and Geist Mono on the website, blog, and docs. And Sorts Mill Goudy with Hack Grotesk for the tsconf.ai page. Types have been really fun to work with.
 
 In my past time, I scour the web for dashing websites which includes marketing website and engineering blogs from mostly startups. What I recognize that sets the great from the meh apart is sometimes decisions regarding colors, spacing, accessible intefaces, animations, micro interactions, and other design choices, what I do think is a big driver is typography.
 
@@ -43,7 +43,7 @@ Sans-serif is everywhere and I think it's because, it's easier to stick to one t
 
 I have come to a realization that Serif fonts are required to break the monotony of the web. I agree with [Rich Harris](https://svelte.dev/blog/the-omnisite#New-look) where they decided on a Serif font, the only downside though was that it wasn't readable enough. But I have come to understand from experimenting and seeing the works of various designers that Serif is required for personality, sometimes that extra classiness.
 
- It doesn't all have to be so boring. It's why I've got PP Neue Montreal paired with PP Editorial New for my website. It gives it a persistent freshness, one that would not exist if I settled for the prosaic sans-serif.Once you evauluate what kind of brand experience you want to offer to your users, or what kind of feeling you want people to get, you'll realize that a bit of novelty is required.
+It doesn't all have to be so boring. It's why I've got PP Neue Montreal paired with PP Editorial New for my website. It gives it a persistent freshness, one that would not exist if I settled for the prosaic sans-serif.Once you evauluate what kind of brand experience you want to offer to your users, or what kind of feeling you want people to get, you'll realize that a bit of novelty is required.
 
 ## Use One Typeface, Maximum Two
 

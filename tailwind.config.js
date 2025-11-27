@@ -23,7 +23,7 @@ module.exports = {
           foreground: 'hsl(var(--popover-foreground))',
         },
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
+          DEFAULT: 'var(--primary)',
           foreground: 'hsl(var(--primary-foreground))',
         },
         secondary: {
@@ -54,9 +54,9 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['var(--font-neue)', ...defaultTheme.fontFamily.sans],
+        sans: ['var(--font-newsreader)', ...defaultTheme.fontFamily.sans],
         mono: ['var(--font-berkeley-mono)', ...defaultTheme.fontFamily.mono],
-        serif: ['var(--font-editorial-new)', ...defaultTheme.fontFamily.serif],
+        serif: ['var(--font-newsreader)', ...defaultTheme.fontFamily.serif],
       },
       transitionProperty: {
         'transform-opacity': 'transform, opacity',

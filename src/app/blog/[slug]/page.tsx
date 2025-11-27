@@ -1,17 +1,17 @@
 import { components } from '@/components/mdx/mdx-components'
-import { PageWrapper } from '@/components/pageWrapper'
+import { PageWrapper } from '@/components/page-wrapper'
+import { getPostData } from '@/lib/posts'
+import * as fsSync from 'fs'
 import { promises as fs } from 'fs'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import Head from 'next/head'
-import { getBlogData } from '../utils'
-import * as fsSync from 'fs'
 import path from 'path'
-import { formatDate } from '@/helpers/formatDate'
 import {
   FinalCodeBlock,
   InitialCodeBlock,
 } from '../components/initial-code-block'
-import { getPostData } from '@/lib/posts'
+import { getBlogData } from '../utils'
+import { formatDate } from '@/helpers/formatDate'
 
 export async function generateMetadata({
   params,
@@ -111,26 +111,28 @@ export default async function Page({
         <title>{postData.title}</title>
       </Head>
       <PageWrapper
+        showLink
+        path="/blog"
+        backText="Blog"
         heading={
-          <div className="border-b-[0.5px] py-6  border-b-[#dcdcdc]">
+          <div className="py-10 pt-24 border-b border-[#dcdcdc7e] pb-6">
+            <span className="text-ken-grey text-[15px]">
+              {formatDate(postData.date)}
+            </span>
             <h1
               style={{
                 textWrap: 'pretty',
               }}
-              className="font-serif  py-8  leading-[1.2em] capitalize text-[48px] lg:text-7xl font-medium  lg:tracking-[-.06em] tracking-[-0.96px]"
+              className="leading-[1.2em] text-[40px]  lg:tracking-[-.06em] tracking-[-0.96px]"
             >
               {postData.title}
             </h1>
-
-            <span className="text-sm text-gray-700 mt-4 inline-block">
-              {formatDate(postData.date || Date.now().toString())}
-            </span>
           </div>
         }
         showHeading
-        classname="max-w-none lg:pt-0"
+        classname="lg:pt-0"
       >
-        <div className="max-w-[40rem] pt-8 mx-auto">{data.content}</div>
+        <div className="mx-auto">{data.content}</div>
       </PageWrapper>
     </>
   )
