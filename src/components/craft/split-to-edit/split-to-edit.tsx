@@ -8,15 +8,16 @@ import { CheckMark, Pen } from './icons'
 
 const nunito = Nunito({ subsets: ['latin'] })
 
-const buttonIcons = {
-  edit: <Pen className="size-4" />,
-  done: <CheckMark className="size-4" />,
-}
 const t = {
   duration: 0.6,
   type: 'spring',
   bounce: 0.5,
 } as Transition
+
+const buttonIcons = {
+  edit: <Pen className="size-4" />,
+  done: <CheckMark className="size-4" />,
+}
 export const SplitToEdit = () => {
   const [hour, setHour] = useState('')
   const [min, setMin] = useState('')

@@ -41,7 +41,6 @@
     "@types/react": "19.1.0",
     "@types/react-dom": "19.1.0",
     "@xyflow/react": "^12.9.0",
-    "ai": "^5.0.77",
     "class-variance-authority": "^0.7.1",
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
