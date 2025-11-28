@@ -5,11 +5,9 @@ date: '2025-09-23'
 status: 'completed'
 ---
 
-This post would not have made it out of the draft if I had let perfectionism win. Thank you [Simon Sarris](https://x.com/simonsarris/status/1970284756169540072). Amazing things do occur on x.com – the everything app.
+In my 2 years at Mastra, I have worked on marketing websites, docs and a couple of brand assets like og images. I create them with Sketch and I generally enjoy making images. All these work has exposed me to lots of types.
 
-In my 1 and a half year at Mastra, I have worked on the marketing website, the docs and a couple of brand assets like og images. I create them Sketch and I really enjoy making images. What this has exposed me to is types, lots and lots of them.
-
-We currently use Inter, Tasa Explorer and Geist Mono on the website, blog, and docs. And Sorts Mill Goudy with Hack Grotesk for the tsconf.ai page. Types have been really fun to work with.
+We currently use Inter, Tasa Explorer and Geist Mono on the [website](https://mastra.ai), blog, and docs. And Sorts Mill Goudy with Hack Grotesk for the [tsconf.ai](https://tsconf.ai) page. Types have been really fun to work with.
 
 In my past time, I scour the web for impressive websites which includes marketing websites and engineering blogs from mostly startups. What I recognize that sets the great from others is decisions regarding colors, spacing, accessibility, animations, micro interactions, and other design choices. What I do think is a big driver is: Typography.
 
@@ -49,7 +47,7 @@ Web content doesn't have to be boring. It's why I've got PP Neue Montreal paired
 
 I tried playing around with multiple typefaces, a couple sans-serif and a serif, maybe some cursive for the footer section and it did not end up well. It is pretty difficult to build something cohesive when multiple types are fighting for prominence. A single typeface can do the job and maybe a Serif to make things pop a bit more.
 
-Overall, there is still so much I am learning about types, I have an obsidian document that contains a list of my favorite typefaces which I will publish soon, it's around 40 or so. Typography is fun, captivating and most importantly, it is a very important part of what I value as Craft. I am inclined to spend more time figuring it out.
+Overall, there is still so much I am learning about types, I have an obsidian document that contains a list of my 40 favorite typefaces from my adventures around the web. I have also started [Details in Typography](https://www.amazon.com/Jost-Hochuli-Typography-english-Reprint/dp/2917855665) by **Jost Hochuli** Typography is fun, captivating and most importantly, it is a very important part of what I value as Craft. I am inclined to spend more time figuring it out.
 
 Thanks for reading, and I hope this helps.
 
