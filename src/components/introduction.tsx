@@ -40,19 +40,17 @@ export const Introduction = () => {
           <div className="flex flex-col text-[var(--gray-1)] gap-2 dark:border-[#282828] dark:bg-[#282828]">
             <div>
               <p className="text-lg  my-4">
-                Kehinde Adeleke is a Design engineer working across brand,
-                design and engineering.
+                I am a Design engineer working across design and engineering.
               </p>
 
               <p className="text-lg my-4">
-                He is regulary thinking about typography, animations, design and
-                code. He is currently curious about how typography can add
-                texture to web experiences.
+                I am regulary thinking about typography, animations, design and
+                how typography can add texture to web experiences.
               </p>
 
               <p className="text-lg my-4">
-                His craft builds him as a person and he strives to infuse every
-                piece of work with care. He currently works on the Docs and
+                My craft builds me as a person and I strive to infuse every
+                piece of work with care. I currently works on the Docs and
                 Website team at{' '}
                 <a
                   href="https://www.mastra.ai"
