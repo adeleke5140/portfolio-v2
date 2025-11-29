@@ -31,7 +31,7 @@ const PageWrapper = ({
       heading
     )
   return (
-    <div className={cn('relative mt-4 px-6 2xl:px-0 mx-auto', classname)}>
+    <div className={cn('relative mt-4  2xl:px-0 mx-auto', classname)}>
       <div className="flex flex-col gap-5">{showHeading ? slot : null}</div>
       {children}
     </div>

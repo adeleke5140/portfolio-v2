@@ -109,7 +109,7 @@ export const components = {
   ),
   blockquote: (props: BlockquoteProps) => (
     <blockquote
-      className="[&>p]:py-2 [&>p]:pl-4 rounded-md border-l-2 border-primary text-[17.5px] font-serif [&_p]:text-gray-500"
+      className="[&>p]:py-1 [&>p]:pl-4 bg-primary/5 rounded-md border-l-2 border-primary [&>p]:text-[16px]"
       {...props}
     />
   ),

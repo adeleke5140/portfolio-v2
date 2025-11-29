@@ -73,9 +73,9 @@ const Index = () => {
           {sortedPostsByYear.map(([year, posts]) => (
             <div
               key={year}
-              className="grid relative last:border-b-0 border-b border-b-[#dcdcdc] "
+              className="grid relative border-b border-dashed  border-b-[#dcdcdc] last:border-b-0 "
             >
-              <h2 className="text-lg absolute -left-[12%] top-4 font-serif text-ken-grey">
+              <h2 className="text-lg md:absolute md:-left-[12%] md:top-4 px-2 md:px-0 font-serif text-ken-grey">
                 {year}
               </h2>
               <div>
@@ -83,7 +83,7 @@ const Index = () => {
                   <Link
                     key={post.id}
                     href={`/blog/${post.id}`}
-                    className="pb-7 px-2 last:border-b-0 border-b group rounded-2xl rounded-b-none py-4 block mb-2 transition-colors duration-200 "
+                    className="px-2   group rounded-2xl rounded-b-none py-4 block mb-2 transition-colors duration-200 "
                   >
                     <div className="flex group-hover:translate-x-2 flex-col gap-1 transition-transform ">
                       <p className="text-lg group-hover:underline  transition-all">
