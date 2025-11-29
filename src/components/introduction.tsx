@@ -65,7 +65,7 @@ export const Introduction = () => {
 
         <A11ySection />
 
-        <div className="flex items-center justify-between">
+        <div className="flex gap-4  md:gap-0 flex-col md:flex-row md:items-center justify-between">
           <div className="flex">
             {connection.map((con) => (
               <a

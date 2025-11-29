@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           id="container"
         >
           <Toaster />
-          <div className="relative flex flex-col min-h-screen pb-8">
+          <div className="relative flex px-6 flex-col min-h-screen pb-8">
             <header className="mt-4 max-w-[36rem] w-full mx-auto flex border-y py-3 border-[#dcdcdc7e] items-center justify-between">
               <Link href="/" className="text-[17.5px]">
                 Kehinde Adeleke

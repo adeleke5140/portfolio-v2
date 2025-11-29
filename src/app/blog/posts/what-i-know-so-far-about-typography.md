@@ -5,9 +5,11 @@ date: '2025-09-23'
 status: 'completed'
 ---
 
-In my 2 years at Mastra, I have worked on marketing websites, docs and a couple of brand assets like og images. I create them with Sketch and I generally enjoy making images. All these work has exposed me to lots of types.
+In my 2 years at Mastra, I have worked on marketing websites, docs and a couple of brand assets like OG images. I create them with Sketch and I generally enjoy making images. All these work has exposed me to lots of types.
 
 We currently use Inter, Tasa Explorer and Geist Mono on the [website](https://mastra.ai), blog, and docs. And Sorts Mill Goudy with Hack Grotesk for the [tsconf.ai](https://tsconf.ai) page. Types have been really fun to work with.
+
+> Mastra recently moved to Greed
 
 In my past time, I scour the web for impressive websites which includes marketing websites and engineering blogs from mostly startups. What I recognize that sets the great from others is decisions regarding colors, spacing, accessibility, animations, micro interactions, and other design choices. What I do think is a big driver is: Typography.
 
