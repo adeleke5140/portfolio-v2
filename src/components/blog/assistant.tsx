@@ -341,7 +341,7 @@ export const KenAssistant = ({
                         }
                       })}
                     </div>
-                    {showPlayButton && (
+                    {/* {showPlayButton && (
                       <button
                         onClick={() => handlePlayAudio(message.id, fullText)}
                         disabled={isLoadingAudio}
@@ -380,7 +380,7 @@ export const KenAssistant = ({
                           </svg>
                         )}
                       </button>
-                    )}
+                    )} */}
                   </div>
                 </MessageContent>
               </Message>

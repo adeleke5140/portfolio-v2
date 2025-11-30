@@ -1,8 +1,15 @@
 'use client'
 
+import { SelectTrigger } from '@radix-ui/react-select'
 import { useAtom } from 'jotai'
-import { MaximizeIcon } from '../ai-elements/loader'
-import { isOpenAtom, maximizedAtom } from './assistant-context'
+import {
+  FloatingIcon,
+  MinimizeIcon,
+  NewChatIcon,
+  SidebarIcon,
+} from '../ai-elements/loader'
+import { Select, SelectContent, SelectItem, SelectValue } from '../ui/select'
+import { chatModeAtom } from './assistant-context'
 
 interface AssistantHeaderProps {
   onClose: () => void
@@ -13,8 +20,7 @@ export const AssistantHeader = ({
   onClose,
   onNewChat,
 }: AssistantHeaderProps) => {
-  const [isMaximized, setIsMaximized] = useAtom(maximizedAtom)
-  const [isOpen, setIsOpen] = useAtom(isOpenAtom)
+  const [chatMode, setChatMode] = useAtom(chatModeAtom)
 
   return (
     <div className="flex rounded-t-3xl items-center justify-between p-4">
@@ -24,41 +30,49 @@ export const AssistantHeader = ({
       <div className="flex items-center gap-1">
         {onNewChat && (
           <button
-            className="px-3 font-sans py-1 text-xs rounded-full border border-gray-200 hover:bg-gray-100 transition-colors"
+            className="p-1 font-sans text-xs rounded-full hover:bg-gray-100 transition-colors"
             type="button"
             onClick={onNewChat}
           >
-            New chat
+            <NewChatIcon />
           </button>
         )}
-        <button
-          className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-          aria-label="Maximize chat"
-          onClick={() => {
-            setIsMaximized(!isMaximized)
-            setIsOpen(!isOpen)
-          }}
+        <Select
+          value={chatMode}
+          onValueChange={(value: 'floating' | 'sidebar') => setChatMode(value)}
         >
-          <MaximizeIcon className="size-4 text-ken-grey" />
-        </button>
+          <SelectTrigger className="hover:bg-gray-100 rounded-full p-1">
+            <SelectValue key={chatMode} aria-label={chatMode}>
+              {chatMode === 'floating' ? <FloatingIcon /> : <SidebarIcon />}
+            </SelectValue>
+          </SelectTrigger>
+          <SelectContent
+            position="popper"
+            side="bottom"
+            className="font-sans bg-[rgb(248,249,250)]  w-[200px] rounded-lg"
+          >
+            <SelectItem value="sidebar" className="rounded-lg">
+              <span className="inline-flex gap-1 relative top-0.5 items-center">
+                <SidebarIcon className="relative -top-0.5 size-5" />
+                <span className="text-sm">Sidebar</span>
+              </span>
+            </SelectItem>
+            <SelectItem value="floating" className="rounded-lg">
+              <span className="inline-flex relative top-0.5 items-center gap-1">
+                <FloatingIcon className="relative -top-0.5 size-5" />
+                <span>Floating</span>
+              </span>
+            </SelectItem>
+          </SelectContent>
+        </Select>
         <button
           onClick={() => {
             onClose()
-            setIsOpen(false)
           }}
-          className="p-2 hover:bg-gray-100  group rounded-full transition-colors"
+          className="p-1 hover:bg-gray-100  group rounded-full transition-colors"
           aria-label="Close chat"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            className="size-4 text-ken-grey"
-          >
-            <polygon
-              fill="currentColor"
-              points="15 13 16 13 16 14 17 14 17 15 18 15 18 16 17 16 17 17 16 17 16 18 15 18 15 17 14 17 14 16 13 16 13 15 11 15 11 16 10 16 10 17 9 17 9 18 8 18 8 17 7 17 7 16 6 16 6 15 7 15 7 14 8 14 8 13 9 13 9 11 8 11 8 10 7 10 7 9 6 9 6 8 7 8 7 7 8 7 8 6 9 6 9 7 10 7 10 8 11 8 11 9 13 9 13 8 14 8 14 7 15 7 15 6 16 6 16 7 17 7 17 8 18 8 18 9 17 9 17 10 16 10 16 11 15 11 15 13"
-            />
-          </svg>
+          <MinimizeIcon />
         </button>
       </div>
     </div>

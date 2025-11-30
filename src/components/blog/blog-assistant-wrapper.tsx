@@ -1,4 +1,5 @@
 'use client'
+
 import { KenAssistant } from '@/components/blog/assistant'
 import { ToggleAssistant } from '@/components/blog/toggle-assistant'
 import {
@@ -12,10 +13,13 @@ import {
   QueryClientProvider,
   useQuery,
 } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { useAtom } from 'jotai'
-import { isChatOpenAtom, isOpenAtom, maximizedAtom } from './assistant-context'
 import { useSearchParams } from 'next/navigation'
+import {
+  isMaximizedAtom,
+  isPopoverOpenAtom,
+  isSidebarOpenAtom,
+} from './assistant-context'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,13 +30,12 @@ const queryClient = new QueryClient({
 })
 
 function BlogAssistantPortal() {
-  const [isMaximized] = useAtom(maximizedAtom)
-  const [isOpen, setIsOpen] = useAtom(isOpenAtom)
-  const [isChatOpen, setIsChatOpen] = useAtom(isChatOpenAtom)
+  const [isMaximized] = useAtom(isMaximizedAtom)
+  const [isOpen, setIsOpen] = useAtom(isSidebarOpenAtom)
+  const [isChatOpen, setIsChatOpen] = useAtom(isPopoverOpenAtom)
   const searchParams = useSearchParams()
   const threadId = searchParams.get('t')
 
-  console.log('threadId', threadId)
   const {
     isPending,
     error,
@@ -53,7 +56,7 @@ function BlogAssistantPortal() {
   return (
     <>
       {isMaximized && isOpen ? (
-        <div className="bg-white w-[400px] z-40 flex flex-col justify-end fixed top-0 bottom-0 right-0 h-full">
+        <div className="bg-[rgb(248,249,250)]  w-[400px] z-40 flex flex-col justify-end fixed top-0 bottom-0 right-0 h-full">
           <KenAssistant
             threadId={threadId ?? undefined}
             isOpen={true}
@@ -110,7 +113,6 @@ export function BlogAssistantWrapper() {
   return (
     <QueryClientProvider client={queryClient}>
       <BlogAssistantPortal />
-      <ReactQueryDevtools initialIsOpen={true} buttonPosition="top-left" />
     </QueryClientProvider>
   )
 }

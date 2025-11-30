@@ -107,7 +107,7 @@ export const Form = ({
           type="submit"
           className={cn(
             'size-8 absolute bottom-2 right-2',
-            'bg-[var(--primary)] backdrop-blur-sm rounded-full text-white',
+            'bg-primary backdrop-blur-sm rounded-full text-white',
             'hover:bg-[var(--primary)] active:scale-95',
             'transition-all',
             'disabled:cursor-not-allowed disabled:hover:bg-[var(--primary)]',

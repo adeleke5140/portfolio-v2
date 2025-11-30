@@ -1,7 +1,7 @@
 'use client'
 
 import { atom } from 'jotai'
-
-export const maximizedAtom = atom(false)
-export const isOpenAtom = atom(false)
-export const isChatOpenAtom = atom(false)
+export const isMaximizedAtom = atom(false)
+export const isSidebarOpenAtom = atom(false)
+export const isPopoverOpenAtom = atom(false)
+export const chatModeAtom = atom<'floating' | 'sidebar'>('floating')
