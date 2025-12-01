@@ -2,8 +2,7 @@
 
 import { useChat } from '@ai-sdk/react'
 import { DefaultChatTransport, UIMessage } from 'ai'
-import { Loader2 } from 'lucide-react'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import {
   Conversation,
@@ -17,25 +16,22 @@ import { TextShimmer } from '../ai-elements/shimmer'
 import { AssistantHeader } from './assistant-header'
 import { Form } from './form'
 
-function generateNewThreadId() {
-  return 'new'
-}
 interface ChatSidebarProps {
-  threadId?: string
   isOpen: boolean
   onClose: () => void
   recentArticles: Array<{ id: string; title: string }>
   savedMessages: UIMessage[]
   isLoadingSavedMessages: boolean
+  userId?: string
 }
 
 export const KenAssistant = ({
-  threadId,
   isOpen,
   onClose,
   recentArticles,
   savedMessages,
   isLoadingSavedMessages,
+  userId,
 }: ChatSidebarProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const [input, setInput] = useState('')
@@ -43,9 +39,6 @@ export const KenAssistant = ({
   const [playingMessageId, setPlayingMessageId] = useState<string | null>(null)
   const [loadingMessageId, setLoadingMessageId] = useState<string | null>(null)
   const [pausedMessageId, setPausedMessageId] = useState<string | null>(null)
-
-  const router = useRouter()
-  const searchParams = useSearchParams()
 
   const pathname = usePathname()
   const currentPath = pathname.split('/').filter(Boolean)
@@ -56,39 +49,16 @@ export const KenAssistant = ({
       : currentPath[1]
     : 'blog'
 
-  const urlThreadId = searchParams.get('t')
-  const initialThreadId = urlThreadId ? urlThreadId : generateNewThreadId()
-
-  useEffect(() => {
-    if (!initialThreadId) return
-    const params = new URLSearchParams(searchParams.toString())
-    params.set('t', initialThreadId)
-    router.push(`${pathname}?${params.toString()}`)
-  }, [initialThreadId, pathname, searchParams, router])
-
   const { messages, sendMessage, setMessages, status } = useChat({
-    id: initialThreadId,
     transport: new DefaultChatTransport({
       api: '/api/agent',
       body: {
         context: context,
         pathname: pathname,
-        threadId: initialThreadId,
+        threadId: userId,
       },
     }),
   })
-
-  const handleNewChat = () => {
-    const newThreadId = generateNewThreadId()
-
-    const params = new URLSearchParams(searchParams.toString())
-    params.set('t', newThreadId)
-
-    const url = `${pathname}?${params.toString()}`
-
-    setMessages([])
-    router.push(url, { scroll: false })
-  }
 
   // Hydrate the chat store from saved messages when they change
   useEffect(() => {
@@ -97,13 +67,7 @@ export const KenAssistant = ({
     if (!savedMessages || savedMessages.length === 0) return
 
     setMessages(savedMessages)
-  }, [
-    initialThreadId,
-    isLoadingSavedMessages,
-    isOpen,
-    savedMessages,
-    setMessages,
-  ])
+  }, [isLoadingSavedMessages, isOpen, savedMessages, setMessages])
 
   const isLoading = status === 'streaming' || status === 'submitted'
 
@@ -265,7 +229,7 @@ export const KenAssistant = ({
     isLoadingSavedMessages && savedMessages?.length === 0
   return (
     <div className="flex  h-full flex-col">
-      <AssistantHeader onClose={onClose} onNewChat={handleNewChat} />
+      <AssistantHeader onClose={onClose} onNewChat={() => {}} />
 
       <Conversation
         style={{
