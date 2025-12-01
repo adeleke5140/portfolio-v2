@@ -37,13 +37,9 @@ export async function POST(req: NextRequest) {
       },
     })
 
-    const response = stream.toUIMessageStreamResponse({
-      sendSources: true,
-    })
-    response.headers.set('X-Thread-Id', existingThreadId)
+    const response = stream.toUIMessageStreamResponse({})
     return response
   } catch (error) {
-    console.error('Agent error:', error)
     return NextResponse.json(
       {
         error: 'Failed to process request',
