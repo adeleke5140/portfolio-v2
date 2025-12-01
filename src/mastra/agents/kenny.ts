@@ -1,9 +1,7 @@
 import { Agent } from '@mastra/core/agent'
 import { Memory } from '@mastra/memory'
 import { readAllBlogs, readSingleBlog } from '../tools/markdown-tool'
-import { GRUG_KENNY_PROMPT, NORMAL_KENNY_PROMPT } from './instructions'
-
-const isProd = process.env.NODE_ENV === 'production'
+import { NORMAL_KENNY_PROMPT } from './instructions'
 
 export const kennyAgent = new Agent({
   name: 'kennyAgent',
