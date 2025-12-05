@@ -136,17 +136,12 @@ export const KenAssistant = ({
   // Derived error state for display
   const rateLimitError =
     rateLimitRemaining === 0
-      ? 'You have reached your daily limit of 10 messages. Please try again tomorrow.'
+      ? 'Limit reached. Please try again tomorrow.'
       : null
 
   return (
     <div className="flex  h-full flex-col">
-      <AssistantHeader
-        onClose={onClose}
-        onNewChat={() => {}}
-        rateLimitRemaining={rateLimitRemaining}
-        rateLimitError={rateLimitError}
-      />
+      <AssistantHeader onClose={onClose} onNewChat={() => {}} />
 
       <Conversation
         style={{
@@ -232,6 +227,7 @@ export const KenAssistant = ({
         context={context}
         recentArticles={recentArticles}
         rateLimitRemaining={rateLimitRemaining}
+        rateLimitError={rateLimitError!}
       />
     </div>
   )
