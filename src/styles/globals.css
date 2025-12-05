@@ -364,3 +364,16 @@ label:focus-within {
   box-shadow: var(--shadow);
   border: 1px solid var(--button-border);
 }
+
+[data-code-block-header='true'] {
+  display: none;
+}
+
+div[data-code-block-container='true'] {
+  border-width: 0px;
+  background: transparent;
+}
+
+[data-streamdown='code-block'] {
+  border: 0px;
+}
