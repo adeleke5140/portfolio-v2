@@ -138,6 +138,18 @@ code > span {
   font-size: 13px;
 }
 
+[data-streamdown='inline-code'] {
+  font-size: 12px;
+  background: #ededed;
+  border-radius: 6px;
+  padding-block: 3.6px;
+  padding-inline: 2px;
+}
+
+[data-streamdown='list-item']:has(code) {
+  line-height: 1.8;
+}
+
 .left-eye {
   transition: transform ease-out 150ms;
 }
