@@ -35,7 +35,7 @@ export const AssistantHeader = ({
         <div className="flex items-center gap-1">
           {onNewChat && (
             <button
-              className="p-1 font-sans text-xs rounded-full hover:bg-gray-100 transition-colors"
+              className="p-1 font-sans text-[10px] rounded-full hover:bg-gray-100 transition-colors"
               type="button"
               onClick={onNewChat}
             >
