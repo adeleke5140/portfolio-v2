@@ -1,10 +1,6 @@
 import { cn, transFormDashToSpaceCase } from '@/lib/utils'
 import { Loader } from '../ai-elements/loader'
 import { BlogIcon } from '../craft/navigation/navigation'
-import { useState } from 'react'
-import { Popover } from '../ui/popover'
-import { PopoverContent, PopoverTrigger } from '@radix-ui/react-popover'
-
 interface FormProps {
   input: string
   setInput: (input: string) => void
@@ -26,7 +22,6 @@ export const Form = ({
   recentArticles = [],
   rateLimitRemaining,
 }: FormProps) => {
-  const [openPopover, setOpenPopover] = useState(false)
   return (
     <form className="p-4 pt-0 relative">
       <div className="border mx-5 border-b-0 border-[#dcdcdc] h-8 pt-2 rounded-t-xl bg-inherit p-4">
@@ -54,14 +49,12 @@ export const Form = ({
             ref={textareaRef}
             value={input || ''}
             onChange={(e) => {
-              if (e.target.value === '@') {
-                setOpenPopover(true)
-              }
               setInput(e.target.value)
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault()
+                if (!input) return
                 sendMessage(input)
                 setInput('')
               }
@@ -78,16 +71,10 @@ export const Form = ({
         <button
           type="button"
           onClick={() => {
+            if (!input) return
             sendMessage(input)
           }}
-          className={cn(
-            'size-8 absolute bottom-2 right-2',
-            'bg-primary backdrop-blur-sm rounded-full text-white',
-            'hover:bg-primary active:scale-95',
-            'transition-all',
-            'disabled:cursor-not-allowed disabled:hover:bg-[var(--primary)]',
-            'flex items-center justify-center'
-          )}
+          className="form-button"
           disabled={isLoading}
         >
           {isLoading ? (
