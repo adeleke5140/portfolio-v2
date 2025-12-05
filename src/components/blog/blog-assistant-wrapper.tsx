@@ -12,26 +12,11 @@ import {
   QueryClient,
   QueryClientProvider,
   useQuery,
+  useQueryClient,
 } from '@tanstack/react-query'
-import { useAtom } from 'jotai'
-import { useEffect, useState } from 'react'
+import { Provider, useAtom } from 'jotai'
+import { useEffect, useRef } from 'react'
 import { assistantStateAtom, chatModeAtom } from './assistant-context'
-
-// Generate or retrieve a unique user ID from localStorage
-function getUserId(): string {
-  if (typeof window === 'undefined') return ''
-
-  const STORAGE_KEY = 'ken-assistant-user-id'
-  let userId = localStorage.getItem(STORAGE_KEY)
-
-  if (!userId) {
-    // Generate a unique ID using timestamp + random string
-    userId = `user_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`
-    localStorage.setItem(STORAGE_KEY, userId)
-  }
-
-  return userId
-}
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -44,28 +29,55 @@ const queryClient = new QueryClient({
 function BlogAssistantPortal() {
   const [chatMode, setChatMode] = useAtom(chatModeAtom)
   const [isAssistantOpen, setIsAssistantOpen] = useAtom(assistantStateAtom)
-  const [userId, setUserId] = useState<string>('')
+  const queryClient = useQueryClient()
+  const prevChatModeRef = useRef(chatMode)
 
-  // Initialize userId on mount
+  // Load rate limit info via React Query
+  const {
+    data: rateLimitData,
+    isPending: isRateLimitPending,
+    error: rateLimitQueryError,
+  } = useQuery({
+    queryKey: ['rateLimit'],
+    queryFn: async () => {
+      const res = await fetch('/api/rate-limit', {
+        credentials: 'include',
+      })
+      if (!res.ok) {
+        throw new Error('Failed to fetch rate limit')
+      }
+      return res.json() as Promise<{
+        limit: number
+        remaining: number
+        reset: number
+        resetAt: string
+      }>
+    },
+  })
+
+  // Refetch saved messages and rate limit when switching between floating/sidebar modes
   useEffect(() => {
-    setUserId(getUserId())
-  }, [])
+    if (prevChatModeRef.current !== chatMode) {
+      queryClient.invalidateQueries({ queryKey: ['savedMessages'] })
+      queryClient.invalidateQueries({ queryKey: ['rateLimit'] })
+    }
+    prevChatModeRef.current = chatMode
+  }, [chatMode, queryClient])
 
   const {
     isPending,
     error,
     data: savedMessages,
   } = useQuery({
-    queryKey: ['savedMessages', userId],
+    queryKey: ['savedMessages'],
     queryFn: async () => {
-      const url = `/api/initial?threadId=${userId}`
-      const res = await fetch(url)
+      const url = `/api/initial`
+      const res = await fetch(url, { credentials: 'include' })
       if (!res.ok) {
         throw new Error('Failed to fetch initial messages')
       }
       return res.json()
     },
-    enabled: !!userId,
   })
 
   return (
@@ -81,7 +93,7 @@ function BlogAssistantPortal() {
             recentArticles={[]}
             savedMessages={error ? [] : savedMessages}
             isLoadingSavedMessages={isPending}
-            userId={userId}
+            rateLimitRemaining={rateLimitData?.remaining || 10}
           />
         </div>
       ) : null}
@@ -113,7 +125,7 @@ function BlogAssistantPortal() {
                   recentArticles={[]}
                   savedMessages={error ? [] : savedMessages}
                   isLoadingSavedMessages={isPending}
-                  userId={userId}
+                  rateLimitRemaining={rateLimitData?.remaining || 10}
                 />
               </div>
             </PopoverContent>
@@ -126,8 +138,10 @@ function BlogAssistantPortal() {
 
 export function BlogAssistantWrapper() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <BlogAssistantPortal />
-    </QueryClientProvider>
+    <Provider>
+      <QueryClientProvider client={queryClient}>
+        <BlogAssistantPortal />
+      </QueryClientProvider>
+    </Provider>
   )
 }
