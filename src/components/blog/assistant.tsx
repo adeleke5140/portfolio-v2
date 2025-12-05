@@ -15,6 +15,7 @@ import { Response } from '../ai-elements/response'
 import { TextShimmer } from '../ai-elements/shimmer'
 import { AssistantHeader } from './assistant-header'
 import { Form } from './form'
+import { useQueryClient } from '@tanstack/react-query'
 
 interface ChatSidebarProps {
   isOpen: boolean
@@ -22,7 +23,7 @@ interface ChatSidebarProps {
   recentArticles: Array<{ id: string; title: string }>
   savedMessages: UIMessage[]
   isLoadingSavedMessages: boolean
-  userId?: string
+  rateLimitRemaining: number
 }
 
 export const KenAssistant = ({
@@ -31,14 +32,11 @@ export const KenAssistant = ({
   recentArticles,
   savedMessages,
   isLoadingSavedMessages,
-  userId,
+  rateLimitRemaining,
 }: ChatSidebarProps) => {
+  const queryClient = useQueryClient()
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const [input, setInput] = useState('')
-  const audioRef = useRef<HTMLAudioElement | null>(null)
-  const [playingMessageId, setPlayingMessageId] = useState<string | null>(null)
-  const [loadingMessageId, setLoadingMessageId] = useState<string | null>(null)
-  const [pausedMessageId, setPausedMessageId] = useState<string | null>(null)
 
   const pathname = usePathname()
   const currentPath = pathname.split('/').filter(Boolean)
@@ -55,9 +53,27 @@ export const KenAssistant = ({
       body: {
         context: context,
         pathname: pathname,
-        threadId: userId,
+      },
+      fetch: async (url, init) => {
+        const response = await fetch(url, {
+          ...init,
+          credentials: 'include',
+        })
+
+        // Invalidate rate limit query on any response (success or error)
+        // to sync with server state
+        if (response.ok || response.status === 429) {
+          queryClient.invalidateQueries({ queryKey: ['rateLimit'] })
+        }
+
+        return response
       },
     }),
+    onError: (error) => {
+      console.error('Chat error:', error)
+      // Invalidate just in case
+      queryClient.invalidateQueries({ queryKey: ['rateLimit'] })
+    },
   })
 
   // Hydrate the chat store from saved messages when they change
@@ -114,122 +130,23 @@ export const KenAssistant = ({
     prevStatusRef.current = status
   }, [status, isOpen])
 
-  const handlePlayAudio = async (messageId: string, text: string) => {
-    // If currently playing this message, pause it
-    if (playingMessageId === messageId && audioRef.current) {
-      audioRef.current.pause()
-      setPausedMessageId(messageId)
-      return
-    }
-
-    // If paused, resume playback
-    if (pausedMessageId === messageId && audioRef.current) {
-      audioRef.current.play().catch((error) => {
-        console.error('Error resuming audio:', error)
-        setPlayingMessageId(null)
-        setPausedMessageId(null)
-      })
-      setPausedMessageId(null)
-      return
-    }
-
-    // Stop any currently playing audio and clear it
-    if (audioRef.current) {
-      audioRef.current.pause()
-      audioRef.current.src = ''
-      setPlayingMessageId(null)
-      setPausedMessageId(null)
-    }
-
-    setLoadingMessageId(messageId)
-
-    try {
-      const response = await fetch('/api/voice', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ text }),
-      })
-
-      if (!response.ok) {
-        console.error('Failed to generate audio:', response.statusText)
-        setLoadingMessageId(null)
-        return
-      }
-
-      // Create audio blob and play it
-      const audioBlob = await response.blob()
-      const audioUrl = URL.createObjectURL(audioBlob)
-
-      // Create new audio element and play
-      const audio = new Audio(audioUrl)
-      audioRef.current = audio
-      setLoadingMessageId(null)
-
-      // Track when audio actually starts playing
-      audio.addEventListener('play', () => {
-        setPlayingMessageId(messageId)
-      })
-
-      // Track when audio is paused
-      audio.addEventListener('pause', () => {
-        // Only clear if it's actually paused and not ended
-        if (!audio.ended) {
-          setPlayingMessageId(null)
-          setPausedMessageId(messageId)
-        }
-      })
-
-      // Track when audio is actively playing (after buffering)
-      audio.addEventListener('playing', () => {
-        setPlayingMessageId(messageId)
-      })
-
-      // Clean up object URL after playback completes
-      audio.addEventListener('ended', () => {
-        setPlayingMessageId(null)
-        setPausedMessageId(null)
-        URL.revokeObjectURL(audioUrl)
-        // Clear the audio ref when finished
-        if (audioRef.current === audio) {
-          audioRef.current = null
-        }
-      })
-
-      audio.addEventListener('error', () => {
-        setPlayingMessageId(null)
-        setPausedMessageId(null)
-        URL.revokeObjectURL(audioUrl)
-      })
-
-      audio.play().catch((error) => {
-        console.error('Error playing audio:', error)
-        setPlayingMessageId(null)
-        setPausedMessageId(null)
-        URL.revokeObjectURL(audioUrl)
-      })
-    } catch (error) {
-      console.error('Error generating audio:', error)
-      setLoadingMessageId(null)
-      setPausedMessageId(null)
-    }
-  }
-
-  useEffect(() => {
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause()
-        audioRef.current.src = ''
-      }
-    }
-  }, [])
-
   const isLoadingInitially =
     isLoadingSavedMessages && savedMessages?.length === 0
+
+  // Derived error state for display
+  const rateLimitError =
+    rateLimitRemaining === 0
+      ? 'You have reached your daily limit of 10 messages. Please try again tomorrow.'
+      : null
+
   return (
     <div className="flex  h-full flex-col">
-      <AssistantHeader onClose={onClose} onNewChat={() => {}} />
+      <AssistantHeader
+        onClose={onClose}
+        onNewChat={() => {}}
+        rateLimitRemaining={rateLimitRemaining}
+        rateLimitError={rateLimitError}
+      />
 
       <Conversation
         style={{
@@ -262,28 +179,6 @@ export const KenAssistant = ({
               return null
             }
 
-            // Extract text content for assistant messages
-            const textParts =
-              message.role === 'assistant'
-                ? message.parts.filter(
-                    (part): part is { type: 'text'; text: string } =>
-                      part.type === 'text' &&
-                      typeof part.text === 'string' &&
-                      part.text.trim().length > 0
-                  )
-                : []
-
-            const fullText =
-              textParts.length > 0
-                ? textParts.map((part) => part.text).join(' ')
-                : ''
-
-            const isPlaying = playingMessageId === message.id
-            const isPaused = pausedMessageId === message.id
-            const isLoadingAudio = loadingMessageId === message.id
-            const showPlayButton =
-              message.role === 'assistant' && fullText.length > 0
-
             return (
               <Message
                 from={message.role as 'user' | 'assistant'}
@@ -305,46 +200,6 @@ export const KenAssistant = ({
                         }
                       })}
                     </div>
-                    {/* {showPlayButton && (
-                      <button
-                        onClick={() => handlePlayAudio(message.id, fullText)}
-                        disabled={isLoadingAudio}
-                        className="self-start p-1.5 hover:bg-gray-100 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                        aria-label={
-                          isPlaying
-                            ? 'Pause audio'
-                            : isPaused
-                            ? 'Resume audio'
-                            : 'Play audio'
-                        }
-                      >
-                        {isLoadingAudio ? (
-                          <Loader2 className="size-4 animate-spin text-gray-600" />
-                        ) : isPlaying ? (
-                          <svg
-                            id="sound-on"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            className="size-4"
-                          >
-                            <polygon points="17 15 17 14 16 14 16 13 17 13 17 11 16 11 16 10 17 10 17 9 18 9 18 10 19 10 19 14 18 14 18 15 17 15" />
-                            <polygon points="23 10 23 14 22 14 22 16 21 16 21 17 20 17 20 18 19 18 19 17 18 17 18 16 19 16 19 15 20 15 20 14 21 14 21 10 20 10 20 9 19 9 19 8 18 8 18 7 19 7 19 6 20 6 20 7 21 7 21 8 22 8 22 10 23 10" />
-                            <path d="m11,2v1h-1v1h-1v1h-1v1h-1v1h-1v1H1v8h5v1h1v1h1v1h1v1h1v1h1v1h3V2h-3Zm1,17h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1H3v-4h4v-1h1v-1h1v-1h1v-1h1v-1h1v14Z" />
-                          </svg>
-                        ) : (
-                          <svg
-                            id="sound-paused"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            className="size-4"
-                          >
-                            <path d="m11,2v1h-1v1h-1v1h-1v1h-1v1h-1v1H1v8h5v1h1v1h1v1h1v1h1v1h1v1h3V2h-3Zm1,17h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1H3v-4h4v-1h1v-1h1v-1h1v-1h1v-1h1v14Z" />
-                            <rect x="17" y="9" width="2" height="6" />
-                            <rect x="21" y="9" width="2" height="6" />
-                          </svg>
-                        )}
-                      </button>
-                    )} */}
                   </div>
                 </MessageContent>
               </Message>
@@ -376,6 +231,7 @@ export const KenAssistant = ({
         }
         context={context}
         recentArticles={recentArticles}
+        rateLimitRemaining={rateLimitRemaining}
       />
     </div>
   )
