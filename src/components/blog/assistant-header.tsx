@@ -14,15 +14,11 @@ import { chatModeAtom } from './assistant-context'
 interface AssistantHeaderProps {
   onClose: () => void
   onNewChat?: () => void
-  rateLimitRemaining?: number | null
-  rateLimitError?: string | null
 }
 
 export const AssistantHeader = ({
   onClose,
   onNewChat,
-  rateLimitRemaining,
-  rateLimitError,
 }: AssistantHeaderProps) => {
   const [chatMode, setChatMode] = useAtom(chatModeAtom)
 
@@ -83,13 +79,6 @@ export const AssistantHeader = ({
           </button>
         </div>
       </div>
-      {rateLimitError && (
-        <div className="px-4 pb-3">
-          <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 rounded-lg text-xs">
-            {rateLimitError}
-          </div>
-        </div>
-      )}
     </div>
   )
 }
