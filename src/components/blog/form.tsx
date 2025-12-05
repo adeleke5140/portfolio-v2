@@ -10,6 +10,7 @@ interface FormProps {
   context: string
   recentArticles?: Array<{ id: string; title: string }>
   rateLimitRemaining: number
+  rateLimitError: string
 }
 
 export const Form = ({
@@ -21,12 +22,17 @@ export const Form = ({
   context,
   recentArticles = [],
   rateLimitRemaining,
+  rateLimitError,
 }: FormProps) => {
   return (
     <form className="p-4 pt-0 relative">
       <div className="border mx-5 border-b-0 border-[#dcdcdc] h-8 pt-2 rounded-t-xl bg-inherit p-4">
-        {rateLimitRemaining !== null && (
-          <p className="text-[12px] font-mono text-ken-grey">
+        {rateLimitRemaining === 0 ? (
+          <p className="text-red-700 rounded-lg font-sans text-xs">
+            {rateLimitError}
+          </p>
+        ) : (
+          <p className="text-[12px] text-xs font-sans text-ken-grey">
             {rateLimitRemaining}{' '}
             {rateLimitRemaining === 1 ? 'message' : 'messages'} remaining today
           </p>
@@ -60,7 +66,9 @@ export const Form = ({
               }
             }}
             placeholder={
-              context === 'blog'
+              rateLimitError
+                ? 'We can chat again in 24hours...'
+                : context === 'blog'
                 ? "You can ask about what I've written."
                 : `Ask Kenny about ${transFormDashToSpaceCase(context)}`
             }
