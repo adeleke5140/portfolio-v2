@@ -1,7 +1,7 @@
 'use client'
 
 import { useChat } from '@ai-sdk/react'
-import { DefaultChatTransport, UIMessage } from 'ai'
+import { DefaultChatTransport, ToolUIPart, UIMessage } from 'ai'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import {
@@ -16,6 +16,13 @@ import { TextShimmer } from '../ai-elements/shimmer'
 import { AssistantHeader } from './assistant-header'
 import { Form } from './form'
 import { useQueryClient } from '@tanstack/react-query'
+import {
+  Tool,
+  ToolContent,
+  ToolHeader,
+  ToolInput,
+  ToolOutput,
+} from '@/components/ai-elements/tool'
 
 interface ChatSidebarProps {
   isOpen: boolean
@@ -47,16 +54,27 @@ export const KenAssistant = ({
       : currentPath[1]
     : 'blog'
 
+  // Use a ref to always have access to the latest context/pathname in the fetch function
+  const contextRef = useRef({ context, pathname })
+  useEffect(() => {
+    contextRef.current = { context, pathname }
+  }, [context, pathname])
+
   const { messages, sendMessage, setMessages, status } = useChat({
     transport: new DefaultChatTransport({
       api: '/api/agent',
-      body: {
-        context: context,
-        pathname: pathname,
-      },
       fetch: async (url, init) => {
+        // Inject the latest context/pathname into the request body
+        const originalBody = init?.body ? JSON.parse(init.body as string) : {}
+        const enrichedBody = {
+          ...originalBody,
+          context: contextRef.current.context,
+          pathname: contextRef.current.pathname,
+        }
+
         const response = await fetch(url, {
           ...init,
+          body: JSON.stringify(enrichedBody),
           credentials: 'include',
         })
 
@@ -75,6 +93,10 @@ export const KenAssistant = ({
       queryClient.invalidateQueries({ queryKey: ['rateLimit'] })
     },
   })
+
+  const tool = messages[messages.length - 1]?.parts?.find((part) =>
+    part.type.startsWith('tool-')
+  ) as ToolUIPart | undefined
 
   // Hydrate the chat store from saved messages when they change
   useEffect(() => {
@@ -161,6 +183,18 @@ export const KenAssistant = ({
           </div>
         ) : null}
         <ConversationContent className="p-4">
+          {tool && (
+            <Tool>
+              <ToolHeader
+                title={tool.type.split('-').slice(1).join('-')}
+                type={tool.type}
+                state={tool.state}
+              />
+              <ToolContent>
+                <ToolInput input={tool.input} />
+              </ToolContent>
+            </Tool>
+          )}
           {messages.map((message, messageIndex) => {
             // Check if message has any text content
             const hasTextContent = message.parts.some(
