@@ -22,6 +22,16 @@ const ratelimit = new Ratelimit({
 
 export async function GET(req: NextRequest) {
   try {
+    // In non-production environments, return unlimited
+    if (process.env.NODE_ENV !== 'production') {
+      return NextResponse.json({
+        limit: 10,
+        remaining: 10,
+        reset: Date.now() + 24 * 60 * 60 * 1000,
+        resetAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+      })
+    }
+
     const userId = await getOrCreateUserId()
     const identifier = userId || 'anonymous'
 

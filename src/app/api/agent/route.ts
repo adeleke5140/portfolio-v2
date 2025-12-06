@@ -34,21 +34,29 @@ export async function POST(req: NextRequest) {
 
     const userId = await getOrCreateUserId()
 
-    const identifier = userId || 'anonymous'
-    const { success, remaining, reset } = await ratelimit.limit(identifier)
+    let remaining = 10
+    let reset = Date.now() + 24 * 60 * 60 * 1000
 
-    if (!success) {
-      const resetDate = new Date(reset)
-      return NextResponse.json(
-        {
-          error: 'Rate limit exceeded',
-          message:
-            'You have reached your daily limit of 10 messages. Please try again tomorrow.',
-          remaining: 0,
-          resetAt: resetDate.toISOString(),
-        },
-        { status: 429 }
-      )
+    // Only rate limit in production
+    if (process.env.NODE_ENV === 'production') {
+      const identifier = userId || 'anonymous'
+      const result = await ratelimit.limit(identifier)
+
+      if (!result.success) {
+        const resetDate = new Date(result.reset)
+        return NextResponse.json(
+          {
+            error: 'Rate limit exceeded',
+            message:
+              'You have reached your daily limit of 10 messages. Please try again tomorrow.',
+            remaining: 0,
+            resetAt: resetDate.toISOString(),
+          },
+          { status: 429 }
+        )
+      }
+      remaining = result.remaining
+      reset = result.reset
     }
 
     const kennyAgent = mastra.getAgent('kennyAgent')
@@ -60,7 +68,13 @@ export async function POST(req: NextRequest) {
 
     const existingThreadId = userId
 
-    const stream = await kennyAgent.stream(messages, {
+    // Filter out any messages that might already be persisted if we are relying on memory
+    // But for simplicity, let's just ensure we don't send duplicate IDs in the payload
+    const uniqueMessages = messages.filter(
+      (msg, index, self) => index === self.findIndex((t) => t.id === msg.id)
+    )
+
+    const stream = await kennyAgent.stream(uniqueMessages, {
       format: 'aisdk',
       runtimeContext,
       memory: {
