@@ -52,7 +52,15 @@ export const Form = ({
       ? 'We can chat again in 24hours...'
       : null
   return (
-    <form className="p-4 pt-0 relative">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault()
+        if (!input) return
+        sendMessage(input.trim())
+        setInput('')
+      }}
+      className="p-4 pt-0 relative"
+    >
       <UsageAlert
         rateLimitRemaining={rateLimitRemaining}
         rateLimitError={rateLimitError}
@@ -80,7 +88,7 @@ export const Form = ({
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault()
                 if (!input) return
-                sendMessage(input)
+                sendMessage(input.trim())
                 setInput('')
               }
             }}
@@ -95,15 +103,7 @@ export const Form = ({
           />
         </div>
 
-        <button
-          type="button"
-          onClick={() => {
-            if (!input) return
-            sendMessage(input)
-          }}
-          className="form-button"
-          disabled={isLoading}
-        >
+        <button type="submit" className="form-button" disabled={isLoading}>
           {isLoading ? (
             <Loader className="text-white" />
           ) : (
