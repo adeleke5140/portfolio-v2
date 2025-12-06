@@ -6,9 +6,6 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   serverExternalPackages: ['@mastra/*'],
-  outputFileTracingIncludes: {
-    '/api/**/*': ['./src/app/blog/posts/**/*'],
-  },
 }
 
 export default nextConfig
