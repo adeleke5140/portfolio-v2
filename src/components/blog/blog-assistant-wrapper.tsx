@@ -15,6 +15,7 @@ import {
 } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
 import { useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
 import {
   isMaximizedAtom,
   isPopoverOpenAtom,
@@ -112,7 +113,9 @@ function BlogAssistantPortal() {
 export function BlogAssistantWrapper() {
   return (
     <QueryClientProvider client={queryClient}>
-      <BlogAssistantPortal />
+      <Suspense fallback={null}>
+        <BlogAssistantPortal />
+      </Suspense>
     </QueryClientProvider>
   )
 }
