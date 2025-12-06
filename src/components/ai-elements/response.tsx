@@ -123,7 +123,7 @@ export const Response = memo(
     return (
       <Streamdown
         className={cn(
-          'size-full [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 streamdown',
+          'size-full [&>*:first-child]:mt-0 [&>*]:mt-3 [&>*:last-child]:mb-0 streamdown',
           className
         )}
         // components={components}
