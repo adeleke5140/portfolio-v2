@@ -3,6 +3,12 @@ import { z } from 'zod'
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import { RuntimeContext } from '@mastra/core/runtime-context'
+
+interface BlogPostContext {
+  context: string
+  pathname: string
+}
 
 // Handle both regular execution and Mastra playground execution
 const getProjectRoot = () => {
@@ -19,7 +25,8 @@ const POSTS_DIRECTORY = path.join(getProjectRoot(), 'src/app/blog/posts')
 export const readSingleBlog = createTool({
   id: 'read-single-blog',
   description:
-    'Reads a single blog post by its file path. If no path is provided, automatically reads the current blog post the user is viewing (from runtime context). Use this for contextual queries like "summarize this post".',
+    'Reads a single blog post by its file path. If no path is provided, automatically reads the current blog post the user is viewing (from runtime context). Use this for contextual queries like "summarize this post" or "what is this post about?".',
+
   inputSchema: z.object({
     path: z
       .string()
@@ -40,22 +47,23 @@ export const readSingleBlog = createTool({
     }),
     slug: z.string(),
   }),
-  execute: async ({ context, runtimeContext }) => {
-    let filePath: string | undefined = context?.path
+  execute: async ({
+    context,
+    runtimeContext,
+  }: {
+    context: { path: string }
+    runtimeContext: RuntimeContext<BlogPostContext>
+  }) => {
+    let filePath: string | undefined = context.path
 
     // If no path provided, try to get it from runtime context
     if (!filePath) {
-      const blogSlug = runtimeContext?.get('blogSlug')
-      if (blogSlug && typeof blogSlug === 'string') {
-        filePath = blogSlug
-      } else {
-        throw new Error(
-          'No blog post specified and user is not currently viewing a blog post'
-        )
+      const pathname = runtimeContext.get('context')
+      if (pathname && typeof pathname === 'string') {
+        filePath = pathname
       }
     }
 
-    // At this point filePath should be defined, but let's be extra safe
     if (!filePath) {
       throw new Error('Unable to determine which blog post to read')
     }
