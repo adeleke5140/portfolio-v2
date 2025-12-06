@@ -1,7 +1,8 @@
 'use client'
 
 import { useChat } from '@ai-sdk/react'
-import { DefaultChatTransport, ToolUIPart, UIMessage } from 'ai'
+import { useQueryClient } from '@tanstack/react-query'
+import { DefaultChatTransport, UIMessage } from 'ai'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import {
@@ -9,20 +10,11 @@ import {
   ConversationContent,
   ConversationScrollButton,
 } from '../ai-elements/conversation'
-import { Loader } from '../ai-elements/loader'
 import { Message, MessageContent } from '../ai-elements/message'
 import { Response } from '../ai-elements/response'
 import { TextShimmer } from '../ai-elements/shimmer'
 import { AssistantHeader } from './assistant-header'
 import { Form } from './form'
-import { useQueryClient } from '@tanstack/react-query'
-import {
-  Tool,
-  ToolContent,
-  ToolHeader,
-  ToolInput,
-  ToolOutput,
-} from '@/components/ai-elements/tool'
 
 interface ChatSidebarProps {
   isOpen: boolean
@@ -60,7 +52,7 @@ export const KenAssistant = ({
     contextRef.current = { context, pathname }
   }, [context, pathname])
 
-  const { messages, sendMessage, setMessages, status } = useChat({
+  const { messages, sendMessage, setMessages, status, error } = useChat({
     transport: new DefaultChatTransport({
       api: '/api/agent',
       fetch: async (url, init) => {
@@ -94,18 +86,13 @@ export const KenAssistant = ({
     },
   })
 
-  const tool = messages[messages.length - 1]?.parts?.find((part) =>
-    part.type.startsWith('tool-')
-  ) as ToolUIPart | undefined
-
   // Hydrate the chat store from saved messages when they change
   useEffect(() => {
-    if (!isOpen) return
     if (isLoadingSavedMessages) return
     if (!savedMessages || savedMessages.length === 0) return
 
     setMessages(savedMessages)
-  }, [isLoadingSavedMessages, isOpen, savedMessages, setMessages])
+  }, [isLoadingSavedMessages, savedMessages, setMessages])
 
   const isLoading = status === 'streaming' || status === 'submitted'
 
@@ -163,7 +150,7 @@ export const KenAssistant = ({
 
   return (
     <div className="flex  h-full flex-col">
-      <AssistantHeader onClose={onClose} onNewChat={() => {}} />
+      <AssistantHeader onClose={onClose} />
 
       <Conversation
         style={{
@@ -177,28 +164,19 @@ export const KenAssistant = ({
         }}
         className="flex-1 relative font-sans overflow-y-auto"
       >
-        {isLoadingInitially ? (
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <Loader className="text-[var(--primary)] duration-500" />
-          </div>
-        ) : null}
         <ConversationContent className="p-4">
-          {tool && (
-            <Tool>
-              <ToolHeader
-                title={tool.type.split('-').slice(1).join('-')}
-                type={tool.type}
-                state={tool.state}
-              />
-              <ToolContent>
-                <ToolInput input={tool.input} />
-              </ToolContent>
-            </Tool>
+          {error && (
+            <p className="text-red-500 font-mono text-xs">An error occurred.</p>
           )}
-          {messages.map((message, messageIndex) => {
+
+          {messages.map((message) => {
             // Check if message has any text content
             const hasTextContent = message.parts.some(
               (part) => part.type === 'text' && part.text && part.text.trim()
+            )
+
+            const textParts = message.parts.filter(
+              (part) => part.type === 'text'
             )
 
             // Skip rendering empty assistant messages when thinking
@@ -215,20 +193,16 @@ export const KenAssistant = ({
               >
                 <MessageContent className="relative group">
                   <div className="flex flex-col gap-2">
-                    <div>
-                      {message.parts.map((part, i) => {
-                        switch (part.type) {
-                          case 'text':
-                            return (
-                              <Response key={`${message.id}-${i}`}>
-                                {part.text}
-                              </Response>
-                            )
-                          default:
-                            return null
-                        }
-                      })}
-                    </div>
+                    {textParts.map((part, i) => {
+                      if (part.type === 'text' && part.text?.trim()) {
+                        return (
+                          <Response key={`${message.id}-text-${i}`}>
+                            {part.text}
+                          </Response>
+                        )
+                      }
+                      return null
+                    })}
                   </div>
                 </MessageContent>
               </Message>
