@@ -6,7 +6,6 @@ import { kennyVoiceAgent } from './agents/kenny-voice'
 
 type MastraInstance = ReturnType<typeof createMastraInstance>
 
-const isProd = process.env.NODE_ENV === 'production'
 const globalForMastra = globalThis as typeof globalThis & {
   mastra: MastraInstance | undefined
 }
@@ -39,6 +38,9 @@ function createMastraInstance() {
           ],
         },
       },
+    },
+    telemetry: {
+      enabled: false,
     },
   })
 }
