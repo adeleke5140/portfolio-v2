@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@source "../../node_modules/streamdown/dist/index.js";
+@source "../../node_modules/streamdown/dist/*.js";
 
 body,
 html {
@@ -34,7 +34,7 @@ h4 {
   --sh-sign: #8f8f8f;
   --sh-comment: #6f6f6f;
 
-  --primary: 18 38% 48%;
+  --primary: oklch(0.53 0.25 265.05);
   --outline: oklch(0.68 0.17 53.04 / 0.44);
   --gradient-stop-1: oklch(0.52 0.02 266.33 / 0.85);
   --gradient-stop-2: oklch(0.74 0.05 268.37 / 0.34);
@@ -349,12 +349,12 @@ label:focus-within {
 
 .form-button {
   @apply size-8 absolute rounded-full text-white bottom-2 right-2 hover:bg-primary active:scale-95 disabled:cursor-not-allowed disabled:hover:bg-[var(--primary)] flex items-center justify-center;
-  --gradient-stop-1: oklch(0.582 0.093 43.8);
-  --gradient-stop-2: oklch(0.674 0.108 43.8);
-  --gradient-stop-3: oklch(0.766 0.081 43.8);
+  --gradient-stop-1: oklch(0.67 0.19 263);
+  --gradient-stop-2: oklch(0.59 0.26 263);
+  --gradient-stop-3: oklch(0.64 0.22 263);
   --shadow: inset 0 1px 0 oklch(1 0 0 / 0.2), inset 0 -1px 0 oklch(0 0 0 / 0.2),
     0 1px 2px oklch(0 0 0 / 0.2);
-  --button-border: oklch(0.766 0.081 43.8);
+  --button-border: oklch(0.53 0.25 265.05);
   background-image: linear-gradient(
     180deg,
     var(--gradient-stop-1),
