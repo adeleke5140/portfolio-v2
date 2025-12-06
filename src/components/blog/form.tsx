@@ -1,10 +1,6 @@
 import { cn, transFormDashToSpaceCase } from '@/lib/utils'
 import { Loader } from '../ai-elements/loader'
 import { BlogIcon } from '../craft/navigation/navigation'
-import { useState } from 'react'
-import { Popover } from '../ui/popover'
-import { PopoverContent, PopoverTrigger } from '@radix-ui/react-popover'
-
 interface FormProps {
   input: string
   setInput: (input: string) => void
@@ -13,6 +9,32 @@ interface FormProps {
   textareaRef: React.RefObject<HTMLTextAreaElement>
   context: string
   recentArticles?: Array<{ id: string; title: string }>
+  rateLimitRemaining: number
+  rateLimitError: string
+}
+const isDev = process.env.NODE_ENV === 'development'
+function UsageAlert({
+  rateLimitRemaining,
+  rateLimitError,
+}: {
+  rateLimitRemaining: number
+  rateLimitError: string
+}) {
+  if (isDev) return null
+  return (
+    <div className="border mx-5 border-b-0 border-[#dcdcdc] h-8 pt-2 rounded-t-xl bg-inherit p-4">
+      {rateLimitRemaining === 0 ? (
+        <p className="text-red-700 rounded-lg font-sans text-xs">
+          {rateLimitError}
+        </p>
+      ) : (
+        <p className="text-[12px] text-xs font-sans text-ken-grey">
+          {rateLimitRemaining}{' '}
+          {rateLimitRemaining === 1 ? 'message' : 'messages'} remaining today
+        </p>
+      )}
+    </div>
+  )
 }
 
 export const Form = ({
@@ -22,19 +44,35 @@ export const Form = ({
   isLoading,
   textareaRef,
   context,
-  recentArticles = [],
+  rateLimitRemaining,
+  rateLimitError,
 }: FormProps) => {
-  const [openPopover, setOpenPopover] = useState(false)
+  const customErrorForTextArea =
+    process.env.NODE_ENV === 'production' && rateLimitError
+      ? 'We can chat again in 24hours...'
+      : null
   return (
-    <form className="p-4 pt-0">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault()
+        if (!input) return
+        sendMessage(input.trim())
+        setInput('')
+      }}
+      className="p-4 pt-0 relative"
+    >
+      <UsageAlert
+        rateLimitRemaining={rateLimitRemaining}
+        rateLimitError={rateLimitError}
+      />
       <div className="relative">
         <div
           className={cn(
-            'flex flex-col focus-visible:outline focus-visible:outline-[var(--primary)] shadow-[0px_10px_24px_-6px_#0000001a,0px_2px_4px_-1px_#0000000f,0_0_0_1px_#54483114] gap-2 px-4 py-2.5 h-32 rounded-[1.25rem] border-r-0'
+            'flex flex-col bg-white focus-visible:outline focus-visible:outline-[var(--primary)] shadow-[0px_10px_24px_-6px_#0000001a,0px_2px_4px_-1px_#0000000f,0_0_0_1px_#54483114] gap-2 px-4 py-2.5 h-32 rounded-[1.25rem] border-r-0'
           )}
         >
           <div className="text-center text-gray-500 text-sm">
-            <p className="border flex font-sans items-center gap-1 border-[#dcdcdc]/50 bg-gray-100 rounded-full text-xs px-[10px] py-[5px] text-left w-fit">
+            <p className="border flex font-sans items-center gap-1 border-[#dcdcdc]/50 bg-gray-100/50 rounded-full text-xs px-[10px] py-[5px] text-left w-fit">
               <BlogIcon className="size-3" />
               {context}
             </p>
@@ -44,77 +82,28 @@ export const Form = ({
             ref={textareaRef}
             value={input || ''}
             onChange={(e) => {
-              if (e.target.value === '@') {
-                setOpenPopover(true)
-              }
               setInput(e.target.value)
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault()
-                sendMessage(input)
+                if (!input) return
+                sendMessage(input.trim())
                 setInput('')
               }
             }}
             placeholder={
-              context === 'blog'
+              customErrorForTextArea
+                ? customErrorForTextArea
+                : context === 'blog'
                 ? "You can ask about what I've written."
                 : `Ask Kenny about ${transFormDashToSpaceCase(context)}`
             }
-            className="w-full font-sans bg-inherit h-full outline-none  disabled:bg-inherit resize-none disabled:cursor-not-allowed text-sm"
+            className="w-full font-sans bg-white h-full outline-none  disabled:bg-inherit resize-none disabled:cursor-not-allowed text-sm"
           />
-          <div className="absolute top-[2.8rem] left-[0.9rem]">
-            <Popover
-              modal={false}
-              open={openPopover}
-              onOpenChange={setOpenPopover}
-            >
-              <PopoverTrigger className="">
-                {input === '@' ? input : ''}
-              </PopoverTrigger>
-              <PopoverContent
-                side="top"
-                className="bg-white relative left-[7rem]  font-sans w-64 max-h-80 overflow-y-auto rounded-xl p-2 shadow"
-              >
-                <div className="flex flex-col gap-1">
-                  {recentArticles.length > 0 ? (
-                    recentArticles.map((article) => (
-                      <button
-                        key={article.id}
-                        type="button"
-                        onClick={() => {
-                          setInput(`@${article.id} `)
-                          setOpenPopover(false)
-                          textareaRef.current?.focus()
-                        }}
-                        className="text-left px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors text-sm"
-                      >
-                        {article.title}
-                      </button>
-                    ))
-                  ) : (
-                    <p className="text-gray-500 text-sm px-3 py-2">
-                      No recent articles
-                    </p>
-                  )}
-                </div>
-              </PopoverContent>
-            </Popover>
-          </div>
         </div>
 
-        <button
-          type="submit"
-          className={cn(
-            'size-8 absolute bottom-2 right-2',
-            'bg-primary backdrop-blur-sm rounded-full text-white',
-            'hover:bg-[var(--primary)] active:scale-95',
-            'transition-all',
-            'disabled:cursor-not-allowed disabled:hover:bg-[var(--primary)]',
-            'flex items-center justify-center'
-          )}
-          disabled={isLoading}
-        >
+        <button type="submit" className="form-button" disabled={isLoading}>
           {isLoading ? (
             <Loader className="text-white" />
           ) : (

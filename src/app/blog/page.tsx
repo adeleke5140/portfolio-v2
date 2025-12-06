@@ -1,7 +1,6 @@
 import { PageWrapper } from '@/components/page-wrapper'
 import { formatDate } from '@/helpers/formatDate'
 import { getSortedPostsData } from '@/lib/posts'
-import Head from 'next/head'
 import Link from 'next/link'
 
 const isDevelopment = process.env.NODE_ENV === 'development'
@@ -61,46 +60,36 @@ const Index = () => {
   )
 
   return (
-    <>
-      <Head>
-        <title>Writing</title>
-        <link rel="icon" href="/kehinde.ico" />
-        <meta name="description" content="Kehinde Adeleke's website" />
-        <meta name="og:title" content="Blog" />
-      </Head>
-      <PageWrapper showLink path="/" backText="Home" heading="Blog" showHeading>
-        <section className="flex flex-col">
-          {sortedPostsByYear.map(([year, posts]) => (
-            <div
-              key={year}
-              className="grid relative border-b border-dashed  border-b-[#dcdcdc] last:border-b-0 "
-            >
-              <h2 className="text-lg md:absolute md:-left-[12%] md:top-4 px-2 md:px-0 font-serif text-ken-grey">
-                {year}
-              </h2>
-              <div>
-                {posts.map((post) => (
-                  <Link
-                    key={post.id}
-                    href={`/blog/${post.id}`}
-                    className="px-2   group rounded-2xl rounded-b-none py-4 block mb-2 transition-colors duration-200 "
-                  >
-                    <div className="flex group-hover:translate-x-2 flex-col gap-1 transition-transform ">
-                      <p className="text-lg group-hover:underline  transition-all">
-                        {post.title}
-                      </p>
-                      <span className="text-sm text-gray-700">
-                        {formatDate(post.date || Date.now().toString())}
-                      </span>
-                    </div>
-                  </Link>
-                ))}
-              </div>
+    <PageWrapper heading="Blog" showHeading>
+      <section className="flex flex-col">
+        {sortedPostsByYear.map(([year, posts]) => (
+          <div
+            key={year}
+            className="grid md:grid-cols-2 last:border-b-0 pt-10 first:pt-0 border-b-[0.5px] border-b-[#dcdcdc]"
+          >
+            <p className="font-serif mb-4 text-lg text-ken-grey">{year}</p>
+            <div>
+              {posts.map((post) => (
+                <Link
+                  key={post.id}
+                  href={`/blog/${post.id}`}
+                  className="pb-7 group rounded-md py-4 block mb-2 transition-colors duration-200"
+                >
+                  <div className="flex group-hover:translate-x-2 flex-col gap-1 transition-transform">
+                    <p className="text-lg hover:underline transition-all">
+                      {post.title}
+                    </p>
+                    <span className="text-sm text-ken-grey">
+                      {formatDate(post.date || Date.now().toString())}
+                    </span>
+                  </div>
+                </Link>
+              ))}
             </div>
-          ))}
-        </section>
-      </PageWrapper>
-    </>
+          </div>
+        ))}
+      </section>
+    </PageWrapper>
   )
 }
 

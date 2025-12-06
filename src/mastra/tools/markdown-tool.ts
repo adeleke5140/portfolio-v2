@@ -1,25 +1,30 @@
 import { createTool } from '@mastra/core/tools'
 import { z } from 'zod'
-import fs from 'fs'
-import path from 'path'
-import matter from 'gray-matter'
+import { RuntimeContext } from '@mastra/core/runtime-context'
 
-// Handle both regular execution and Mastra playground execution
-const getProjectRoot = () => {
-  const cwd = process.cwd()
-  // If we're in .mastra/output, navigate up to project root
-  if (cwd.includes('.mastra/output')) {
-    return cwd.split('.mastra/output')[0]
-  }
-  return cwd
+interface BlogPostContext {
+  context: string
+  pathname: string
 }
 
-const POSTS_DIRECTORY = path.join(getProjectRoot(), 'src/app/blog/posts')
+const isDev = process.env.NODE_ENV === 'development'
+
+const getApiBaseUrl = () => {
+  if (isDev) {
+    return 'http://localhost:3000'
+  }
+
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`
+  }
+  return `https://kehinde.xyz`
+}
 
 export const readSingleBlog = createTool({
   id: 'read-single-blog',
   description:
-    'Reads a single blog post by its file path. If no path is provided, automatically reads the current blog post the user is viewing (from runtime context). Use this for contextual queries like "summarize this post".',
+    'Reads a single blog post by its file path. If no path is provided, automatically reads the current blog post the user is viewing (from runtime context). Use this for contextual queries like "summarize this post" or "what is this post about?".',
+
   inputSchema: z.object({
     path: z
       .string()
@@ -40,71 +45,62 @@ export const readSingleBlog = createTool({
     }),
     slug: z.string(),
   }),
-  execute: async ({ context, runtimeContext }) => {
-    let filePath: string | undefined = context?.path
+  execute: async ({
+    context,
+    runtimeContext,
+  }: {
+    context: { path: string }
+    runtimeContext: RuntimeContext<BlogPostContext>
+  }) => {
+    let slug: string | undefined = context.path
 
     // If no path provided, try to get it from runtime context
-    if (!filePath) {
-      const blogSlug = runtimeContext?.get('blogSlug')
-      if (blogSlug && typeof blogSlug === 'string') {
-        filePath = blogSlug
-      } else {
-        throw new Error(
-          'No blog post specified and user is not currently viewing a blog post'
-        )
+    if (!slug) {
+      const pathname = runtimeContext.get('context')
+      if (pathname && typeof pathname === 'string') {
+        slug = pathname
       }
     }
 
-    // At this point filePath should be defined, but let's be extra safe
-    if (!filePath) {
+    if (!slug) {
       throw new Error('Unable to determine which blog post to read')
     }
 
     try {
-      // Handle both just filename and full path
-      let fullPath: string
-      if (filePath.includes('/')) {
-        // If it's already a full path, use it
-        fullPath = filePath
-      } else {
-        // If it's just a filename, construct the full path
-        fullPath = path.join(POSTS_DIRECTORY, filePath)
+      // Extract slug from path if it includes extension or path separators
+      // e.g., "precise-types.mdx" -> "precise-types" or "posts/precise-types" -> "precise-types"
+      if (slug.includes('/')) {
+        slug = slug.split('/').pop() || slug
+      }
+      if (slug.includes('.')) {
+        slug = slug.replace(/\.(md|mdx)$/, '')
       }
 
-      // Check if file exists
-      if (!fs.existsSync(fullPath)) {
-        // Try with different extensions if the file doesn't exist
-        const baseName = path.basename(filePath, path.extname(filePath))
-        const mdPath = path.join(POSTS_DIRECTORY, `${baseName}.md`)
-        const mdxPath = path.join(POSTS_DIRECTORY, `${baseName}.mdx`)
+      const baseUrl = getApiBaseUrl()
+      const response = await fetch(`${baseUrl}/api/posts/${slug}`)
 
-        if (fs.existsSync(mdPath)) {
-          fullPath = mdPath
-        } else if (fs.existsSync(mdxPath)) {
-          fullPath = mdxPath
-        } else {
-          throw new Error(`Blog post not found: ${filePath}`)
+      if (!response.ok) {
+        if (response.status === 404) {
+          throw new Error(`Blog post not found: ${slug}`)
         }
+        throw new Error(
+          `Failed to fetch blog post: ${response.status} ${response.statusText}`
+        )
       }
 
-      const fileContents = fs.readFileSync(fullPath, 'utf8')
-      const { data, content } = matter(fileContents)
-
-      // Extract slug from filename
-      const fileName = path.basename(fullPath)
-      const slug = fileName.replace(/\.(md|mdx)$/, '')
+      const data = await response.json()
 
       return {
-        content,
+        content: data.content,
         metadata: {
-          title: data.title || slug,
-          description: data.description,
-          date: data.date,
-          status: data.status || 'unknown',
-          tag: data.tag,
-          language: data.language,
+          title: data.metadata.title || slug,
+          description: data.metadata.description,
+          date: data.metadata.date,
+          status: data.metadata.status || 'unknown',
+          tag: data.metadata.tag,
+          language: data.metadata.language,
         },
-        slug,
+        slug: data.slug,
       }
     } catch (error) {
       throw new Error(
@@ -144,25 +140,25 @@ export const readAllBlogs = createTool({
       .optional(),
   }),
   execute: async () => {
-    const files = fs.readdirSync(POSTS_DIRECTORY)
-    const posts = files
-      .filter((file) => file.endsWith('.md') || file.endsWith('.mdx'))
-      .map((file) => {
-        const filePath = path.join(POSTS_DIRECTORY, file)
-        const fileContents = fs.readFileSync(filePath, 'utf8')
-        const { data } = matter(fileContents)
-        const slug = file.replace(/\.(md|mdx)$/, '')
+    try {
+      const baseUrl = getApiBaseUrl()
+      const response = await fetch(`${baseUrl}/api/posts`)
 
-        return {
-          slug,
-          title: data.title || slug,
-          description: data.description,
-          date: data.date,
-          status: data.status || 'unknown',
-        }
-      })
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch blog posts: ${response.status} ${response.statusText}`
+        )
+      }
 
-    return { posts }
+      const posts = await response.json()
+
+      return { posts }
+    } catch (error) {
+      throw new Error(
+        `Failed to read blog posts: ${
+          error instanceof Error ? error.message : 'Unknown error'
+        }`
+      )
+    }
   },
 })

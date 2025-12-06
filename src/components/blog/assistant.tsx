@@ -1,52 +1,43 @@
 'use client'
 
 import { useChat } from '@ai-sdk/react'
+import { useQueryClient } from '@tanstack/react-query'
 import { DefaultChatTransport, UIMessage } from 'ai'
-import { Loader2 } from 'lucide-react'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import {
   Conversation,
   ConversationContent,
   ConversationScrollButton,
 } from '../ai-elements/conversation'
-import { Loader } from '../ai-elements/loader'
 import { Message, MessageContent } from '../ai-elements/message'
 import { Response } from '../ai-elements/response'
 import { TextShimmer } from '../ai-elements/shimmer'
 import { AssistantHeader } from './assistant-header'
 import { Form } from './form'
+import { TextLoop } from '../ai-elements/loop'
 
-function generateNewThreadId() {
-  return 'new'
-}
 interface ChatSidebarProps {
-  threadId?: string
   isOpen: boolean
   onClose: () => void
   recentArticles: Array<{ id: string; title: string }>
   savedMessages: UIMessage[]
   isLoadingSavedMessages: boolean
+  rateLimitRemaining: number
 }
 
 export const KenAssistant = ({
-  threadId,
   isOpen,
   onClose,
   recentArticles,
   savedMessages,
   isLoadingSavedMessages,
+  rateLimitRemaining,
 }: ChatSidebarProps) => {
+  const queryClient = useQueryClient()
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const [input, setInput] = useState('')
-  const audioRef = useRef<HTMLAudioElement | null>(null)
-  const [playingMessageId, setPlayingMessageId] = useState<string | null>(null)
-  const [loadingMessageId, setLoadingMessageId] = useState<string | null>(null)
-  const [pausedMessageId, setPausedMessageId] = useState<string | null>(null)
-
-  const router = useRouter()
-  const searchParams = useSearchParams()
-
+  const [direction, setDirection] = useState(-1)
   const pathname = usePathname()
   const currentPath = pathname.split('/').filter(Boolean)
   const isOnBlogPost = currentPath[0] === 'blog'
@@ -56,54 +47,53 @@ export const KenAssistant = ({
       : currentPath[1]
     : 'blog'
 
-  const urlThreadId = searchParams.get('t')
-  const initialThreadId = urlThreadId ? urlThreadId : generateNewThreadId()
-
+  // Use a ref to always have access to the latest context/pathname in the fetch function
+  const contextRef = useRef({ context, pathname })
   useEffect(() => {
-    if (!initialThreadId) return
-    const params = new URLSearchParams(searchParams.toString())
-    params.set('t', initialThreadId)
-    router.push(`${pathname}?${params.toString()}`)
-  }, [initialThreadId, pathname, searchParams, router])
+    contextRef.current = { context, pathname }
+  }, [context, pathname])
 
-  const { messages, sendMessage, setMessages, status } = useChat({
-    id: initialThreadId,
+  const { messages, sendMessage, setMessages, status, error } = useChat({
     transport: new DefaultChatTransport({
       api: '/api/agent',
-      body: {
-        context: context,
-        pathname: pathname,
-        threadId: initialThreadId,
+      fetch: async (url, init) => {
+        // Inject the latest context/pathname into the request body
+        const originalBody = init?.body ? JSON.parse(init.body as string) : {}
+        const enrichedBody = {
+          ...originalBody,
+          context: contextRef.current.context,
+          pathname: contextRef.current.pathname,
+        }
+
+        const response = await fetch(url, {
+          ...init,
+          body: JSON.stringify(enrichedBody),
+          credentials: 'include',
+        })
+
+        // Invalidate rate limit query on any response (success or error)
+        // to sync with server state
+        if (response.ok || response.status === 429) {
+          queryClient.invalidateQueries({ queryKey: ['rateLimit'] })
+        }
+
+        return response
       },
     }),
+    onError: (error) => {
+      console.error('Chat error:', error)
+      // Invalidate just in case
+      queryClient.invalidateQueries({ queryKey: ['rateLimit'] })
+    },
   })
-
-  const handleNewChat = () => {
-    const newThreadId = generateNewThreadId()
-
-    const params = new URLSearchParams(searchParams.toString())
-    params.set('t', newThreadId)
-
-    const url = `${pathname}?${params.toString()}`
-
-    setMessages([])
-    router.push(url, { scroll: false })
-  }
 
   // Hydrate the chat store from saved messages when they change
   useEffect(() => {
-    if (!isOpen) return
     if (isLoadingSavedMessages) return
     if (!savedMessages || savedMessages.length === 0) return
 
     setMessages(savedMessages)
-  }, [
-    initialThreadId,
-    isLoadingSavedMessages,
-    isOpen,
-    savedMessages,
-    setMessages,
-  ])
+  }, [isLoadingSavedMessages, savedMessages, setMessages])
 
   const isLoading = status === 'streaming' || status === 'submitted'
 
@@ -150,122 +140,18 @@ export const KenAssistant = ({
     prevStatusRef.current = status
   }, [status, isOpen])
 
-  const handlePlayAudio = async (messageId: string, text: string) => {
-    // If currently playing this message, pause it
-    if (playingMessageId === messageId && audioRef.current) {
-      audioRef.current.pause()
-      setPausedMessageId(messageId)
-      return
-    }
-
-    // If paused, resume playback
-    if (pausedMessageId === messageId && audioRef.current) {
-      audioRef.current.play().catch((error) => {
-        console.error('Error resuming audio:', error)
-        setPlayingMessageId(null)
-        setPausedMessageId(null)
-      })
-      setPausedMessageId(null)
-      return
-    }
-
-    // Stop any currently playing audio and clear it
-    if (audioRef.current) {
-      audioRef.current.pause()
-      audioRef.current.src = ''
-      setPlayingMessageId(null)
-      setPausedMessageId(null)
-    }
-
-    setLoadingMessageId(messageId)
-
-    try {
-      const response = await fetch('/api/voice', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ text }),
-      })
-
-      if (!response.ok) {
-        console.error('Failed to generate audio:', response.statusText)
-        setLoadingMessageId(null)
-        return
-      }
-
-      // Create audio blob and play it
-      const audioBlob = await response.blob()
-      const audioUrl = URL.createObjectURL(audioBlob)
-
-      // Create new audio element and play
-      const audio = new Audio(audioUrl)
-      audioRef.current = audio
-      setLoadingMessageId(null)
-
-      // Track when audio actually starts playing
-      audio.addEventListener('play', () => {
-        setPlayingMessageId(messageId)
-      })
-
-      // Track when audio is paused
-      audio.addEventListener('pause', () => {
-        // Only clear if it's actually paused and not ended
-        if (!audio.ended) {
-          setPlayingMessageId(null)
-          setPausedMessageId(messageId)
-        }
-      })
-
-      // Track when audio is actively playing (after buffering)
-      audio.addEventListener('playing', () => {
-        setPlayingMessageId(messageId)
-      })
-
-      // Clean up object URL after playback completes
-      audio.addEventListener('ended', () => {
-        setPlayingMessageId(null)
-        setPausedMessageId(null)
-        URL.revokeObjectURL(audioUrl)
-        // Clear the audio ref when finished
-        if (audioRef.current === audio) {
-          audioRef.current = null
-        }
-      })
-
-      audio.addEventListener('error', () => {
-        setPlayingMessageId(null)
-        setPausedMessageId(null)
-        URL.revokeObjectURL(audioUrl)
-      })
-
-      audio.play().catch((error) => {
-        console.error('Error playing audio:', error)
-        setPlayingMessageId(null)
-        setPausedMessageId(null)
-        URL.revokeObjectURL(audioUrl)
-      })
-    } catch (error) {
-      console.error('Error generating audio:', error)
-      setLoadingMessageId(null)
-      setPausedMessageId(null)
-    }
-  }
-
-  useEffect(() => {
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause()
-        audioRef.current.src = ''
-      }
-    }
-  }, [])
-
   const isLoadingInitially =
     isLoadingSavedMessages && savedMessages?.length === 0
+
+  // Derived error state for display
+  const rateLimitError =
+    rateLimitRemaining === 0
+      ? 'Limit reached. Please try again tomorrow.'
+      : null
+
   return (
     <div className="flex  h-full flex-col">
-      <AssistantHeader onClose={onClose} onNewChat={handleNewChat} />
+      <AssistantHeader onClose={onClose} />
 
       <Conversation
         style={{
@@ -279,16 +165,19 @@ export const KenAssistant = ({
         }}
         className="flex-1 relative font-sans overflow-y-auto"
       >
-        {isLoadingInitially ? (
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <Loader className="text-[var(--primary)] duration-500" />
-          </div>
-        ) : null}
         <ConversationContent className="p-4">
-          {messages.map((message, messageIndex) => {
+          {error && (
+            <p className="text-red-500 font-mono text-xs">An error occurred.</p>
+          )}
+
+          {messages.map((message) => {
             // Check if message has any text content
             const hasTextContent = message.parts.some(
               (part) => part.type === 'text' && part.text && part.text.trim()
+            )
+
+            const textParts = message.parts.filter(
+              (part) => part.type === 'text'
             )
 
             // Skip rendering empty assistant messages when thinking
@@ -298,28 +187,6 @@ export const KenAssistant = ({
               return null
             }
 
-            // Extract text content for assistant messages
-            const textParts =
-              message.role === 'assistant'
-                ? message.parts.filter(
-                    (part): part is { type: 'text'; text: string } =>
-                      part.type === 'text' &&
-                      typeof part.text === 'string' &&
-                      part.text.trim().length > 0
-                  )
-                : []
-
-            const fullText =
-              textParts.length > 0
-                ? textParts.map((part) => part.text).join(' ')
-                : ''
-
-            const isPlaying = playingMessageId === message.id
-            const isPaused = pausedMessageId === message.id
-            const isLoadingAudio = loadingMessageId === message.id
-            const showPlayButton =
-              message.role === 'assistant' && fullText.length > 0
-
             return (
               <Message
                 from={message.role as 'user' | 'assistant'}
@@ -327,60 +194,16 @@ export const KenAssistant = ({
               >
                 <MessageContent className="relative group">
                   <div className="flex flex-col gap-2">
-                    <div>
-                      {message.parts.map((part, i) => {
-                        switch (part.type) {
-                          case 'text':
-                            return (
-                              <Response key={`${message.id}-${i}`}>
-                                {part.text}
-                              </Response>
-                            )
-                          default:
-                            return null
-                        }
-                      })}
-                    </div>
-                    {/* {showPlayButton && (
-                      <button
-                        onClick={() => handlePlayAudio(message.id, fullText)}
-                        disabled={isLoadingAudio}
-                        className="self-start p-1.5 hover:bg-gray-100 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                        aria-label={
-                          isPlaying
-                            ? 'Pause audio'
-                            : isPaused
-                            ? 'Resume audio'
-                            : 'Play audio'
-                        }
-                      >
-                        {isLoadingAudio ? (
-                          <Loader2 className="size-4 animate-spin text-gray-600" />
-                        ) : isPlaying ? (
-                          <svg
-                            id="sound-on"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            className="size-4"
-                          >
-                            <polygon points="17 15 17 14 16 14 16 13 17 13 17 11 16 11 16 10 17 10 17 9 18 9 18 10 19 10 19 14 18 14 18 15 17 15" />
-                            <polygon points="23 10 23 14 22 14 22 16 21 16 21 17 20 17 20 18 19 18 19 17 18 17 18 16 19 16 19 15 20 15 20 14 21 14 21 10 20 10 20 9 19 9 19 8 18 8 18 7 19 7 19 6 20 6 20 7 21 7 21 8 22 8 22 10 23 10" />
-                            <path d="m11,2v1h-1v1h-1v1h-1v1h-1v1h-1v1H1v8h5v1h1v1h1v1h1v1h1v1h1v1h3V2h-3Zm1,17h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1H3v-4h4v-1h1v-1h1v-1h1v-1h1v-1h1v14Z" />
-                          </svg>
-                        ) : (
-                          <svg
-                            id="sound-paused"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            className="size-4"
-                          >
-                            <path d="m11,2v1h-1v1h-1v1h-1v1h-1v1h-1v1H1v8h5v1h1v1h1v1h1v1h1v1h1v1h3V2h-3Zm1,17h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1H3v-4h4v-1h1v-1h1v-1h1v-1h1v-1h1v14Z" />
-                            <rect x="17" y="9" width="2" height="6" />
-                            <rect x="21" y="9" width="2" height="6" />
-                          </svg>
-                        )}
-                      </button>
-                    )} */}
+                    {textParts.map((part, i) => {
+                      if (part.type === 'text' && part.text?.trim()) {
+                        return (
+                          <Response key={`${message.id}-text-${i}`}>
+                            {part.text}
+                          </Response>
+                        )
+                      }
+                      return null
+                    })}
                   </div>
                 </MessageContent>
               </Message>
@@ -391,9 +214,52 @@ export const KenAssistant = ({
             <Message from="assistant" key="thinking">
               <MessageContent>
                 <div className="flex items-center">
-                  <TextShimmer duration={1} className="text-xs">
-                    Gnuggling....
-                  </TextShimmer>
+                  <TextLoop
+                    transition={{
+                      type: 'spring',
+                      bounce: 0.3,
+                    }}
+                    interval={2.5}
+                    onIndexChange={(index) => {
+                      setDirection(index === 0 ? -1 : 1)
+                    }}
+                    variants={{
+                      initial: {
+                        y: -direction * 5,
+                        rotateX: -direction * 90,
+                        opacity: 0,
+                        filter: 'blur(4px)',
+                      },
+                      animate: {
+                        y: 0,
+                        rotateX: 0,
+                        opacity: 1,
+                        filter: 'blur(0px)',
+                      },
+                      exit: {
+                        y: -direction * 5,
+                        rotateX: -direction * 90,
+                        opacity: 0,
+                        filter: 'blur(4px)',
+                      },
+                    }}
+                  >
+                    <TextShimmer duration={1} className="text-xs">
+                      Gnuggling....
+                    </TextShimmer>
+                    <TextShimmer duration={1} className="text-xs">
+                      Noodling...
+                    </TextShimmer>
+                    <TextShimmer duration={1} className="text-xs">
+                      Synapsing...
+                    </TextShimmer>
+                    <TextShimmer duration={1} className="text-xs">
+                      Percolating...
+                    </TextShimmer>
+                    <TextShimmer duration={1} className="text-xs">
+                      Thinkfiddling...
+                    </TextShimmer>
+                  </TextLoop>
                 </div>
               </MessageContent>
             </Message>
@@ -412,6 +278,8 @@ export const KenAssistant = ({
         }
         context={context}
         recentArticles={recentArticles}
+        rateLimitRemaining={rateLimitRemaining}
+        rateLimitError={rateLimitError!}
       />
     </div>
   )

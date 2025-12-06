@@ -123,7 +123,7 @@ export default async function Page({
               style={{
                 textWrap: 'pretty',
               }}
-              className="leading-[1.2em] text-[40px]  lg:tracking-[-.06em] tracking-[-0.96px]"
+              className="leading-[1.2em] text-[40px]   tracking-[-0.96px]"
             >
               {postData.title}
             </h1>

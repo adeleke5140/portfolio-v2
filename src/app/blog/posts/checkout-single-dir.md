@@ -1,15 +1,15 @@
 ---
 title: 'Checkout a single directory from a monorepo'
 date: '2025-06-26'
-status: 'completed'
+status: 'draft'
 tag: 'git'
 ---
-
 
 I wanted to play around with the `remote-mcp-server` from the `cloudflare` examples monorepo but didn't want to pull every example down. I just needed to access one folder.
 
 Here is how I did it:
 <br/>
+
 ```bash
 git clone --no-checkout https://github.com/cloudflare/ai.git
 
