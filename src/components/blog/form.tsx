@@ -47,6 +47,10 @@ export const Form = ({
   rateLimitRemaining,
   rateLimitError,
 }: FormProps) => {
+  const customErrorForTextArea =
+    process.env.NODE_ENV === 'production' && rateLimitError
+      ? 'We can chat again in 24hours...'
+      : null
   return (
     <form className="p-4 pt-0 relative">
       <UsageAlert
@@ -81,8 +85,8 @@ export const Form = ({
               }
             }}
             placeholder={
-              rateLimitError
-                ? 'We can chat again in 24hours...'
+              customErrorForTextArea
+                ? customErrorForTextArea
                 : context === 'blog'
                 ? "You can ask about what I've written."
                 : `Ask Kenny about ${transFormDashToSpaceCase(context)}`
