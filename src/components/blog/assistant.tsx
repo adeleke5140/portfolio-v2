@@ -15,6 +15,7 @@ import { Response } from '../ai-elements/response'
 import { TextShimmer } from '../ai-elements/shimmer'
 import { AssistantHeader } from './assistant-header'
 import { Form } from './form'
+import { TextLoop } from '../ai-elements/loop'
 
 interface ChatSidebarProps {
   isOpen: boolean
@@ -36,7 +37,7 @@ export const KenAssistant = ({
   const queryClient = useQueryClient()
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const [input, setInput] = useState('')
-
+  const [direction, setDirection] = useState(-1)
   const pathname = usePathname()
   const currentPath = pathname.split('/').filter(Boolean)
   const isOnBlogPost = currentPath[0] === 'blog'
@@ -213,9 +214,52 @@ export const KenAssistant = ({
             <Message from="assistant" key="thinking">
               <MessageContent>
                 <div className="flex items-center">
-                  <TextShimmer duration={1} className="text-xs">
-                    Gnuggling....
-                  </TextShimmer>
+                  <TextLoop
+                    transition={{
+                      type: 'spring',
+                      bounce: 0.3,
+                    }}
+                    interval={2.5}
+                    onIndexChange={(index) => {
+                      setDirection(index === 0 ? -1 : 1)
+                    }}
+                    variants={{
+                      initial: {
+                        y: -direction * 5,
+                        rotateX: -direction * 90,
+                        opacity: 0,
+                        filter: 'blur(4px)',
+                      },
+                      animate: {
+                        y: 0,
+                        rotateX: 0,
+                        opacity: 1,
+                        filter: 'blur(0px)',
+                      },
+                      exit: {
+                        y: -direction * 5,
+                        rotateX: -direction * 90,
+                        opacity: 0,
+                        filter: 'blur(4px)',
+                      },
+                    }}
+                  >
+                    <TextShimmer duration={1} className="text-xs">
+                      Gnuggling....
+                    </TextShimmer>
+                    <TextShimmer duration={1} className="text-xs">
+                      Noodling...
+                    </TextShimmer>
+                    <TextShimmer duration={1} className="text-xs">
+                      Synapsing...
+                    </TextShimmer>
+                    <TextShimmer duration={1} className="text-xs">
+                      Percolating...
+                    </TextShimmer>
+                    <TextShimmer duration={1} className="text-xs">
+                      Thinkfiddling...
+                    </TextShimmer>
+                  </TextLoop>
                 </div>
               </MessageContent>
             </Message>
