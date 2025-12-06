@@ -8,6 +8,7 @@ import { RecaptchaButton } from '@/components/craft/recaptcha/recaptcha-button'
 import { SplitToEdit } from '@/components/craft/split-to-edit/split-to-edit'
 import { components } from '@/components/mdx/mdx-components'
 import { PageWrapper } from '@/components/page-wrapper'
+import { TastyButton } from '@/components/craft/tasty-button'
 import { promises as fs } from 'fs'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import path from 'path'
@@ -105,6 +106,7 @@ export default async function Page({
       IntegrationMenu,
       RecaptchaButton,
       SplitToEdit,
+      TastyButton,
       ...components,
     },
   })
