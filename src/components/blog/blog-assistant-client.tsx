@@ -18,6 +18,7 @@ import { UIMessage } from 'ai'
 import { Provider, useAtom } from 'jotai'
 import { useEffect, useRef } from 'react'
 import { assistantStateAtom, chatModeAtom } from './assistant-context'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -57,6 +58,7 @@ function BlogAssistantPortal({ initialMessages }: BlogAssistantClientProps) {
         resetAt: string
       }>
     },
+    enabled: process.env.NODE_ENV === 'production',
   })
 
   // Refetch saved messages and rate limit when switching between floating/sidebar modes
@@ -148,6 +150,7 @@ export function BlogAssistantClient({
     <Provider>
       <QueryClientProvider client={queryClient}>
         <BlogAssistantPortal initialMessages={initialMessages} />
+        <ReactQueryDevtools buttonPosition="bottom-left" />
       </QueryClientProvider>
     </Provider>
   )
