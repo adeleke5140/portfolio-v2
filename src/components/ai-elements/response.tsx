@@ -85,40 +85,40 @@ const customTheme = {
 
 export const Response = memo(
   ({ className, children, ...props }: ResponseProps) => {
-    const components = useMemo(
-      () => ({
-        // Custom renderer for text nodes to parse colors
-        p: (props: React.ComponentPropsWithoutRef<'p'>) => {
-          const { children, ...rest } = props
-          if (typeof children === 'string') {
-            return (
-              <p {...rest} className="mb-4">
-                <ColorParsedText text={children} />
-              </p>
-            )
-          }
-          // Handle array of children
-          if (Array.isArray(children)) {
-            return (
-              <p {...rest} className="mb-4">
-                {children.map((child, i) => {
-                  if (typeof child === 'string') {
-                    return <ColorParsedText key={i} text={child} />
-                  }
-                  return child
-                })}
-              </p>
-            )
-          }
-          return (
-            <p {...rest} className="mb-4">
-              {children}
-            </p>
-          )
-        },
-      }),
-      []
-    )
+    // const components = useMemo(
+    //   () => ({
+    //     // Custom renderer for text nodes to parse colors
+    //     p: (props: React.ComponentPropsWithoutRef<'p'>) => {
+    //       const { children, ...rest } = props
+    //       if (typeof children === 'string') {
+    //         return (
+    //           <p {...rest} className="mb-4">
+    //             <ColorParsedText text={children} />
+    //           </p>
+    //         )
+    //       }
+    //       // Handle array of children
+    //       if (Array.isArray(children)) {
+    //         return (
+    //           <p {...rest} className="mb-4">
+    //             {children.map((child, i) => {
+    //               if (typeof child === 'string') {
+    //                 return <ColorParsedText key={i} text={child} />
+    //               }
+    //               return child
+    //             })}
+    //           </p>
+    //         )
+    //       }
+    //       return (
+    //         <p {...rest} className="mb-4">
+    //           {children}
+    //         </p>
+    //       )
+    //     },
+    //   }),
+    //   []
+    // )
 
     return (
       <Streamdown
@@ -126,7 +126,7 @@ export const Response = memo(
           'size-full [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 streamdown',
           className
         )}
-        components={components}
+        // components={components}
         // Custom themes are valid but TypeScript's BundledTheme type only includes built-in themes
         shikiTheme={[customTheme as any, customTheme as any]}
         {...props}
