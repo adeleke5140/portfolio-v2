@@ -12,6 +12,30 @@ interface FormProps {
   rateLimitRemaining: number
   rateLimitError: string
 }
+const isDev = process.env.NODE_ENV === 'development'
+function UsageAlert({
+  rateLimitRemaining,
+  rateLimitError,
+}: {
+  rateLimitRemaining: number
+  rateLimitError: string
+}) {
+  if (isDev) return null
+  return (
+    <div className="border mx-5 border-b-0 border-[#dcdcdc] h-8 pt-2 rounded-t-xl bg-inherit p-4">
+      {rateLimitRemaining === 0 ? (
+        <p className="text-red-700 rounded-lg font-sans text-xs">
+          {rateLimitError}
+        </p>
+      ) : (
+        <p className="text-[12px] text-xs font-sans text-ken-grey">
+          {rateLimitRemaining}{' '}
+          {rateLimitRemaining === 1 ? 'message' : 'messages'} remaining today
+        </p>
+      )}
+    </div>
+  )
+}
 
 export const Form = ({
   input,
@@ -20,24 +44,15 @@ export const Form = ({
   isLoading,
   textareaRef,
   context,
-  recentArticles = [],
   rateLimitRemaining,
   rateLimitError,
 }: FormProps) => {
   return (
     <form className="p-4 pt-0 relative">
-      <div className="border mx-5 border-b-0 border-[#dcdcdc] h-8 pt-2 rounded-t-xl bg-inherit p-4">
-        {rateLimitRemaining === 0 ? (
-          <p className="text-red-700 rounded-lg font-sans text-xs">
-            {rateLimitError}
-          </p>
-        ) : (
-          <p className="text-[12px] text-xs font-sans text-ken-grey">
-            {rateLimitRemaining}{' '}
-            {rateLimitRemaining === 1 ? 'message' : 'messages'} remaining today
-          </p>
-        )}
-      </div>
+      <UsageAlert
+        rateLimitRemaining={rateLimitRemaining}
+        rateLimitError={rateLimitError}
+      />
       <div className="relative">
         <div
           className={cn(
