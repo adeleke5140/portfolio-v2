@@ -7,6 +7,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
+export const maxDuration = 60
 
 const redis = new Redis({
   url: process.env.UPSTASH_REDIS_REST_URL!,
@@ -85,15 +86,18 @@ export async function POST(req: NextRequest) {
       },
     })
 
-    const response = stream.toUIMessageStreamResponse({})
-
-    // Add rate limit info to headers
+    const response = stream.toUIMessageStreamResponse({
+      sendSources: true,
+    })
+    response.headers.set('Cache-Control', 'no-cache')
+    response.headers.set('Connection', 'keep-alive')
     if (process.env.NODE_ENV === 'production') {
       response.headers.set('X-RateLimit-Limit', '10')
       response.headers.set('X-RateLimit-Remaining', remaining.toString())
       response.headers.set('X-RateLimit-Reset', reset.toString())
     }
 
+    response.headers.set('X-Thread-Id', existingThreadId)
     return response
   } catch (error) {
     return NextResponse.json(
