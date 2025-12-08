@@ -47,6 +47,6 @@ function createMastraInstance() {
 
 export const mastra = globalForMastra.mastra ?? createMastraInstance()
 
-if (process.env.NODE_ENV !== 'production') {
+if (!globalForMastra.mastra) {
   globalForMastra.mastra = mastra
 }

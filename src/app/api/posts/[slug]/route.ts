@@ -10,9 +10,9 @@ const POSTS_DIRECTORY = path.join(process.cwd(), 'src/app/blog/posts')
 
 export async function GET(
   _request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
-  const { slug } = params
+  const { slug } = await params
 
   try {
     // Try both .md and .mdx extensions
@@ -57,5 +57,3 @@ export async function GET(
     )
   }
 }
-
-
