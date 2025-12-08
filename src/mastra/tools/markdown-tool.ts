@@ -11,7 +11,7 @@ const isDev = process.env.NODE_ENV === 'development'
 
 const getApiBaseUrl = () => {
   if (isDev) {
-    return 'http://localhost:3000'
+    return 'http://localhost:3001'
   }
 
   if (process.env.VERCEL_URL) {
@@ -147,7 +147,7 @@ export const readAllBlogs = createTool({
 
       if (!response.ok) {
         throw new Error(
-          `Failed to fetch blog posts: ${response.status} ${response.statusText}`
+          `Failed to fetch blog posts: ${response.status} ${response.statusText} from ${baseUrl}`
         )
       }
 
