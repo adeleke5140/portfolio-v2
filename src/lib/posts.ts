@@ -1,8 +1,6 @@
 import fs from 'fs'
-import path from 'path'
 import matter from 'gray-matter'
-import { remark } from 'remark'
-import html from 'remark-html'
+import path from 'path'
 
 const postsDirectory = path.join(process.cwd(), 'src/app/blog/posts')
 const craftDirectory = path.join(process.cwd(), 'src/app/craft/components')
@@ -93,4 +91,4 @@ const getSortedCraftData = () => {
   })
 }
 
-export { getSortedPostsData, getAllPostsIds, getPostData, getSortedCraftData }
+export { getAllPostsIds, getPostData, getSortedCraftData, getSortedPostsData }
