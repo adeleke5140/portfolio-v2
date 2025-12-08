@@ -23,6 +23,7 @@ export const kennyAgent = new Agent({
     }
     return {
       readAllBlogs,
+      readSingleBlog,
     }
   },
   memory: new Memory(),
