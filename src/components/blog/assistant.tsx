@@ -224,7 +224,7 @@ export const KenAssistant = ({
             )
           })}
 
-          {true && (
+          {isThinking && (
             <Message from="assistant" key="thinking">
               <MessageContent>
                 <div className="flex items-center">
