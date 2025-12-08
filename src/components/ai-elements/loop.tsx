@@ -37,15 +37,15 @@ export function TextLoop({
     if (!trigger) return
 
     const intervalMs = interval * 1000
+
     const timer = setInterval(() => {
-      setCurrentIndex((current) => {
-        const next = (current + 1) % items.length
-        onIndexChange?.(next)
-        return next
-      })
+      const nextIndex = (currentIndex + 1) % items.length
+      setCurrentIndex(nextIndex)
+      onIndexChange?.(nextIndex)
     }, intervalMs)
+
     return () => clearInterval(timer)
-  }, [items.length, interval, onIndexChange, trigger])
+  }, [items.length, currentIndex, interval, onIndexChange, trigger])
 
   const motionVariants: Variants = {
     initial: { y: 20, opacity: 0 },

@@ -11,7 +11,7 @@ const isDev = process.env.NODE_ENV === 'development'
 
 const getApiBaseUrl = () => {
   if (isDev) {
-    return 'http://localhost:3000'
+    return 'http://localhost:3001'
   }
 
   if (process.env.VERCEL_URL) {
@@ -114,7 +114,8 @@ export const readSingleBlog = createTool({
 
 export const readAllBlogs = createTool({
   id: 'read-all-blogs',
-  description: "Reads all blog posts from Kenny's portfolio.",
+  description:
+    "Reads all blog posts from Kenny's portfolio. The slug returned is the title of the blog post and can be used to read a single blog post.",
   outputSchema: z.object({
     posts: z
       .array(
@@ -146,7 +147,7 @@ export const readAllBlogs = createTool({
 
       if (!response.ok) {
         throw new Error(
-          `Failed to fetch blog posts: ${response.status} ${response.statusText}`
+          `Failed to fetch blog posts: ${response.status} ${response.statusText} from ${baseUrl}`
         )
       }
 
