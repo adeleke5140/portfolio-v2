@@ -12,7 +12,7 @@ export const kennyAgent = new Agent({
     const pathname = (runtimeContext?.get('pathname') as string) || '/blog'
     return getKennyInstructions(context, pathname)
   },
-  model: 'openai/gpt-4.1-mini',
+  model: 'openai/gpt-5-mini',
   tools: ({ runtimeContext }) => {
     const pathname = (runtimeContext?.get('pathname') as string) || ''
     if (pathname.includes('blog')) {
