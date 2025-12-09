@@ -44,8 +44,7 @@ export const Introduction = () => {
               </p>
 
               <p className="text-lg my-4">
-                I am regulary thinking about typography, animations, design and
-                how typography can add texture to web experiences.
+                I want to make wonderful things. I am regulary thinking about how good typography, animation and overall design add texture to the web.
               </p>
 
               <p className="text-lg my-4">
