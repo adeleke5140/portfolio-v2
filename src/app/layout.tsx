@@ -39,7 +39,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               {children}
             </main>
           </div>
-          <BlogAssistantWrapper />
+          <div className="hidden lg:block">
+            <BlogAssistantWrapper />
+          </div>
         </div>
       </body>
     </html>
