@@ -1,18 +1,15 @@
 import { convertMessages } from '@mastra/core/agent'
 import { mastra } from '@/mastra'
-import { getOrCreateUserId } from '@/lib/session'
 
 const myAgent = mastra.getAgent('kennyAgent')
 
-export async function getInitialMessages() {
+export async function getInitialMessages(userId: string) {
   const mem = await myAgent.getMemory()
   if (!mem) return []
 
   try {
-    const threadId = await getOrCreateUserId()
-
     const res = await mem.query({
-      threadId,
+      threadId: userId,
       resourceId: 'chat-session',
     })
 

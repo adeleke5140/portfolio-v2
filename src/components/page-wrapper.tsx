@@ -1,7 +1,6 @@
 'use client'
 import { cn } from '@/lib/utils'
 import { ReactNode } from 'react'
-import { BackButton } from './back-button'
 
 interface PageWrapperProps {
   heading: string | ReactNode

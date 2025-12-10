@@ -30,12 +30,7 @@ const queryClient = new QueryClient({
   },
 })
 
-interface BlogAssistantClientProps {
-  initialMessages: UIMessage[]
-  initialRateLimitData?: RateLimitResponse | null
-}
-
-function BlogAssistantPortal({ initialMessages, initialRateLimitData }: BlogAssistantClientProps) {
+function BlogAssistantPortal() {
   const [chatMode, setChatMode] = useAtom(chatModeAtom)
   const [isAssistantOpen, setIsAssistantOpen] = useAtom(assistantStateAtom)
   const queryClient = useQueryClient()
@@ -48,11 +43,12 @@ function BlogAssistantPortal({ initialMessages, initialRateLimitData }: BlogAssi
   } = useQuery({
     queryKey: ['rateLimit'],
     queryFn: async () => {
-      return await ky.get('/api/rate-limit', {
-        credentials: 'include',
-      }).json<RateLimitResponse>()
+      return await ky
+        .get('/api/rate-limit', {
+          credentials: 'include',
+        })
+        .json<RateLimitResponse>()
     },
-    initialData: initialRateLimitData || undefined,
     enabled: process.env.NODE_ENV === 'production',
   })
 
@@ -66,16 +62,17 @@ function BlogAssistantPortal({ initialMessages, initialRateLimitData }: BlogAssi
   }, [chatMode, queryClient])
 
   const {
-    isPending,
+    isPending: isLoadingSavedMessages,
     error,
     data: savedMessages,
   } = useQuery({
     queryKey: ['savedMessages'],
-    initialData: initialMessages,
     queryFn: async () => {
-      return await ky.get('/api/initial', {
-        credentials: 'include',
-      }).json<UIMessage[]>()
+      return await ky
+        .get('/api/initial', {
+          credentials: 'include',
+        })
+        .json<UIMessage[]>()
     },
   })
 
@@ -90,8 +87,8 @@ function BlogAssistantPortal({ initialMessages, initialRateLimitData }: BlogAssi
               setChatMode('floating')
             }}
             recentArticles={[]}
-            savedMessages={error ? [] : savedMessages}
-            isLoadingSavedMessages={isPending}
+            savedMessages={error ? [] : savedMessages || []}
+            isLoadingSavedMessages={isLoadingSavedMessages}
             rateLimitRemaining={rateLimitData?.remaining || 0}
           />
         </div>
@@ -122,8 +119,8 @@ function BlogAssistantPortal({ initialMessages, initialRateLimitData }: BlogAssi
                   isOpen={isAssistantOpen}
                   onClose={() => setIsAssistantOpen(false)}
                   recentArticles={[]}
-                  savedMessages={error ? [] : savedMessages}
-                  isLoadingSavedMessages={isPending}
+                  savedMessages={error ? [] : savedMessages || []}
+                  isLoadingSavedMessages={isLoadingSavedMessages}
                   rateLimitRemaining={rateLimitData?.remaining || 0}
                 />
               </div>
@@ -135,17 +132,11 @@ function BlogAssistantPortal({ initialMessages, initialRateLimitData }: BlogAssi
   )
 }
 
-export function BlogAssistantClient({
-  initialMessages,
-  initialRateLimitData,
-}: BlogAssistantClientProps) {
+export function BlogAssistantClient({}) {
   return (
     <Provider>
       <QueryClientProvider client={queryClient}>
-        <BlogAssistantPortal
-          initialMessages={initialMessages}
-          initialRateLimitData={initialRateLimitData}
-        />
+        <BlogAssistantPortal />
         <ReactQueryDevtools buttonPosition="bottom-left" />
       </QueryClientProvider>
     </Provider>
