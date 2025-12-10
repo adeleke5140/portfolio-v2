@@ -1,5 +1,5 @@
-import React, { ComponentPropsWithoutRef } from 'react'
 import Link from 'next/link'
+import { ComponentPropsWithoutRef } from 'react'
 import { highlight } from 'sugar-high'
 import { LetterSpacingPlayground } from '../letter-spacing-playground'
 
@@ -12,17 +12,17 @@ type BlockquoteProps = ComponentPropsWithoutRef<'blockquote'>
 
 export const components = {
   h1: (props: HeadingProps) => (
-    <h1 className="font-medium font-serif  pt-12 text-2xl mb-0" {...props} />
+    <h1 className="font-medium font-serif  pt-12 text-3xl mb-0" {...props} />
   ),
   h2: (props: HeadingProps) => (
     <h2
-      className="text-gray-800 font-serif text-xl font-medium mt-8 mb-3"
+      className="text-gray-800 font-serif text-2xl font-medium mt-8 mb-3"
       {...props}
     />
   ),
   h3: (props: HeadingProps) => (
     <h3
-      className="text-gray-800 font-serif dark:text-zinc-200 font-medium mt-8 mb-3"
+      className="text-gray-800 font-serif text-xl font-medium mt-8 mb-3"
       {...props}
     />
   ),
@@ -30,7 +30,7 @@ export const components = {
     <h4 className="font-serif font-medium" {...props} />
   ),
   p: (props: ParagraphProps) => (
-    <p className="text-ken-grey text-[20px] my-6 leading-[30px]" {...props} />
+    <p className="text-ken-black text-[20px] my-6 leading-[30px]" {...props} />
   ),
   ol: (props: ListProps) => (
     <ol
