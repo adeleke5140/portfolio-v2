@@ -1,4 +1,4 @@
-import { BlogAssistantWrapper } from '@/components/blog/blog-assistant-wrapper'
+import { BlogAssistantClient } from '@/components/blog/blog-assistant-client'
 import { fonts } from '@/fonts/setup'
 import '@/styles/globals.css'
 import Link from 'next/link'
@@ -40,7 +40,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </main>
           </div>
           <div className="hidden lg:block">
-            <BlogAssistantWrapper />
+            <BlogAssistantClient />
           </div>
         </div>
       </body>
