@@ -154,14 +154,7 @@ export const KenAssistant = ({
     prevStatusRef.current = status
   }, [status, isOpen])
 
-  const isLoadingInitially =
-    isLoadingSavedMessages && savedMessages?.length === 0
-
   // Derived error state for display
-  const rateLimitError =
-    rateLimitRemaining === 0
-      ? 'Limit reached. Please try again tomorrow.'
-      : null
 
   return (
     <div className="flex  h-full flex-col">
@@ -250,7 +243,6 @@ export const KenAssistant = ({
         context={context}
         recentArticles={recentArticles}
         rateLimitRemaining={rateLimitRemaining}
-        rateLimitError={rateLimitError!}
       />
     </div>
   )
