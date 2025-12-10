@@ -1,6 +1,7 @@
 import { createTool } from '@mastra/core/tools'
 import { z } from 'zod'
 import { RuntimeContext } from '@mastra/core/runtime-context'
+import ky from 'ky'
 
 interface BlogPostContext {
   context: string
@@ -77,30 +78,28 @@ export const readSingleBlog = createTool({
       }
 
       const baseUrl = getApiBaseUrl()
-      const response = await fetch(`${baseUrl}/api/posts/${slug}`)
 
-      if (!response.ok) {
-        if (response.status === 404) {
+      try {
+        const data = await ky.get(`${baseUrl}/api/posts/${slug}`).json() as any
+        return {
+          content: data.content,
+          metadata: {
+            title: data.metadata.title || slug,
+            description: data.metadata.description,
+            date: data.metadata.date,
+            status: data.metadata.status || 'unknown',
+            tag: data.metadata.tag,
+            language: data.metadata.language,
+          },
+          slug: data.slug,
+        }
+      } catch (error: any) {
+        if (error.response?.status === 404) {
           throw new Error(`Blog post not found: ${slug}`)
         }
         throw new Error(
-          `Failed to fetch blog post: ${response.status} ${response.statusText}`
+          `Failed to fetch blog post: ${error.response?.status} ${error.response?.statusText || error.message}`
         )
-      }
-
-      const data = await response.json()
-
-      return {
-        content: data.content,
-        metadata: {
-          title: data.metadata.title || slug,
-          description: data.metadata.description,
-          date: data.metadata.date,
-          status: data.metadata.status || 'unknown',
-          tag: data.metadata.tag,
-          language: data.metadata.language,
-        },
-        slug: data.slug,
       }
     } catch (error) {
       throw new Error(
@@ -143,21 +142,19 @@ export const readAllBlogs = createTool({
   execute: async () => {
     try {
       const baseUrl = getApiBaseUrl()
-      const response = await fetch(`${baseUrl}/api/posts`)
-
-      if (!response.ok) {
-        throw new Error(
-          `Failed to fetch blog posts: ${response.status} ${response.statusText} from ${baseUrl}`
-        )
-      }
-
-      const posts = await response.json()
+      const posts = await ky.get(`${baseUrl}/api/posts`).json() as Array<{
+        slug: string
+        title: string
+        description?: string
+        date: string
+        status: string
+      }>
 
       return { posts }
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(
         `Failed to read blog posts: ${
-          error instanceof Error ? error.message : 'Unknown error'
+          error.response?.status ? `${error.response.status} ${error.response.statusText}` : error.message || 'Unknown error'
         }`
       )
     }
