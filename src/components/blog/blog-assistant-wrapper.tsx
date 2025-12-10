@@ -9,8 +9,12 @@ const baseUrl =
   'http://localhost:3001'
 
 export async function BlogAssistantWrapper() {
-  let initialMessages = []
+  let initialMessages: any[] = []
   let rateLimitData: RateLimitResponse | null = null
+
+  console.log('baseUrl', baseUrl)
+  console.log('initialMessages---', initialMessages)
+  console.log('rateLimitData---', rateLimitData)
 
   try {
     const cookieStore = await cookies()
