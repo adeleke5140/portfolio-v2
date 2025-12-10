@@ -19,6 +19,8 @@ import { Provider, useAtom } from 'jotai'
 import { useEffect, useRef } from 'react'
 import { assistantStateAtom, chatModeAtom } from './assistant-context'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { RateLimitResponse } from './types'
+import ky from 'ky'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,9 +32,10 @@ const queryClient = new QueryClient({
 
 interface BlogAssistantClientProps {
   initialMessages: UIMessage[]
+  initialRateLimitData?: RateLimitResponse | null
 }
 
-function BlogAssistantPortal({ initialMessages }: BlogAssistantClientProps) {
+function BlogAssistantPortal({ initialMessages, initialRateLimitData }: BlogAssistantClientProps) {
   const [chatMode, setChatMode] = useAtom(chatModeAtom)
   const [isAssistantOpen, setIsAssistantOpen] = useAtom(assistantStateAtom)
   const queryClient = useQueryClient()
@@ -45,19 +48,11 @@ function BlogAssistantPortal({ initialMessages }: BlogAssistantClientProps) {
   } = useQuery({
     queryKey: ['rateLimit'],
     queryFn: async () => {
-      const res = await fetch('/api/rate-limit', {
+      return await ky.get('/api/rate-limit', {
         credentials: 'include',
-      })
-      if (!res.ok) {
-        throw new Error('Failed to fetch rate limit')
-      }
-      return res.json() as Promise<{
-        limit: number
-        remaining: number
-        reset: number
-        resetAt: string
-      }>
+      }).json<RateLimitResponse>()
     },
+    initialData: initialRateLimitData || undefined,
     enabled: process.env.NODE_ENV === 'production',
   })
 
@@ -78,12 +73,9 @@ function BlogAssistantPortal({ initialMessages }: BlogAssistantClientProps) {
     queryKey: ['savedMessages'],
     initialData: initialMessages,
     queryFn: async () => {
-      const url = `/api/initial`
-      const res = await fetch(url, { credentials: 'include' })
-      if (!res.ok) {
-        throw new Error('Failed to fetch initial messages')
-      }
-      return res.json()
+      return await ky.get('/api/initial', {
+        credentials: 'include',
+      }).json<UIMessage[]>()
     },
   })
 
@@ -145,11 +137,15 @@ function BlogAssistantPortal({ initialMessages }: BlogAssistantClientProps) {
 
 export function BlogAssistantClient({
   initialMessages,
+  initialRateLimitData,
 }: BlogAssistantClientProps) {
   return (
     <Provider>
       <QueryClientProvider client={queryClient}>
-        <BlogAssistantPortal initialMessages={initialMessages} />
+        <BlogAssistantPortal
+          initialMessages={initialMessages}
+          initialRateLimitData={initialRateLimitData}
+        />
         <ReactQueryDevtools buttonPosition="bottom-left" />
       </QueryClientProvider>
     </Provider>
