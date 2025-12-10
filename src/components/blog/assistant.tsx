@@ -16,6 +16,7 @@ import { TextShimmer } from '../ai-elements/shimmer'
 import { AssistantHeader } from './assistant-header'
 import { Form } from './form'
 import { TextLoop } from '../ai-elements/loop'
+import { Loader } from '../ai-elements/loader'
 
 const THINKING_MESSAGES = [
   'Gnuggling...',
@@ -173,6 +174,10 @@ export const KenAssistant = ({
         className="flex-1 relative font-sans overflow-y-auto"
       >
         <ConversationContent className="p-4">
+          {isLoadingSavedMessages && (
+            <Loader className="absolute text-primary top-1/2 left-1/2 " />
+          )}
+
           {error && (
             <p className="text-red-500 font-mono text-xs">An error occurred.</p>
           )}
