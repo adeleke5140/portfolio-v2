@@ -117,7 +117,7 @@ export default async function Page({
         heading={
           <div className="py-10 pt-24 border-b border-[#dcdcdc7e] pb-6">
             <span className="text-ken-grey text-[15px]">
-              {formatDate(postData.date)}
+              {formatDate(postData.date, 'LLL d, yyyy')}
             </span>
             <h1
               style={{
