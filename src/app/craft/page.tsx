@@ -1,4 +1,5 @@
 import { PageWrapper } from '@/components/page-wrapper'
+import { formatDate } from '@/helpers/formatDate'
 import { getSortedCraftData } from '@/lib/posts'
 import Link from 'next/link'
 
@@ -46,7 +47,7 @@ export default function Index() {
         {sortedCategories.map(([category, crafts]) => (
           <div
             key={category}
-            className="grid md:grid-cols-2 last:border-b-0  pt-10 first:pt-0 border-b-[0.5px] border-b-[#dcdcdc]"
+            className="grid  last:border-b-0  pt-10 first:pt-0 border-b-[0.5px] border-b-[#dcdcdc]"
           >
             <p className="font-serif mb-4 capitalize text-lg text-ken-grey">
               {category}
@@ -56,7 +57,7 @@ export default function Index() {
                 <Link
                   href={`/craft/${craft.id}`}
                   key={craft.id}
-                  className="pb-7 group rounded-md py-4 block mb-2 transition-colors duration-200 "
+                  className=" md:flex justify-between items-start group rounded-md py-4 block mb-2 transition-colors duration-200 "
                 >
                   <div className="flex group-hover:translate-x-2 flex-col gap-1 transition-transform ">
                     <p className="flex gap-2 items-center">

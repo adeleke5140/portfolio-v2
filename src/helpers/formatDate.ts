@@ -1,9 +1,9 @@
 import { format, parseISO } from 'date-fns'
 
-const formatDate = (date: string) => {
+const formatDate = (date: string, dateFormat = 'd.LL.y') => {
   if (!date) return
   try {
-    const formattedDate = format(parseISO(date), 'LLL d, yyyy')
+    const formattedDate = format(parseISO(date), dateFormat)
     return formattedDate
   } catch (err) {
     console.error(err)
