@@ -84,7 +84,6 @@ function BlogAssistantPortal() {
             isOpen={true}
             onClose={() => {
               setIsAssistantOpen(false)
-              setChatMode('floating')
             }}
             recentArticles={[]}
             savedMessages={error ? [] : savedMessages || []}
@@ -94,12 +93,12 @@ function BlogAssistantPortal() {
         </div>
       ) : null}
 
-      {chatMode === 'floating' ? (
-        <div className={cn('fixed bottom-6 right-6 z-30')}>
-          <Popover open={isAssistantOpen} onOpenChange={setIsAssistantOpen}>
-            <PopoverTrigger className="data-[state=open]:translate-y-[120%] data-[state=open]:opacity-0 data-[state=closed]:translate-y-0 transition-all duration-300">
-              <ToggleAssistant />
-            </PopoverTrigger>
+      <div className={cn('fixed bottom-6 right-6 z-30')}>
+        <Popover open={isAssistantOpen} onOpenChange={setIsAssistantOpen}>
+          <PopoverTrigger className="data-[state=open]:translate-y-[120%] data-[state=open]:opacity-0 data-[state=closed]:translate-y-0 transition-all duration-300">
+            <ToggleAssistant />
+          </PopoverTrigger>
+          {chatMode === 'floating' ? (
             <PopoverContent
               onInteractOutside={(e) => {
                 e.preventDefault()
@@ -125,9 +124,9 @@ function BlogAssistantPortal() {
                 />
               </div>
             </PopoverContent>
-          </Popover>
-        </div>
-      ) : null}
+          ) : null}
+        </Popover>
+      </div>
     </>
   )
 }
