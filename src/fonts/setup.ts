@@ -12,6 +12,7 @@ export const newsreader = Newsreader({
   variable: '--font-newsreader',
   display: 'swap',
   weight: ['400', '500', '600', '700', '800'],
+  style: ['normal', 'italic'],
 })
 
 export const fonts = {

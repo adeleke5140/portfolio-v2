@@ -1,5 +1,5 @@
 ---
-title: 'Fixed positioning causes layout shift'
+title: 'Fixed Positioning causes Layout Shift'
 date: '2025-08-06'
 status: 'completed'
 tag: 'css'
@@ -16,8 +16,8 @@ Here is how it was setup:
 ```jsx
 <body>
   <div>
-      <FixedNav/>
-      <OtherContent/>
+    <FixedNav />
+    <OtherContent />
   </div>
 </body>
 ```
@@ -26,9 +26,9 @@ The fix was to take the nav out of the container for the rest of the content and
 
 ```jsx
 <body>
-  <FixedNav/>
+  <FixedNav />
   <div>
-    <OtherContent/>
+    <OtherContent />
   </div>
 </body>
 ```

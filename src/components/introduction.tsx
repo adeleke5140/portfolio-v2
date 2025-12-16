@@ -1,8 +1,7 @@
 'use client'
 import { PageWrapper } from '@/components/page-wrapper'
-import { A11ySection } from './home/a11y-section'
-import Link from 'next/link'
 import Image from 'next/image'
+import { A11ySection } from './home/a11y-section'
 
 const connection = [
   {
@@ -44,7 +43,9 @@ export const Introduction = () => {
               </p>
 
               <p className="text-lg my-4">
-                I want to make wonderful things. I am regulary thinking about how good typography, animation and overall design add texture to the web.
+                I want to make wonderful things. I am regulary thinking about
+                how good typography, animation and overall design add texture to
+                the web.
               </p>
 
               <p className="text-lg my-4">
