@@ -30,7 +30,7 @@ export const components = {
     <h4 className="font-serif font-medium" {...props} />
   ),
   p: (props: ParagraphProps) => (
-    <p className="text-ken-black text-[20px] my-6 leading-[30px]" {...props} />
+    <p className="text-ken-black text-[20px] leading-[30px] my-6" {...props} />
   ),
   ol: (props: ListProps) => (
     <ol
@@ -43,7 +43,7 @@ export const components = {
   ),
   li: (props: ListItemProps) => <li className="pl-1 text-[17px]" {...props} />,
   em: (props: ComponentPropsWithoutRef<'em'>) => (
-    <em className="font-medium" {...props} />
+    <em className="font-italic" {...props} />
   ),
   strong: (props: ComponentPropsWithoutRef<'strong'>) => (
     <strong className="font-medium" {...props} />
