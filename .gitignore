@@ -39,3 +39,6 @@ next-env.d.ts
 # mastra
 .mastra
 agent-memory.db**
+
+# Claude
+.claude
