@@ -2,18 +2,19 @@
 title: What I know so far about Typography
 description: types make and break the web
 date: '2025-09-23'
+updatedAt: '2025-12-16'
 status: 'completed'
 ---
 
-In my 2 years at Mastra, I have worked on marketing websites, docs and a couple of brand assets like OG images. I create them with Sketch and I generally enjoy making images. All these work has exposed me to lots of types.
+In my 2 years at Mastra, I have worked on the marketing websites, docs and a couple of brand assets like OG images. I create the OG Images with Sketch and I generally enjoy making images. All these work has exposed me to lots of types.
 
-We currently use Inter, Tasa Explorer and Geist Mono on the [website](https://mastra.ai), blog, and docs. And Sorts Mill Goudy with Hack Grotesk for the [tsconf.ai](https://tsconf.ai) page. Types have been really fun to work with.
+We currently use [Inter](https://rsms.me/inter/), [Tasa Explorer](https://fonts.google.com/specimen/TASA+Explorer) and [Geist Mono](https://vercel.com/font) on the [website](https://mastra.ai), blog, and docs. And [Sorts Mill Goudy](https://www.theleagueofmoveabletype.com/sorts-mill-goudy) with [Host Grotesk](https://elementtype.co/host-grotesk/) for the [tsconf.ai](https://tsconf.ai) page. Types have been really fun to work with.
 
 > Mastra recently moved to Greed
 
 In my past time, I scour the web for impressive websites which includes marketing websites and engineering blogs from mostly startups. What I recognize that sets the great from others is decisions regarding colors, spacing, accessibility, animations, micro interactions, and other design choices. What I do think is a big driver is: Typography.
 
-The right type can substantially elevate a brand. A couple of these brands that immediately come to mind are: Zed, Vercel, Linear, Paradigm and Firecrawl.
+The right type can substantially elevate a brand. A couple of these brands that immediately come to mind are: [Zed](https://zed.dev/), [Vercel](https://vercel.com/), [Linear](https://linear.app/), [Paradigm](https://www.paradigmai.com/) and [Firecrawl](https://www.firecrawl.dev/).
 
 The right type will make you go **wow**. It will seize your breath and enthrall you. That's how I felt when I saw [Yokai](https://off-type.com/products/yokai) for the first time.
 
