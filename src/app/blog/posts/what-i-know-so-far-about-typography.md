@@ -2,12 +2,13 @@
 title: What I know so far about Typography
 description: types make and break the web
 date: '2025-09-23'
+updatedAt: '2025-12-16'
 status: 'completed'
 ---
 
-In my 2 years at Mastra, I have worked on marketing websites, docs and a couple of brand assets like OG images. I create them with Sketch and I generally enjoy making images. All these work has exposed me to lots of types.
+In my 2 years at Mastra, I have worked on the marketing websites, docs and a couple of brand assets like OG images. I create the OG Images with Sketch and I generally enjoy making images. All these work has exposed me to lots of types.
 
-We currently use Inter, Tasa Explorer and Geist Mono on the [website](https://mastra.ai), blog, and docs. And Sorts Mill Goudy with Hack Grotesk for the [tsconf.ai](https://tsconf.ai) page. Types have been really fun to work with.
+We currently use [Inter](https://rsms.me/inter/), [Tasa Explorer](https://fonts.google.com/specimen/TASA+Explorer) and [Geist Mono](https://vercel.com/font) on the [website](https://mastra.ai), blog, and docs. And [Sorts Mill Goudy](https://www.theleagueofmoveabletype.com/sorts-mill-goudy) with [Host Grotesk](https://elementtype.co/host-grotesk/) for the [tsconf.ai](https://tsconf.ai) page. Types have been really fun to work with.
 
 > Mastra recently moved to Greed
 
