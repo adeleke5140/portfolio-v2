@@ -41,7 +41,7 @@ export const components = {
   ul: (props: ListProps) => (
     <ul className="text-gray-800 block list-disc pl-5 my-2" {...props} />
   ),
-  li: (props: ListItemProps) => <li className="pl-1" {...props} />,
+  li: (props: ListItemProps) => <li className="pl-1 text-[17px]" {...props} />,
   em: (props: ComponentPropsWithoutRef<'em'>) => (
     <em className="font-medium" {...props} />
   ),
