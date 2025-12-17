@@ -1,6 +1,6 @@
+import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { ComponentPropsWithoutRef } from 'react'
-import { highlight } from 'sugar-high'
 import { LetterSpacingPlayground } from '../letter-spacing-playground'
 
 type HeadingProps = ComponentPropsWithoutRef<'h1'>
@@ -9,6 +9,7 @@ type ListProps = ComponentPropsWithoutRef<'ul'>
 type ListItemProps = ComponentPropsWithoutRef<'li'>
 type AnchorProps = ComponentPropsWithoutRef<'a'>
 type BlockquoteProps = ComponentPropsWithoutRef<'blockquote'>
+type SuperscripttProps = ComponentPropsWithoutRef<'sup'>
 
 export const components = {
   h1: (props: HeadingProps) => (
@@ -41,7 +42,9 @@ export const components = {
   ul: (props: ListProps) => (
     <ul className="text-gray-800 block list-disc pl-5 my-2" {...props} />
   ),
-  li: (props: ListItemProps) => <li className="pl-1 text-[17px]" {...props} />,
+  li: (props: ListItemProps) => (
+    <li className="pl-1 my-4 text-[17px]" {...props} />
+  ),
   em: (props: ComponentPropsWithoutRef<'em'>) => (
     <em className="font-italic" {...props} />
   ),
@@ -77,12 +80,10 @@ export const components = {
       </a>
     )
   },
-  code: ({ children, ...props }: ComponentPropsWithoutRef<'code'>) => {
-    const codeHTML = highlight(children as string)
+  code: (props: ComponentPropsWithoutRef<'code'>) => {
     return (
       <code
         className="font-mono bg-[#ededed] overflow-x-auto rounded-[6px] py-0.5 px-[3.6px] border border-[#e5e7eb] text-xs"
-        dangerouslySetInnerHTML={{ __html: codeHTML }}
         {...props}
       />
     )
@@ -112,6 +113,9 @@ export const components = {
       className="[&>p]:py-1 [&>p]:pl-4 bg-primary/5 rounded-md border-l-2 border-primary [&>p]:text-[16px]"
       {...props}
     />
+  ),
+  sup: ({ className, ...props }: SuperscripttProps) => (
+    <sup className={cn('text-pink-500 align-super', className)} {...props} />
   ),
   LetterSpacingPlayground,
 }
