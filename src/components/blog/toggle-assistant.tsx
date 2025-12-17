@@ -20,7 +20,6 @@ export const ToggleAssistant = ({ className }: ChatToggleButtonProps) => {
       aria-label="Open chat with Kenny"
     >
       <SmirkIcon />
-      <span className="text-black">Ask Kenny</span>
     </div>
   )
 }
