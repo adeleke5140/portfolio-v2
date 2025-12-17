@@ -12,6 +12,25 @@ import {
 } from '../components/initial-code-block'
 import { getBlogData } from '../utils'
 import { formatDate } from '@/helpers/formatDate'
+import Link from 'next/link'
+
+const Sup = ({ id }: { id: string }) => {
+  return (
+    <sup>
+      <Link href={`#in:${id}`}>{id} </Link>
+    </sup>
+  )
+}
+
+const SupItem = ({
+  id,
+  children,
+}: {
+  id: string
+  children: React.ReactNode
+}) => {
+  return <div id={`in:${id}`}>{children}</div>
+}
 
 export async function generateMetadata({
   params,
@@ -100,6 +119,8 @@ export default async function Page({
     components: {
       InitialCodeBlock,
       FinalCodeBlock,
+      Sup,
+      SupItem,
       ...components,
     },
   })
