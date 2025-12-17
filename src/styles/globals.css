@@ -27,17 +27,6 @@ h4 {
   --gray-4: #282828;
   --gray-6: #343434;
 
-  /* Sugar High variables (for MDX) */
-  --sh-identifier: #354150;
-  --sh-keyword: #6f6f6f;
-  --sh-string: #6f6f6f;
-  --sh-class: #000000;
-  --sh-property: #6f6f6f;
-  --sh-entity: #000000;
-  --sh-jsxliterals: #000000;
-  --sh-sign: #8f8f8f;
-  --sh-comment: #6f6f6f;
-
   --primary: 18 38% 48%;
   --outline: oklch(0.68 0.17 53.04 / 0.44);
   --gradient-stop-1: oklch(0.52 0.02 266.33 / 0.85);
@@ -64,6 +53,16 @@ body *::selection {
 pre {
   scrollbar-gutter: stable;
   scrollbar-color: #dcdcdc transparent;
+}
+
+code {
+  @apply font-mono bg-[#ededed] overflow-x-auto rounded-[6px] py-0.5 px-[3.6px] border border-[#e5e7eb] text-[15px];
+}
+
+pre code {
+  background: transparent;
+  border: none;
+  line-height: 1.8;
 }
 
 .shimmer {
@@ -390,4 +389,27 @@ div[data-code-block-container='true'] {
 
 [data-streamdown='code-block'] {
   border: 0px;
+}
+
+.footnotes {
+  border-top: 0.5px solid #dcdcdc;
+  padding-top: 1rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  word-wrap: normal;
+  border: 0;
+}
+
+/* Place `[` and `]` around footnote references. */
+[data-footnote-backref] {
+  font-family: var(--font-newsreader);
+  font-weight: 300;
+  font-size: 14px;
 }

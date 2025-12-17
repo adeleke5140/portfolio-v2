@@ -1,17 +1,37 @@
 import { components } from '@/components/mdx/mdx-components'
 import { PageWrapper } from '@/components/page-wrapper'
-import { getPostData } from '@/lib/posts'
+import { formatDate } from '@/helpers/formatDate'
 import * as fsSync from 'fs'
 import { promises as fs } from 'fs'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import Head from 'next/head'
+import Link from 'next/link'
 import path from 'path'
 import {
   FinalCodeBlock,
   InitialCodeBlock,
 } from '../components/initial-code-block'
 import { getBlogData } from '../utils'
-import { formatDate } from '@/helpers/formatDate'
+import rehypePrettyCode, { type Options } from 'rehype-pretty-code'
+import remarkGfm from 'remark-gfm'
+
+const Sup = ({ id }: { id: string }) => {
+  return (
+    <sup>
+      <Link href={`#in:${id}`}>{id} </Link>
+    </sup>
+  )
+}
+
+const SupItem = ({
+  id,
+  children,
+}: {
+  id: string
+  children: React.ReactNode
+}) => {
+  return <div id={`in:${id}`}>{children}</div>
+}
 
 export async function generateMetadata({
   params,
@@ -24,8 +44,6 @@ export async function generateMetadata({
   const mdPath = path.join(process.cwd(), 'src/app/blog/posts', `${slug}.md`)
 
   const blogPath = fsSync.existsSync(mdxPath) ? mdxPath : mdPath
-
-  const data = await getPostData(slug)
 
   try {
     const content = await fs.readFile(blogPath, 'utf8')
@@ -79,6 +97,11 @@ export async function generateStaticParams() {
   }))
 }
 
+const options: Options = {
+  theme: 'github-light',
+  keepBackground: false,
+}
+
 export default async function Page({
   params,
 }: {
@@ -96,10 +119,16 @@ export default async function Page({
     source: content,
     options: {
       parseFrontmatter: true,
+      mdxOptions: {
+        remarkPlugins: [remarkGfm],
+        rehypePlugins: [[rehypePrettyCode, options]],
+      },
     },
     components: {
       InitialCodeBlock,
       FinalCodeBlock,
+      Sup,
+      SupItem,
       ...components,
     },
   })

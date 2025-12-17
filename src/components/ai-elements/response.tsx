@@ -126,8 +126,6 @@ export const Response = memo(
           'size-full [&>*:first-child]:mt-0 [&>*]:mt-3 [&>*:last-child]:mb-0 streamdown',
           className
         )}
-        // components={components}
-        // Custom themes are valid but TypeScript's BundledTheme type only includes built-in themes
         shikiTheme={[customTheme as any, customTheme as any]}
         {...props}
       >
