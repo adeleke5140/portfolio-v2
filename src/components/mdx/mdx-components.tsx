@@ -81,12 +81,7 @@ export const components = {
     )
   },
   code: (props: ComponentPropsWithoutRef<'code'>) => {
-    return (
-      <code
-        className="font-mono bg-[#ededed] overflow-x-auto rounded-[6px] py-0.5 px-[3.6px] border border-[#e5e7eb] text-xs"
-        {...props}
-      />
-    )
+    return <code {...props} />
   },
   Table: ({ data }: { data: { headers: string[]; rows: string[][] } }) => (
     <table>
