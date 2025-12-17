@@ -43,14 +43,14 @@ export const Introduction = () => {
               </p>
 
               <p className="text-lg my-4">
-                I want to make wonderful things. I am regulary thinking about
-                how good typography, animation and overall design add texture to
+                I want to make wonderful things. I am regularly thinking about
+                how typography, animation and overall design add texture to
                 the web.
               </p>
 
               <p className="text-lg my-4">
                 My craft builds me as a person and I strive to infuse every
-                piece of work with care. I currently works on the Docs and
+                piece of work with care. I currently work on the Docs and
                 Website team at{' '}
                 <a
                   href="https://www.mastra.ai"
