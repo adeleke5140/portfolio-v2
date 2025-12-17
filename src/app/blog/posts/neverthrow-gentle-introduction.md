@@ -1,11 +1,11 @@
 ---
 title: 'Neverthrow, a Gentle Introduction'
 date: '2025-12-16'
-status: 'in-progress'
+status: 'completed'
 tag: 'typescript'
 ---
 
-For quite a while writing software, I didn't think much about errors. The happy path was all that mattered, and I would only look into _error handling_ when a runtime error occurred. Validators like Zod and Arktype, have helped add an extra layer of validation to values the Typescript compilers cannot verify. Yet, while they do help limit runtime errors, they still don't offer typesafe errors.
+For quite a while writing software, I didn't think much about errors. The happy path was all that mattered, and I would only look into _error handling_ when a runtime error occurred. Validators like Zod and Arktype add an extra layer of runtime validation to values the Typescript compiler cannot verify at compile time. They help but what about code-paths where validation alone is not enough. In those cases, we want to surface errors in the type system.
 
 The more I wrote software, the more I realized that errors shouldn't be an afterthought.
 
@@ -13,13 +13,17 @@ The more I wrote software, the more I realized that errors shouldn't be an after
 
 Software should be predictable, but the happy path isn't always the predictable path, errors lurk, in various parts of our program and they can be triggered when certain conditions are met.
 
-I don't think `try` `catch` really helped either because it didn't provide me with a good mental model of how to think about errors after `throwing` it. I played around with a custom `Result<T,E>` similar to Rust's [Result Type](https://doc.rust-lang.org/std/result/) which I like where recoverable errors are returned as values but that only worked for simple cases, and there were a lot of edge cases that wasn't handled with it. It does take quite significant effort to build out a feature-rich, robust type-safe error handling system.
+I don't think `try/catch` really helped either because it didn't provide me with a good mental model of how to think about errors after `throwing` it. I played around with a custom `Result<T,E>` similar to [Rust's](https://doc.rust-lang.org/std/result/) which I like where recoverable errors are returned as values, but that only worked for simple cases. there were a lot of edge cases that weren't handled by my implementation. It takes quite a significant effort to build out a feature-rich, robust, typed-error handling system.
 
-`NeverThrow` is that. For a solid introduction, Jökull has a post you can read [on his blog](https://www.solberg.is/neverthrow). I have taken that and expanded it into a `BUN` server with some type error fixes. These are my initial thoughts on the ergonomics.
+`NeverThrow` is the robust typed-error<Sup id={1}/> lib I needed.
+
+For a solid introduction, Jökull has a post you can read [on his blog](https://www.solberg.is/neverthrow). I have taken that and expanded it into a `BUN` server with some slight modification.
 
 ## Neverthrow in Action
 
-Let's say we fetch and parse some resources from an API. We want to return type-safe errors. In the example below, we use `ok`, `err` and `Result` primitives with around the parsing process. This is the the same function Jökull uses but I've adapted it for zod v4.
+Let's say we fetch and parse some resources from an API. We want to return typed errors for possible paths that might lead to errors.
+
+In the example below, we use `ok`, `err` and `Result` primitives with the validation process. This is the the same function Jökull uses but I've adapted it for zod v4.
 
 ```typescript
 import { err, ok, type Result } from 'neverthrow'
@@ -44,7 +48,7 @@ export function safeZodParse<TSchema extends z.ZodType>(
 }
 ```
 
-We use zod's `safeParse` to return the error rather than just throwing which `parse` does. We also infer the resulting type of the value from the Schema, as well as the resulting error when validation fails
+We use zod's `safeParse` to return the error rather than just throwing which `parse` does. We also infer the resulting type of the value from the Schema, as well as the resulting error when validation fails.
 
 I particularly like the `Interface` up above because `neverthrow` helps us narrow in the error case.
 
@@ -114,9 +118,9 @@ There's quite a lot of code to wrangle with but the general idea I like is that 
 Sometimes, though, there are errors that are thrown synchronously from a function that also returns a Promise. I have this piece of code:
 
 ```typescript
-async function doStuff(): Promise<SomeResult> {
+async function doStuff(slug: string): Promise<SomeResult> {
   if (!slug) {
-    throw new Error('Unable to determine which blog post to read')
+    throw new Error('Slug not present, cannot determine which blogpost to read')
   }
 
   doAsyncStuff()
@@ -125,7 +129,7 @@ async function doStuff(): Promise<SomeResult> {
 
 In the case above, `ResultAsync.fromThrowable` is better suited.
 
-Actual implementation of this in action will be:
+Let's see how to use the `safeZodParse` and `safeFetch` in a simple web server.
 
 ```typescript
 import z from 'zod'
@@ -171,7 +175,7 @@ main('facts/random')
 
 I tried the `isOk()` and `isErr()` methods but I wasn't getting a proper discriminated result from that. By which I mean, after checking for `isErr()` and returning the result, I expect the tye to be narrowed to the `isOK()` path. But that could just be something I've missed with the implementation details, I'll check the docs for more info.
 
-[Pattern matching](https://doc.rust-lang.org/book/ch19-01-all-the-places-for-patterns.html) is pretty nice so I've decided to go with that. You can also use `map` and `mapErr` to get the value and the error.
+[Pattern matching](https://doc.rust-lang.org/book/ch19-01-all-the-places-for-patterns.html) is pretty nice so I've decided to go with that. We can also use `map` and `mapErr` to get the value and the error.
 
 ```typescript
 res
@@ -179,6 +183,12 @@ res
   .mapErr((err) => console.err(err.type))
 ```
 
-I like what I've seen so far and the next step is to rewrite my markdown fetching logic and the Hono server powering Hanashi's chrome extension. I will write a follow up on how that goes including quirks I run into with the rewrite.
+I like what I've seen so far and the next step is to rewrite the markdown fetching logic for my blog. I will also rewrite the Hono server powering Hanashi's chrome extension as well. I will write a follow up on how that goes including quirks I run into with the rewrite.
 
 Thanks for reading.
+
+<hr/>
+
+<SupItem id={1}>
+1. For an error to be typed, we surface the error on the type level providing the compiler enough information for it to determine that our code is safe. 
+</SupItem>
