@@ -27,17 +27,6 @@ h4 {
   --gray-4: #282828;
   --gray-6: #343434;
 
-  /* Sugar High variables (for MDX) */
-  --sh-identifier: #354150;
-  --sh-keyword: #6f6f6f;
-  --sh-string: #6f6f6f;
-  --sh-class: #000000;
-  --sh-property: #6f6f6f;
-  --sh-entity: #000000;
-  --sh-jsxliterals: #000000;
-  --sh-sign: #8f8f8f;
-  --sh-comment: #6f6f6f;
-
   --primary: 18 38% 48%;
   --outline: oklch(0.68 0.17 53.04 / 0.44);
   --gradient-stop-1: oklch(0.52 0.02 266.33 / 0.85);
