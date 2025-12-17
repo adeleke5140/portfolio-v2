@@ -5,25 +5,31 @@ status: 'completed'
 tag: 'typescript'
 ---
 
-For quite a while writing software, I didn't think much about errors. The happy path was all that mattered, and I would only look into _error handling_ when a runtime error occurred. Validators like Zod and Arktype add an extra layer of runtime validation to values the Typescript compiler cannot verify at compile time. They help but what about code-paths where validation alone is not enough. In those cases, we want to surface errors in the type system.
+For quite a while writing software, I didn't think much about errors. The happy path was all that mattered, and I would only look into _error handling_ when a runtime error occurred.
 
-The more I wrote software, the more I realized that errors shouldn't be an afterthought.
+Validators like Zod and Arktype helped because they added an extra layer of runtime validation to values the Typescript compiler could not verify at compile time.
+
+But then, I wondered, what about code paths where validation alone was not enough? Could we encode the potential for failure in our programs and surface the errors to handle it gracefully?
+
+## Thinking about Solutions
+
+The more I write software, the more I realize that errors shouldn't be an afterthought.
 
 > If anything can go wrong, at some point it will go wrong.
 
-Software should be predictable, but the happy path isn't always the predictable path, errors lurk, in various parts of our program and they can be triggered when certain conditions are met.
+Software should work predictably. The happy path isn't always the predictable path. Errors lurk, in various parts of our program, and they can be triggered when certain conditions are met.
 
-I don't think `try/catch` really helped either because it didn't provide me with a good mental model of how to think about errors after `throwing` it. I played around with a custom `Result<T,E>` similar to [Rust's](https://doc.rust-lang.org/std/result/) which I like where recoverable errors are returned as values, but that only worked for simple cases. there were a lot of edge cases that weren't handled by my implementation. It takes quite a significant effort to build out a feature-rich, robust, typed-error handling system.
+I have used `try/catch` and it helps but it's kinda awkward since it tends disrupt the way I reason about control flow in my programs. It didn't provide me with a good mental model of how to think about errors after `throwing` it. I have also tried to create a custom `Result<T,E>` similar to [Rust's](https://doc.rust-lang.org/std/result/) where recoverable errors are returned as values, but that only worked for simple cases. There were a lot of edge cases that weren't handled by my implementation. It takes quite a significant effort to build out a feature-rich, robust, typed, error handling system.
 
-`NeverThrow` is the robust typed-error<Sup id={1}/> lib I needed.
+`NeverThrow` is exactly that. It's a lib that helps "encode failability in the typesystem"[^1]
 
-For a solid introduction, Jökull has a post you can read [on his blog](https://www.solberg.is/neverthrow). I have taken that and expanded it into a `BUN` server with some slight modification.
+For a solid introduction, Jökull has a post you can read [on his blog](https://www.solberg.is/neverthrow). I have taken that and expanded it into a simple web server built with `bun` with some slight modification and fixes.
 
 ## Neverthrow in Action
 
-Let's say we fetch and parse some resources from an API. We want to return typed errors for possible paths that might lead to errors.
+Let's say we fetch and parse some resources from an API. We want to return typed errors for code paths that might lead to errors.
 
-In the example below, we use `ok`, `err` and `Result` primitives with the validation process. This is the the same function Jökull uses but I've adapted it for zod v4.
+In the example below, we use `ok`, `err` and `Result` primitives with the zod validation. This is the same function Jökull uses but I've adapted it for Zod v4.
 
 ```typescript
 import { err, ok, type Result } from 'neverthrow'
@@ -50,7 +56,7 @@ export function safeZodParse<TSchema extends z.ZodType>(
 
 We use zod's `safeParse` to return the error rather than just throwing which `parse` does. We also infer the resulting type of the value from the Schema, as well as the resulting error when validation fails.
 
-I particularly like the `Interface` up above because `neverthrow` helps us narrow in the error case.
+I particularly like the `Interface` because `neverthrow` uses it to help us narrow in the error case.
 
 Let's look at a type-safe `fetch` function that lets us know about possible errors that could occur while fetching and parsing some `JSON`
 
@@ -179,16 +185,12 @@ I tried the `isOk()` and `isErr()` methods but I wasn't getting a proper discrim
 
 ```typescript
 res
-  .map(({ facts }) => console.log(facts))
+  .map((value) => console.log(value.facts))
   .mapErr((err) => console.err(err.type))
 ```
 
-I like what I've seen so far and the next step is to rewrite the markdown fetching logic for my blog. I will also rewrite the Hono server powering Hanashi's chrome extension as well. I will write a follow up on how that goes including quirks I run into with the rewrite.
+I like what I've seen so far and the next step, is to rewrite the markdown fetching logic for my blog. and improve error handling in the Hono server powering Hanashi's chrome extension. I will write a follow up on how that goes including quirks I run into.
 
 Thanks for reading.
 
-<hr/>
-
-<SupItem id={1}>
-1. For an error to be typed, we surface the error on the type level providing the compiler enough information for it to determine that our code is safe. 
-</SupItem>
+[^1]: [Introduction: Type Safe Errors in JS & TypeScript](<https://github.com/supermacro/neverthrow/wiki/Introduction:-Type-Safe-Errors-in-JS-&-TypeScript-(10-minute-read)>)
