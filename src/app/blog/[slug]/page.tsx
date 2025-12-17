@@ -13,6 +13,7 @@ import {
 } from '../components/initial-code-block'
 import { getBlogData } from '../utils'
 import rehypePrettyCode, { type Options } from 'rehype-pretty-code'
+import remarkGfm from 'remark-gfm'
 
 const Sup = ({ id }: { id: string }) => {
   return (
@@ -119,6 +120,7 @@ export default async function Page({
     options: {
       parseFrontmatter: true,
       mdxOptions: {
+        remarkPlugins: [remarkGfm],
         rehypePlugins: [[rehypePrettyCode, options]],
       },
     },
