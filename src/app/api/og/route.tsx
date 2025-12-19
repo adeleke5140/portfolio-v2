@@ -53,13 +53,13 @@ export async function GET(request: Request) {
         <h1
           style={{
             color: '#000',
-            fontSize: '72px',
             textAlign: 'left',
             letterSpacing: '-0.02em',
             margin: 0,
             paddingLeft: 80,
             marginBottom: 60,
           }}
+          tw="text-7xl"
         >
           {title}
         </h1>
