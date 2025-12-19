@@ -95,8 +95,8 @@ function BlogAssistantPortal() {
 
       <div className={cn('fixed bottom-6 right-6 z-30')}>
         <Popover open={isAssistantOpen} onOpenChange={setIsAssistantOpen}>
-          <PopoverTrigger className="data-[state=open]:translate-y-[120%] data-[state=open]:opacity-0 data-[state=closed]:translate-y-0 transition-[transform] duration-300">
-            <ToggleAssistant />
+          <PopoverTrigger className="data-[state=open]:translate-y-[120%] data-[state=open]:opacity-0 data-[state=closed]:translate-y-0 transition-[transform] duration-500">
+            <ToggleAssistant className="" />
           </PopoverTrigger>
           {chatMode === 'floating' ? (
             <PopoverContent
