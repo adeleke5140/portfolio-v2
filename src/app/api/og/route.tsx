@@ -1,18 +1,19 @@
-import { getPostData } from '@/lib/posts'
 import { ImageResponse } from 'next/og'
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
 export const size = {
-  width: 1200,
-  height: 630,
+  width: 800,
+  height: 400,
 }
 
 export const contentType = 'image/png'
 
-export default async function Image({ params }: { params: { slug: string } }) {
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url)
+  const title = searchParams.get('title')
   const ppEditorialNew = await readFile(
-    join(process.cwd(), 'src/fonts/PPEditorialNew-Regular.ttf')
+    join(process.cwd(), 'src/fonts/Newsreader_24pt-Regular.ttf')
   )
   const imageMetadata = await readFile(
     join(process.cwd(), 'src/asset/kehinde-small.png')
@@ -22,8 +23,6 @@ export default async function Image({ params }: { params: { slug: string } }) {
     imageMetadata.byteOffset,
     imageMetadata.byteOffset + imageMetadata.byteLength
   )
-
-  const post = await getPostData(params.slug)
 
   return new ImageResponse(
     (
@@ -54,15 +53,15 @@ export default async function Image({ params }: { params: { slug: string } }) {
         <h1
           style={{
             color: '#000',
-            fontSize: '72px',
             textAlign: 'left',
             letterSpacing: '-0.02em',
             margin: 0,
-            paddingLeft: 80,
-            marginBottom: 60,
+            paddingLeft: 40,
+            marginBottom: 40,
           }}
+          tw="text-6xl"
         >
-          {post.title}
+          {title}
         </h1>
       </div>
     ),

@@ -6,6 +6,22 @@ import Link from 'next/link'
 export const metadata = {
   title: 'Craft',
   description: 'Craft components',
+  openGraph: {
+    title: 'Craft',
+    description: 'Craft components',
+    type: 'website',
+    url: 'https://kehinde.xyz/craft',
+    images: [
+      {
+        url: `/api/og?title=${encodeURIComponent('Craft')}`,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Craft',
+    description: 'Craft components',
+  },
 }
 
 export type CraftItem = {
