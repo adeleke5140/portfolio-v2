@@ -53,6 +53,11 @@ export async function generateMetadata({
           `Explore ${frontmatter.title} - UI craft by Kenny`,
         type: 'website',
         url: `https://kehinde.xyz/craft/${slug}`,
+        images: [
+          {
+            url: `/api/og?title=${encodeURIComponent(frontmatter.title)}`,
+          },
+        ],
       },
       twitter: {
         card: 'summary_large_image',

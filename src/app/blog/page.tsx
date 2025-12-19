@@ -8,6 +8,22 @@ const isDevelopment = process.env.NODE_ENV === 'development'
 export const metadata = {
   title: 'Blog',
   description: "Kehinde Adeleke's blog",
+  openGraph: {
+    title: 'Blog',
+    description: "Kehinde Adeleke's blog",
+    type: 'website',
+    url: 'https://kehinde.xyz/blog',
+    images: [
+      {
+        url: `/api/og?title=${encodeURIComponent('Blog')}`,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog',
+    description: "Kehinde Adeleke's blog",
+  },
 }
 
 function getYearFromDate(dateString?: string): number {

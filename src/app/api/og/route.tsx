@@ -1,4 +1,3 @@
-import { getPostData } from '@/lib/posts'
 import { ImageResponse } from 'next/og'
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
@@ -10,9 +9,11 @@ export const size = {
 
 export const contentType = 'image/png'
 
-export default async function Image({ params }: { params: { slug: string } }) {
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url)
+  const title = searchParams.get('title')
   const ppEditorialNew = await readFile(
-    join(process.cwd(), 'src/fonts/PPEditorialNew-Regular.ttf')
+    join(process.cwd(), 'src/fonts/Newsreader_24pt-Regular.ttf')
   )
   const imageMetadata = await readFile(
     join(process.cwd(), 'src/asset/kehinde-small.png')
@@ -22,8 +23,6 @@ export default async function Image({ params }: { params: { slug: string } }) {
     imageMetadata.byteOffset,
     imageMetadata.byteOffset + imageMetadata.byteLength
   )
-
-  const post = await getPostData(params.slug)
 
   return new ImageResponse(
     (
@@ -62,7 +61,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
             marginBottom: 60,
           }}
         >
-          {post.title}
+          {title}
         </h1>
       </div>
     ),

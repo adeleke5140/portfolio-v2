@@ -59,19 +59,22 @@ export async function generateMetadata({
       date: string
       description?: string
     }
+    const { title, description, date } = frontmatter
 
     return {
-      title: frontmatter.title,
-      description:
-        frontmatter.description || `Read ${frontmatter.title} on Kenny's blog`,
+      title,
+      description: description || `Read ${title} on Kenny's blog`,
       openGraph: {
-        title: frontmatter.title,
-        description:
-          frontmatter.description ||
-          `Read ${frontmatter.title} on Kenny's blog`,
+        title,
+        description: description || `Read ${title} on Kenny's blog`,
         type: 'article',
         publishedTime: frontmatter.date,
         url: `https://kehinde.xyz/blog/${slug}`,
+        images: [
+          {
+            url: `/api/og?title=${encodeURIComponent(title)}`,
+          },
+        ],
       },
       twitter: {
         card: 'summary_large_image',
