@@ -17,10 +17,10 @@ There are a number of issues to fix on the website:
 Here are a number of Craft Todos I need to finish
 
 - [ ] I am not a robot
-- [ ] Tasty Button
+- [x] Tasty Button
 
 Here are a number of Articles I need to write
 
-- [ ] `Neverthrow`, my gentle introduction
+- [x] `Neverthrow`, my gentle introduction
 - [ ] Animation with `useMotionTemplate`
 - [ ] Build an AI chatbot with `mastra` and `AI Elements` and `NextJS`
