@@ -407,9 +407,52 @@ div[data-code-block-container='true'] {
   border: 0;
 }
 
-/* Place `[` and `]` around footnote references. */
 [data-footnote-backref] {
   font-family: var(--font-newsreader);
   font-weight: 300;
   font-size: 14px;
+}
+
+.craft-button,
+.destructive {
+  --text-sh: oklch(0.14 0.02 215.95 / 0.4);
+  color: oklch(1 0 0);
+  border: 1px solid var(--border-color);
+  border-radius: 0.725rem;
+  background-image: linear-gradient(
+    180deg,
+    var(--stop-1),
+    var(--stop-2),
+    var(--stop-3)
+  );
+  padding-inline: 16px;
+  box-shadow: inset 0 1px 0 var(--sh-color-1), inset 0 -1px 0 var(--sh-color-2),
+    0 1px 2px var(--sh-color-2);
+  transition: transform 200ms ease, border-color 200ms ease;
+  height: 36px;
+  font-weight: 800;
+  &:active {
+    transform: scale(0.96);
+    border-color: var(--active-color);
+  }
+}
+
+.craft-button {
+  --border-color: oklch(0.53 0.25 265.05);
+  --stop-1: oklch(0.67 0.19 263);
+  --stop-2: oklch(0.59 0.26 263);
+  --stop-3: oklch(0.64 0.22 263);
+  --sh-color-1: oklch(1 0 0 / 0.2);
+  --sh-color-2: oklch(0 0 0 / 0.2);
+  --active-color: oklch(0.4 0.22 263);
+}
+
+.destructive {
+  --border-color: oklch(0.64 0.24 35.05);
+  --stop-1: oklch(0.64 0.24 25.34);
+  --stop-2: oklch(0.64 0.26 25.34);
+  --stop-3: oklch(0.64 0.28 25.34);
+  --sh-color-1: oklch(1 0 0 / 0.2);
+  --sh-color-2: oklch(0 0 0 / 0.05);
+  --active-color: oklch(0.4 0.28 25.34);
 }
