@@ -6,7 +6,7 @@ import { Nunito } from 'next/font/google'
 import { useEffect, useRef, useState } from 'react'
 import { CheckMark, Pen } from './icons'
 
-const nunito = Nunito({ subsets: ['latin'] })
+export const nunito = Nunito({ subsets: ['latin'] })
 
 const t = {
   duration: 0.6,
