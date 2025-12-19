@@ -35,7 +35,7 @@ export const components = {
   ),
   ol: (props: ListProps) => (
     <ol
-      className="text-gray-800 dark:text-zinc-300 list-decimal pl-5 space-y-2"
+      className="text-gray-800 dark:text-zinc-300 list-decimal pl-5"
       {...props}
     />
   ),
