@@ -56,10 +56,10 @@ export async function GET(request: Request) {
             textAlign: 'left',
             letterSpacing: '-0.02em',
             margin: 0,
-            paddingLeft: 80,
-            marginBottom: 60,
+            paddingLeft: 40,
+            marginBottom: 40,
           }}
-          tw="text-7xl"
+          tw="text-6xl"
         >
           {title}
         </h1>
