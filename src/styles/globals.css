@@ -431,8 +431,11 @@ div[data-code-block-container='true'] {
   transition: transform 200ms ease, border-color 200ms ease;
   height: 36px;
   font-weight: 800;
+  &:hover:not(:active) {
+    transform: scale(1.02);
+  }
   &:active {
-    transform: scale(0.96);
+    transform: scale(0.97);
     border-color: var(--active-color);
   }
 }
