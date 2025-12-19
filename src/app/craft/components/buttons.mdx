@@ -1,0 +1,24 @@
+---
+title: Buttons
+description: Inspiration from the physical world
+tag: CSS
+status: draft
+---
+
+[SF Compute](https://sfcompute.com/) and [COSS UI](https://coss.com/ui/docs/components/alert-dialog) have buttons with a feeling of depth. They act like physical buttons.
+
+<br />
+
+<CraftContainer className="bg-white">
+  <TastyButton />
+</CraftContainer>
+
+The key css properties are:
+
+1. `border`
+2. `background-image`
+3. `box-shadow`
+4. `transform`
+
+The `background-image` and `box-shadow` properties with multiple color stops give the button its <em>embossed</em> appearance at rest. When pressed, the `scale`
+transform creates a <em>debossed</em> effect, simulating how a physical button depresses under pressure.
