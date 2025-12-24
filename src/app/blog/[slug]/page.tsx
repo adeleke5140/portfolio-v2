@@ -15,24 +15,6 @@ import { getBlogData } from '../utils'
 import rehypePrettyCode, { type Options } from 'rehype-pretty-code'
 import remarkGfm from 'remark-gfm'
 
-const Sup = ({ id }: { id: string }) => {
-  return (
-    <sup>
-      <Link href={`#in:${id}`}>{id} </Link>
-    </sup>
-  )
-}
-
-const SupItem = ({
-  id,
-  children,
-}: {
-  id: string
-  children: React.ReactNode
-}) => {
-  return <div id={`in:${id}`}>{children}</div>
-}
-
 export async function generateMetadata({
   params,
 }: {
@@ -130,8 +112,6 @@ export default async function Page({
     components: {
       InitialCodeBlock,
       FinalCodeBlock,
-      Sup,
-      SupItem,
       ...components,
     },
   })
