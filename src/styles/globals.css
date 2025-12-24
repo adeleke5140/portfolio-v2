@@ -51,9 +51,14 @@ body *::selection {
   --shimmer-after-transform: skewX(45deg) translateX(-150%);
 }
 
-pre {
+pre,
+.llm-stream {
   scrollbar-gutter: stable;
   scrollbar-color: #dcdcdc transparent;
+}
+
+.llm-stream {
+  scrollbar-stroke: thin;
 }
 
 code {

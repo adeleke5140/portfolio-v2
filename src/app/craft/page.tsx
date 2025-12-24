@@ -1,5 +1,4 @@
 import { PageWrapper } from '@/components/page-wrapper'
-import { formatDate } from '@/helpers/formatDate'
 import { getSortedCraftData } from '@/lib/posts'
 import Link from 'next/link'
 

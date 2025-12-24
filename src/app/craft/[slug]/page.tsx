@@ -12,6 +12,7 @@ import { TastyButton } from '@/components/craft/tasty-button'
 import { promises as fs } from 'fs'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import path from 'path'
+import { LLMStream } from '@/components/craft/llm-stream/llm-stream'
 
 export async function generateMetadata({
   params,
@@ -104,6 +105,7 @@ export default async function Page({
     options: {
       parseFrontmatter: true,
     },
+    // There should be a better way of loading these components
     components: {
       CraftContainer,
       CardAnimation,
@@ -112,6 +114,7 @@ export default async function Page({
       RecaptchaButton,
       SplitToEdit,
       TastyButton,
+      LLMStream,
       ...components,
     },
   })
@@ -121,7 +124,7 @@ export default async function Page({
       heading={
         <div className="py-10 pt-24 border-b border-[#dcdcdc7e] pb-6">
           <span className="text-ken-grey text-[15px]">
-            {formatDate(craftFrontMatter.date)}
+            {formatDate(craftFrontMatter.date, 'LLL d, yyyy')}
           </span>
           <h1
             style={{
