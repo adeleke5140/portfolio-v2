@@ -54,9 +54,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['var(--font-newsreader)', ...defaultTheme.fontFamily.sans],
+        sans: ['var(--font-sans)', ...defaultTheme.fontFamily.sans],
         mono: ['var(--font-berkeley-mono)', ...defaultTheme.fontFamily.mono],
-        serif: ['var(--font-newsreader)', ...defaultTheme.fontFamily.serif],
       },
       transitionProperty: {
         'transform-opacity': 'transform, opacity',

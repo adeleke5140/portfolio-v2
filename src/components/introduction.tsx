@@ -38,23 +38,22 @@ export const Introduction = () => {
         <section className="px-0">
           <div className="flex flex-col text-[var(--gray-1)] gap-2 dark:border-[#282828] dark:bg-[#282828]">
             <div>
-              <p className="text-lg  my-4">
+              <p className="text-base my-4">
                 I am a Design engineer working across design and engineering.
               </p>
 
-              <p className="text-lg my-4">
+              <p className="text-base my-4">
                 I want to make wonderful things. I am regularly thinking about
-                how elements of design like typography, composition and animation add texture to
-                the web.
+                how elements of design like typography, composition and
+                animation add texture to the web.
               </p>
 
-              <p className="text-lg my-4">
+              <p className="text-base my-4">
                 My craft builds me as a person and I strive to infuse every
-                piece of work with care. I currently work on the Docs and
-                Website team at{' '}
+                piece of work with care. I previously worked at{' '}
                 <a
                   href="https://www.mastra.ai"
-                  className="underline decoration-primary text-primary"
+                  className="border-b border-primary text-primary"
                 >
                   mastra.ai
                 </a>{' '}
@@ -65,14 +64,14 @@ export const Introduction = () => {
 
         <A11ySection />
 
-        <div className="flex gap-4  md:gap-0 flex-col md:flex-row md:items-center justify-between">
+        <div className="flex gap-4 md:gap-0 flex-col md:flex-row md:items-center justify-between">
           <div className="flex">
             {connection.map((con) => (
               <a
                 key={con.name}
                 target="_blank"
                 href={con.value}
-                className="capitalize text-ken-grey hover:underline first:-ml-3 justify-between group flex gap-1.5 text-[17.5px] items-center px-3 py-1 rounded-xl"
+                className="capitalize text-ken-grey hover:underline first:-ml-3 justify-between group flex gap-1.5 items-center px-3 py-1 rounded-xl"
                 rel="external"
                 referrerPolicy="strict-origin"
               >
@@ -80,7 +79,7 @@ export const Introduction = () => {
               </a>
             ))}
           </div>
-          <p className="text-ken-grey text-[17.5px]">
+          <p className="text-ken-grey text-base">
             © {new Date().getFullYear()}
           </p>
         </div>

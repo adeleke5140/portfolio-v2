@@ -1,4 +1,3 @@
-import { Newsreader } from 'next/font/google'
 import localFont from 'next/font/local'
 
 export const berkeleyMono = localFont({
@@ -7,15 +6,13 @@ export const berkeleyMono = localFont({
   variable: '--font-berkeley-mono',
 })
 
-export const newsreader = Newsreader({
-  subsets: ['latin'],
-  variable: '--font-newsreader',
+export const sans = localFont({
+  src: './Google-sans-variable.ttf',
   display: 'swap',
-  weight: ['400', '500', '600', '700', '800'],
-  style: ['normal', 'italic'],
+  variable: '--font-sans',
 })
 
 export const fonts = {
   berkeleyMono,
-  newsreader,
+  sans,
 }
