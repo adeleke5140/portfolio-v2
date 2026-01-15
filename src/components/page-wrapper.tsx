@@ -23,7 +23,7 @@ const PageWrapper = ({
 }: PageWrapperProps) => {
   const slot =
     heading && typeof heading == 'string' ? (
-      <h1 className="font-serif text-left py-10 text-[40px] font-medium w-full capitalize leading-[100%] tracking-[-0.96px]">
+      <h1 className="text-left py-10 text-[40px] w-full capitalize leading-[100%] tracking-[-0.96px]">
         {heading}
       </h1>
     ) : (

@@ -83,7 +83,7 @@ const Index = () => {
             key={year}
             className=" last:border-b-0 pt-10 first:pt-0 border-b-[0.5px] border-b-[#dcdcdc]"
           >
-            <p className="font-serif mb-4 text-lg text-ken-grey">{year}</p>
+            <p className="text-sm mb-4 text-ken-grey">{year}</p>
             <div>
               {posts.map((post) => (
                 <Link
@@ -92,11 +92,14 @@ const Index = () => {
                   className="group rounded-md py-2 block mb-2 transition-colors duration-200"
                 >
                   <div className="flex md:flex-row md:justify-between group-hover:translate-x-2 flex-col gap-1 transition-transform">
-                    <p className="text-lg hover:underline transition-all">
+                    <p className="hover:underline transition-all">
                       {post.title}
                     </p>
                     <span className="text-sm text-ken-grey">
-                      {formatDate(post.date || Date.now().toString())}
+                      {formatDate(
+                        post.date || Date.now().toString(),
+                        'LLL d, yyyy'
+                      )}
                     </span>
                   </div>
                 </Link>

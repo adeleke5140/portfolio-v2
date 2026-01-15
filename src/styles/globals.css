@@ -62,7 +62,7 @@ pre,
 }
 
 code {
-  @apply font-mono bg-[#ededed] overflow-x-auto rounded-[6px] py-0.5 px-[3.6px] border border-[#e5e7eb] text-[15px];
+  @apply font-mono overflow-x-auto rounded-[6px] bg-top from-[#f8f8f8] to-[#fcfcfc] py-0.5 px-[3.6px] border border-[hsl(0_0%_92%)] text-[15px];
 }
 
 pre code {

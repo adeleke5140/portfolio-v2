@@ -64,9 +64,7 @@ export default function Index() {
             key={category}
             className="grid  last:border-b-0  pt-10 first:pt-0 border-b-[0.5px] border-b-[#dcdcdc]"
           >
-            <p className="font-serif mb-4 capitalize text-lg text-ken-grey">
-              {category}
-            </p>
+            <p className="mb-4 capitalize text-sm text-ken-grey">{category}</p>
             <div>
               {crafts.map((craft) => (
                 <Link
@@ -76,7 +74,7 @@ export default function Index() {
                 >
                   <div className="flex group-hover:translate-x-2 flex-col gap-1 transition-transform ">
                     <p className="flex gap-2 items-center">
-                      <span className="text-lg  hover:underline  transition-all">
+                      <span className="hover:underline  transition-all">
                         {craft.title}
                       </span>
                       <span>{craft.isNew ? <NewBadge /> : ''}</span>

@@ -13,31 +13,22 @@ type SuperscripttProps = ComponentPropsWithoutRef<'sup'>
 
 export const components = {
   h1: (props: HeadingProps) => (
-    <h1 className="font-medium font-serif  pt-12 text-3xl mb-0" {...props} />
+    <h1 className="font-medium pt-12 text-3xl mb-0" {...props} />
   ),
   h2: (props: HeadingProps) => (
-    <h2
-      className="text-gray-800 font-serif text-2xl font-medium mt-8 mb-3"
-      {...props}
-    />
+    <h2 className="text-gray-800 text-2xl font-medium mt-8 mb-3" {...props} />
   ),
   h3: (props: HeadingProps) => (
-    <h3
-      className="text-gray-800 font-serif text-xl font-medium mt-8 mb-3"
-      {...props}
-    />
+    <h3 className="text-gray-800 text-xl font-medium mt-8 mb-3" {...props} />
   ),
   h4: (props: HeadingProps) => (
-    <h4 className="font-serif font-medium" {...props} />
+    <h4 className="text-gray-800 mt-8 mb-3 font-medium" {...props} />
   ),
   p: (props: ParagraphProps) => (
-    <p className="text-ken-black text-[20px] leading-[30px] my-6" {...props} />
+    <p className="text-ken-black my-6 leading-[1.7]" {...props} />
   ),
   ol: (props: ListProps) => (
-    <ol
-      className="text-gray-800 dark:text-zinc-300 list-decimal pl-5"
-      {...props}
-    />
+    <ol className="text-gray-800 list-decimal pl-5" {...props} />
   ),
   ul: (props: ListProps) => (
     <ul className="text-gray-800 block list-disc pl-5 my-2" {...props} />
@@ -52,8 +43,7 @@ export const components = {
     <strong className="font-medium" {...props} />
   ),
   a: ({ href, children, ...props }: AnchorProps) => {
-    const className =
-      'text-primary underline group-hover:text-primary dark:text-gray-400 group-hover:dark:text-gray-300 dark:underline dark:underline-offset-2 dark:decoration-gray-800'
+    const className = 'text-primary underline group-hover:text-primary'
     if (href?.startsWith('/')) {
       return (
         <Link href={href} className={className} {...props}>
@@ -105,7 +95,7 @@ export const components = {
   ),
   blockquote: (props: BlockquoteProps) => (
     <blockquote
-      className="[&>p]:py-1 [&>p]:pl-4 bg-primary/5 rounded-md border-l-2 border-primary [&>p]:text-[16px]"
+      className="[&>p]:py-1 [&>p]:pl-4 bg-primary/5 rounded-md rounded-l-none border-l-2 border-primary [&>p]:text-[16px]"
       {...props}
     />
   ),

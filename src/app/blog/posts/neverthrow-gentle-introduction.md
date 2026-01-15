@@ -19,7 +19,11 @@ The more I write software, the more I realize that errors shouldn't be an aftert
 
 Software should work predictably. The happy path isn't always the predictable path. Errors lurk, in various parts of our program, and they can be triggered when certain conditions are met.
 
-I have used `try/catch` and it helps but it's kinda awkward since it tends disrupt the way I reason about control flow in my programs. It didn't provide me with a good mental model of how to think about errors after `throwing` it. I have also tried to create a custom `Result<T,E>` similar to [Rust's](https://doc.rust-lang.org/std/result/) where recoverable errors are returned as values, but that only worked for simple cases. There were a lot of edge cases that weren't handled by my implementation. It takes quite a significant effort to build out a feature-rich, robust, typed, error handling system.
+I have used `try/catch` and it helps but it's kinda awkward since it tends disrupt the way I reason about control flow in my programs. It didn't provide me with a good mental model of how to think about errors after `throwing` it.
+
+I have also tried to create a custom `Result<T,E>` similar to [Rust's](https://doc.rust-lang.org/std/result/) where recoverable errors are returned as values, but that only worked for simple cases.
+
+There were a lot of edge cases that weren't handled by my implementation. It takes quite a significant effort to build out a feature-rich, robust, typed, error handling system.
 
 `NeverThrow` is exactly that. It's a lib that helps "encode failability in the typesystem"[^1]
 
@@ -119,7 +123,9 @@ export function safeFetch<T = unknown, E = unknown>(
 }
 ```
 
-There's quite a lot of code to wrangle with but the general idea I like is that we pass in callbacks for each error case and when they might occur. Coupled with `FetchError<E>` this allows for a discriminated type, where based on the type of error, we can extract the corresponding error data. `fetch` returns a `Promise` and `ResultAsync.safePromise` is appropriate for that.
+There's quite a lot of code to wrangle with but the general idea I like is that we pass in callbacks for each error case and when they might occur.
+
+Coupled with `FetchError<E>` this allows for a discriminated type, where based on the type of error, we can extract the corresponding error data. `fetch` returns a `Promise` and `ResultAsync.safePromise` is appropriate for that.
 
 Sometimes, though, there are errors that are thrown synchronously from a function that also returns a Promise. I have this piece of code:
 
