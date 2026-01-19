@@ -25,13 +25,13 @@ export const components = {
     <h4 className="text-gray-800 mt-8 mb-3 font-medium" {...props} />
   ),
   p: (props: ParagraphProps) => (
-    <p className="text-ken-black my-6 leading-[1.7]" {...props} />
+    <p className="text-ken-black my-6 leading-[26px]" {...props} />
   ),
   ol: (props: ListProps) => (
     <ol className="text-gray-800 list-decimal pl-5" {...props} />
   ),
   ul: (props: ListProps) => (
-    <ul className="text-gray-800 block list-disc pl-5 my-2" {...props} />
+    <ul className="text-gray-800 block list-[square] pl-5 my-2" {...props} />
   ),
   li: (props: ListItemProps) => (
     <li className="pl-1 my-4 text-[17px]" {...props} />
