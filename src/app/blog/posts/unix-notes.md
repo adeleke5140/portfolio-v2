@@ -16,7 +16,7 @@ human-readable web domain which you can then connect to an IP address.
 
 I used DigitialOcean for the first time. I bought a Droplet for $4/month and installed `Ubuntu LTS` on it. It came with `10GB` of SSD storage and `512MB` of RAM. My macbook pro has 16GB. There really is a lot to think about when you have so little `RAM`. How much `RAM` did [Apollo Guidance Computer](https://en.wikipedia.org/wiki/Apollo_Guidance_Computer) have again?
 
-Once you've gotten the domain, you'll have to register and manage it with Digitial ocean, I can't remember what this is now, but something about *nameservers* and managing records, A record, CNAME, txt records etc. Right now, my domain is registered through `namecheap` but managed through DigitalOcean.
+Once you've gotten the domain, you can manage it with DigitialOcean. A, CNAME, txt records etc.
 
 After acquiring a domain, there are a number of UNIX utilities that provide you with technical information on/for the domain. They include:
 - `curl`
@@ -25,13 +25,13 @@ After acquiring a domain, there are a number of UNIX utilities that provide you 
 - `nmap`
 - `ping`
 
-They do a number of things and their full description can be gotten from their man pages. You get by running:
+They do a number of things and their full description can be gotten from their man pages. 
 
 ```zsh
 man curl | head -n 10
 ```
 
-which gives the sample output
+gives the ff output
 
 ```zsh
 curl(1)                           curl Manual                          curl(1)
@@ -46,11 +46,12 @@ DESCRIPTION
        curl is a tool for transferring data from or to a server using URLs. It
 ```
 
-`man` pages are awesome because they give you detailed explanation of the util. When the internet is down, it will come in handy.
+`man` pages are awesome because they give prvide detailed explanation of the util. When the internet is down, it will come in handy.
 
 Mosh is a great tool for working with `SSH` connections like the one I have on DigitalOcean. It improves keystroke latency and you can read more about it [here](./mosh.md)
 
-If you noticed in the article above, I was logged in as root which is something you shouldn't do. Creating a user group and removing root is the right approach.
+In the article above, I was logged in as root which is something you shouldn't do. Creating a user group and removing disabling root access is the better approach.
+
 
 Now I access my server with:
 
@@ -62,7 +63,15 @@ where ken is the user I created without sudo permissions. `sudo` is short for `s
 
 `chmod` is useful for changing the `read`, `write` and `execute` access to a file and `chown` is used for changing the ownership access of a file. File or directories, they both apply.
 
-When in a low-resource setting, you start to realize how much precious RAM is. Node is generally too resources intensive, and a compiled langugage works better. Especially a compile languge that is also lightweight and doesn't use all your RAM for installation. 
+Running `ls -la` reveals the content of a directory and permissions of files and directories.
+
+```zsh
+drwxrwxr-x 3 ken ken 4096 Jan 11 23:27 go
+-rwxrw-r-- 1 ken ken  123 Jan 11 17:35 init.sh
+drwx------ 3 ken ken 4096 Jan 19 12:44 snap
+```
+
+When in a low-resource setting, you start to realize how much precious RAM is. Node hogs too much of it and a compiled langugage works better. Especially a compile languge that is also lightweight and doesn't use all your RAM for installing the compiler.
 
 `Rust` was my first choice but I couldn't even install `rustup` so I had to settle for...`Go` which I suprisingly came to like. [Here](https://github.com/adeleke5140/simple-go-wss) is a websocket implementation in `Go` thanks to both Medium Authors and lessons from ChatGPT.
 
@@ -77,7 +86,26 @@ I like the `:=` syntax.
 
 Even with a compiled language like `Go` you can run into problems with `go build`. I couldn't run it on the droplet. The solution was to build locally and then transfer the binary over scp to my server.
 
+You can view resource usage with `htop` and watch free and used memory with `free`.
+
+You can see how much the memory allocation changes per second with:
+
+```
+watch -n 1 free -h
+```
+
+Back to `scp`
+
+
 Here is man intro to `scp`
+
+I copied it over with:
+
+```
+scp server ken@<ip-address>:<path-to-working-directory>
+```
+
+Short description from `man`
 
 ```zsh
 SCP(1)                      General Commands Manual                     SCP(1)
@@ -101,11 +129,7 @@ DESCRIPTION
      authentication.
 ```
 
-and then I just copied it over with:
 
-```
-scp server ken@<ip-address>:<path-to-working-directory>
-```
 
 This was very nifty albeit not as fast. I wonder if it's dependent on both my `ISP` and my server.
 
@@ -137,10 +161,10 @@ I also setup `SSL` with [Certbot](https://certbot.eff.org/instructions) which do
 
 Docker is really cool for boxing things up and making them easily reusable. I created a `Dockerfile` that intialied `go-lang` and `alpine`. It allows me to spin up as many server applications as possible. `nginx` balances all of this after some setup.
 
-Prior to this, I used `pm2` which is a package for managing processes. It can also kick of processes from other language binaries. It worked for go.
+Prior to this, I used `pm2` which is a package for managing processes. It can also kick of processes from other language binaries.
 The [npm page](https://www.npmjs.com/package/pm2) is a good place to start.
 
-Here is the `Dockerfile` for setting up `go`
+Here is the `Dockerfile`
 
 ```txt
 FROM golang:1.25-alpine AS builder
@@ -196,7 +220,7 @@ DESCRIPTION
        Copy standard input to each FILE, and also to standard output.
 ```
 
-`fstab` has a number of entries we would not want to overwrite so the `-a` flag just appends to the file.
+`fstab` has a number of entries I do not want to tamper with so the `-a` flag just appends to the file.
 
 Docker images are built with
 
