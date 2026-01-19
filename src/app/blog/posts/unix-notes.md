@@ -14,7 +14,7 @@ There really isn't an order, it's just gonna be a list of things as I remember t
 Domain registrars like **namecheap** are pretty neat and they allow you a piece of the internet, since they grant you the access of getting a
 human-readable web domain which you can then connect to an IP address.
 
-I used DigitialOcean for the first time. I bought a Droplet for $4/month and installed `Ubuntu LTS` on it. It came with `10GB` of SSD storage and `512MB` of RAM. My macbook pro has 16GB. There really is a lot to think about when you have so little `RAM`. How much `RAM` did Apollo use again?,  I'll get into that later.
+I used DigitialOcean for the first time. I bought a Droplet for $4/month and installed `Ubuntu LTS` on it. It came with `10GB` of SSD storage and `512MB` of RAM. My macbook pro has 16GB. There really is a lot to think about when you have so little `RAM`. How much `RAM` did [Apollo Guidance Computer](https://en.wikipedia.org/wiki/Apollo_Guidance_Computer) have again?
 
 Once you've gotten the domain, you'll have to register and manage it with Digitial ocean, I can't remember what this is now, but something about *nameservers* and managing records, A record, CNAME, txt records etc. Right now, my domain is registered through `namecheap` but managed through DigitalOcean.
 
