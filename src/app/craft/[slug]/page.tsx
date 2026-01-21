@@ -9,6 +9,7 @@ import { SplitToEdit } from '@/components/craft/split-to-edit/split-to-edit'
 import { components } from '@/components/mdx/mdx-components'
 import { PageWrapper } from '@/components/page-wrapper'
 import { TastyButton } from '@/components/craft/tasty-button'
+import { BatteryWidget } from '@/components/craft/battery-widget/battery-widget'
 import { promises as fs } from 'fs'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import path from 'path'
@@ -115,6 +116,7 @@ export default async function Page({
       SplitToEdit,
       TastyButton,
       LLMStream,
+      BatteryWidget,
       ...components,
     },
   })
