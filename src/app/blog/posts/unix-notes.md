@@ -46,7 +46,7 @@ DESCRIPTION
        curl is a tool for transferring data from or to a server using URLs. It
 ```
 
-`man` pages are awesome because they give prvide detailed explanation of the util. When the internet is down, it will come in handy.
+`man` pages are awesome because they give detailed explanation of the util. When the internet is down, it will come in handy.
 
 Mosh is a great tool for working with `SSH` connections like the one I have on DigitalOcean. It improves keystroke latency and you can read more about it [here](./mosh.md)
 
@@ -73,7 +73,7 @@ drwx------ 3 ken ken 4096 Jan 19 12:44 snap
 
 When in a low-resource setting, you start to realize how much precious RAM is. Node hogs too much of it and a compiled langugage works better. Especially a compile languge that is also lightweight and doesn't use all your RAM for installing the compiler.
 
-`Rust` was my first choice but I couldn't even install `rustup` so I had to settle for...`Go` which I suprisingly came to like. [Here](https://github.com/adeleke5140/simple-go-wss) is a websocket implementation in `Go` thanks to both Medium Authors and lessons from ChatGPT.
+`Rust` was my first choice but I couldn't install `rustup` so I had to settle for...`Go` which I suprisingly came to like. [Here](https://github.com/adeleke5140/simple-go-wss) is a websocket implementation in `Go` thanks to both Medium Authors and lessons from ChatGPT.
 
 ```go
 conn, err := upgrader.Upgrade(w,r,nil)
@@ -234,7 +234,7 @@ and ran with
 docker run -d -p 3000:3000 <name-of-app> 
 ```
 
-Docker is really and I'm looking forward to using it some more.
+Docker is great and I'm looking forward to using it some more.
 
 Other interesting utlities include [btop](https://github.com/aristocratos/btop) and [pfetch](https://github.com/dylanaraps/pfetch). `pfetch` is a lightweight sys information tool and I used it to regularly get an overview of how much RAM I was using. Sample output:
 
