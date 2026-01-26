@@ -13,7 +13,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const title = searchParams.get('title')
   const ppEditorialNew = await readFile(
-    join(process.cwd(), 'src/fonts/Newsreader_24pt-Regular.ttf')
+    join(process.cwd(), 'src/fonts/Google-sans-variable.ttf')
   )
   const imageMetadata = await readFile(
     join(process.cwd(), 'src/asset/kehinde-small.png')
