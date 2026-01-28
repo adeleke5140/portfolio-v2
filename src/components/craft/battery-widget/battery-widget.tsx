@@ -2,18 +2,64 @@
 read from the user battery's percentage
 might need some permission stuff
 */
+"use client"
+
+import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react"
+interface BatteryManager {
+  charging: boolean;
+  chargingTime: number;
+  dischargingTime: number;
+  level: number;
+  onchargingchange: () => any;
+  onchargingtimechange: () => any;
+  ondischargingtimechange: () => any;
+  onlevelchange: () => any
+}
+interface INavigator extends Navigator{
+  getBattery:() => Promise<BatteryManager>
+}
+
+interface Battery {
+  percentage: number;
+  charging: boolean;
+}
+
+function useBattery(){
+  const [battery, setBattery] = useState<Battery>(
+    { percentage: 0.69, charging: false }
+  )
+  
+  useEffect(() =>{
+    if(!window) return
+   
+    async function getBattery(){
+      const n = window.navigator as INavigator
+      if("getBattery" in n){
+        const battery = await n.getBattery()
+        setBattery({percentage: battery.level, charging: battery.charging})
+      }else{
+        setBattery({percentage: 0.69, charging: false})
+      }
+    }
+    getBattery()
+  },[])
+  return battery
+}
 
 export const BatteryWidget = () => {
+  const battery = useBattery();
+ 
   return (
     <div className="bg-white px-6 w-80 py-8 flex flex-col gap-4">
-      <p className="font-semibold text-5xl">69%</p>
+      <p className="font-semibold text-5xl">{battery.percentage * 100}%</p>
       <div className="inline-flex items-center gap-2">
         <svg width="20" height="20" viewBox="0 0 20 20">
           <g>
             <polygon points="11 3 9 9 16 9 9 17 11 11 4 11 11 3" stroke="#525252" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill="#525252"></polygon>
           </g>
         </svg>
-        <span className="">Charging...</span>
+        <span className="">{battery.charging ? "Charging..." : "Not Charging"}</span>
       </div>
       <div className="inline-flex items-center gap-2">
         <svg width="18" height="18" viewBox="0 0 18 18">
@@ -39,8 +85,8 @@ export const BatteryWidget = () => {
         </svg>
         <span>215 <span className="text-ken-grey">cycles</span></span>
       </div>
-      <div className="flex relative mt-6 gap-2 overflow-hidden w-full">
-        <span className="w-[69%] h-1 inline-block animate-mask bg-green-400 z-20 absolute"/>
+      <div className="flex relative mt-6  gap-2 overflow-hidden w-full">
+        <span className={cn("w-[69%] h-1 inline-block  bg-green-400 z-20 absolute", battery.charging ? "animate-mask":"")}/>
         {Array.from({ length: 6 }).map((_, index) => (
           <span key={index} className="h-1 after:z-30 relative after:absolue after:content-[''] after:h-full after:top-0 after:absolute after:inline-block after:w-[8px] after:bg-white after:right-full inline-block w-20 bg-gray-300/50"/>
         ))}

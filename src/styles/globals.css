@@ -469,7 +469,7 @@ div[data-code-block-container='true'] {
 
 
 .animate-mask{
-  animation: mask 3.4s cubic-bezier(0.33, 1, 0.68, 1) infinite both;
+  animation: mask 2s cubic-bezier(0.33, 1, 0.68, 1) infinite both;
 }
 
 @keyframes mask{
@@ -477,7 +477,7 @@ div[data-code-block-container='true'] {
     mask-image: linear-gradient(
       60deg,
       #000 25%,
-      hotpink 50%,
+      rgb(0,0,0,0.4) 50%,
       #000 75%
     );
     mask-size: 400%;
@@ -488,7 +488,7 @@ div[data-code-block-container='true'] {
     mask-image: linear-gradient(
       60deg,
       #000 25%,
-      hotpink 50%,
+      rgb(0,0,0,0.4) 50%,
       #000 75%
     );
     mask-size: 400%;
