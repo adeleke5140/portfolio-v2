@@ -8,7 +8,7 @@ tag:
     - Langfuse
 ---
 
-Langfuse allows you to observe agent runs and group agent runs by users and sessions. It's a must-have tool for AI Product development.
+Langfuse allows you to observe agent runs and group agent runs by users and sessions. An agent run produces spans and traces. It's a must-have tool for AI Product development.
 
 The definitive guide to setting up langfuse with Docker compose can be found onn their
 [docs](https://langfuse.com/self-hosting/deployment/docker-compose).
