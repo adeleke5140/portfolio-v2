@@ -56,7 +56,7 @@ export const Introduction = () => {
                   className="border-b border-primary text-primary"
                 >
                   mastra.ai
-                </a>{' '}
+                </a> on the website, docs and CLI.
               </p>
             </div>
           </div>
