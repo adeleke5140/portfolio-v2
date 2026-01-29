@@ -19,13 +19,14 @@ I used DigitialOcean for the first time. I bought a Droplet for $4/month and ins
 Once you've gotten the domain, you can manage it with DigitialOcean. A, CNAME, txt records etc.
 
 After acquiring a domain, there are a number of UNIX utilities that provide you with technical information on/for the domain. They include:
+
 - `curl`
 - `dig`
 - `nslookup`
 - `nmap`
 - `ping`
 
-They do a number of things and their full description can be gotten from their man pages. 
+They do a number of things and their full description can be gotten from their man pages.
 
 ```zsh
 man curl | head -n 10
@@ -51,7 +52,6 @@ DESCRIPTION
 Mosh is a great tool for working with `SSH` connections like the one I have on DigitalOcean. It improves keystroke latency and you can read more about it [here](./mosh.md)
 
 In the article above, I was logged in as root which is something you shouldn't do. Creating a user group and removing disabling root access is the better approach.
-
 
 Now I access my server with:
 
@@ -82,7 +82,7 @@ if err != nil{
 }
 ```
 
-I like the `:=` syntax. 
+I like the `:=` syntax.
 
 Even with a compiled language like `Go` you can run into problems with `go build`. I couldn't run it on the droplet. The solution was to build locally and then transfer the binary over scp to my server.
 
@@ -95,7 +95,6 @@ watch -n 1 free -h
 ```
 
 Back to `scp`
-
 
 Here is man intro to `scp`
 
@@ -129,8 +128,6 @@ DESCRIPTION
      authentication.
 ```
 
-
-
 This was very nifty albeit not as fast. I wonder if it's dependent on both my `ISP` and my server.
 
 On `Linux` servers, `nginx` can help with load-balancing, routing, and even returning `html` plus many more.
@@ -148,7 +145,7 @@ server {
                 proxy_set_header Upgrade $http_upgrade;
                 proxy_set_header Connection "upgrade";
                 proxy_http_version 1.1;
-                proxy_pass http://gobackend; 
+                proxy_pass http://gobackend;
         }
 }
 ```
@@ -192,12 +189,12 @@ Snippet used:
 
 ```zsh
 #create a 1GB swap file
-sudo fallocate -l 1G /swapfile 
-sudo chmod 600 /swapfile 
-sudo mkswap /swapfile 
-sudo swapon /swapfile 
+sudo fallocate -l 1G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
 
-# make it permanent 
+# make it permanent
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 ```
 
@@ -231,7 +228,7 @@ docker build -t <name-of-app> .
 and ran with
 
 ```zsh
-docker run -d -p 3000:3000 <name-of-app> 
+docker run -d -p 3000:3000 <name-of-app>
 ```
 
 Docker is great and I'm looking forward to using it some more.

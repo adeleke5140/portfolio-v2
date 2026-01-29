@@ -32,8 +32,8 @@ export const CardSpendLimit = ({
               {duration === 'daily'
                 ? 'day'
                 : duration === 'weekly'
-                  ? 'week'
-                  : 'month'}
+                ? 'week'
+                : 'month'}
             </span>
           </p>
         </div>

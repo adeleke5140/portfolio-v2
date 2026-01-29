@@ -80,7 +80,9 @@ export const readSingleBlog = createTool({
       const baseUrl = getApiBaseUrl()
 
       try {
-        const data = await ky.get(`${baseUrl}/api/posts/${slug}`).json() as any
+        const data = (await ky
+          .get(`${baseUrl}/api/posts/${slug}`)
+          .json()) as any
         return {
           content: data.content,
           metadata: {
@@ -98,7 +100,9 @@ export const readSingleBlog = createTool({
           throw new Error(`Blog post not found: ${slug}`)
         }
         throw new Error(
-          `Failed to fetch blog post: ${error.response?.status} ${error.response?.statusText || error.message}`
+          `Failed to fetch blog post: ${error.response?.status} ${
+            error.response?.statusText || error.message
+          }`
         )
       }
     } catch (error) {
@@ -142,7 +146,7 @@ export const readAllBlogs = createTool({
   execute: async () => {
     try {
       const baseUrl = getApiBaseUrl()
-      const posts = await ky.get(`${baseUrl}/api/posts`).json() as Array<{
+      const posts = (await ky.get(`${baseUrl}/api/posts`).json()) as Array<{
         slug: string
         title: string
         description?: string
@@ -154,7 +158,9 @@ export const readAllBlogs = createTool({
     } catch (error: any) {
       throw new Error(
         `Failed to read blog posts: ${
-          error.response?.status ? `${error.response.status} ${error.response.statusText}` : error.message || 'Unknown error'
+          error.response?.status
+            ? `${error.response.status} ${error.response.statusText}`
+            : error.message || 'Unknown error'
         }`
       )
     }

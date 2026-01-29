@@ -5,7 +5,6 @@ import * as fsSync from 'fs'
 import { promises as fs } from 'fs'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import Head from 'next/head'
-import Link from 'next/link'
 import path from 'path'
 import {
   FinalCodeBlock,
