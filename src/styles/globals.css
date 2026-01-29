@@ -467,31 +467,31 @@ div[data-code-block-container='true'] {
   --active-color: oklch(0.4 0.28 25.34);
 }
 
-
-.animate-mask{
+.animate-mask {
   animation: mask 2s cubic-bezier(0.33, 1, 0.68, 1) infinite both;
 }
 
-@keyframes mask{
+@keyframes mask {
   0% {
     mask-image: linear-gradient(
       60deg,
       #000 25%,
-      rgb(0,0,0,0.4) 50%,
+      rgb(0, 0, 0, 0.4) 50%,
       #000 75%
     );
     mask-size: 400%;
     mask-position: 100%;
   }
 
-  70%, 100% {
+  70%,
+  100% {
     mask-image: linear-gradient(
       60deg,
       #000 25%,
-      rgb(0,0,0,0.4) 50%,
+      rgb(0, 0, 0, 0.4) 50%,
       #000 75%
     );
     mask-size: 400%;
-    mask-position: 0%; 
+    mask-position: 0%;
   }
 }
