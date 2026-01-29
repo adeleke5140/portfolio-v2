@@ -2,14 +2,49 @@
 read from the user battery's percentage
 might need some permission stuff
 */
+"use client"
 import { cn } from "@/lib/utils"
+import { useEffect, useState } from "react"
+import { motion } from "motion/react"
 
-const PlusIcon = ({ className }: { className: string }) => <svg className={className} viewBox="0 0 32 32"><g fill="#525252"><path d="M29,14h-11V3c0-.553-.447-1-1-1h-2c-.553,0-1,.447-1,1V14H3c-.553,0-1,.447-1,1v2c0,.553,.447,1,1,1H14v11c0,.553,.447,1,1,1h2c.553,0,1-.447,1-1v-11h11c.553,0,1-.447,1-1v-2c0-.553-.447-1-1-1Z" fill="#525252"></path></g></svg>
-const Dot = ({ className }: { className: string }) => <span className={cn("absolute inline-block size-2 bg-ken-grey", className)}></span>
 export const BatteryWidget = () => {
+  const [percentage, setPercentage] = useState(69)
+  const [showN, setShowN] = useState(false)
+
+  useEffect(() => {
+    setInterval(() => {
+      setPercentage((prev) => {
+        const nextPercent = (prev + 1)
+        return Math.min(nextPercent,100)
+      })
+    },3000)
+  },[])
+
+  useEffect(() => {
+    if(percentage === 100){
+      setShowN(true)
+    }
+  }, [percentage])
+
+
   return (
-      <div className="bg-white px-6 border border-dashed relative w-80 py-8 flex flex-col gap-4">
-        <p className="font-semibold text-5xl">{0.69 * 100}%</p>
+      <div className="bg-white px-6 border border-dashed w-80 py-8 flex flex-col gap-4">
+        <button onClick={() => setPercentage(69)} className="absolute bg-white rounded-md size-4 grid place-items-center top-2 right-2">
+          <svg width="20" height="20" className="size-3" viewBox="0 0 20 20">
+            <g>
+              <g className="bottom-a">
+                <path d="m4,10c0,3.314,2.686,6,6,6,1.227,0,2.367-.368,3.317-1" fill="none" stroke="#212121" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1"></path>
+                <polygon points="5.75 10 4 8 2.25 10 5.75 10" fill="#212121" stroke="#212121" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1"></polygon>
+              </g>
+              <g className="top-a">
+                <polygon points="14.25 10 16 12 17.75 10 14.25 10" stroke="#525252" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" fill="#525252"></polygon>
+                <path d="m16,10c0-3.314-2.686-6-6-6-1.227,0-2.367.368-3.317,1" fill="none" stroke="#525252" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1"></path>
+              </g>
+             
+            </g>
+          </svg>
+        </button>
+        <p className="font-semibold text-5xl">{percentage}%</p>
         <div className="inline-flex items-center gap-2">
           <svg width="20" height="20" viewBox="0 0 20 20">
             <g>
@@ -43,11 +78,23 @@ export const BatteryWidget = () => {
           <span>215 <span className="text-ken-grey">cycles</span></span>
         </div>
         <div className="flex relative mt-6  gap-2 overflow-hidden w-full">
-          <span className="w-[69%] h-1 inline-block  bg-green-400 z-20 absolute animate-mask"/>
+          <motion.span layout style={{
+            width: `${percentage}%`
+          }} className="h-1 inline-block  bg-green-400 z-20 absolute animate-mask"/>
           {Array.from({ length: 6 }).map((_, index) => (
             <span key={index} className="h-1 after:z-30 relative after:absolue after:content-[''] after:h-full after:top-0 after:absolute after:inline-block after:w-[8px] after:bg-white after:right-full inline-block w-20 bg-gray-300/50"/>
           ))}
         </div>
+      <div className={cn("absolute transition-transform duration-400 ease-in-out bottom-2 text-xs right-2 bg-white shadow-sm px-2 rounded-md py-1", showN ? "translate-y-0" : "translate-y-[150%]")}>
+        <button onClick={() => setShowN(false)} className="bg-gray-100 border border-dashed grid place-items-center rounded-full size-3 absolute -top-1 -right-1">
+            <svg className="size-2" viewBox="0 0 48 48">
+              <g fill="#212121" stroke-linejoin="round" stroke-linecap="round">
+              <line fill="none" stroke="#212121" stroke-width="3" stroke-linecap="round" stroke-miterlimit="10" x1="38" y1="10" x2="10" y2="38" stroke-linejoin="round"></line> 
+              <line fill="none" stroke="#212121" stroke-width="3" stroke-linecap="round" stroke-miterlimit="10" x1="38" y1="38" x2="10" y2="10" stroke-linejoin="round"></line>
+              </g></svg>
+            <span className="sr-only">Dismiss notification</span>
+          </button>
+          Fully Charged</div>
     </div>
   )
 }
