@@ -13,6 +13,7 @@ import {
 import { getBlogData } from '../utils'
 import rehypePrettyCode, { type Options } from 'rehype-pretty-code'
 import remarkGfm from 'remark-gfm'
+import Image from 'next/image'
 
 export async function generateMetadata({
   params,
@@ -111,6 +112,7 @@ export default async function Page({
     components: {
       InitialCodeBlock,
       FinalCodeBlock,
+      Image,
       ...components,
     },
   })

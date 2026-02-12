@@ -4,7 +4,7 @@ date: '2026-01-28'
 status: 'in-progress'
 ---
 
-ogpk by [Aladair Monk](https://www.alasdairmonk.com/) is a open-source tool for previewing opengraph metadata straight from the terminal. I have been looking for a tool like that, Vercel has one on their cloud platform but that's tied to their Infra. 
+ogpk by [Aladair Monk](https://www.alasdairmonk.com/) is a open-source tool for previewing opengraph metadata straight from the terminal. I have been looking for a tool like that, Vercel has one on their cloud platform but that's tied to their Infra.
 
 Pretty straightforward CLI tool. You just run:
 
@@ -22,7 +22,7 @@ ogpk -p https://www.kehinde.xyz/blog/unix-notes
 
 Which should return:
 
-![img](/images/ogpk-preview.webp)
+![Og Image](/images/ogpk-preview.webp)
 
 It also works for opengraph metadata on localhost which should be helpful for building OG images locally.
 

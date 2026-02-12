@@ -1,4 +1,3 @@
-import { BlogAssistantClient } from '@/components/blog/blog-assistant-client'
 import { fonts } from '@/fonts/setup'
 import '@/styles/globals.css'
 import Link from 'next/link'
@@ -7,6 +6,7 @@ import { Toaster } from 'sonner'
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <meta name="description" content="Kehinde Adekeke's website where he explores design and engineering" />
       <body className={`${fonts.berkeleyMono.variable} ${fonts.sans.variable}`}>
         <div
           className={`min-h-screen font-sans outline outline-pink-200  bg-[rgb(248,249,250)] text-ken-black`}

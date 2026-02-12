@@ -34,7 +34,7 @@ export const components = {
     <ul className="text-gray-800 block list-[square] pl-5 my-2" {...props} />
   ),
   li: (props: ListItemProps) => (
-    <li className="pl-1 my-4 text-[17px]" {...props} />
+    <li className="pl-1 my-2 text-[17px]" {...props} />
   ),
   em: (props: ComponentPropsWithoutRef<'em'>) => (
     <em className="font-italic" {...props} />
@@ -95,7 +95,7 @@ export const components = {
   ),
   blockquote: (props: BlockquoteProps) => (
     <blockquote
-      className="[&>p]:py-1 [&>p]:pl-4 bg-primary/5 rounded-md rounded-l-none border-l-2 border-primary [&>p]:text-[16px]"
+      className="[&>p]:py-1 [&>p]:pl-4 bg-bb rounded-md rounded-l-none border-l-2 border-primary [&>p]:text-[16px]"
       {...props}
     />
   ),

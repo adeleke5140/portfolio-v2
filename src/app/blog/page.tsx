@@ -7,7 +7,7 @@ const isDevelopment = process.env.NODE_ENV === 'development'
 
 export const metadata = {
   title: 'Blog',
-  description: "Kehinde Adeleke's blog",
+  description: "Kehinde Adeleke's blog page where he writes technical articles",
   openGraph: {
     title: 'Blog',
     description: "Kehinde Adeleke's blog",

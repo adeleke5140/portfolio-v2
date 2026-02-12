@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'Craft',
-  description: 'Craft components',
+  description: 'Kehinde"s list of craft components where he explores ideas with CSS and motion',
   openGraph: {
     title: 'Craft',
     description: 'Craft components',

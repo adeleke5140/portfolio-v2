@@ -23,7 +23,7 @@ module.exports = {
           foreground: 'hsl(var(--popover-foreground))',
         },
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
+          DEFAULT: 'oklch(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
         },
         secondary: {
@@ -45,6 +45,7 @@ module.exports = {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
+        "bb": "oklch(var(--bb))",
         chart: {
           1: 'hsl(var(--chart-1))',
           2: 'hsl(var(--chart-2))',
