@@ -9,10 +9,6 @@ const connection = [
     value: 'mailto:k@kehinde.me',
   },
   {
-    name: 'twitter',
-    value: 'https://twitter.com/adeleke5140',
-  },
-  {
     name: 'github',
     value: 'https://github.com/adeleke5140',
   },
