@@ -31,7 +31,7 @@ export const components = {
     <ol className="text-gray-800 list-decimal pl-5" {...props} />
   ),
   ul: (props: ListProps) => (
-    <ul className="text-gray-800 block list-[square] pl-5 my-2" {...props} />
+    <ul className="text-gray-800 block list-disc pl-5 my-2" {...props} />
   ),
   li: (props: ListItemProps) => (
     <li className="pl-1 my-2 text-[17px]" {...props} />

@@ -12,11 +12,11 @@ Something I will probably look back on kindly in a couple of months.
 There really isn't an order, it's just gonna be a list of things as I remember them.
 
 Domain registrars like **namecheap** are pretty neat and they allow you a piece of the internet, since they grant you the access of getting a
-human-readable web domain which you can then connect to an IP address.
+human-readable web domain which you can then map to an IP address.
 
 I used DigitialOcean for the first time. I bought a Droplet for $4/month and installed `Ubuntu LTS` on it. It came with `10GB` of SSD storage and `512MB` of RAM. My macbook pro has 16GB. There really is a lot to think about when you have so little `RAM`. How much `RAM` did [Apollo Guidance Computer](https://en.wikipedia.org/wiki/Apollo_Guidance_Computer) have again?
 
-Once you've gotten the domain, you can manage it with DigitialOcean. A, CNAME, txt records etc.
+Once you've gotten the domain, you can manage it with the records: A, CNAME, txt records with DigitialOcean.
 
 After acquiring a domain, there are a number of UNIX utilities that provide you with technical information on/for the domain. They include:
 
@@ -86,25 +86,13 @@ I like the `:=` syntax.
 
 Even with a compiled language like `Go` you can run into problems with `go build`. I couldn't run it on the droplet. The solution was to build locally and then transfer the binary over scp to my server.
 
-You can view resource usage with `htop` and watch free and used memory with `free`.
-
-You can see how much the memory allocation changes per second with:
-
-```
-watch -n 1 free -h
-```
-
-Back to `scp`
-
-Here is man intro to `scp`
-
 I copied it over with:
 
-```
+```zsh
 scp server ken@<ip-address>:<path-to-working-directory>
 ```
 
-Short description from `man`
+Here is man intro to `scp`
 
 ```zsh
 SCP(1)                      General Commands Manual                     SCP(1)
@@ -130,6 +118,14 @@ DESCRIPTION
 
 This was very nifty albeit not as fast. I wonder if it's dependent on both my `ISP` and my server.
 
+You can view resource usage with `htop` and watch free and used memory with `free`.
+
+You can see how much the memory allocation changes per second with:
+
+```zsh
+watch -n 1 free -h
+```
+
 On `Linux` servers, `nginx` can help with load-balancing, routing, and even returning `html` plus many more.
 
 The config file is in the `/etc/nginx/nginx.conf` file. With server configuration in `/etc/nginx/sites-enabled` which you setup for your domain after aquisition. Here's one file for my domain
@@ -152,14 +148,11 @@ server {
 
 Logs are stored in the `access.log` file and `nginx` manages load through round robin. The `gobackend` config lives in the `nginx.conf` file.
 
-Honestly, I hadn't done much server work and now I've gained an appreciation of all the parts required for modern websites to work. Perhaps, there is more `nginx` work for me in the future.
+I've gained an appreciation of all the parts required for modern websites to work. Perhaps, there is more `nginx` work for me in the future.
 
 I also setup `SSL` with [Certbot](https://certbot.eff.org/instructions) which does all the heavy lifting after running a number of simple commands.
 
 Docker is really cool for boxing things up and making them easily reusable. I created a `Dockerfile` that intialied `go-lang` and `alpine`. It allows me to spin up as many server applications as possible. `nginx` balances all of this after some setup.
-
-Prior to this, I used `pm2` which is a package for managing processes. It can also kick of processes from other language binaries.
-The [npm page](https://www.npmjs.com/package/pm2) is a good place to start.
 
 Here is the `Dockerfile`
 
@@ -232,6 +225,9 @@ docker run -d -p 3000:3000 <name-of-app>
 ```
 
 Docker is great and I'm looking forward to using it some more.
+
+`pm2` which is a package for managing processes. It can also kick of processes from other language binaries.
+The [npm page](https://www.npmjs.com/package/pm2) is a good place to start.
 
 Other interesting utlities include [btop](https://github.com/aristocratos/btop) and [pfetch](https://github.com/dylanaraps/pfetch). `pfetch` is a lightweight sys information tool and I used it to regularly get an overview of how much RAM I was using. Sample output:
 
