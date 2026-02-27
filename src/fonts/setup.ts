@@ -1,9 +1,9 @@
 import localFont from 'next/font/local'
 
-export const berkeleyMono = localFont({
-  src: './BerkeleyMono-Regular.otf',
+export const mono = localFont({
+  src: './Google-sans-code.ttf',
   display: 'swap',
-  variable: '--font-berkeley-mono',
+  variable: '--font-mono',
 })
 
 export const sans = localFont({
@@ -13,6 +13,6 @@ export const sans = localFont({
 })
 
 export const fonts = {
-  berkeleyMono,
+  mono,
   sans,
 }

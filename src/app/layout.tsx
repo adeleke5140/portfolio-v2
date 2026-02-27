@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <meta name="description" content="Kehinde Adekeke's website where he explores design and engineering" />
-      <body className={`${fonts.berkeleyMono.variable} ${fonts.sans.variable}`}>
+      <body className={`${fonts.mono.variable} ${fonts.sans.variable}`}>
         <div
           className={`min-h-screen font-sans outline outline-pink-200  bg-[rgb(248,249,250)] text-ken-black`}
           id="container"
