@@ -7,10 +7,6 @@ tag: CSS
 
 Exclusion tabs inspired by [Paco](https://paco.me/craft/tabs) using [WAAPI](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) and Clip-path. I extend it to support wrapped content with `flex-wrap` on the parent container.
 
-The typical way of creating exclusive tabs is by using motion with a `span` element. You move that based on the active item and that creates the smooth effect.
-
-Motion is an extra dependency and `CSS` is powerful which means we can solve the problem with the extra dep
-
 The trick is to use `clip-path` to create a mask that reveals only the active tab.
 
 <br />
@@ -18,63 +14,3 @@ The trick is to use `clip-path` to create a mask that reveals only the active ta
 <CraftContainer className="bg-white">
   <Tabs />
 </CraftContainer>
-
-## How it works
-
-To animate the `clip-path` across the horizontal axis, you have to measure how much you have to clip on the `left` and how much you have to clip on the `right`.
-
-We add a `ref` to the activeTabElement and use that to get it's offsets.
-
-```typescript
-const { offsetLeft, offsetWidth } = activeTabElement
-const clipLeft = offsetLeft
-const clipRight = offsetLeft + offsetWidth
-```
-
-Once you've gotten that, you slot the values into the `clip-path`. We are basically saying clip everything from the left of the element and everything after the right of the element.
-
-```typescript
-container.style.clipPath = `inset(0 ${Number(
-  100 - (clipRight / container.offsetWidth) * 100
-).toFixed()}% 0 ${Number(
-  (clipLeft / container.offsetWidth) * 100
-).toFixed()}% round 17px)`
-```
-
-[Emil](https://emilkowal.ski/ui/the-magic-of-clip-path) has a great introduction to the feature.
-
-To make this work for `flex-wrap` containers, we need to figure out the `top` and `bottom` positions as well. With that we can by what percentage we have to clip.
-
-In this case:
-
-```typescript
-const { offsetLeft, offsetWidth, offsetTop, offsetHeight } = activeTabElement
-const clipLeft = offsetLeft
-const clipRight = offsetLeft + offsetWidth
-const clipBottom = offsetTop + offsetHeight
-const clipTop = offsetTop
-```
-
-With that, our `clip-path` looks like this:
-
-```typescript
-const clipBottomValue = Number(
-  100 - (clipBottom / container.offsetHeight) * 100
-).toFixed()
-
-const clipTopValue = Number((clipTop / container.offsetHeight) * 100).toFixed()
-
-const clipRightValue = Number(
-  100 - (clipRight / container.offsetWidth) * 100
-).toFixed()
-
-container.style.clipPath = `inset(${clipTopValue}% ${clipRightValue}% ${clipBottomValue}% ${Number(
-  (clipLeft / container.offsetWidth) * 100
-).toFixed()}% round 17px)`
-```
-
-It wasn't intuitive at first but getting a pen and paper and drawing out a 4/4 rectangle helped simplify it.
-
-Thanks for Emil for the initial prototype.
-
-You can view the full code [here](https://github.com/adeleke5140/portfolio-v2/blob/17b4541917bf003214c0695bae209ba953f6a837/src/components/craft/exclusion-tabs/tabs.tsx).
