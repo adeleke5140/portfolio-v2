@@ -35,7 +35,7 @@ export const Introduction = () => {
           <div className="flex flex-col text-[var(--gray-1)] gap-2 dark:border-[#282828] dark:bg-[#282828]">
             <div>
               <p className="text-base my-4">
-                I am a Design engineer working across design and engineering.
+                I am an engineer working across design and engineering.
               </p>
 
               <p className="text-base my-4">
@@ -43,6 +43,8 @@ export const Introduction = () => {
                 how elements of design like typography, composition and
                 animation add texture to the web.
               </p>
+
+              <p>I spend my time reading about typography and working through system design.</p>
 
               <p className="text-base my-4">
                 My craft builds me as a person and I strive to infuse every
