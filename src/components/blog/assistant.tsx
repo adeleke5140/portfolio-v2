@@ -175,7 +175,7 @@ export const KenAssistant = ({
       >
         <ConversationContent className="p-4">
           {isLoadingSavedMessages && (
-            <Loader className="absolute text-primary top-1/2 left-1/2 " />
+            <Loader className="absolute text-blue-600 top-1/2 left-1/2 " />
           )}
 
           {error && (

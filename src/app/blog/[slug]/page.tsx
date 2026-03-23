@@ -145,7 +145,7 @@ export default async function Page({
         showHeading
         classname="lg:pt-0"
       >
-        <div className="mx-auto">{data.content}</div>
+        <div className="mx-auto mt-5">{data.content}</div>
       </PageWrapper>
     </>
   )
