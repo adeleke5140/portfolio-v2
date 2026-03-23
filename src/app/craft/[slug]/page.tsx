@@ -140,7 +140,7 @@ export default async function Page({
       }
       showHeading
     >
-      <div className="max-w-[680px] mx-auto">{data.content}</div>
+      <div className="max-w-[680px] mt-5  mx-auto">{data.content}</div>
     </PageWrapper>
   )
 }

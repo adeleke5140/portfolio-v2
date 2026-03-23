@@ -30,28 +30,26 @@ export const Introduction = () => {
           className="rounded-full w-[10rem] h-[10rem]"
         />
       </div>
-      <div className="flex gap-10 max-w-[40rem] flex-col">
+      <div className="flex gap-5 max-w-[40rem] flex-col">
         <section className="px-0">
-          <div className="flex flex-col text-[var(--gray-1)] gap-2 dark:border-[#282828] dark:bg-[#282828]">
+          <div className="flex flex-col text-[var(--gray-1)] gap-2">
             <div>
-              <p className="text-base my-4">
+              <p className="text-base leading-[1.65] my-4">
                 I am an engineer working across design and engineering.
               </p>
 
-              <p className="text-base my-4">
+              <p className="text-base leading-[1.65] my-4">
                 I want to make wonderful things. I am regularly thinking about
                 how elements of design like typography, composition and
                 animation add texture to the web.
               </p>
 
-              <p>I spend my time reading about typography and working through system design.</p>
-
-              <p className="text-base my-4">
+              <p className="text-base my-4 leading-[1.65]">
                 My craft builds me as a person and I strive to infuse every
                 piece of work with care. I previously worked at{' '}
                 <a
                   href="https://www.mastra.ai"
-                  className="border-b border-primary text-primary"
+                  className="border-b border-blue-600 text-blue-600"
                 >
                   mastra.ai
                 </a> on the website, docs and CLI.

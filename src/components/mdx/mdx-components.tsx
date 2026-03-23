@@ -25,7 +25,7 @@ export const components = {
     <h4 className="text-gray-800 mt-8 mb-3 font-medium" {...props} />
   ),
   p: (props: ParagraphProps) => (
-    <p className="text-ken-black my-6 leading-[28px]" {...props} />
+    <p className="text-ken-black mb-5 leading-[1.65]" {...props} />
   ),
   ol: (props: ListProps) => (
     <ol className="text-gray-800 list-decimal pl-5" {...props} />
@@ -43,7 +43,7 @@ export const components = {
     <strong className="font-medium" {...props} />
   ),
   a: ({ href, children, ...props }: AnchorProps) => {
-    const className = 'text-primary underline group-hover:text-primary'
+    const className = 'text-blue-600 underline group-hover:text-blue-600'
     if (href?.startsWith('/')) {
       return (
         <Link href={href} className={className} {...props}>
@@ -95,7 +95,7 @@ export const components = {
   ),
   blockquote: (props: BlockquoteProps) => (
     <blockquote
-      className="[&>p]:py-1 [&>p]:pl-4 bg-bb rounded-md rounded-l-none border-l-2 border-primary [&>p]:text-[16px]"
+      className="[&>p]:py-1 [&>p]:pl-4 bg-bb rounded-md rounded-l-none border-l-2 border-blue-600 [&>p]:text-[16px]"
       {...props}
     />
   ),
