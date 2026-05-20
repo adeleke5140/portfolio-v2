@@ -11,10 +11,10 @@ When you create a pipeline in the your preferred shell of choice, let's take `ba
 ls | fd oop.py | echo "hello world"
 ```
 
-You can get the exit code of the last command by running `echo $?` but what if you wanted to get the exit code for 
+You retrieve the exit code of the last command by running `echo $?` but what if you wanted to get the exit code for
 each of the commands in the pipeline?
 
-Bash provides a convenient variable called `PIPESTATUS` which contains a list of exit codes.
+Bash provides a convenient variable called `PIPESTATUS` which contains exactly that.
 
 ```zsh
 ls | fd oop.py | echo "hello world"
@@ -22,29 +22,25 @@ echo "${PIPESTATUS[@]}"
 > 0 0 0
 ```
 
-That all works okay but the command doesn't seem to work in `zsh` and that's because the variable is called `pipestatus`
-and you write it to the `stdout` by running `echo $pipestatus`.
+It works okay in bash but not in my `zsh` and that's because the variable is instead called `pipestatus`
+and you write it to the `stdout` stream by running `echo $pipestatus`.
 
-In my shell  only the last exit code was being returned which was strange.
+In my shell though, only the last exit code was being returned which was unusual.
 
-After a bit of digging on the interent, I found a [Stack Exchange Post](https://unix.stackexchange.com/questions/673321/zsh-pipestatus-disappears-in-the-following-prompt) where a similar question was asked.
-Apparently, when something else is using a pipe, it can override `pipestatus`, mostly in a `prompt` related automation.
+After a bit of digging on the interent, I found a [Stack Exchange Post](https://unix.stackexchange.com/questions/673321/zsh-pipestatus-disappears-in-the-following-prompt) which explained that when another process perhaps is using a pipe, it can override `pipestatus`, mostly in a `prompt` related automation.
 
-What immediately came to mind was my `.zshrc` config. I have `powerlevel10K` setup and other useful tidbits, something there could be overriding it.
+In my `.zshrc` config, I use `powerlevel10K` and other useful tidbits, which could be the cause of the problem
 
-I backed up my file and then deleted every line.
-
-After that, I tried it once again.
+After backing up my config and then deleting every line, I tried it again.
 
 ```zsh
-ls | fd oop.py | echo "Hello World"
-echo $pipestatus
+ls | fd oop.py | echo "Hello World"; echo $pipestatus
 ```
 
-and it returned:
+and voila:
 
 ```zsh
 0 0 0
 ```
 
-I am still not sure what is responsible per se but I just wanted to document this. I'll do a bit more digging during the weekend.
+I am still not sure what is responsible per se but I'll do a bit more digging and document it when I figure it out.

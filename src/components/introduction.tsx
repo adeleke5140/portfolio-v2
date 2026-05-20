@@ -21,38 +21,28 @@ const connection = [
 export const Introduction = () => {
   return (
     <PageWrapper showHeading heading={''}>
-      <div className="pt-20 pb-8 border-b border-[#dcdcdc7e]">
-        <Image
-          src="/ken-with-noise.png"
-          alt="Kehinde Adeleke"
-          width={400}
-          height={400}
-          className="rounded-full w-[10rem] h-[10rem]"
-        />
+      <div className="pt-20">
+        <p className='my-4'>Welcome, Traveller.</p>
       </div>
       <div className="flex gap-5 max-w-[40rem] flex-col">
         <section className="px-0">
           <div className="flex flex-col text-[var(--gray-1)] gap-2">
             <div>
               <p className="text-base leading-[1.65] my-4">
-                I am an engineer working across design and engineering.
+                I like computers which means I have an interest in knowing how they work and how to wield them masterfully. I thought Design engineering was my calling but nowadays, I think it's systems. All forms of systems underpinning modern software.
               </p>
-
               <p className="text-base leading-[1.65] my-4">
-                I want to make wonderful things. I am regularly thinking about
-                how elements of design like typography, composition and
-                animation add texture to the web.
+                I am a big fan of accessibility both on the web and on other forms of computing devices.
               </p>
 
               <p className="text-base my-4 leading-[1.65]">
-                My craft builds me as a person and I strive to infuse every
-                piece of work with care. I previously worked at{' '}
+                I am currently building a LSP in Rust for {" "}
                 <a
-                  href="https://www.mastra.ai"
-                  className="border-b border-blue-600 text-blue-600"
+                  href="https://rcl-lang.org/"
+                  className="border-b border-primary text-primary"
                 >
-                  mastra.ai
-                </a> on the website, docs and CLI.
+                  RCL
+                </a> and learning bash.
               </p>
             </div>
           </div>

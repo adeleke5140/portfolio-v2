@@ -1,0 +1,3 @@
+[daemons.dev]
+run = "pnpm dev"
+auto = ["start", "stop"]  # Auto-start and auto-stop

@@ -1,7 +1,6 @@
 import { fonts } from '@/fonts/setup'
 import '@/styles/globals.css'
 import Link from 'next/link'
-import { Toaster } from 'sonner'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -12,7 +11,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           className={`min-h-screen font-sans outline outline-pink-200  bg-[rgb(248,249,250)] text-ken-black`}
           id="container"
         >
-          <Toaster />
           <div className="relative flex px-6 flex-col min-h-screen pb-8">
             <header className="mt-4 max-w-[36rem] w-full mx-auto flex border-y py-3 border-[#dcdcdc7e] items-center justify-between">
               <Link href="/" className="text-base">
