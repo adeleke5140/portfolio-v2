@@ -1,0 +1,28 @@
+# Supply-chain hardening for pnpm.
+# Background: pnpm.io/supply-chain-security, aikido.dev/protect/safe-chain
+# Layered with @aikidosec/safe-chain installed globally for real-time malware checks.
+
+# Wait one week after a version is published before installing it. Gives the
+# community time to flag and yank compromised releases before they reach us.
+# Override per-package in `minimumReleaseAgeExclude` when you need an urgent fix.
+minimumReleaseAge: 10080
+minimumReleaseAgeExclude: []
+
+# Fail the install if any dependency declares a build/lifecycle script that
+# isn't in the allowlist below. Forces an explicit decision per package
+# instead of trusting arbitrary postinstall code.
+strictDepBuilds: true
+dangerouslyAllowAllBuilds: false
+
+# Packages whose install/postinstall scripts are permitted to run.
+# Add entries here (after reviewing the script) when an install fails on
+# strictDepBuilds. Keep this list as small as possible.
+onlyBuiltDependencies:
+  - protobufjs       # generates static JS from .proto definitions
+  - unrs-resolver    # builds native Rust resolver binding (eslint-import-resolver-typescript)
+
+# Packages whose build scripts should be skipped without prompting.
+ignoredBuiltDependencies: []
+
+auditConfig:
+  ignoreGhsas: []
