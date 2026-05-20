@@ -68,7 +68,7 @@ export async function generateMetadata({
           `Explore ${frontmatter.title} - UI craft by Kenny`,
       },
     }
-  } catch (error) {
+  } catch  {
     return {
       title: 'Craft',
       description: 'UI playground by Kenny',

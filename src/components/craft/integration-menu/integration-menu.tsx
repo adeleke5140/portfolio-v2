@@ -1,10 +1,10 @@
 'use client'
-import { motion, AnimatePresence, Variants } from 'motion/react'
-import { Check, Copy } from 'lucide-react'
-import { RefObject, useEffect, useRef, useState } from 'react'
-import { integrations } from './int'
 import { cn } from '@/lib/utils'
+import { Check, Copy } from 'lucide-react'
+import { AnimatePresence, motion } from 'motion/react'
+import { useEffect, useRef, useState } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
+import { integrations } from './int'
 
 export const CopyButton = ({
   copy,
@@ -175,7 +175,6 @@ const integrationItems = [
 function IntegrationItem({
   id,
   title,
-  color,
   icon,
 }: {
   id: string

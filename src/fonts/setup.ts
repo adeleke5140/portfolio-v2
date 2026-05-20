@@ -1,6 +1,5 @@
-import localFont from 'next/font/local'
-import { Crimson_Text } from 'next/font/google'
 import { EB_Garamond } from 'next/font/google'
+import localFont from 'next/font/local'
 
 export const mono = localFont({
   src: './Google-sans-code.ttf',

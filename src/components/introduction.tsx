@@ -1,6 +1,5 @@
 'use client'
 import { PageWrapper } from '@/components/page-wrapper'
-import Image from 'next/image'
 import { A11ySection } from './home/a11y-section'
 
 const connection = [

@@ -1,6 +1,5 @@
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 const links = [
   { name: 'Home', href: '/' },
@@ -9,7 +8,6 @@ const links = [
 ]
 
 export const Nav = () => {
-  const path = `/${useRouter().asPath.split('/')[1]}`
 
   return (
     <nav className="mx-auto">

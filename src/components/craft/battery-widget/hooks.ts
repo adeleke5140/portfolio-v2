@@ -19,7 +19,7 @@ interface Battery {
   charging: boolean
 }
 
-function useBattery() {
+export function useBattery() {
   const [battery, setBattery] = useState<Battery>({
     percentage: 0.69,
     charging: false,

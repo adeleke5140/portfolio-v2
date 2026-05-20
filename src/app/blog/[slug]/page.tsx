@@ -50,7 +50,7 @@ export async function generateMetadata({
         title,
         description: description || `Read ${title} on Kenny's blog`,
         type: 'article',
-        publishedTime: frontmatter.date,
+        publishedTime: date,
         url: `https://kehinde.xyz/blog/${slug}`,
         images: [
           {
@@ -66,7 +66,7 @@ export async function generateMetadata({
           `Read ${frontmatter.title} on Kenny's blog`,
       },
     }
-  } catch (error) {
+  } catch  {
     return {
       title: 'Blog Post',
       description: 'A blog post by Kenny',

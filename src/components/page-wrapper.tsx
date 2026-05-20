@@ -14,10 +14,7 @@ interface PageWrapperProps {
 const PageWrapper = ({
   heading,
   children,
-  path,
   showHeading = false,
-  showLink = false,
-  backText,
   classname,
 }: PageWrapperProps) => {
   const slot =
