@@ -20,6 +20,7 @@ dangerouslyAllowAllBuilds: false
 onlyBuiltDependencies:
   - protobufjs       # generates static JS from .proto definitions
   - unrs-resolver    # builds native Rust resolver binding (eslint-import-resolver-typescript)
+  - sharp            # native libvips bindings for Next.js image optimization
 
 # Packages whose build scripts should be skipped without prompting.
 ignoredBuiltDependencies: []
