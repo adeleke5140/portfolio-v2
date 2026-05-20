@@ -1,3 +1,4 @@
+import { EB_Garamond } from 'next/font/google'
 import localFont from 'next/font/local'
 
 export const mono = localFont({
@@ -6,8 +7,7 @@ export const mono = localFont({
   variable: '--font-mono',
 })
 
-export const sans = localFont({
-  src: './Google-sans-variable.ttf',
+export const sans = EB_Garamond({
   display: 'swap',
   variable: '--font-sans',
 })

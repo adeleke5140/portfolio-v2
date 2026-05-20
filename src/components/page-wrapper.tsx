@@ -1,4 +1,3 @@
-'use client'
 import { cn } from '@/lib/utils'
 import { ReactNode } from 'react'
 
@@ -15,10 +14,7 @@ interface PageWrapperProps {
 const PageWrapper = ({
   heading,
   children,
-  path,
   showHeading = false,
-  showLink = false,
-  backText,
   classname,
 }: PageWrapperProps) => {
   const slot =

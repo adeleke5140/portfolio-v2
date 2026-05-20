@@ -5,7 +5,7 @@ export const A11ySection = () => {
         <p className="text-base">
           This site is a member of the{' '}
           <a
-            className="text-blue-600 border-b border-blue-600"
+            className="text-primary border-b border-primary"
             rel="external"
             href="https://a11y-webring.club/"
           >

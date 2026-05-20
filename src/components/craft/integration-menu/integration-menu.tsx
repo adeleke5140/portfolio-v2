@@ -1,10 +1,10 @@
 'use client'
-import { motion, AnimatePresence, Variants } from 'motion/react'
-import { Check, Copy } from 'lucide-react'
-import { RefObject, useEffect, useRef, useState } from 'react'
-import { integrations } from './int'
 import { cn } from '@/lib/utils'
+import { Check, Copy } from 'lucide-react'
+import { AnimatePresence, motion } from 'motion/react'
+import { useEffect, useRef, useState } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
+import { integrations } from './int'
 
 export const CopyButton = ({
   copy,
@@ -175,7 +175,6 @@ const integrationItems = [
 function IntegrationItem({
   id,
   title,
-  color,
   icon,
 }: {
   id: string
@@ -197,8 +196,8 @@ function IntegrationItem({
             title === 'fix-checkout-process'
               ? 'text-[#3fb950]'
               : title === 'update-api-docs'
-              ? 'text-[#ab7df8]'
-              : 'text-[#3fb950]'
+                ? 'text-[#ab7df8]'
+                : 'text-[#3fb950]'
           )}
         >
           {icon ? (
@@ -221,7 +220,7 @@ function IntegrationItem({
       </span>
 
       <div className="flex gap-2 overflow-hidden pl-10 relative items-center">
-        <p className="text-sm relative transition-transform duration-300 delay-75 group-hover/item:-translate-x-5  text-blue-600 dark:text-blue-400 font-medium">
+        <p className="text-sm relative transition-transform duration-300 delay-75 group-hover/item:-translate-x-5  text-primary dark:text-blue-400 font-medium">
           {title}
         </p>
 

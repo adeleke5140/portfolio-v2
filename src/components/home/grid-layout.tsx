@@ -20,7 +20,6 @@ export const GridLayout = ({
         <motion.button
           layoutId="play"
           onClick={async () => {
-            ;``
             setShowVariant(false)
           }}
           type="button"

@@ -1,17 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@source "../../node_modules/streamdown/dist/*.css";
-
-* {
-  -webkit-font-smoothing: antialiased;
-}
 
 body,
 html {
   height: 100%;
   text-rendering: optimizeLegibility;
   background: rgb(248, 249, 250);
+  font-size-adjust: ex-height 0.53;
+  --webkit-text-size-adjust: 100%;
+  --line-height: 1.7rem;
+  line-height: var(--line-height);
 }
 
 h2,
@@ -28,7 +27,7 @@ h4 {
   --gray-6: #343434;
   --radius: 0.5rem;
 
-  --primary: 0.42 0.04 37.15;
+  --primary: 0.54 0.16 31.35;
   --bb: 0.42 0.04 37.15 / 0.08;
   --outline: oklch(0.68 0.17 53.04 / 0.44);
   --gradient-stop-1: oklch(0.52 0.02 266.33 / 0.85);
@@ -138,13 +137,10 @@ h1 {
 }
 
 pre {
-  background: linear-gradient(to top, #f8f8f8, #fcfcfc);
-  padding: 1em;
+  padding: 0.5em;
   margin-block: 1em;
   user-select: auto;
   tab-size: 4;
-  border: 1px solid hsl(0 0% 92% / 1);
-  border-radius: 12px;
   overflow: auto;
 }
 
