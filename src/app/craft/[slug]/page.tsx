@@ -13,7 +13,6 @@ import { BatteryWidget } from '@/components/craft/battery-widget/battery-widget'
 import { promises as fs } from 'fs'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import path from 'path'
-import { LLMStream } from '@/components/craft/llm-stream/llm-stream'
 
 export async function generateMetadata({
   params,
@@ -115,7 +114,6 @@ export default async function Page({
       RecaptchaButton,
       SplitToEdit,
       TastyButton,
-      LLMStream,
       BatteryWidget,
       ...components,
     },
