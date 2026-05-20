@@ -22,7 +22,14 @@ export const Introduction = () => {
   return (
     <PageWrapper showHeading heading={''}>
       <div className="pt-20">
-        <p className='my-4'>Welcome, Traveller.</p>
+        <h1
+          style={{
+            textWrap: 'pretty',
+          }}
+          className="leading-[1.7em] text-[40px] mt-[5px]  tracking-[-0.96px]"
+        >
+          Bonjour.
+        </h1>
       </div>
       <div className="flex gap-5 max-w-[40rem] flex-col">
         <section className="px-0">
