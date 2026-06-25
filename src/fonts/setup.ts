@@ -1,4 +1,4 @@
-import { EB_Garamond } from 'next/font/google'
+import { Commissioner } from 'next/font/google'
 import localFont from 'next/font/local'
 
 export const mono = localFont({
@@ -7,7 +7,7 @@ export const mono = localFont({
   variable: '--font-mono',
 })
 
-export const sans = EB_Garamond({
+export const sans = Commissioner({
   display: 'swap',
   variable: '--font-sans',
 })

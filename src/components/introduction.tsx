@@ -35,20 +35,22 @@ export const Introduction = () => {
           <div className="flex flex-col text-[var(--gray-1)] gap-2">
             <div>
               <p className="text-base leading-[1.65] my-4">
-                I like computers which means I have an interest in knowing how they work and how to wield them masterfully. I thought Design engineering was my calling but nowadays, I think it's systems. All forms of systems underpinning modern software.
+                I like systems and design engineering.
               </p>
               <p className="text-base leading-[1.65] my-4">
-                I am a big fan of accessibility both on the web and on other forms of computing devices.
+                I am a big fan of accessibility both on the web and on other
+                forms of computing devices.
               </p>
 
               <p className="text-base my-4 leading-[1.65]">
-                I am currently building a LSP in Rust for {" "}
+                I am currently building a LSP in Rust for{' '}
                 <a
                   href="https://rcl-lang.org/"
                   className="border-b border-primary text-primary"
                 >
                   RCL
-                </a> and learning bash.
+                </a>{' '}
+                and reading a book on bash.
               </p>
             </div>
           </div>

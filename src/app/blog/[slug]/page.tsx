@@ -66,7 +66,7 @@ export async function generateMetadata({
           `Read ${frontmatter.title} on Kenny's blog`,
       },
     }
-  } catch  {
+  } catch {
     return {
       title: 'Blog Post',
       description: 'A blog post by Kenny',
@@ -136,7 +136,7 @@ export default async function Page({
               style={{
                 textWrap: 'pretty',
               }}
-              className="leading-[1.7em] text-[40px] mt-[5px]  tracking-[-0.96px]"
+              className="leading-[1.9em] text-[40px] mt-[5px]  tracking-[-0.9px]"
             >
               {postData.title}
             </h1>
