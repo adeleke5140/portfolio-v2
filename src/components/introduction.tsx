@@ -25,7 +25,7 @@ export const Introduction = () => {
           style={{
             textWrap: 'pretty',
           }}
-          className="leading-[1.7em] text-[40px] mt-[5px]  tracking-[-0.96px]"
+          className="leading-[1.7em] text-primary text-[40px] mt-[5px]  tracking-[-0.96px]"
         >
           Bonjour.
         </h1>
@@ -33,16 +33,14 @@ export const Introduction = () => {
       <div className="flex gap-5 max-w-[40rem] flex-col">
         <section className="px-0">
           <div className="flex flex-col text-[var(--gray-1)] gap-2">
-            <div>
-              <p className="text-base leading-[1.65] my-4">
-                I like systems and design engineering.
-              </p>
-              <p className="text-base leading-[1.65] my-4">
-                I am a big fan of accessibility both on the web and on other
-                forms of computing devices.
+            <div className="[&_p]:text-base [&_p]:leading-[1.65] [&_p]:my-2">
+              <p>Programmer who likes design and systems engineering.</p>
+              <p>
+                I am a big fan of accessibility on the web and on other forms of
+                computing devices.
               </p>
 
-              <p className="text-base my-4 leading-[1.65]">
+              <p>
                 I am currently building a LSP in Rust for{' '}
                 <a
                   href="https://rcl-lang.org/"
@@ -65,7 +63,7 @@ export const Introduction = () => {
                 key={con.name}
                 target="_blank"
                 href={con.value}
-                className="capitalize text-ken-grey hover:underline first:-ml-3 justify-between group flex gap-1.5 items-center px-3 py-1 rounded-xl"
+                className="capitalize hover:underline first:-ml-3 justify-between group flex gap-1.5 items-center px-3 py-1 rounded-xl"
                 rel="external"
                 referrerPolicy="strict-origin"
               >
@@ -73,9 +71,7 @@ export const Introduction = () => {
               </a>
             ))}
           </div>
-          <p className="text-ken-grey text-base">
-            © {new Date().getFullYear()}
-          </p>
+          <p className="text-base">© {new Date().getFullYear()}</p>
         </div>
       </div>
     </PageWrapper>

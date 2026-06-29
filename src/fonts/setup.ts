@@ -1,4 +1,3 @@
-import { Commissioner } from 'next/font/google'
 import localFont from 'next/font/local'
 
 export const mono = localFont({
@@ -7,8 +6,24 @@ export const mono = localFont({
   variable: '--font-mono',
 })
 
-export const sans = Commissioner({
-  display: 'swap',
+const sans = localFont({
+  src: [
+    {
+      path: './XETBook/XETBook-Regular.otf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './XETBook/XETBook-Italic.otf',
+      weight: '400',
+      style: 'italic',
+    },
+    {
+      path: './XETBook/XETBook-Medium.otf',
+      weight: '500',
+      style: 'normal',
+    },
+  ],
   variable: '--font-sans',
 })
 

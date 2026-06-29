@@ -5,10 +5,13 @@ import Link from 'next/link'
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <meta name="description" content="Kehinde Adekeke's website where he explores design and engineering" />
+      <meta
+        name="description"
+        content="Kehinde Adekeke's website where he explores design and engineering"
+      />
       <body className={`${fonts.mono.variable} ${fonts.sans.variable}`}>
         <div
-          className={`min-h-screen font-sans outline outline-pink-200  bg-[rgb(248,249,250)] text-ken-black`}
+          className={`min-h-screen font-sans bg-white text-ken-black`}
           id="container"
         >
           <div className="relative flex px-6 flex-col min-h-screen pb-8">

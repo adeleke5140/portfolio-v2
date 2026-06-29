@@ -4,12 +4,7 @@ date: '2026-01-19'
 status: 'completed'
 ---
 
-I spent the first three weeks in January learning and relearning servers, domains, linux, nginx and docker.
-
-I am not sure how detailed I want this note to be but I want it to be a public log. It's a record of how I was thinking at the time.
-Something I will probably look back on kindly in a couple of months.
-
-There really isn't an order, it's just gonna be a list of things as I remember them.
+I spent the first three weeks in January learning and relearning servers, domains, linux, nginx and docker. They aren't really in order, it's a list of things as I remember them.
 
 Domain registrars like **namecheap** are pretty neat and they allow you a piece of the internet, since they grant you the access of getting a
 human-readable web domain which you can then map to an IP address.
