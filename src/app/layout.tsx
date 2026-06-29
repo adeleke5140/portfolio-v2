@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           id="container"
         >
           <div className="relative flex px-6 flex-col min-h-screen pb-8">
-            <header className="mt-4 max-w-[36rem] w-full mx-auto flex border-y py-3 border-[#dcdcdc7e] items-center justify-between">
+            <header className="mt-4 max-w-[42rem] pl-4 w-full mx-auto flex border-y py-3 border-[#dcdcdc7e] items-center justify-between">
               <Link href="/" className="text-base">
                 Kehinde Adeleke
               </Link>
@@ -34,7 +34,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </Link>
               </nav>
             </header>
-            <main className="flex-1 max-w-[36rem] mx-auto w-full">
+            <main className="flex-1 max-w-[42rem] pl-4 mx-auto w-full">
               {children}
             </main>
           </div>

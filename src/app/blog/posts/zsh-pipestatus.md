@@ -5,9 +5,9 @@ status: 'in-progress'
 tag: 'shell'
 ---
 
-When you create a pipeline in the your preferred shell of choice, let's take `bash` as an example
+When you create a pipeline in `bash` with: 
 
-```zsh
+```bash
 ls | fd oop.py | echo "hello world"
 ```
 
@@ -22,10 +22,10 @@ echo "${PIPESTATUS[@]}"
 > 0 0 0
 ```
 
-It works okay in bash but not in my `zsh` and that's because the variable is instead called `pipestatus`
+It works in bash but not in my `zsh` and that's because the variable is instead called `pipestatus`
 and you write it to the `stdout` stream by running `echo $pipestatus`.
 
-In my shell though, only the last exit code was being returned which was unusual.
+In my shell, only the last exit code was being returned which was unusual.
 
 After a bit of digging on the interent, I found a [Stack Exchange Post](https://unix.stackexchange.com/questions/673321/zsh-pipestatus-disappears-in-the-following-prompt) which explained that when another process perhaps is using a pipe, it can override `pipestatus`, mostly in a `prompt` related automation.
 
