@@ -1,5 +1,5 @@
 ---
-title: 'Mosh: a Better SSH'
+title: 'Mosh: a Better SSH?'
 date: '2026-01-06'
 status: 'completed'
 tag: 'shell'
@@ -37,9 +37,7 @@ Usage was straightforward.
 mosh <ip-address>
 ```
 
-I immediately got an error. It complained about not being able to find the `mosh` server.
-
-On my server I also had to install it. The server is `Ubuntu 24.04.3 LTS` and I installed with `apt`.
+I immediately got an error. It complained about not being able to find the `mosh` server. On my server I also had to install it. The server is `Ubuntu 24.04.3 LTS` and I installed with `apt`.
 
 ```bash
 apt install mosh
@@ -53,9 +51,7 @@ Once installed, I connected again using:
 mosh <ip-address>
 ```
 
-It worked as intended.
-
-The latency reduced drastically and it made typing less painful.
+It worked as intended. The latency reduced drastically and it made typing less painful.
 
 Interestingly, I didn't have to pass in my private key even though I have both `id_rsa` and `id_ed25519` present. With `SSH`, I have to run:
 

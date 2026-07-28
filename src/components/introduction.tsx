@@ -33,8 +33,8 @@ export const Introduction = () => {
       <div className="flex gap-5 max-w-[40rem] flex-col">
         <section className="px-0">
           <div className="flex flex-col text-[var(--gray-1)] gap-2">
-            <div className="[&_p]:text-base [&_p]:leading-[1.65] [&_p]:my-2">
-              <p>Programmer who likes design and systems engineering.</p>
+            <div className="[&_p]:text-base [&_p]:leading-[1.65] [&_p]:my-4 md:[&_p]:my-2">
+              <p>Programmer interested in design and systems engineering.</p>
               <p>
                 I am a big fan of accessibility on the web and on other forms of
                 computing devices.
