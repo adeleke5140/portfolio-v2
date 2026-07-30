@@ -2,21 +2,6 @@
 import { PageWrapper } from '@/components/page-wrapper'
 import { A11ySection } from './home/a11y-section'
 
-const connection = [
-  {
-    name: 'email',
-    value: 'mailto:k@kehinde.me',
-  },
-  {
-    name: 'github',
-    value: 'https://github.com/adeleke5140',
-  },
-  {
-    name: 'linkedin',
-    value: 'https://www.linkedin.com/in/adeleke5140/',
-  },
-]
-
 export const Introduction = () => {
   return (
     <PageWrapper showHeading heading={''}>
@@ -33,41 +18,28 @@ export const Introduction = () => {
       <div className="flex gap-5 max-w-[40rem] flex-col">
         <section className="px-0">
           <div className="flex flex-col text-[var(--gray-1)] gap-2">
-            <div className="[&_p]:text-base [&_p]:leading-[1.65] [&_p]:my-4 md:[&_p]:my-2">
+            <div className="[&_p]:text-base [&_p]:leading-[1.65] [&_p]:pt-4 ">
               <p>Programmer who likes design. I'm interested in design and systems engineering. A fan of accessibility on the web plus other forms of
                 computing devices.
-
-              Currently working a LSP in Rust for{' '}
-              <a
-                href="https://rcl-lang.org/"
-                className="border-b border-primary text-primary"
-              >
-                RCL
-              </a>{' '}
-              and something <i>truly sensational</i> for Homer's Odyssey.
-</p>
+              </p>
+              <p>
+                Currently working a LSP in Rust for{' '}
+                <a
+                  href="https://rcl-lang.org/"
+                  className="border-b border-primary text-primary"
+                >
+                  RCL
+                </a>{' '}
+                and something <i>truly sensational</i> for Homer's Odyssey.
+              </p>
+              <p className='[&_a]:text-primary [&_a]:border-b [&_a]:border-primary'>
+                You can find me on <a href='https://github.com/adeleke5140'>Github</a>, <a href='https://www.linkedin.com/in/adeleke5140/'>LinkedIn</a> or, send me a <a href='mailto:k@kehinde.me'>mail</a>.
+              </p>
             </div>
           </div>
         </section>
 
         <A11ySection />
-
-        <div className="flex gap-4 text-base md:gap-0 flex-col md:flex-row md:items-center justify-between">
-          <div className="flex">
-            {connection.map((con) => (
-              <a
-                key={con.name}
-                target="_blank"
-                href={con.value}
-                className="capitalize hover:underline first:-ml-3 justify-between group flex gap-1.5 items-center px-3 py-1 rounded-xl"
-                rel="external"
-                referrerPolicy="strict-origin"
-              >
-                {con.name}
-              </a>
-            ))}
-          </div>
-        </div>
       </div>
     </PageWrapper>
   )
