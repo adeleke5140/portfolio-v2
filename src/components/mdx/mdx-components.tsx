@@ -19,7 +19,7 @@ export const components = {
     <h3 className="text-gray-800 tracking-[-0.7px] text-lg font-medium mt-8 mb-3" {...props} />
   ),
   p: (props: ParagraphProps) => (
-    <p className="text-ken-black first:pt-0 text-sm pt-4 leading-[1.7]" {...props} />
+    <p className="text-ken-black first:pt-0 text-base pt-4 leading-[1.7]" {...props} />
   ),
   ol: (props: ListProps) => (
     <ol className="text-gray-800 list-decimal pl-5" {...props} />

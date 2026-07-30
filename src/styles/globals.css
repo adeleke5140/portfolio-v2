@@ -27,6 +27,7 @@ h4 {
   --gray-4: #282828;
   --gray-6: #343434;
   --radius: 0.5rem;
+  --body-size: 16px;
 
   --max-width: 36.3rem;
   --primary: 0.54 0.16 31.35;

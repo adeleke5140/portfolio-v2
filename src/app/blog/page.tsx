@@ -91,7 +91,7 @@ const Index = () => {
                   href={`/blog/${post.id}`}
                   className="group rounded-md py-2 block mb-2 transition-colors duration-200"
                 >
-                  <div className="flex text-sm md:flex-row md:justify-between group-hover:translate-x-2 flex-col gap-1 transition-transform">
+                  <div className="flex text-base md:flex-row md:justify-between group-hover:translate-x-2 flex-col gap-1 transition-transform">
                     <p className="hover:underline transition-all">
                       {post.title}
                     </p>

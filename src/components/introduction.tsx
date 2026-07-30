@@ -33,11 +33,11 @@ export const Introduction = () => {
       <div className="flex gap-5 max-w-[40rem] flex-col">
         <section className="px-0">
           <div className="flex flex-col text-[var(--gray-1)] gap-2">
-            <div className="[&_p]:text-sm [&_p]:leading-[1.65] [&_p]:my-4 md:[&_p]:my-2">
+            <div className="[&_p]:text-base [&_p]:leading-[1.65] [&_p]:my-4 md:[&_p]:my-2">
               <p>Programmer who likes design. I'm interested in design and systems engineering. A fan of accessibility on the web plus other forms of
                 computing devices.
 
-              Currently building a LSP in Rust for{' '}
+              Currently working a LSP in Rust for{' '}
               <a
                 href="https://rcl-lang.org/"
                 className="border-b border-primary text-primary"
@@ -52,7 +52,7 @@ export const Introduction = () => {
 
         <A11ySection />
 
-        <div className="flex gap-4 text-sm md:gap-0 flex-col md:flex-row md:items-center justify-between">
+        <div className="flex gap-4 text-base md:gap-0 flex-col md:flex-row md:items-center justify-between">
           <div className="flex">
             {connection.map((con) => (
               <a
