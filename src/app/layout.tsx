@@ -15,26 +15,26 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           id="container"
         >
           <div className="relative flex px-5 flex-col min-h-screen pb-8">
-            <header className="mt-4 max-w-[42rem] w-full mx-auto flex border-y py-3 border-[#dcdcdc7e] items-center justify-between">
-              <Link href="/" className="text-base">
+            <header className="mt-4 text-sm max-w-[var(--max-width)] w-full mx-auto flex border-y py-3 border-[#dcdcdc7e] items-center justify-between">
+              <Link href="/" >
                 Kehinde Adeleke
               </Link>
               <nav className="flex cursor-pointer items-center">
                 <Link
                   href="/craft"
-                  className="text-ken-grey text-base -ml-3 px-3 py-1 rounded-xl "
+                  className="text-ken-grey ml-3 px-3 py-1 rounded-xl "
                 >
                   Craft
                 </Link>
                 <Link
                   href="/blog"
-                  className="text-ken-grey text-base px-3 py-1 rounded-xl "
+                  className="text-ken-grey px-3 py-1 rounded-xl "
                 >
                   Blog
                 </Link>
               </nav>
             </header>
-            <main className="flex-1 max-w-[42rem] mx-auto w-full">
+            <main className="flex-1 max-w-[var(--max-width)] mx-auto w-full">
               {children}
             </main>
           </div>

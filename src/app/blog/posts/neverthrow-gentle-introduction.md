@@ -7,7 +7,7 @@ tag: 'typescript'
 
 For quite a while writing software, I didn't think much about errors. The happy path was all that mattered, and I would only look into _error handling_ when a runtime error occurred.
 
-Validators like Zod and Arktype helped because they added an extra layer of runtime validation to values the Typescript compiler could not verify at compile time.
+Validators like Zod helped because they added an extra layer of runtime validation to values the Typescript compiler could not verify at compile time. I say the compiler but Zod really helped me add some order to chaos.
 
 But then, I wondered, what about code paths where validation alone was not enough? Could we encode the potential for failure in our programs and surface the errors to handle it gracefully?
 
@@ -15,7 +15,7 @@ But then, I wondered, what about code paths where validation alone was not enoug
 
 The more I write software, the more I realize that errors shouldn't be an afterthought.
 
-> If anything can go wrong, at some point it will go wrong.
+> If anything can go wrong, at some point it will.
 
 Software should work predictably. The happy path isn't always the predictable path. Errors lurk, in various parts of our program, and they can be triggered when certain conditions are met.
 

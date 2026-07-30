@@ -130,7 +130,7 @@ export default async function Page({
             style={{
               textWrap: 'pretty',
             }}
-            className="leading-[1.2em] text-[40px] tracking-[-0.96px]"
+            className="leading-[1.2em] text-3xl tracking-[-0.96px]"
           >
             {craftFrontMatter.title}
           </h1>

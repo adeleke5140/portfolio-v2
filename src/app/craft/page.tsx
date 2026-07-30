@@ -72,7 +72,7 @@ export default function Index() {
                   key={craft.id}
                   className=" md:flex justify-between items-start group rounded-md py-4 block mb-2 transition-colors duration-200 "
                 >
-                  <div className="flex group-hover:translate-x-2 flex-col gap-1 transition-transform ">
+                  <div className="flex text-sm group-hover:translate-x-2 flex-col gap-1 transition-transform ">
                     <p className="flex gap-2 items-center">
                       <span className="hover:underline  transition-all">
                         {craft.title}
@@ -80,7 +80,7 @@ export default function Index() {
                       <span>{craft.isNew ? <NewBadge /> : ''}</span>
                     </p>
                     {craft.description && (
-                      <p className="text-sm text-ken-grey">
+                      <p className="text-xs text-ken-grey">
                         {craft.description}
                       </p>
                     )}

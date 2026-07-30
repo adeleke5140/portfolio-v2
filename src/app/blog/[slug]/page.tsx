@@ -129,14 +129,14 @@ export default async function Page({
         backText="Blog"
         heading={
           <div className="py-10 pt-24 border-b border-[#dcdcdc7e] pb-6">
-            <span className="text-ken-grey text-[15px]">
+            <span className="text-ken-grey text-xs  ">
               {formatDate(postData.date, 'LLL d, yyyy')}
             </span>
             <h1
               style={{
                 textWrap: 'pretty',
               }}
-              className="leading-[1.4] text-primary text-[40px] mt-[5px]  tracking-[-0.9px]"
+              className="leading-[1.4] text-primary text-3xl mt-[5px] tracking-[-0.7px]"
             >
               {postData.title}
             </h1>

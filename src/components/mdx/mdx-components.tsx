@@ -13,16 +13,13 @@ type SuperscripttProps = ComponentPropsWithoutRef<'sup'>
 
 export const components = {
   h2: (props: HeadingProps) => (
-    <h2 className="text-gray-800 text-2xl font-medium mt-8 mb-3" {...props} />
+    <h2 className="text-gray-800 tracking-[-0.7px] text-primary text-xl font-medium mt-8 mb-3" {...props} />
   ),
   h3: (props: HeadingProps) => (
-    <h3 className="text-gray-800 text-xl font-medium mt-8 mb-3" {...props} />
-  ),
-  h4: (props: HeadingProps) => (
-    <h4 className="text-gray-800 mt-8 mb-3 font-medium" {...props} />
+    <h3 className="text-gray-800 tracking-[-0.7px] text-lg font-medium mt-8 mb-3" {...props} />
   ),
   p: (props: ParagraphProps) => (
-    <p className="text-ken-black mb-[var(--line-height)] leading-[1.7]" {...props} />
+    <p className="text-ken-black first:pt-0 text-sm pt-4 leading-[1.7]" {...props} />
   ),
   ol: (props: ListProps) => (
     <ol className="text-gray-800 list-decimal pl-5" {...props} />
@@ -92,7 +89,7 @@ export const components = {
   ),
   blockquote: (props: BlockquoteProps) => (
     <blockquote
-      className="[&>p]:py-1 [&>p]:pl-4 bg-bb rounded-md rounded-l-none border-l-2 border-primary [&>p]:text-[16px]"
+      className="[&>p]:py-1 [&>p]:pl-4 mt-4 italic rounded-md rounded-l-none border-l-2 border-primary [&>p]:text-[16px]"
       {...props}
     />
   ),

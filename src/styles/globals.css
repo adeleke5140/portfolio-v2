@@ -9,7 +9,8 @@ html {
   -webkit-font-smoothing: antialiased;
   font-size-adjust: ex-height 0.53;
   -webkit-text-size-adjust: 100%;
-  --line-height: 1.7rem;
+  --line-height: 1.2rem;
+
   line-height: var(--line-height);
 }
 
@@ -27,6 +28,7 @@ h4 {
   --gray-6: #343434;
   --radius: 0.5rem;
 
+  --max-width: 36.3rem;
   --primary: 0.54 0.16 31.35;
   --bb: 0.42 0.04 37.15 / 0.08;
   --outline: oklch(0.68 0.17 53.04 / 0.44);
@@ -63,14 +65,14 @@ pre,
 }
 
 code {
-  @apply font-mono overflow-x-auto rounded-[6px] bg-top from-[#f8f8f8] to-[#fcfcfc] py-0.5 px-[3.6px] border border-[hsl(0_0%_92%)] text-[13px];
+  @apply font-mono overflow-x-auto rounded-[6px] py-0.5 px-[3.6px] text-[13px];
 }
 
 pre code {
   background: transparent;
   border: none;
   line-height: 1.8;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .shimmer {
@@ -145,7 +147,7 @@ pre {
 }
 
 code > span {
-  font-size: 13px;
+  font-size: 12px;
 }
 
 [data-streamdown='inline-code'] {
