@@ -23,7 +23,7 @@ export const Introduction = () => {
                 computing devices.
               </p>
               <p>
-                Currently working a LSP in Rust for{' '}
+                Currently building a LSP in Rust for{' '}
                 <a
                   href="https://rcl-lang.org/"
                   className="border-b border-primary text-primary"
