@@ -1,0 +1,47 @@
+---
+import favicon from '@/app/favicon.ico?url'
+import xetbookRegular from '@/fonts/XETBook/XETBook-Regular.otf?url'
+
+interface Props {
+  title: string
+  description?: string
+  type?: 'website' | 'article'
+  publishedTime?: string
+  image?: string
+}
+
+const {
+  title,
+  description = "Kehinde Adeleke's website where he explores design and engineering",
+  type = 'website',
+  publishedTime,
+  image = '/opengraph-image.png',
+} = Astro.props
+
+// build.format 'file' puts `.html` in the build-time pathname; Vercel serves
+// clean URLs, so strip it.
+const pathname = Astro.url.pathname.replace(/(index)?\.html$/, '')
+const url = new URL(pathname, Astro.site)
+const imageUrl = new URL(image, Astro.site)
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href={favicon} />
+<link rel="preload" href={xetbookRegular} as="font" type="font/otf" crossorigin />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={url} />
+
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={type} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={imageUrl} />
+{publishedTime && <meta property="article:published_time" content={publishedTime} />}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />

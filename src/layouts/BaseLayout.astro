@@ -1,0 +1,33 @@
+---
+import BaseHead from '@/components/BaseHead.astro'
+import '@/styles/globals.css'
+import '@/styles/fonts.css'
+// Hover popovers for ```ts twoslash code fences.
+import '@shikijs/twoslash/style-rich.css'
+
+type Props = Parameters<typeof BaseHead>[0]
+---
+
+<html lang="en">
+  <head>
+    <BaseHead {...Astro.props} />
+  </head>
+  <body>
+    <div class="min-h-screen font-sans bg-white text-ken-black" id="container">
+      <div class="relative flex px-5 flex-col min-h-screen pb-8">
+        <header
+          class="mt-4 text-sm max-w-[var(--max-width)] w-full mx-auto flex border-y py-3 border-[#dcdcdc7e] items-center justify-between"
+        >
+          <a href="/">Kehinde Adeleke</a>
+          <nav class="flex cursor-pointer items-center">
+            <a href="/craft" class="text-ken-grey ml-3 px-3 py-1 rounded-xl">Craft</a>
+            <a href="/blog" class="text-ken-grey px-3 py-1 rounded-xl">Blog</a>
+          </nav>
+        </header>
+        <main class="flex-1 max-w-[var(--max-width)] mx-auto w-full">
+          <slot />
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

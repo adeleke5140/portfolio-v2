@@ -1,0 +1,36 @@
+/* Replaces next/font/local (src/fonts/setup.ts) for the Astro build. */
+
+@font-face {
+  font-family: 'XETBook';
+  src: url('../fonts/XETBook/XETBook-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'XETBook';
+  src: url('../fonts/XETBook/XETBook-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'XETBook';
+  src: url('../fonts/XETBook/XETBook-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Google Sans Code';
+  src: url('../fonts/Google-sans-code.ttf') format('truetype');
+  font-display: swap;
+}
+
+:root {
+  --font-sans: 'XETBook';
+  --font-mono: 'Google Sans Code';
+}
