@@ -17,8 +17,8 @@ const {
   image = '/og/home.png',
 } = Astro.props
 
-// build.format 'file' puts `.html` in the build-time pathname; Vercel serves
-// clean URLs, so strip it.
+// build.format 'file' puts `.html` in the build-time pathname; canonical URLs
+// are extensionless, so strip it.
 const pathname = Astro.url.pathname.replace(/(index)?\.html$/, '')
 const url = new URL(pathname, Astro.site)
 const imageUrl = new URL(image, Astro.site)

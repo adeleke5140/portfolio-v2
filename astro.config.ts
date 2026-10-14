@@ -24,6 +24,8 @@ export default defineConfig({
   trailingSlash: 'never',
   build: { format: 'file' },
   prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
+  // The old Next file-convention OG route.
+  redirects: { '/opengraph-image': '/og/home.png' },
   integrations: [react(), mdx()],
   vite: {
     // Native .node binding (OG images); the dev dep optimizer can't bundle it.
