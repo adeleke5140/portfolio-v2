@@ -515,3 +515,24 @@ div[data-code-block-container='true'] {
 .footnotes a {
   font-size: 14px !important;
 }
+
+/* Twoslash hover popovers open upward instead of down, so they don't cover the
+   lines below the token being inspected. The container is positioned from the
+   token's top edge, so it's shifted up by its own height plus a small gap. */
+.twoslash .twoslash-popup-container {
+  transform: translateY(calc(-100% - 0.4em)) !important;
+}
+
+.twoslash .twoslash-query-persisted .twoslash-popup-container {
+  transform: translateY(calc(-100% - 0.6em)) !important;
+}
+
+/* The arrow lives on the opposite edge once the popover flips. */
+.twoslash .twoslash-popup-arrow {
+  top: auto;
+  bottom: -4px;
+  border-top: none;
+  border-right: none;
+  border-bottom: 1px solid var(--twoslash-border-color);
+  border-left: 1px solid var(--twoslash-border-color);
+}

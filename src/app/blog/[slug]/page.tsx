@@ -12,6 +12,10 @@ import {
 } from '../components/initial-code-block'
 import { getBlogData } from '../utils'
 import rehypePrettyCode, { type Options } from 'rehype-pretty-code'
+import {
+  rendererRich,
+  transformerTwoslash,
+} from '@shikijs/twoslash'
 import remarkGfm from 'remark-gfm'
 import Image from 'next/image'
 
@@ -85,6 +89,14 @@ export async function generateStaticParams() {
 const options: Options = {
   theme: 'github-light',
   keepBackground: false,
+  // Opt-in per fence with ```ts twoslash — runs the compiler at build time so
+  // inferred types and errors are real rather than hand-written.
+  transformers: [
+    transformerTwoslash({
+      explicitTrigger: true,
+      renderer: rendererRich(),
+    }),
+  ],
 }
 
 export default async function Page({
@@ -117,7 +129,7 @@ export default async function Page({
     },
   })
 
-  const postData = data.frontmatter as { title: string; date: string }
+  const postData = data.frontmatter as { title: string; date: string; status: string }
   return (
     <>
       <Head>
@@ -130,6 +142,7 @@ export default async function Page({
         heading={
           <div className="py-10 pt-24 border-b border-[#dcdcdc7e] pb-6">
             <span className="text-ken-grey text-xs ">
+              <span className='italic'>{postData.status == "draft" ? "Draft. " : ""}</span>
               {formatDate(postData.date, 'LLL d, yyyy')}
             </span>
             <h1

@@ -1,5 +1,7 @@
 import { fonts } from '@/fonts/setup'
 import '@/styles/globals.css'
+// Hover popovers for ```ts twoslash code fences.
+import '@shikijs/twoslash/style-rich.css'
 import Link from 'next/link'
 
 export default function Layout({ children }: { children: React.ReactNode }) {

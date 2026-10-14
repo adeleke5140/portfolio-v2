@@ -44,7 +44,8 @@ function pluck(records: any[], key: string): any[] {
 Here in the second version, it is slightly better but the `string` type is still too broad.
 Remember that this string could also not exists on the object we need to access. The `any` type is also problematic.
 
-```typescript
+```ts twoslash
+// @errors: 7053
 function pluck<T>(records: T[], key: string) {
   return records.map((record) => record[key])
 }
@@ -56,7 +57,7 @@ We cannot use a `string` key to index type `unknown`.
 
 The problem here still persists and this is because string is still broad. It is **stringly typed**. The return type is also still `any[]`
 
-```typescript
+```ts twoslash
 function pluck<T>(records: T[], key: keyof T) {
   return records.map((record) => record[key])
 }
@@ -64,13 +65,13 @@ function pluck<T>(records: T[], key: keyof T) {
 
 We are making some progress here. We constrain the key so that it is only an existing key on the object. Typescript infers the return type.
 
-If you mouse over the function, the return type is `T[keyof T][]`
+Hover the function above and the return type is `T[keyof T][]`.
 In this case, if there are four keys with values of type `number` and `string`, the compiler infers the returned `array` as a `string` or number `array`.
 
 It can be better.
 
-```typescript
-function pluck<T, K extends keyof T>(record: T[], key: K): T[K][] {
+```ts twoslash
+function pluck<T, K extends keyof T>(records: T[], key: K): T[K][] {
   return records.map((record) => record[key])
 }
 ```
@@ -79,7 +80,11 @@ Perfecto. In this final function, we have a generic function with two parameters
 
 Here is an concrete example:
 
-```typescript
+```ts twoslash
+function pluck<T, K extends keyof T>(records: T[], key: K): T[K][] {
+  return records.map((record) => record[key])
+}
+// ---cut---
 type RecordingType = 'studio' | 'live'
 
 type RecordType = {
