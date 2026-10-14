@@ -1,0 +1,42 @@
+---
+import PageWrapper from '@/components/PageWrapper.astro'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { getCraftItems, groupCraftByTag } from '@/lib/content'
+
+const itemsByTag = groupCraftByTag(await getCraftItems())
+---
+
+<BaseLayout
+  title="Craft"
+  description="Kehinde's list of craft components where he explores ideas with CSS and motion"
+>
+  <PageWrapper heading="Craft">
+    <section class="flex flex-col">
+      {
+        itemsByTag.map(([tag, items]) => (
+          <div class="grid  last:border-b-0  pt-10 first:pt-0 border-b-[0.5px] border-b-[#dcdcdc]">
+            <p class="mb-4 capitalize text-sm text-ken-grey">{tag}</p>
+            <div>
+              {items.map((item) => (
+                <a
+                  href={`/craft/${item.id}`}
+                  class=" md:flex justify-between items-start group rounded-md py-4 block mb-2 transition-colors duration-200 "
+                >
+                  <div class="flex text-base group-hover:translate-x-2 flex-col gap-1 transition-transform ">
+                    <p class="flex gap-2 items-center">
+                      <span class="hover:underline  transition-all">{item.data.title}</span>
+                      <span />
+                    </p>
+                    {item.data.description && (
+                      <p class="text-xs text-ken-grey">{item.data.description}</p>
+                    )}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </section>
+  </PageWrapper>
+</BaseLayout>

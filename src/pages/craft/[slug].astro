@@ -1,0 +1,36 @@
+---
+import PageWrapper from '@/components/PageWrapper.astro'
+import { craftComponents } from '@/components/mdx/components'
+import { formatDate } from '@/helpers/formatDate'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { getCraftItems, type CraftItem } from '@/lib/content'
+import { render } from 'astro:content'
+// Linked up front: TastyButton renders without JS, so it can't rely on the
+// split-to-edit island pulling this stylesheet in.
+import '@/styles/nunito.css'
+
+export async function getStaticPaths() {
+  const items = await getCraftItems()
+  return items.map((item) => ({ params: { slug: item.id }, props: { item } }))
+}
+
+const { item } = Astro.props as { item: CraftItem }
+const { title, date, description } = item.data
+const { Content } = await render(item)
+---
+
+<BaseLayout title={title} description={description ?? `Explore ${title} - UI craft by Kenny`}>
+  <PageWrapper>
+    <div slot="heading" class="py-10 pt-24 border-b border-[#dcdcdc7e] pb-6">
+      <span class="text-ken-grey text-[15px]">
+        {date && formatDate(date, 'LLL d, yyyy')}
+      </span>
+      <h1 style={{ textWrap: 'pretty' }} class="leading-[1.2em] text-3xl tracking-[-0.96px]">
+        {title}
+      </h1>
+    </div>
+    <div class="max-w-[680px] mt-5  mx-auto">
+      <Content components={craftComponents} />
+    </div>
+  </PageWrapper>
+</BaseLayout>

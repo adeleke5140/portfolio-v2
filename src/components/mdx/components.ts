@@ -2,7 +2,15 @@ import {
   FinalCodeBlock,
   InitialCodeBlock,
 } from '@/app/blog/components/initial-code-block'
+import CraftContainer from '@/components/CraftContainer.astro'
+import { TastyButton } from '@/components/craft/tasty-button'
+import BatteryWidget from '@/components/islands/BatteryWidget.astro'
+import CardAnimation from '@/components/islands/CardAnimation.astro'
+import IntegrationMenu from '@/components/islands/IntegrationMenu.astro'
 import LetterSpacingPlayground from '@/components/islands/LetterSpacingPlayground.astro'
+import RecaptchaButton from '@/components/islands/RecaptchaButton.astro'
+import SplitToEdit from '@/components/islands/SplitToEdit.astro'
+import Tabs from '@/components/islands/Tabs.astro'
 import A from './A.astro'
 import Blockquote from './Blockquote.astro'
 import Em from './Em.astro'
@@ -40,4 +48,17 @@ export const blogComponents = {
   // Server-rendered only: sugar-high runs at build time.
   InitialCodeBlock,
   FinalCodeBlock,
+}
+
+export const craftComponents = {
+  ...mdxComponents,
+  CraftContainer,
+  BatteryWidget,
+  CardAnimation,
+  IntegrationMenu,
+  RecaptchaButton,
+  SplitToEdit,
+  Tabs,
+  // CSS-only (:active), so it ships as static HTML.
+  TastyButton,
 }
