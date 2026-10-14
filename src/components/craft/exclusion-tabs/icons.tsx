@@ -1,8 +1,4 @@
-'use client'
 import { cn } from '@/lib/utils'
-import { motion } from 'motion/react'
-import Link from 'next/link'
-import { useState } from 'react'
 
 export const BlogIcon = ({ className }: { className?: string }) => {
   return (
@@ -119,27 +115,6 @@ export const ToolsIcon = ({ className }: { className?: string }) => {
   )
 }
 
-type Link = (typeof links)[number]
-
-function getBorderRadius(path: string, allLinks: Array<Link>) {
-  if (path == allLinks[0].href) {
-    return {
-      borderRadius: '16px',
-      borderTopRightRadius: '4px',
-      borderBottomRightRadius: '4px',
-    }
-  } else if (path == allLinks[allLinks.length - 1].href) {
-    return {
-      borderRadius: '16px',
-      borderTopLeftRadius: '4px',
-      borderBottomLeftRadius: '4px',
-    }
-  }
-  return {
-    borderRadius: '4px',
-  }
-}
-
 export const CraftIcon = () => {
   return (
     <svg
@@ -160,53 +135,5 @@ export const CraftIcon = () => {
       <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" />
       <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" />
     </svg>
-  )
-}
-
-const links = [
-  { name: 'Home', href: '/', icon: HomeIcon },
-  { name: 'Craft', href: '/craft', icon: CraftIcon },
-  { name: 'Blog', href: '/blog', icon: BlogIcon },
-]
-
-export const Navigation = () => {
-  const [activeLink, setactiveLink] = useState(links[0].href)
-
-  return (
-    <nav className="mx-auto w-fit border rounded-full bg-white border-gray-100/90 dark:border-[#282828]">
-      <ul className="flex items-center px-1 gap-1  py-1">
-        {links.map((link) => (
-          <li key={link.name}>
-            <button
-              type="button"
-              onClick={() => setactiveLink(link.href)}
-              className={cn(
-                'text-sm relative dark:text-[#e5e5e5] grid place-items-center px-3 py-1 font-sm'
-              )}
-            >
-              <span className="inline-flex dark:text-[#e5e5e5] items-center gap-1">
-                <link.icon />
-                <span>{link.name}</span>
-              </span>
-
-              {activeLink === link.href ? (
-                <motion.span
-                  layoutId="bubble"
-                  className="absolute inset-0 bg-gray-100 dark:bg-[#282828] dark:mix-blend-lighten mix-blend-darken"
-                  style={{
-                    ...getBorderRadius(link.href, links),
-                  }}
-                  transition={{
-                    type: 'spring',
-                    bounce: 0.2,
-                    duration: 0.6,
-                  }}
-                />
-              ) : null}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </nav>
   )
 }

@@ -4,8 +4,6 @@ date: '2026-02-12'
 status: 'completed'
 ---
 
-import Image from 'next/image'
-
 Semantic HTML and SSR got me the scores below. My website is mostly static, yet I wanted to improve it a little bit more.
 ![Initial Lighthouse Metric](/images/lighthouse/metric.png)
 
@@ -85,11 +83,13 @@ The Devtools mention that JavaScript is not minified, there are unused JavaScrip
 
 The production build pipeline would minify and strip any unnecessary JavaScript from the NextJS bundle. So before optimizing, I ran `pnpm build`, opened the browser devtools and got this:
 
-<Image
+<img
   src="/images/lighthouse/perfect.gif"
   alt="Perfect lighthouse score across all metrics"
   width={200}
   height={200}
+  loading="lazy"
+  decoding="async"
   className="h-full w-full rounded-xl border-0"
 />
 

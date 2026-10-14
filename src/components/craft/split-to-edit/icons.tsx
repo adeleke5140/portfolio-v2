@@ -1,5 +1,4 @@
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
 
 export const CheckMark = ({ className }: { className: string }) => {
   return (
@@ -32,17 +31,5 @@ export const Pen = ({ className }: { className: string }) => {
         fill="#92909d"
       />
     </svg>
-  )
-}
-
-export const SmirkIcon = ({ className }: { className?: string }) => {
-  return (
-    <Image
-      src="/face.png"
-      width={800}
-      height={800}
-      alt=""
-      className={cn('size-20', className)}
-    />
   )
 }
