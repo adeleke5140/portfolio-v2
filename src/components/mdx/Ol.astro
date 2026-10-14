@@ -1,0 +1,8 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+type Props = HTMLAttributes<'ol'>
+const { class: className, ...rest } = Astro.props
+---
+
+<ol class={className ?? 'text-gray-800 list-decimal pl-5'} {...rest}><slot /></ol>
