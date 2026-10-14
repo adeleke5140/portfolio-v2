@@ -25,6 +25,11 @@ export default defineConfig({
   build: { format: 'file' },
   prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
   integrations: [react(), mdx()],
+  vite: {
+    // Native .node binding (OG images); the dev dep optimizer can't bundle it.
+    ssr: { external: ['@resvg/resvg-js'] },
+    optimizeDeps: { exclude: ['@resvg/resvg-js'] },
+  },
   markdown: {
     // rehype-pretty-code does the highlighting, so Astro's Shiki stays off.
     syntaxHighlight: false,

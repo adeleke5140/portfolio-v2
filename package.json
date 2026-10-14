@@ -4,16 +4,14 @@
   "private": true,
   "packageManager": "pnpm@10.23.0",
   "engines": {
-    "pnpm": ">=10.23.0"
+    "pnpm": ">=10.23.0",
+    "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "next dev -p 3001",
-    "build": "next build",
-    "start": "next start",
-    "astro:dev": "astro dev --port 4321",
-    "astro:build": "astro build",
-    "astro:preview": "astro preview --port 4321",
-    "astro:check": "astro check",
+    "dev": "astro dev --port 3001",
+    "build": "astro build",
+    "preview": "astro preview --port 3001",
+    "check": "astro check",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix-suggestions"
   },
@@ -25,15 +23,11 @@
     "astro": "^7.3.6",
     "clsx": "^2.1.1",
     "date-fns": "^2.29.3",
-    "gray-matter": "^4.0.3",
     "lucide-react": "^1.16.0",
     "motion": "^12.39.0",
-    "next": "16.0.7",
-    "next-mdx-remote": "^6.0.0",
     "react": "19.2.1",
     "react-dom": "19.2.1",
     "rehype-pretty-code": "^0.14.1",
-    "remark-gfm": "^4.0.1",
     "satori": "^0.35.1",
     "shiki": "^3.19.0",
     "sonner": "^2.0.7",
@@ -41,14 +35,12 @@
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.7.2",
-    "usehooks-ts": "^3.1.1",
-    "zod": "^3.25.76"
+    "usehooks-ts": "^3.1.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@shikijs/twoslash": "^3.19.0",
     "@tailwindcss/typography": "^0.5.9",
-    "@types/mdx": "^2.0.13",
     "@types/node": "22.20.5",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",

@@ -7,7 +7,7 @@ import { z } from 'astro/zod'
 const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/)
 
 const blog = defineCollection({
-  loader: glob({ pattern: '**/*.mdx', base: './src/app/blog/posts' }),
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
     date: isoDate,
@@ -24,7 +24,7 @@ const blog = defineCollection({
 })
 
 const craft = defineCollection({
-  loader: glob({ pattern: '**/*.mdx', base: './src/app/craft/components' }),
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/craft' }),
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),

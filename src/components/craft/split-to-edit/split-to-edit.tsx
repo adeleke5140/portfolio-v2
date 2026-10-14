@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { AnimatePresence, motion, Transition } from 'motion/react'
+import { AnimatePresence, motion, type Transition } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
 import { CheckMark, Pen } from './icons'
 import '@/styles/nunito.css'

@@ -1,4 +1,4 @@
-import { motion, Variants } from 'motion/react'
+import { motion, type Variants } from 'motion/react'
 import { container, item } from './variants'
 
 export const CardStatus = () => {

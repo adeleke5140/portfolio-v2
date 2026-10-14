@@ -1,7 +1,7 @@
 import {
   FinalCodeBlock,
   InitialCodeBlock,
-} from '@/app/blog/components/initial-code-block'
+} from '@/components/initial-code-block'
 import CraftContainer from '@/components/CraftContainer.astro'
 import { TastyButton } from '@/components/craft/tasty-button'
 import BatteryWidget from '@/components/islands/BatteryWidget.astro'
