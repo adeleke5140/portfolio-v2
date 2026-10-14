@@ -19,7 +19,11 @@ const { title, date, description } = item.data
 const { Content } = await render(item)
 ---
 
-<BaseLayout title={title} description={description ?? `Explore ${title} - UI craft by Kenny`}>
+<BaseLayout
+  title={title}
+  description={description ?? `Explore ${title} - UI craft by Kenny`}
+  image={`/og/craft/${item.id}.png`}
+>
   <PageWrapper>
     <div slot="heading" class="py-10 pt-24 border-b border-[#dcdcdc7e] pb-6">
       <span class="text-ken-grey text-[15px]">

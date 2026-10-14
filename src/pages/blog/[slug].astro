@@ -21,6 +21,7 @@ const { Content } = await render(post)
   description={description ?? `Read ${title} on Kenny's blog`}
   type="article"
   publishedTime={date}
+  image={`/og/blog/${post.id}.png`}
 >
   <PageWrapper class="lg:pt-0">
     <div slot="heading" class="py-10 pt-24 border-b border-[#dcdcdc7e] pb-6">
