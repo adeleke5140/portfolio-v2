@@ -13,6 +13,7 @@
     "astro:dev": "astro dev --port 4321",
     "astro:build": "astro build",
     "astro:preview": "astro preview --port 4321",
+    "astro:check": "astro check",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix-suggestions"
   },
@@ -43,6 +44,7 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
     "@shikijs/twoslash": "^3.19.0",
     "@tailwindcss/typography": "^0.5.9",
     "@types/mdx": "^2.0.13",
