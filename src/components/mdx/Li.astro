@@ -5,4 +5,6 @@ type Props = HTMLAttributes<'li'>
 const { class: className, ...rest } = Astro.props
 ---
 
-<li class={className ?? 'pl-1 my-2'} {...rest}><slot /></li>
+<li class={className ?? 'pl-1 text-[15px] my-2'} {...rest}>
+  <slot />
+</li>

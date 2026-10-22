@@ -1,4 +1,4 @@
-/* Nunito for the craft demos (replaces next/font/google). The family is named
+/* Nunito for the craft demos. The family is named
    plain 'Nunito' so the inline `fontFamily: 'Nunito'` styles resolve to it. */
 @font-face {
   font-family: 'Nunito';

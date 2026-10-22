@@ -10,17 +10,7 @@ const { heading, class: className } = Astro.props
 const hasHeadingSlot = Astro.slots.has('heading')
 ---
 
-<div class={cn('relative mt-4  2xl:px-0 mx-auto', className)}>
-  <div class="flex flex-col gap-5">
-    {
-      hasHeadingSlot ? (
-        <slot name="heading" />
-      ) : heading ? (
-        <h1 class="text-left text-primary py-10 text-3xl w-full capitalize leading-[100%] tracking-[-0.96px]">
-          {heading}
-        </h1>
-      ) : null
-    }
-  </div>
+<div class={cn('relative 2xl:px-0 mx-auto', className)}>
+  <h1 class="text-left mt-4 mb-32 text-xl w-full capitalize">{heading}</h1>
   <slot />
 </div>

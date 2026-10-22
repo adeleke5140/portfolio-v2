@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import satori from 'satori'
 
-// Ported from src/app/api/og/route.tsx (next/og). Runs at build time only.
+// Runs at build time only.
 const size = { width: 800, height: 400 }
 
 // Resolved from the project root: this module is bundled before it runs.

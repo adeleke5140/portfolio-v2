@@ -2,7 +2,6 @@
 read from the user battery's percentage
 might need some permission stuff
 */
-'use client'
 import { cn } from '@/lib/utils'
 import { useEffect, useState } from 'react'
 import { motion } from 'motion/react'

@@ -1,6 +1,4 @@
 ---
-import xetbookRegular from '@/fonts/XETBook/XETBook-Regular.otf?url'
-
 interface Props {
   title: string
   description?: string
@@ -27,7 +25,6 @@ const imageUrl = new URL(image, Astro.site)
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="icon" href="/favicon.ico" />
-<link rel="preload" href={xetbookRegular} as="font" type="font/otf" crossorigin />
 
 <title>{title}</title>
 <meta name="description" content={description} />

@@ -4,9 +4,10 @@ import react from '@astrojs/react'
 import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
 import { defineConfig } from 'astro/config'
 import rehypePrettyCode, { type Options } from 'rehype-pretty-code'
+import { codeTheme } from './src/lib/code-theme'
 
 const prettyCodeOptions: Options = {
-  theme: 'github-light',
+  theme: codeTheme,
   keepBackground: false,
   // Opt-in per fence with ```ts twoslash — runs the compiler at build time so
   // inferred types and errors are real rather than hand-written.
@@ -24,7 +25,7 @@ export default defineConfig({
   trailingSlash: 'never',
   build: { format: 'file' },
   prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
-  // The old Next file-convention OG route.
+  // Keeps old shared links to the previous OG image URL working.
   redirects: { '/opengraph-image': '/og/home.png' },
   integrations: [react(), mdx()],
   vite: {
@@ -37,7 +38,7 @@ export default defineConfig({
     syntaxHighlight: false,
     processor: unified({
       rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
-      // next-mdx-remote never converted quotes; keep them straight.
+      // Keep quotes straight; posts are written expecting no smart quotes.
       smartypants: false,
     }),
   },

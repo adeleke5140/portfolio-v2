@@ -1,7 +1,6 @@
 ---
 import PageWrapper from '@/components/PageWrapper.astro'
 import { blogComponents } from '@/components/mdx/components'
-import { formatDate } from '@/helpers/formatDate'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import { getPosts, type BlogPost } from '@/lib/content'
 import { render } from 'astro:content'
@@ -23,21 +22,9 @@ const { Content } = await render(post)
   publishedTime={date}
   image={`/og/blog/${post.id}.png`}
 >
-  <PageWrapper class="lg:pt-0">
-    <div slot="heading" class="py-10 pt-24 border-b border-[#dcdcdc7e] pb-6">
-      <span class="text-ken-grey text-xs">
-        <span class="italic">{status === 'draft' ? 'Draft. ' : ''}</span>
-        {formatDate(date, 'LLL d, yyyy')}
-      </span>
-      <h1
-        style={{ textWrap: 'pretty' }}
-        class="leading-[1.4] text-primary text-3xl mt-[5px] tracking-[-0.7px]"
-      >
-        {title}
-      </h1>
-    </div>
-    <div class="mx-auto mt-5">
+  <PageWrapper class="lg:pt-0" heading={title}>
+    <article>
       <Content components={blogComponents} />
-    </div>
+    </article>
   </PageWrapper>
 </BaseLayout>

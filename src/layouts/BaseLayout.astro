@@ -12,22 +12,9 @@ type Props = Parameters<typeof BaseHead>[0]
   <head>
     <BaseHead {...Astro.props} />
   </head>
-  <body>
-    <div class="min-h-screen font-sans bg-white text-ken-black" id="container">
-      <div class="relative flex px-5 flex-col min-h-screen pb-8">
-        <header
-          class="mt-4 text-sm max-w-[var(--max-width)] w-full mx-auto flex border-y py-3 border-[#dcdcdc7e] items-center justify-between"
-        >
-          <a href="/">Kehinde Adeleke</a>
-          <nav class="flex cursor-pointer items-center">
-            <a href="/craft" class="text-ken-grey ml-3 px-3 py-1 rounded-xl">Craft</a>
-            <a href="/blog" class="text-ken-grey px-3 py-1 rounded-xl">Blog</a>
-          </nav>
-        </header>
-        <main class="flex-1 max-w-[var(--max-width)] mx-auto w-full">
-          <slot />
-        </main>
-      </div>
-    </div>
+  <body class="min-h-screen p-6 font-serif text-ken-black" id="container">
+    <main class="flex-1 max-w-[var(--max-width)] mx-auto w-full">
+      <slot />
+    </main>
   </body>
 </html>

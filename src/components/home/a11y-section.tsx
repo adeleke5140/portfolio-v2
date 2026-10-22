@@ -1,6 +1,6 @@
 export const A11ySection = () => {
   return (
-    <div className="px-0 w-full border-y border-[#dcdcdc7e] py-10 flex gap-1.5 items-center">
+    <div className="px-0 w-full border-t border-[#dcdcdc7e] py-10 flex gap-1.5 items-center">
       <nav className="flex flex-col gap-3 text-base" aria-labelledby="a11y-webring-club">
         <p>
           This site is a member of the{' '}

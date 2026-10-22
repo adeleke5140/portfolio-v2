@@ -14,7 +14,7 @@ export function isPublishedCraft({ data }: CraftItem) {
   return data.status !== 'draft'
 }
 
-/** Newest first. Same-day posts fall back to id (descending, matching the old Next order). */
+/** Newest first. Same-day posts fall back to id (descending). */
 export async function getPosts() {
   const posts = await getCollection('blog', (post) =>
     import.meta.env.DEV ? true : isPublishedPost(post)
