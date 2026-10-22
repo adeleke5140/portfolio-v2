@@ -1,0 +1,30 @@
+---
+import PageWrapper from '@/components/PageWrapper.astro'
+import { blogComponents } from '@/components/mdx/components'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { getPosts, type BlogPost } from '@/lib/content'
+import { render } from 'astro:content'
+
+export async function getStaticPaths() {
+  const posts = await getPosts()
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }))
+}
+
+const { post } = Astro.props as { post: BlogPost }
+const { title, date, description, status } = post.data
+const { Content } = await render(post)
+---
+
+<BaseLayout
+  title={title}
+  description={description ?? `Read ${title} on Kenny's blog`}
+  type="article"
+  publishedTime={date}
+  image={`/og/blog/${post.id}.png`}
+>
+  <PageWrapper class="lg:pt-0" heading={title}>
+    <article>
+      <Content components={blogComponents} />
+    </article>
+  </PageWrapper>
+</BaseLayout>

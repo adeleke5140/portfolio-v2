@@ -1,0 +1,16 @@
+---
+import { cn } from '@/lib/utils'
+
+interface Props {
+  heading?: string
+  class?: string
+}
+
+const { heading, class: className } = Astro.props
+const hasHeadingSlot = Astro.slots.has('heading')
+---
+
+<div class={cn('relative 2xl:px-0 mx-auto', className)}>
+  <h1 class="text-left mt-4 mb-32 text-xl w-full capitalize">{heading}</h1>
+  <slot />
+</div>

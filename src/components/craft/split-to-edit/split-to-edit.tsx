@@ -1,12 +1,10 @@
-'use client'
-
 import { cn } from '@/lib/utils'
-import { AnimatePresence, motion, Transition } from 'motion/react'
-import { Nunito } from 'next/font/google'
+import { AnimatePresence, motion, type Transition } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
 import { CheckMark, Pen } from './icons'
+import '@/styles/nunito.css'
 
-export const nunito = Nunito({ subsets: ['latin'] })
+export const nunito = { className: 'font-nunito' }
 
 const t = {
   duration: 0.6,

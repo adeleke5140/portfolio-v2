@@ -1,0 +1,13 @@
+/* Nunito for the craft demos. The family is named
+   plain 'Nunito' so the inline `fontFamily: 'Nunito'` styles resolve to it. */
+@font-face {
+  font-family: 'Nunito';
+  src: url('../fonts/Nunito-Variable-latin.woff2') format('woff2-variations');
+  font-weight: 200 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-nunito {
+  font-family: 'Nunito', ui-sans-serif, system-ui, sans-serif;
+}

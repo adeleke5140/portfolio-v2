@@ -1,0 +1,33 @@
+---
+import PageWrapper from '@/components/PageWrapper.astro'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { getPosts, groupPostsByYear } from '@/lib/content'
+
+const postsByYear = groupPostsByYear(await getPosts())
+---
+
+<BaseLayout
+  title="Blog"
+  description="Kehinde Adeleke's blog page where he writes technical articles"
+  image="/og/blog.png"
+>
+  <PageWrapper heading="Blog">
+    <section class="flex flex-col">
+      {postsByYear.map(([year, posts]) => (
+        <div class="first:mt-0 mt-16">
+          <p class="text-sm mb-6">{year}</p>
+          <div>
+            {posts.map((post) => (
+              <a
+                href={`/blog/${post.id}`}
+                class="group text-[17px] hover:underline underline-offset-2 py-2 block"
+              >
+                {post.data.title}
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </section>
+  </PageWrapper>
+</BaseLayout>

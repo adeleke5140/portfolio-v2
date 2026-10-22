@@ -1,0 +1,14 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+type Props = HTMLAttributes<'a'>
+const { href, ...rest } = Astro.props
+
+// Site-relative and in-page links stay in the tab; everything else opens a new one.
+const isLocal = typeof href === 'string' && (href.startsWith('/') || href.startsWith('#'))
+const external = isLocal ? {} : { target: '_blank', rel: 'noopener noreferrer' }
+---
+
+<a href={href} class="text-primary underline group-hover:text-primary" {...external} {...rest}
+  ><slot /></a
+>

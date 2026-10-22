@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'Inconsolata';
+  src: url('../fonts/Inconsolata-Variable-latin.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Newsreader';
+  src: url('../fonts/Newsreader-Variable-latin.woff2') format('woff2-variations');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Newsreader';
+  src: url('../fonts/Newsreader-Variable-Italic-latin.woff2') format('woff2-variations');
+  font-weight: 200 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --font-mono: 'Inconsolata';
+  --font-newsreader: 'Newsreader';
+  /* Iowan Old Style ships with macOS/iOS and can't be self-hosted, so it's
+     referenced by name only. Everyone else gets self-hosted Newsreader. */
+  --font-serif: 'Iowan Old Style', var(--font-newsreader);
+}

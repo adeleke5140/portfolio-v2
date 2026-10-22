@@ -5,7 +5,7 @@ import {
   HomeIcon,
   PhotosIcon,
   ToolsIcon,
-} from '../navigation/navigation'
+} from './icons'
 
 export const TABS = [
   {
