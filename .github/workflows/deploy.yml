@@ -1,4 +1,4 @@
-name: Deploy to VPS
+name: Deploy Site 
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: pnpm
 
       - name: Install dependencies
@@ -62,11 +62,3 @@ jobs:
           target: "/var/www/kehinde.xyz"
           strip_components: 1
 
-      - name: Reload Caddy
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          script: |
-            sudo systemctl reload caddy
