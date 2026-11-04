@@ -1,6 +1,5 @@
 import type { ThemeRegistration } from 'shiki'
 
-/** Shiki theme for MDX code fences. Background comes from `pre` in globals.css (keepBackground: false). */
 export const codeTheme: ThemeRegistration = {
   name: 'kenny-light',
   type: 'light',
